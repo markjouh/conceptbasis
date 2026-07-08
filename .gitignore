@@ -1,0 +1,20 @@
+# --- THINGS images: NOT redistributable (research license) ---
+data/raw/
+
+# --- local artifacts: checkpoints + full-image demos (not redistributable) ---
+outputs/
+
+# --- large / regenerable caches ---
+data/*.npy
+data/*.parquet
+
+# --- local-only material ---
+archive/
+.claude/
+
+# --- junk ---
+__pycache__/
+*.egg-info/
+*.pyc
+.DS_Store
+build/

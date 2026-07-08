@@ -1,0 +1,59 @@
+<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept Basis</title>
+<style>
+ body{margin:0;background:#12171c;color:#e6e6e6;font:16px/1.6 system-ui,sans-serif;
+      display:flex;flex-direction:column;align-items:center;padding:48px 20px}
+ main{max-width:820px;width:100%}
+ h1{font-size:34px;margin:0 0 6px;letter-spacing:-.02em}
+ .tag{color:#7fd1ff;font-size:17px;margin:0 0 22px}
+ p.lead{color:#b8c4ce;margin:0 0 34px}
+ .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:40px}
+ a.card{display:block;background:#182027;border:1px solid #26303a;border-radius:12px;
+        padding:18px;text-decoration:none;color:inherit;transition:border-color .15s}
+ a.card:hover{border-color:#3d6d94}
+ a.card.primary{border-color:#2f81f7;background:#16202c}
+ .card h3{margin:0 0 6px;font-size:16px;color:#dfe8f0}
+ .card.primary h3{color:#7fd1ff}
+ .card p{margin:0;font-size:13px;color:#8fa0ad}
+ footer{color:#5c6b78;font-size:12.5px;max-width:820px;width:100%;border-top:1px solid #222b34;
+        padding-top:16px;line-height:1.7}
+ footer a{color:#7fa8c8}
+</style></head><body>
+<main>
+<h1>Concept Basis</h1>
+<p class="tag">image embeddings you can read, compose, and slide along</p>
+<p class="lead">
+An image–text embedding trained so that ~256 human-interpretable visual concepts
+(<i>metallic, furry, edible, manmade…</i>) become explicit, conditionally-orthogonal
+directions — a <b>conceptual basis</b>. Every object is representable as its profile
+of concept activations while the vector remains a normal retrieval embedding.
+The concept vocabulary is mined automatically and the training is label-free:
+all supervision is distilled from pretrained vision-language models.
+The demos below are fully static — the model's outputs over the gallery are
+precomputed, and your browser only does dot products.
+</p>
+<div class="grid">
+<a class="card primary" href="playground.html"><h3>▶ Playground</h3>
+<p>256 concept sliders over the trained embedding. Compose properties
+(pointed + metallic + handheld…), load a real object's profile, edit it, retrieve live.</p></a>
+<a class="card" href="playground-axis-aligned.html"><h3>Axis-aligned variant</h3>
+<p>The same model with its concept basis rotated onto coordinate axes — one named
+concept per embedding dimension.</p></a>
+<a class="card" href="playground-baseline.html"><h3>Frozen baseline</h3>
+<p>No-training control: raw SigLIP2 features with text-derived concept directions.
+Compare how composition degrades without the trained basis.</p></a>
+<a class="card" href="dictionary.html"><h3>Concept dictionary</h3>
+<p>The 256 automatically-mined concepts, each with its strongest example images.</p></a>
+<a class="card" href="attributes.html"><h3>Mined attributes</h3>
+<p>The raw per-image attributes a vision-language model produced — the seed
+material the dictionary was clustered from.</p></a>
+</div>
+<footer>
+Images: the CC0-licensed subset of the
+<a href="https://things-initiative.org/">THINGS database</a> (Hebart et al.;
+THINGSplus, Stoinski et al.) — one image per object concept.
+Model backbone: SigLIP2. Code: MIT-licensed.
+</footer>
+</main>
+</body></html>

@@ -1,0 +1,11 @@
+numpy
+pandas
+pyarrow
+scipy
+scikit-learn
+pillow
+tqdm
+requests
+torch
+torchvision
+open_clip_torch
