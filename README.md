@@ -1,5 +1,7 @@
 # Concept-Axis Embeddings on THINGS
 
+**Live demo: <https://markjouh.github.io/conceptbasis/>**
+
 A label-free pipeline that trains an image-text embedding around a
 **conceptual basis**: ~256 human-interpretable visual concepts become
 explicit, (conditionally) orthogonal directions, and every object is
