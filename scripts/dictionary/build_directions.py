@@ -1,5 +1,5 @@
-"""Final concept directions: per-concept best-of-three construction, validated
-on the VLM attribute mentions (CC0 set), then relabel the training set.
+"""Final concept directions: per-concept best-of-three construction, selected
+on development CC0 attribute mentions, then relabel the full embedding cache.
 
 Constructions compared per concept:
   generic      mean("an object that is <member>") - "an object"
@@ -20,6 +20,7 @@ directions.
 """
 from __future__ import annotations
 import argparse
+import hashlib
 import json
 import os
 from collections import defaultdict
@@ -31,8 +32,17 @@ from sklearn.metrics import roc_auc_score
 from sklearn.mixture import GaussianMixture
 
 from conceptbasis import BACKBONE as MODEL, BACKBONE_PRETRAINED as PRETRAINED
+from conceptbasis.splits import load_split_manifest, split_for_image
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+
+def sha256(path: str) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as file:
+        while chunk := file.read(1024 * 1024):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 @torch.no_grad()
@@ -48,6 +58,14 @@ def main():
         "--source-map",
         default="data/direction_sources.json",
         help="tracked choices used by --selection frozen",
+    )
+    ap.add_argument("--split-manifest", default="data/splits.json")
+    ap.add_argument("--selection-attributes", default="data/attributes_dev.jsonl")
+    ap.add_argument(
+        "--selection-split",
+        choices=("dev",),
+        default="dev",
+        help="held-out development split used to choose direction construction",
     )
     args = ap.parse_args()
 
@@ -79,12 +97,32 @@ def main():
     ids = json.load(open(os.path.join(ROOT, "data/image_ids.json")))
     id2i = {x: i for i, x in enumerate(ids)}
     fi = np.load(os.path.join(ROOT, "data/image_embeddings.npy"))
+    labels_path = os.path.join(ROOT, "data/labels.parquet")
+    df = pd.read_parquet(labels_path)
+    if list(df.image_id) != ids:
+        raise ValueError("label rows do not match image embedding order")
+    train_ids = set(df.loc[df.split == "train", "image_id"])
+    manifest = load_split_manifest(ROOT, args.split_manifest)
 
-    # mention ground truth + CC0 embeddings (weak validation oracle)
-    rows = [json.loads(l) for l in open(os.path.join(ROOT, "data/attributes.jsonl")) if l.strip()]
+    # Development-only mention labels used to choose among direction recipes.
+    rows = [
+        json.loads(line)
+        for line in open(os.path.join(ROOT, args.selection_attributes))
+        if line.strip()
+    ]
     rows = [r for r in rows if r.get("attributes")]
+    cc0_order = json.load(open(os.path.join(ROOT, "data/cc0_image_ids.json")))
+    cc0_index = {image_id: index for index, image_id in enumerate(cc0_order)}
+    img_cc0_all = np.load(os.path.join(ROOT, "data/image_embeddings_cc0.npy"))
+    if len(img_cc0_all) != len(cc0_order):
+        raise ValueError("CC0 embeddings do not match their image ID manifest")
+    if any(
+        split_for_image(manifest, row["image_id"]) != args.selection_split
+        for row in rows
+    ):
+        raise ValueError("selection attribute file contains a non-development class")
     sets = [set(r["attributes"]) for r in rows]
-    img_cc0 = np.load(os.path.join(ROOT, "data/image_embeddings_cc0.npy"))
+    img_cc0 = img_cc0_all[[cc0_index[row["image_id"]] for row in rows]]
 
     # verified anchors + degeneracy stats from the VLM judgments
     J = defaultdict(lambda: {"pos": [], "neg": []})
@@ -94,6 +132,8 @@ def main():
         for l in open(jpath):
             r = json.loads(l)
             if r.get("verdict") is None:
+                continue
+            if r["image_id"] not in train_ids:
                 continue
             st = stats[r["concept"]]
             if r["proposed"] == "pos":
@@ -176,7 +216,16 @@ def main():
             aucs_final.append(scores[best])
 
     np.save(os.path.join(ROOT, "data/concept_directions.npy"), final)
-    json.dump({"source": src, "flags": flags},
+    provenance = {
+        "selection_split": args.selection_split,
+        "dictionary_sha256": sha256(os.path.join(ROOT, "data/dictionary.json")),
+        "split_manifest_sha256": sha256(os.path.join(ROOT, args.split_manifest)),
+        "selection_attributes_sha256": sha256(
+            os.path.join(ROOT, args.selection_attributes)
+        ),
+        "judgments_sha256": sha256(jpath),
+    }
+    json.dump({"source": src, "flags": flags, "provenance": provenance},
               open(os.path.join(ROOT, "data/direction_sources.json"), "w"), indent=1)
     from collections import Counter
     print("construction choices:", dict(Counter(src.values())))
@@ -184,14 +233,14 @@ def main():
         print(f"final direction AUROC vs mentions: mean {np.mean(aucs_final):.3f} "
               f"| p10 {np.percentile(aucs_final, 10):.3f}")
 
-    # relabel the training set with the final directions
+    # Relabel all partitions with calibrators fit on train classes only.
     S = fi @ final.T
     soft = np.zeros_like(S, dtype=np.float32)
+    train = (df.split == "train").to_numpy()
     for k in range(S.shape[1]):
-        gm = GaussianMixture(2, random_state=0, n_init=2).fit(S[:, k].reshape(-1, 1))
-        soft[:, k] = gm.predict_proba(S[:, k].reshape(-1, 1))[:, int(gm.means_.argmax())]
-    lp = os.path.join(ROOT, "data/labels.parquet")
-    df = pd.read_parquet(lp)
+        values = S[:, k].reshape(-1, 1)
+        gm = GaussianMixture(2, random_state=0, n_init=2).fit(values[train])
+        soft[:, k] = gm.predict_proba(values)[:, int(gm.means_.argmax())]
     keep = [c for c in df.columns if not c.startswith("s_")]
     score_frame = pd.DataFrame(
         soft,
@@ -199,8 +248,8 @@ def main():
         index=df.index,
     )
     df = pd.concat([df[keep], score_frame], axis=1)
-    df.to_parquet(lp)
-    print(f"relabeled -> {lp}")
+    df.to_parquet(labels_path)
+    print(f"relabeled -> {labels_path}")
 
 
 if __name__ == "__main__":

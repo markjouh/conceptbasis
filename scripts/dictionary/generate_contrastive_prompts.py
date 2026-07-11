@@ -84,6 +84,8 @@ def main():
     d = json.load(open(os.path.join(ROOT, "data", "dictionary.json")))
     path = os.path.join(ROOT, args.out)
     out = json.load(open(path)) if os.path.exists(path) else {}
+    active_names = {concept["name"] for concept in d}
+    out = {name: prompts for name, prompts in out.items() if name in active_names}
     todo = [c for c in d if len(out.get(c["name"], {}).get("positive", [])) < 4]
     print(f"{len(todo)} concepts to generate")
     lock = threading.Lock()

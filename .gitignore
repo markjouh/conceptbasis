@@ -7,6 +7,7 @@ outputs/
 # --- large / regenerable caches ---
 data/*.npy
 data/*.parquet
+data/heldout/
 
 # --- local-only material ---
 archive/

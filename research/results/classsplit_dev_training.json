@@ -1,0 +1,38 @@
+{
+  "split_manifest_sha256": "ee6bdf93feeb1367fde2da4f53474efa4e80f0a6dc0188e2636d51d09bb57027",
+  "seed": 0,
+  "epochs": 60,
+  "batch": 1024,
+  "embed_dim": 320,
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "models": {
+    "clip_only": {
+      "lambda_orth": 0.0,
+      "corr_exempt": 0.0,
+      "checkpoint_sha256": "2264138ce9a3be656a924c47c59a1bf8cf5d8ea5bbab6342f7e8881acb8e5509",
+      "dev": {
+        "R@1": 0.5745000243,
+        "R@5": 0.8909999728,
+        "R@10": 0.9685000181,
+        "concept_auroc": 0.8451663260,
+        "orth_rms": 0.3136003315
+      }
+    },
+    "clip_orth": {
+      "lambda_orth": 8.0,
+      "corr_exempt": 0.15,
+      "corr_weighting": "smooth",
+      "corr_weight_power": 4.0,
+      "corr_weight_floor": 0.01,
+      "checkpoint_sha256": "fe15294a2d484e1f9d7df554daffe4266255d832ba262e7979f5b0236a7db8ee",
+      "dev": {
+        "R@1": 0.5630000234,
+        "R@5": 0.8865000010,
+        "R@10": 0.9685000181,
+        "concept_auroc": 0.8655300218,
+        "orth_rms": 0.2982828617
+      }
+    }
+  }
+}

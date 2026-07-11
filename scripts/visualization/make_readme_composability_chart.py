@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SERIES = [
     ("frozen", "Frozen backbone", "frozen"),
     ("clip_only", "Contrastive adapter", "contrastive"),
-    ("clip_orth_smooth", "+ orthogonality loss", "orth"),
+    ("clip_orth", "+ orthogonality loss", "orth"),
 ]
 
 
@@ -19,7 +19,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--metrics",
-        default="research/results/composability_ablation_k14.json",
+        default="research/results/classsplit_dev_composability.json",
     )
     parser.add_argument(
         "--out",
@@ -33,7 +33,7 @@ def main() -> None:
     left, right, top, bottom = 74, 118, 70, 58
     plot_width = width - left - right
     plot_height = height - top - bottom
-    y_max = 0.55
+    y_max = 0.85
 
     def x_pos(index: int) -> float:
         return left + index * plot_width / (len(subset_sizes) - 1)
@@ -51,18 +51,18 @@ def main() -> None:
         "<style>",
         ".text{fill:#1f2328;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}",
         ".muted{fill:#57606a}.grid{stroke:#d8dee4;stroke-width:1}.axis{stroke:#8c959f;stroke-width:1}",
-        ".frozen{stroke:#6e7781;fill:#6e7781}.contrastive{stroke:#0969da;fill:#0969da}",
-        ".orth{stroke:#1a7f37;fill:#1a7f37}.series{fill:none;stroke-width:3}",
+        ".frozen{stroke:#6e7781}.point.frozen{fill:#6e7781}.contrastive{stroke:#0969da}.point.contrastive{fill:#0969da}",
+        ".orth{stroke:#1a7f37}.point.orth{fill:#1a7f37}.series{fill:none;stroke-width:3}",
         ".point{stroke-width:0}.label{font-size:13px}.small{font-size:12px}.title{font-size:17px;font-weight:500}",
         "@media(prefers-color-scheme:dark){.text{fill:#e6edf3}.muted{fill:#9da7b1}"
-        ".grid{stroke:#30363d}.axis{stroke:#6e7681}.frozen{stroke:#9da7b1;fill:#9da7b1}"
-        ".contrastive{stroke:#58a6ff;fill:#58a6ff}.orth{stroke:#3fb950;fill:#3fb950}}",
+        ".grid{stroke:#30363d}.axis{stroke:#6e7681}.frozen{stroke:#9da7b1}.point.frozen{fill:#9da7b1}"
+        ".contrastive{stroke:#58a6ff}.point.contrastive{fill:#58a6ff}.orth{stroke:#3fb950}.point.orth{fill:#3fb950}}",
         "</style>",
         '<text class="text title" x="74" y="30">Compositional retrieval from partial attribute sets</text>',
-        '<text class="text muted small" x="74" y="50">Higher is better · 1,854-image gallery</text>',
+        '<text class="text muted small" x="74" y="50">Higher is better · 278-class dev gallery · 52 query classes with ≥14 attributes</text>',
     ]
 
-    for tick in range(0, 6):
+    for tick in range(0, 9):
         value = tick / 10
         y = y_pos(value)
         lines.append(f'<line class="grid" x1="{left}" y1="{y:.1f}" x2="{width-right}" y2="{y:.1f}"/>')
@@ -91,15 +91,11 @@ def main() -> None:
             metrics["models"][key]["true_attributes"][str(size)]["R@10"]
             for size in subset_sizes
         ]
-        points = " ".join(
-            f"{x_pos(index):.1f},{y_pos(value):.1f}"
+        path = " ".join(
+            f"{'M' if index == 0 else 'L'} {x_pos(index):.1f} {y_pos(value):.1f}"
             for index, value in enumerate(values)
         )
-        lines.append(f'<polyline class="series {css_class}" points="{points}"/>')
-        for index, value in enumerate(values):
-            lines.append(
-                f'<circle class="point {css_class}" cx="{x_pos(index):.1f}" cy="{y_pos(value):.1f}" r="4"/>'
-            )
+        lines.append(f'<path class="series {css_class}" d="{path}"/>')
         final_y = y_pos(values[-1])
         lines.append(
             f'<text class="text label" x="{width-right+12}" y="{final_y+4:.1f}">{values[-1]*100:.1f}%</text>'

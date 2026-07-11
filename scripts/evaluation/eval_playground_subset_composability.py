@@ -27,6 +27,8 @@ from datetime import datetime, timezone
 
 import numpy as np
 
+from conceptbasis.splits import load_split_manifest, split_for_image
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 
@@ -235,7 +237,11 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--trained-html", default="docs/playground.html")
     ap.add_argument("--frozen-html", default="docs/playground-baseline.html")
-    ap.add_argument("--attributes", default="data/attributes.jsonl")
+    ap.add_argument("--flags", default="data/direction_sources.json")
+    ap.add_argument("--attributes", default="data/attributes_dev.jsonl")
+    ap.add_argument("--split-manifest", default="data/splits.json")
+    ap.add_argument("--eval-split", choices=("dev", "test"), default="dev")
+    ap.add_argument("--allow-test", action="store_true")
     ap.add_argument("--dictionary", default=None)
     ap.add_argument("--dictionary-git", default=None,
                     help="git object containing the matching dictionary")
@@ -250,31 +256,41 @@ def main() -> None:
     ap.add_argument("--include-flagged", action="store_true")
     ap.add_argument("--out", default="outputs/evals/playground_subset_composability.json")
     args = ap.parse_args()
+    if args.eval_split == "test" and not args.allow_test:
+        raise ValueError("reading test requires --allow-test")
 
     sizes = parse_sizes(args.subset_sizes)
     trained_path = os.path.join(ROOT, args.trained_html)
     frozen_path = os.path.join(ROOT, args.frozen_html)
     attrs_path = os.path.join(ROOT, args.attributes)
-    trained = load_playground(trained_path)
-    frozen = load_playground(frozen_path)
     dictionary = load_dictionary(args.dictionary, args.dictionary_git)
-    rows = load_attributes(attrs_path)
+    manifest = load_split_manifest(ROOT, args.split_manifest)
+    rows = [
+        row
+        for row in load_attributes(attrs_path)
+        if split_for_image(manifest, row["image_id"]) == args.eval_split
+    ]
 
     names = [c["name"] for c in dictionary]
-    if trained["names"] != names or frozen["names"] != names:
-        raise ValueError("playground concept names/order do not match the selected dictionary")
-    if len(trained["gallery"]) != len(rows) or len(frozen["gallery"]) != len(rows):
-        raise ValueError("playground gallery length does not match attribute rows")
-    expected_labels = [image_label(r["image_id"]) for r in rows]
-    for label, data in (("trained", trained), ("frozen", frozen)):
-        gallery_labels = [g["concept"] for g in data["gallery"]]
-        mismatches = [i for i, (a, b) in enumerate(zip(expected_labels, gallery_labels)) if a != b]
-        if mismatches:
-            raise ValueError(f"{label} gallery order differs from attributes at rows {mismatches[:5]}")
-
-    flags = trained.get("flags", {})
-    if frozen.get("flags", {}) != flags:
-        raise ValueError("trained and frozen playground flag sets differ")
+    trained = frozen = None
+    if args.profiles_npz:
+        flags = load_json(os.path.join(ROOT, args.flags)).get("flags", {})
+    else:
+        trained = load_playground(trained_path)
+        frozen = load_playground(frozen_path)
+        if trained["names"] != names or frozen["names"] != names:
+            raise ValueError("playground concept names/order do not match the selected dictionary")
+        if len(trained["gallery"]) != len(rows) or len(frozen["gallery"]) != len(rows):
+            raise ValueError("playground gallery length does not match attribute rows")
+        expected_labels = [image_label(r["image_id"]) for r in rows]
+        for label, data in (("trained", trained), ("frozen", frozen)):
+            gallery_labels = [g["concept"] for g in data["gallery"]]
+            mismatches = [i for i, (a, b) in enumerate(zip(expected_labels, gallery_labels)) if a != b]
+            if mismatches:
+                raise ValueError(f"{label} gallery order differs from attributes at rows {mismatches[:5]}")
+        flags = trained.get("flags", {})
+        if frozen.get("flags", {}) != flags:
+            raise ValueError("trained and frozen playground flag sets differ")
     concepts = mapped_concepts(rows, dictionary, flags, args.include_flagged)
     counts = np.array([len(x) for x in concepts])
     rollout_data = build_rollouts(concepts, len(names), sizes, args.rollouts, args.seed)
@@ -286,7 +302,7 @@ def main() -> None:
         if list(cached["names"]) != names:
             raise ValueError("profile NPZ concept names/order do not match the dictionary")
         if list(cached["image_ids"]) != [r["image_id"] for r in rows]:
-            raise ValueError("profile NPZ image IDs/order do not match attributes.jsonl")
+            raise ValueError("profile NPZ image IDs/order do not match attribute rows")
         profiles = {
             key: cached[key].astype(np.float32)
             for key in cached.files
@@ -336,6 +352,7 @@ def main() -> None:
         "subset_sizes": sizes,
         "rollouts_per_image": args.rollouts,
         "seed": args.seed,
+        "eval_split": args.eval_split,
         "exclude_flagged": not args.include_flagged,
         "n_images": len(rows),
         "n_concepts": len(names),
@@ -355,11 +372,15 @@ def main() -> None:
         },
         "inputs": {
             "trained_html": args.trained_html,
-            "trained_html_sha256": sha256(trained_path),
+            "trained_html_sha256": sha256(trained_path) if trained is not None else None,
             "frozen_html": args.frozen_html,
-            "frozen_html_sha256": sha256(frozen_path),
+            "frozen_html_sha256": sha256(frozen_path) if frozen is not None else None,
+            "flags": args.flags,
+            "flags_sha256": sha256(os.path.join(ROOT, args.flags)),
             "attributes": args.attributes,
             "attributes_sha256": sha256(attrs_path),
+            "split_manifest": args.split_manifest,
+            "split_manifest_sha256": sha256(os.path.join(ROOT, args.split_manifest)),
             "dictionary": args.dictionary,
             "dictionary_git": args.dictionary_git,
             "profiles_npz": args.profiles_npz,

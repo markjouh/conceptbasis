@@ -32,9 +32,10 @@ def main():
 
     scores = embeddings @ directions.T
     soft = np.empty_like(scores, dtype=np.float32)
+    train = (template.split == "train").to_numpy()
     for k in range(scores.shape[1]):
         values = scores[:, k:k + 1]
-        gm = GaussianMixture(2, random_state=0, n_init=2).fit(values)
+        gm = GaussianMixture(2, random_state=0, n_init=2).fit(values[train])
         soft[:, k] = gm.predict_proba(values)[:, int(gm.means_.argmax())]
         if k % 32 == 0:
             print(f"calibrated {k}/{scores.shape[1]}", flush=True)

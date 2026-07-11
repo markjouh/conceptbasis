@@ -1,25 +1,27 @@
-"""Reproduce the 256-concept dictionary used by the original playground.
+"""Build the 256-concept dictionary from the discovery split.
 
 Verified recipe:
-  - attributes: data/attributes.jsonl (1,854 CC0 images)
+  - attributes: model-generated tags on train-class CC0 images
   - dictionary encoder: ViT-B-32/laion2b_s34b_b79k
   - phrase profiles: standardized image/text scores with top SVD component removed
   - clustering: complete linkage at profile correlation >= 0.50
   - selection: support-ranked, rejecting profile twins above correlation 0.75
 
-With the archived ViT-B/32 image cache, the default command regenerates the
-checked-in data/dictionary.json byte-for-byte (SHA-256
-b5388af5425af0596768b0b72a531a5f71566fe0729325f78913e69f3bf55a6e).
+Development and test classes are excluded by default so the same frozen
+dictionary can be evaluated on unseen object classes.
 """
 from __future__ import annotations
 
 import argparse
 from collections import Counter
+import hashlib
 import json
 import os
 
 import numpy as np
 import torch
+
+from conceptbasis.splits import image_class, load_split_manifest, split_for_image
 
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -28,8 +30,20 @@ PRETRAINED = "laion2b_s34b_b79k"
 IMG_CACHE = os.path.join(ROOT, "data", "dictionary_image_embeddings_vitb32.npy")
 
 
+def sha256(path: str) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as file:
+        while chunk := file.read(1024 * 1024):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 @torch.no_grad()
-def clip_embed(img_dir: str, phrases: list[str]) -> tuple[np.ndarray, np.ndarray]:
+def clip_embed(
+    img_dir: str,
+    phrases: list[str],
+    allowed_classes: set[str] | None,
+) -> tuple[np.ndarray, np.ndarray]:
     import open_clip
     from PIL import Image
 
@@ -40,14 +54,16 @@ def clip_embed(img_dir: str, phrases: list[str]) -> tuple[np.ndarray, np.ndarray
     tokenizer = open_clip.get_tokenizer(MODEL)
     model.eval().to(device)
 
+    paths = sorted(
+        os.path.join(img_dir, name)
+        for name in os.listdir(img_dir)
+        if name.lower().endswith((".jpg", ".jpeg", ".png"))
+    )
     if os.path.exists(IMG_CACHE):
-        image_embeddings = np.load(IMG_CACHE)
+        all_image_embeddings = np.load(IMG_CACHE)
+        if len(all_image_embeddings) != len(paths):
+            raise ValueError("dictionary image cache does not match CC0 files")
     else:
-        paths = sorted(
-            os.path.join(img_dir, name)
-            for name in os.listdir(img_dir)
-            if name.lower().endswith((".jpg", ".jpeg", ".png"))
-        )
         batches = []
         for start in range(0, len(paths), 256):
             images = torch.stack(
@@ -58,8 +74,16 @@ def clip_embed(img_dir: str, phrases: list[str]) -> tuple[np.ndarray, np.ndarray
                 .cpu()
                 .numpy()
             )
-        image_embeddings = np.concatenate(batches)
-        np.save(IMG_CACHE, image_embeddings)
+        all_image_embeddings = np.concatenate(batches)
+        np.save(IMG_CACHE, all_image_embeddings)
+
+    if allowed_classes is None:
+        image_embeddings = all_image_embeddings
+    else:
+        keep = np.array(
+            [image_class(os.path.basename(path)) in allowed_classes for path in paths]
+        )
+        image_embeddings = all_image_embeddings[keep]
 
     text_batches = []
     for start in range(0, len(phrases), 256):
@@ -76,20 +100,42 @@ def clip_embed(img_dir: str, phrases: list[str]) -> tuple[np.ndarray, np.ndarray
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--attrs", default="data/attributes.jsonl")
+    parser.add_argument("--attrs", default="data/attributes_train.jsonl")
     parser.add_argument("--img-dir", default="data/raw/object_images_CC0")
     parser.add_argument("--out", default="data/dictionary.json")
+    parser.add_argument("--provenance-out", default="data/dictionary_provenance.json")
     parser.add_argument("--k", type=int, default=256)
     parser.add_argument("--min-mentions", type=int, default=3)
     parser.add_argument("--merge-corr", type=float, default=0.5)
     parser.add_argument("--max-twin-corr", type=float, default=0.75)
+    parser.add_argument("--split-manifest", default="data/splits.json")
+    parser.add_argument(
+        "--split", choices=("train", "dev", "test", "all"), default="train"
+    )
+    parser.add_argument("--allow-test", action="store_true")
     args = parser.parse_args()
+    if args.split in {"test", "all"} and not args.allow_test:
+        raise ValueError("dictionary construction may read test only with --allow-test")
 
     rows = [
         json.loads(line)
         for line in open(os.path.join(ROOT, args.attrs))
         if line.strip()
     ]
+    manifest = load_split_manifest(ROOT, args.split_manifest)
+    if args.split != "all":
+        rows = [
+            row
+            for row in rows
+            if split_for_image(manifest, row["image_id"]) == args.split
+        ]
+        allowed_classes = {
+            concept
+            for concept, split in manifest["classes"].items()
+            if split == args.split
+        }
+    else:
+        allowed_classes = None
     image_sets = [set(row["attributes"]) for row in rows if row.get("attributes")]
     counts = Counter(attribute for attributes in image_sets for attribute in attributes)
     phrases = sorted(
@@ -114,7 +160,7 @@ def main() -> None:
     print(f"negation fold-in: {len(base_of)} phrases -> negative poles")
 
     image_embeddings, text_embeddings = clip_embed(
-        os.path.join(ROOT, args.img_dir), phrases
+        os.path.join(ROOT, args.img_dir), phrases, allowed_classes
     )
     scores = image_embeddings @ text_embeddings.T
     scores = (scores - scores.mean(0)) / (scores.std(0) + 1e-8)
@@ -192,6 +238,25 @@ def main() -> None:
     output = os.path.join(ROOT, args.out)
     with open(output, "w") as file:
         json.dump(selected, file, indent=2)
+    provenance = {
+        "model": MODEL,
+        "pretrained": PRETRAINED,
+        "attribute_split": args.split,
+        "n_attribute_images": len(image_sets),
+        "k": args.k,
+        "min_mentions": args.min_mentions,
+        "merge_corr": args.merge_corr,
+        "max_twin_corr": args.max_twin_corr,
+        "inputs": {
+            args.attrs: sha256(os.path.join(ROOT, args.attrs)),
+            args.split_manifest: sha256(os.path.join(ROOT, args.split_manifest)),
+        },
+        "dictionary_sha256": sha256(output),
+    }
+    provenance_output = os.path.join(ROOT, args.provenance_out)
+    with open(provenance_output, "w") as file:
+        json.dump(provenance, file, indent=2)
+        file.write("\n")
     print(f"wrote {args.out} ({len(selected)} concepts)")
 
 

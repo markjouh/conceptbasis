@@ -19,6 +19,8 @@ import pandas as pd
 import torch
 from PIL import Image
 
+from conceptbasis.splits import load_split_manifest, split_for_image
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 NAV_PUBLIC = '<div id="sitenav"><a href="index.html">⌂ Concept Basis</a><a href="playground.html" class=here>Playground</a><a href="playground-baseline.html">Baseline</a><a href="dictionary.html">Dictionary</a><a href="attributes.html">Attributes</a></div>\n<style>#sitenav{position:fixed;top:10px;right:14px;z-index:99;background:rgba(18,22,28,.94);\nborder:1px solid #38404c;border-radius:20px;padding:6px 14px;font:12px system-ui;display:flex;gap:14px}\n#sitenav a{color:#9ab8d8;text-decoration:none}#sitenav a:hover{color:#fff}\n#sitenav a.here{color:#fff;font-weight:600}</style>'
 IMG_DIR = os.path.join(ROOT, "data", "raw", "object_images")
@@ -45,7 +47,12 @@ def main():
     ap.add_argument("--cc0", action="store_true",
                     help="public gallery from the freely-licensed CC0 subset "
                          "(one image per THINGS concept; redistributable)")
+    ap.add_argument("--split-manifest", default="data/splits.json")
+    ap.add_argument("--gallery-split", choices=("dev", "test"), default="dev")
+    ap.add_argument("--allow-test", action="store_true")
     args = ap.parse_args()
+    if args.gallery_split == "test" and not args.allow_test:
+        raise ValueError("rendering test requires --allow-test")
 
     from conceptbasis.models import Adapter
 
@@ -66,7 +73,7 @@ def main():
         Z = img_ad(torch.from_numpy(fi)).numpy()
 
     tr = (df.split == "train").to_numpy()
-    te = (df.split == "test").to_numpy()
+    gallery_mask = (df.split == args.gallery_split).to_numpy()
 
     # true soft mu+ - mu- directions (train), per-axis projection stats
     dirs = []
@@ -82,10 +89,21 @@ def main():
     gal = []
     if args.cc0:
         # public gallery: CC0 subset (redistributable), one image per concept
-        rows = [json.loads(l) for l in open(os.path.join(ROOT, "data/attributes.jsonl"))
+        rows = [json.loads(l) for l in open(os.path.join(ROOT, "data/attributes_dev.jsonl"))
                 if l.strip()]
-        cc0_ids = [r["image_id"] for r in rows if r.get("attributes")]
+        manifest = load_split_manifest(ROOT, args.split_manifest)
         fi_cc0 = np.load(os.path.join(ROOT, "data/image_embeddings_cc0.npy"))
+        if any(
+            split_for_image(manifest, row["image_id"]) != args.gallery_split
+            for row in rows
+        ):
+            raise ValueError("CC0 attribute file contains rows outside gallery split")
+        cc0_order = json.load(open(os.path.join(ROOT, "data/cc0_image_ids.json")))
+        if len(fi_cc0) != len(cc0_order):
+            raise ValueError("CC0 embeddings do not match their image ID manifest")
+        cc0_index = {image_id: index for index, image_id in enumerate(cc0_order)}
+        cc0_ids = [row["image_id"] for row in rows if row.get("attributes")]
+        fi_cc0 = fi_cc0[[cc0_index[image_id] for image_id in cc0_ids]]
         with torch.no_grad():
             Z_cc0 = img_ad(torch.from_numpy(fi_cc0)).numpy()
         P_gal = (Z_cc0 @ D.T - mu) / sd
@@ -98,9 +116,9 @@ def main():
                         "p": [round(float(x), 2) for x in P_gal[j]],
                         "concept": concept, "top": top})
     else:
-        te_idx = np.where(te)[0]
+        gallery_idx = np.where(gallery_mask)[0]
         rng = np.random.default_rng(1)
-        pick = rng.permutation(te_idx)[:args.gallery]
+        pick = rng.permutation(gallery_idx)[:args.gallery]
         P_gal = (Z[pick] @ D.T - mu) / sd                # z-scored projections
         for j, i in enumerate(pick):
             top = [names[k] for k in np.argsort(-S[i])[:3]]

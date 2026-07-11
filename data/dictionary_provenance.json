@@ -1,0 +1,15 @@
+{
+  "model": "ViT-B-32",
+  "pretrained": "laion2b_s34b_b79k",
+  "attribute_split": "train",
+  "n_attribute_images": 1298,
+  "k": 256,
+  "min_mentions": 3,
+  "merge_corr": 0.5,
+  "max_twin_corr": 0.75,
+  "inputs": {
+    "data/attributes_train.jsonl": "c27409c17bf48ee2ed24392c31f1ce77e083cbb0dbce8e2a30b5cba3584689a3",
+    "data/splits.json": "ee6bdf93feeb1367fde2da4f53474efa4e80f0a6dc0188e2636d51d09bb57027"
+  },
+  "dictionary_sha256": "fb2ca2578ae8790ac793d7fa6f32f79f0d47a52918dabe595264f81ee2e7c470"
+}

@@ -9,6 +9,8 @@ import os
 
 from PIL import Image
 
+from conceptbasis.splits import load_split_manifest, split_for_image
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 NAV_PUBLIC = '<div id="sitenav"><a href="index.html">⌂ Concept Basis</a><a href="playground.html">Playground</a><a href="playground-baseline.html">Baseline</a><a href="dictionary.html">Dictionary</a><a href="attributes.html" class=here>Attributes</a></div>\n<style>#sitenav{position:fixed;top:10px;right:14px;z-index:99;background:rgba(18,22,28,.94);\nborder:1px solid #38404c;border-radius:20px;padding:6px 14px;font:12px system-ui;display:flex;gap:14px}\n#sitenav a{color:#9ab8d8;text-decoration:none}#sitenav a:hover{color:#fff}\n#sitenav a.here{color:#fff;font-weight:600}</style>'
 
@@ -23,14 +25,24 @@ def thumb_b64(path: str, size: int = 420) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--attrs", default="data/attributes.jsonl")
+    ap.add_argument("--attrs", default="data/attributes_dev.jsonl")
     ap.add_argument("--img-dir", default="data/raw/object_images_CC0")
     ap.add_argument("--out", default="docs/attributes.html")
     ap.add_argument("--limit", type=int, default=300)
+    ap.add_argument("--split-manifest", default="data/splits.json")
+    ap.add_argument("--gallery-split", choices=("dev", "test"), default="dev")
+    ap.add_argument("--allow-test", action="store_true")
     args = ap.parse_args()
+    if args.gallery_split == "test" and not args.allow_test:
+        raise ValueError("rendering test requires --allow-test")
 
     rows = [json.loads(l) for l in open(os.path.join(ROOT, args.attrs)) if l.strip()]
-    rows = [r for r in rows if r.get("attributes")][:args.limit]
+    manifest = load_split_manifest(ROOT, args.split_manifest)
+    rows = [
+        row for row in rows
+        if row.get("attributes")
+        and split_for_image(manifest, row["image_id"]) == args.gallery_split
+    ][:args.limit]
     items = []
     for r in rows:
         p = os.path.join(ROOT, args.img_dir, r["image_id"])

@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-PREFIX = "sweep_smooth_"
+PREFIX = "classsplit_smooth_"
 
 # name, mode, tau, floor, power, lambda_orth
 CONFIGS = [
@@ -33,9 +33,9 @@ COMMON = [
     "--lr", "0.001", "--weight_decay", "0.0001",
     "--ema", "0.9", "--seed", "0", "--device", "mps",
     "--image_ids", "data/image_ids.json",
-    "--image_embeddings", "archive/data/image_embeddings_siglip2.npy",
-    "--caption_embeddings", "archive/data/caption_embeddings_siglip2.npy",
-    "--labels", "outputs/evals/labels_siglip2_final_reconstructed.parquet",
+    "--image_embeddings", "data/image_embeddings.npy",
+    "--caption_embeddings", "data/caption_embeddings.npy",
+    "--labels", "data/labels.parquet",
 ]
 
 
@@ -70,13 +70,13 @@ def main():
         output = run(command)
         print(output.strip().splitlines()[-2], flush=True)
 
-    profiles = "outputs/evals/sweep_smooth_profiles.npz"
+    profiles = "outputs/evals/classsplit_smooth_profiles.npz"
     command = [
         sys.executable, "scripts/evaluation/build_groupmean_profiles.py",
-        "--embeddings", "archive/data/image_embeddings_siglip2.npy",
-        "--cc0-embeddings", "archive/data/image_embeddings_cc0_siglip2.npy",
-        "--labels", "outputs/evals/labels_siglip2_final_reconstructed.parquet",
-        "--attributes", "data/attributes.jsonl", "--include-frozen",
+        "--embeddings", "data/image_embeddings.npy",
+        "--cc0-embeddings", "data/image_embeddings_cc0.npy",
+        "--labels", "data/labels.parquet",
+        "--attributes", "data/attributes_dev.jsonl", "--include-frozen",
     ]
     for name, *_ in CONFIGS:
         command.extend(["--checkpoint", f"{name}=outputs/checkpoints/{PREFIX}{name}/ckpt.pt"])
@@ -84,10 +84,10 @@ def main():
     print("building profiles", flush=True)
     run(command)
 
-    metrics_path = "outputs/evals/sweep_smooth_k14.json"
+    metrics_path = "outputs/evals/classsplit_smooth_k14.json"
     run([
         sys.executable, "scripts/evaluation/eval_playground_subset_composability.py",
-        "--dictionary-git", "HEAD:data/dictionary.json",
+        "--dictionary", "data/dictionary.json",
         "--profiles-npz", profiles,
         "--subset-sizes", "1,4,8,14", "--rollouts", "24", "--seed", "0",
         "--out", metrics_path,
@@ -98,7 +98,7 @@ def main():
     for name, mode, tau, floor, power, lam in CONFIGS:
         history = json.load(open(os.path.join(
             ROOT, "outputs", "checkpoints", PREFIX + name, "history.json")))
-        val = history[-1]["val"]
+        val = history[-1]["dev"]
         curves = metrics["models"][name]["true_attributes"]
         row = {
             "name": name, "mode": mode, "tau": tau, "floor": floor,
@@ -120,7 +120,7 @@ def main():
         summary.append(row)
     summary.sort(key=lambda x: x["screen_score"], reverse=True)
 
-    out = os.path.join(ROOT, "outputs/evals/sweep_smooth_summary.json")
+    out = os.path.join(ROOT, "outputs/evals/classsplit_smooth_summary.json")
     with open(out, "w") as f:
         json.dump(summary, f, indent=2)
     print("\nranked screen")

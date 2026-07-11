@@ -1,8 +1,7 @@
 # Local artifact manifest
 
 Large arrays and checkpoints are intentionally excluded from Git. The
-historical SigLIP2-B ablations documented in `experiments/` and orchestrated by
-`scripts/sweeps/sweep_smooth_orth.py` currently require:
+historical SigLIP2-B ablations documented in `experiments/` currently require:
 
 | Local path | Size | SHA-256 |
 |---|---:|---|

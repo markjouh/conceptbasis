@@ -1693,28 +1693,6 @@
       "a natural resource"
     ]
   },
-  "beige": {
-    "positive": [
-      "a beige colored surface",
-      "tan textured material",
-      "flesh-toned object",
-      "light beige item",
-      "neutral beige tone",
-      "pale beige appearance",
-      "warm beige hue",
-      "beige shaded entity"
-    ],
-    "negative": [
-      "a bright red object",
-      "deep black surface",
-      "pure white item",
-      "vivid blue color",
-      "dark charcoal shade",
-      "neon green appearance",
-      "bright orange tone",
-      "dark purple hue"
-    ]
-  },
   "hard": {
     "positive": [
       "a rigid solid block",
@@ -1957,28 +1935,6 @@
       "a subject situated in air"
     ]
   },
-  "kitchen": {
-    "positive": [
-      "a kitchen utensil",
-      "a kitchen appliance",
-      "a kitchen container",
-      "a kitchen tool",
-      "a kitchen device",
-      "a kitchen accessory",
-      "a kitchen gadget",
-      "a kitchen implement"
-    ],
-    "negative": [
-      "a natural stone",
-      "a wild animal",
-      "a living plant",
-      "a natural landscape",
-      "a raw ingredient",
-      "a natural element",
-      "a natural formation",
-      "a natural object"
-    ]
-  },
   "painted": {
     "positive": [
       "a freshly painted surface",
@@ -2199,28 +2155,6 @@
       "a non-organic material"
     ]
   },
-  "uniform": {
-    "positive": [
-      "a standardized uniform",
-      "a matching set outfit",
-      "a regulated clothing ensemble",
-      "a consistent dress code",
-      "a prescribed attire",
-      "a synchronized group wear",
-      "a formal uniformed look",
-      "a structured identical garment"
-    ],
-    "negative": [
-      "a chaotic mismatched outfit",
-      "a random assortment of clothes",
-      "a disorganized diverse wardrobe",
-      "a haphazardly dressed person",
-      "a unique individual style",
-      "a non-standard casual wear",
-      "a distinctively different attire",
-      "a freely mixed clothing"
-    ]
-  },
   "irregular": {
     "positive": [
       "an uneven shaped object",
@@ -2243,28 +2177,6 @@
       "a regular shaped object"
     ]
   },
-  "light-colored": {
-    "positive": [
-      "a bright white surface",
-      "a pale translucent material",
-      "a light ivory object",
-      "a clear glass item",
-      "a whitish ceramic piece",
-      "a light beige structure",
-      "a transparent plastic form",
-      "a light gray entity"
-    ],
-    "negative": [
-      "a dark black object",
-      "a deep shadowed item",
-      "a pitch black surface",
-      "a dark charcoal piece",
-      "a heavily shaded object",
-      "a dark brown entity",
-      "a black matte form",
-      "a dark obsidian item"
-    ]
-  },
   "pointed": {
     "positive": [
       "a sharp pointed tip",
@@ -2285,28 +2197,6 @@
       "a flat blunt edge",
       "rounded and soft shape",
       "no sharp points here"
-    ]
-  },
-  "displayed": {
-    "positive": [
-      "a mounted display",
-      "clearly showcased item",
-      "exhibited on a stand",
-      "presented for viewing",
-      "hanging on a wall",
-      "set out for display",
-      "visible in a case",
-      "arranged for exhibition"
-    ],
-    "negative": [
-      "a hidden object",
-      "buried in the ground",
-      "concealed from view",
-      "unseen natural item",
-      "lost in darkness",
-      "not displayed anywhere",
-      "obscured from sight",
-      "kept out of view"
     ]
   },
   "display": {
@@ -2551,28 +2441,6 @@
       "a ceremonial formal garb"
     ]
   },
-  "construction": {
-    "positive": [
-      "a constructed building structure",
-      "an architectural edifice",
-      "a built environment element",
-      "a manufactured construction site",
-      "a designed architectural form",
-      "a constructed framework",
-      "a built architectural piece",
-      "a constructed urban structure"
-    ],
-    "negative": [
-      "a natural landscape feature",
-      "an organic growing plant",
-      "a wild natural formation",
-      "a raw natural object",
-      "an unaltered natural element",
-      "a spontaneous natural occurrence",
-      "a non-constructed natural item",
-      "a purely organic entity"
-    ]
-  },
   "fibrous": {
     "positive": [
       "a rough textured surface",
@@ -2683,28 +2551,6 @@
       "a rigid non-padded item"
     ]
   },
-  "straight": {
-    "positive": [
-      "a perfectly straight line",
-      "a rigid straight edge",
-      "a linear geometric shape",
-      "a straight vertical bar",
-      "a straight horizontal rod",
-      "a straight path without curves",
-      "a straight diagonal segment",
-      "a straight parallel ruler"
-    ],
-    "negative": [
-      "a curved wavy line",
-      "a bent irregular shape",
-      "a twisted spiral form",
-      "a crooked crooked path",
-      "a bent random object",
-      "a curved organic shape",
-      "a twisted knotted rope",
-      "a bent irregular fragment"
-    ]
-  },
   "sliced": {
     "positive": [
       "a sliced fruit",
@@ -2791,28 +2637,6 @@
       "a slender fine line",
       "a thin lightweight fragment",
       "a slim delicate edge"
-    ]
-  },
-  "vegetation": {
-    "positive": [
-      "lush green foliage",
-      "dense plant life",
-      "vibrant grassy ground",
-      "thick natural vegetation",
-      "abundant greenery",
-      "living plant cover",
-      "wild growing plants",
-      "rich vegetative growth"
-    ],
-    "negative": [
-      "bare lifeless ground",
-      "sterile artificial surface",
-      "empty non-living space",
-      "man-made concrete area",
-      "dead dry soil",
-      "inorganic barren land",
-      "synthetic non-vegetated",
-      "lifeless exposed earth"
     ]
   },
   "dense": {
@@ -3035,28 +2859,6 @@
       "a complete intact object"
     ]
   },
-  "wall-mounted": {
-    "positive": [
-      "attached to a vertical surface",
-      "fixed against the wall",
-      "mounted on a wall",
-      "wall-secured item",
-      "hanging on a wall",
-      "affixed to the wall",
-      "wall-mounted fixture",
-      "secured to the wall"
-    ],
-    "negative": [
-      "standing freely on floor",
-      "lying on the ground",
-      "suspended in mid air",
-      "freestanding object",
-      "resting on a table",
-      "floating in space",
-      "placed on the ground",
-      "unattached loose item"
-    ]
-  },
   "articulated": {
     "positive": [
       "a jointed mechanical arm",
@@ -3167,28 +2969,6 @@
       "an untouched nature feature"
     ]
   },
-  "drinkable": {
-    "positive": [
-      "a refreshing beverage",
-      "a drinkable liquid",
-      "a bottled drink",
-      "a serving of drinkware",
-      "a consumable beverage",
-      "a pourable drink",
-      "a hydrating liquid",
-      "a ready-to-drink item"
-    ],
-    "negative": [
-      "a non-drinkable solid",
-      "an inedible object",
-      "a dry material",
-      "a structural component",
-      "a non-consumable item",
-      "a solid rock",
-      "a piece of metal",
-      "a non-liquid substance"
-    ]
-  },
   "streamlined": {
     "positive": [
       "a sleek aerodynamic shape",
@@ -3253,28 +3033,6 @@
       "a plain board",
       "a straight pipe",
       "a flat plane"
-    ]
-  },
-  "biodegradable": {
-    "positive": [
-      "a decaying organic substance",
-      "a naturally compostable material",
-      "a biodegradable waste item",
-      "a decomposing natural object",
-      "an eco-friendly biodegradable product",
-      "a rotting organic matter",
-      "a biodegradable household item",
-      "a natural decomposing material"
-    ],
-    "negative": [
-      "a non-biodegradable plastic",
-      "a synthetic non-decomposing object",
-      "a persistent non-organic item",
-      "a non-biodegradable manufactured good",
-      "a non-decomposing synthetic material",
-      "a non-organic artificial object",
-      "a non-biodegradable industrial product",
-      "a non-decomposing plastic item"
     ]
   },
   "public": {
@@ -3519,28 +3277,6 @@
       "a minimalist modern tool"
     ]
   },
-  "attached": {
-    "positive": [
-      "a securely attached item",
-      "a firmly fastened object",
-      "a connected component",
-      "a glued piece",
-      "a bolted assembly",
-      "a taped section",
-      "a fixed attachment",
-      "a bound element"
-    ],
-    "negative": [
-      "a detached object",
-      "a loose item",
-      "a separated piece",
-      "a free-standing element",
-      "an unconnected part",
-      "a removed component",
-      "a detached fragment",
-      "a standalone object"
-    ]
-  },
   "game": {
     "positive": [
       "a game piece",
@@ -3695,28 +3431,6 @@
       "a surface that does not absorb"
     ]
   },
-  "motorized": {
-    "positive": [
-      "a powered mechanical device",
-      "an electrically driven machine",
-      "a motorized apparatus",
-      "a battery operated gadget",
-      "an engine powered tool",
-      "a motorized mechanical unit",
-      "an electrically powered instrument",
-      "a motorized mechanical device"
-    ],
-    "negative": [
-      "a passive non-mechanical item",
-      "a purely manual object",
-      "a non-motorized simple tool",
-      "a hand operated device",
-      "a static unpowered object",
-      "a non-electric simple item",
-      "a manual non-motorized tool",
-      "a non-powered static object"
-    ]
-  },
   "footwear": {
     "positive": [
       "a pair of shoes",
@@ -3761,28 +3475,6 @@
       "runny clear juice"
     ]
   },
-  "rusty": {
-    "positive": [
-      "a corroded metal surface",
-      "an oxidized iron structure",
-      "a weathered reddish object",
-      "a decayed metallic item",
-      "a rusted old fixture",
-      "a tarnished copper piece",
-      "a rusted iron bar",
-      "a corroded steel part"
-    ],
-    "negative": [
-      "a pristine shiny object",
-      "a brand new item",
-      "a clean polished surface",
-      "a fresh unblemished object",
-      "a spotless metal piece",
-      "a newly manufactured object",
-      "a bright shiny surface",
-      "a clean unused item"
-    ]
-  },
   "open": {
     "positive": [
       "an open container",
@@ -3803,28 +3495,6 @@
       "a sealed package",
       "a covered vessel",
       "a shut container"
-    ]
-  },
-  "wired": {
-    "positive": [
-      "a device with a visible cable",
-      "an item connected by a wire",
-      "a corded electronic gadget",
-      "something tethered by a cord",
-      "a wired peripheral device",
-      "an object with a power cord",
-      "a connection via wire",
-      "a device featuring a cable"
-    ],
-    "negative": [
-      "a completely wireless device",
-      "an untethered electronic item",
-      "a cordless gadget",
-      "something without any wires",
-      "a battery-operated standalone object",
-      "an item with no cables",
-      "a wireless peripheral",
-      "a device free of cords"
     ]
   },
   "watercraft": {
@@ -4069,28 +3739,6 @@
       "a non-flexible item"
     ]
   },
-  "bird": {
-    "positive": [
-      "a winged creature flying",
-      "a feathered animal perched",
-      "a beaked bird singing",
-      "a small avian species",
-      "a bird with colorful plumage",
-      "a flying bird soaring",
-      "a bird nesting in tree",
-      "a bird with sharp talons"
-    ],
-    "negative": [
-      "a leafless branch",
-      "a smooth stone rock",
-      "a wooden tree trunk",
-      "a patch of green grass",
-      "a clear blue sky",
-      "a still body of water",
-      "a pile of dry leaves",
-      "a rocky mountain peak"
-    ]
-  },
   "wrapped": {
     "positive": [
       "a wrapped gift box",
@@ -4177,28 +3825,6 @@
       "a polluted natural setting",
       "a dirty organic matter",
       "a messy unsterilized room"
-    ]
-  },
-  "intricate": {
-    "positive": [
-      "a highly detailed surface",
-      "an elaborately patterned design",
-      "a complex geometric structure",
-      "an intricately woven texture",
-      "a finely crafted element",
-      "a richly ornate form",
-      "a densely layered composition",
-      "a meticulously finished piece"
-    ],
-    "negative": [
-      "a plain simple shape",
-      "a basic unadorned form",
-      "a smooth featureless surface",
-      "a minimalist geometric block",
-      "a crude rough texture",
-      "a simple solid object",
-      "a basic uniform structure",
-      "a plain unembellished item"
     ]
   },
   "handle": {
@@ -4289,28 +3915,6 @@
       "a strong brick pillar"
     ]
   },
-  "multiple": {
-    "positive": [
-      "a multi-part assembly",
-      "an object with multiple pieces",
-      "a composite structure",
-      "a complex multi-component item",
-      "a thing made of several parts",
-      "a segmented object",
-      "a multi-element construction",
-      "an object consisting of multiple units"
-    ],
-    "negative": [
-      "a single solid piece",
-      "a monolithic object",
-      "a unified single entity",
-      "a singular indivisible item",
-      "a one-piece object",
-      "a simple single unit",
-      "a non-composite object",
-      "a solitary single form"
-    ]
-  },
   "bumpy": {
     "positive": [
       "a highly textured surface",
@@ -4331,50 +3935,6 @@
       "a level plain object",
       "a refined smooth material",
       "a consistent even surface"
-    ]
-  },
-  "external": {
-    "positive": [
-      "an exterior surface",
-      "the outer layer",
-      "external boundary",
-      "outside structure",
-      "outermost part",
-      "exterior facade",
-      "external shell",
-      "outer perimeter"
-    ],
-    "negative": [
-      "an internal core",
-      "the inner layer",
-      "internal structure",
-      "inside component",
-      "innermost part",
-      "interior facade",
-      "internal shell",
-      "inner perimeter"
-    ]
-  },
-  "ribbed": {
-    "positive": [
-      "a ribbed surface texture",
-      "object with parallel grooves",
-      "item featuring ridged lines",
-      "surface with distinct ribs",
-      "texture showing slatted pattern",
-      "object with corrugated design",
-      "item with fluted details",
-      "surface featuring linear ridges"
-    ],
-    "negative": [
-      "a smooth unbroken surface",
-      "object with flat finish",
-      "item with no ridges",
-      "surface lacking any grooves",
-      "texture that is plain",
-      "object with smooth contours",
-      "item with even surface",
-      "surface without any lines"
     ]
   },
   "buttoned": {
@@ -4441,72 +4001,6 @@
       "a fixed item",
       "an object on the floor",
       "a grounded entity"
-    ]
-  },
-  "insulated": {
-    "positive": [
-      "a thermally protected vessel",
-      "a heat-retaining container",
-      "a temperature-stable enclosure",
-      "a thermal barrier structure",
-      "a heat-insulated chamber",
-      "a thermal shielded box",
-      "a temperature-controlled housing",
-      "a heat-preserving shell"
-    ],
-    "negative": [
-      "a thermally exposed item",
-      "a heat-leaking container",
-      "a temperature-unstable object",
-      "a thermal conductor piece",
-      "a heat-exposed vessel",
-      "a thermal unprotected box",
-      "a temperature-uncontrolled item",
-      "a heat-transmitting shell"
-    ]
-  },
-  "precious": {
-    "positive": [
-      "a valuable treasure",
-      "a rich gemstone",
-      "a precious artifact",
-      "a costly heirloom",
-      "a luxurious item",
-      "a rare collectible",
-      "a high-value asset",
-      "an expensive possession"
-    ],
-    "negative": [
-      "a worthless object",
-      "a cheap item",
-      "a common thing",
-      "a disposable object",
-      "a basic necessity",
-      "a mundane object",
-      "a free item",
-      "a worthless scrap"
-    ]
-  },
-  "braided": {
-    "positive": [
-      "a tightly braided cord",
-      "a knotted rope structure",
-      "a stringed textile item",
-      "a woven braided material",
-      "a twisted cordage piece",
-      "a braided fiber object",
-      "a knotted string assembly",
-      "a rope-like textured item"
-    ],
-    "negative": [
-      "a smooth unbraided surface",
-      "a single straight strand",
-      "a non-knotted simple cord",
-      "a loose untwisted fiber",
-      "a plain unbraided rope",
-      "a straight singular string",
-      "a non-woven material piece",
-      "a simple unknotted cord"
     ]
   },
   "perforated": {
@@ -4641,28 +4135,6 @@
       "a standard mass market object"
     ]
   },
-  "artistic": {
-    "positive": [
-      "a handcrafted ceramic vase",
-      "a vibrant abstract painting",
-      "a detailed wooden sculpture",
-      "a colorful woven tapestry",
-      "an intricate metal filigree",
-      "a hand-painted silk scarf",
-      "a carved stone statue",
-      "a unique artisanal jewelry piece"
-    ],
-    "negative": [
-      "a plain concrete block",
-      "a standard steel beam",
-      "a raw unprocessed rock",
-      "a basic plastic container",
-      "a simple glass window pane",
-      "a standard metal pipe",
-      "a rough piece of timber",
-      "a plain white sheet of paper"
-    ]
-  },
   "modular": {
     "positive": [
       "modular design system",
@@ -4749,28 +4221,6 @@
       "a distinct variation",
       "a non-repeating form",
       "a one-off design"
-    ]
-  },
-  "perching": {
-    "positive": [
-      "a bird perched on a branch",
-      "an animal resting on a high spot",
-      "a creature sitting atop a surface",
-      "a figure balanced on an edge",
-      "a small animal holding a perch",
-      "a being settled on a high place",
-      "a subject perched on a ledge",
-      "a creature resting on a support"
-    ],
-    "negative": [
-      "a bird flying in the air",
-      "an animal walking on the ground",
-      "a creature swimming in water",
-      "a figure standing on flat ground",
-      "a small animal running freely",
-      "a being lying on the earth",
-      "a subject resting on the floor",
-      "a creature moving across open space"
     ]
   },
   "stone": {
@@ -4971,28 +4421,6 @@
       "a convex structure"
     ]
   },
-  "horizontal": {
-    "positive": [
-      "a flat horizontal surface",
-      "an object lying horizontally",
-      "a level horizontal plane",
-      "a wide horizontal structure",
-      "a stretched horizontal line",
-      "a broad horizontal shape",
-      "a horizontal aligned object",
-      "a parallel horizontal bar"
-    ],
-    "negative": [
-      "a tall vertical object",
-      "a steeply angled item",
-      "a standing vertical structure",
-      "a diagonal slanted form",
-      "an upright vertical piece",
-      "a sharply inclined object",
-      "a perpendicular vertical edge",
-      "a non-horizontal angle"
-    ]
-  },
   "garnished": {
     "positive": [
       "a garnished dish",
@@ -5059,28 +4487,6 @@
       "a shapeless draped garment"
     ]
   },
-  "flying": {
-    "positive": [
-      "an airborne object",
-      "a floating entity",
-      "a suspended item",
-      "a levitating thing",
-      "a soaring artifact",
-      "a hovering object",
-      "a drifting element",
-      "a sky-bound object"
-    ],
-    "negative": [
-      "a grounded object",
-      "a stationary item",
-      "a resting object",
-      "a fixed entity",
-      "a static thing",
-      "a landed object",
-      "a anchored item",
-      "a grounded entity"
-    ]
-  },
   "military": {
     "positive": [
       "a military vehicle",
@@ -5103,28 +4509,6 @@
       "a soft fabric item"
     ]
   },
-  "crisp": {
-    "positive": [
-      "a crunchy snack item",
-      "a brittle dry leaf",
-      "a sharp fresh apple",
-      "a rigid structural beam",
-      "a brittle ceramic shard",
-      "a snapping dry twig",
-      "a crisp winter air",
-      "a brittle glass fragment"
-    ],
-    "negative": [
-      "a soft plush toy",
-      "a squishy ripe fruit",
-      "a malleable clay lump",
-      "a soggy wet sponge",
-      "a flexible rubber band",
-      "a mushy overcooked vegetable",
-      "a pliable fabric cloth",
-      "a viscous liquid gel"
-    ]
-  },
   "substance": {
     "positive": [
       "a solid heavy mass",
@@ -5145,72 +4529,6 @@
       "an insubstantial shadow",
       "a fragile temporary form",
       "a light insubstantial mist"
-    ]
-  },
-  "plate": {
-    "positive": [
-      "a flat circular dish",
-      "a shallow serving vessel",
-      "a ceramic dinner plate",
-      "a round food holder",
-      "a porcelain serving plate",
-      "a disposable paper plate",
-      "a flat tableware piece",
-      "a round ceramic dish"
-    ],
-    "negative": [
-      "a tall drinking glass",
-      "a solid wooden block",
-      "a deep soup bowl",
-      "a cylindrical vase",
-      "a rough stone rock",
-      "a hanging curtain fabric",
-      "a sharp metal knife",
-      "a soft fluffy pillow"
-    ]
-  },
-  "botanical": {
-    "positive": [
-      "a vibrant floral arrangement",
-      "a lush green plant",
-      "a blooming garden flower",
-      "a delicate botanical illustration",
-      "a natural leafy branch",
-      "a colorful floral pattern",
-      "a fresh garden bouquet",
-      "a vibrant nature scene"
-    ],
-    "negative": [
-      "a rigid metal structure",
-      "a synthetic plastic item",
-      "a manufactured industrial part",
-      "a concrete building block",
-      "a mechanical engine component",
-      "a smooth glass surface",
-      "a digital electronic device",
-      "a processed food product"
-    ]
-  },
-  "mass-produced": {
-    "positive": [
-      "a mass-produced item",
-      "an industrial manufactured good",
-      "a factory-made product",
-      "a standardized commercial object",
-      "a replicated mass item",
-      "a machine-generated artifact",
-      "a\u6279\u91cf produced commodity",
-      "a uniform manufactured thing"
-    ],
-    "negative": [
-      "a unique handcrafted piece",
-      "a naturally occurring object",
-      "a one-of-a-kind artifact",
-      "a singular handmade item",
-      "an organic natural form",
-      "a bespoke crafted object",
-      "a rare original creation",
-      "a solitary natural specimen"
     ]
   },
   "elevated": {
@@ -5255,50 +4573,6 @@
       "a matte untextured item",
       "a continuous smooth surface",
       "a basic round object"
-    ]
-  },
-  "reclining": {
-    "positive": [
-      "a relaxed figure lying down",
-      "someone resting in a chair",
-      "a person sleeping comfortably",
-      "a body in a reclined pose",
-      "an object set at an angle",
-      "a laid-back posture",
-      "a slumped resting position",
-      "a person in a supine state"
-    ],
-    "negative": [
-      "a standing upright figure",
-      "someone sitting straight up",
-      "a rigid vertical posture",
-      "a person in a sprint",
-      "an object in a vertical stance",
-      "a tense standing pose",
-      "a person jumping high",
-      "a straight rigid position"
-    ]
-  },
-  "marine": {
-    "positive": [
-      "a marine creature",
-      "an oceanic animal",
-      "a sea-dwelling being",
-      "a coastal organism",
-      "a saltwater inhabitant",
-      "a marine lifeform",
-      "an aquatic sea entity",
-      "a marine species"
-    ],
-    "negative": [
-      "a terrestrial animal",
-      "a land-dwelling creature",
-      "a desert organism",
-      "a mountain inhabitant",
-      "a forest dweller",
-      "a terrestrial species",
-      "a land animal",
-      "a non-marine life"
     ]
   },
   "part": {
@@ -5411,94 +4685,6 @@
       "a smooth hard surface"
     ]
   },
-  "skin-covered": {
-    "positive": [
-      "a flesh-covered surface",
-      "an organic skin layer",
-      "a body with skin",
-      "a skin-wrapped form",
-      "a living skin exterior",
-      "a raw skin texture",
-      "a skin-covered mass",
-      "a biological skin coating"
-    ],
-    "negative": [
-      "a bare bone structure",
-      "a smooth metal surface",
-      "a plastic coated item",
-      "a fabric wrapped object",
-      "a wooden carved piece",
-      "a glass transparent object",
-      "a stone rough surface",
-      "a leather processed material"
-    ]
-  },
-  "surface": {
-    "positive": [
-      "a smooth polished surface",
-      "a sleek glossy finish",
-      "a flat even texture",
-      "a refined smooth exterior",
-      "a perfectly smooth layer",
-      "a clean smooth face",
-      "a highly polished plane",
-      "a smooth continuous surface"
-    ],
-    "negative": [
-      "a rough uneven texture",
-      "a bumpy jagged surface",
-      "a coarse rough finish",
-      "a textured irregular layer",
-      "a rough uneven face",
-      "a rugged bumpy exterior",
-      "a coarse granular surface",
-      "a rough irregular plane"
-    ]
-  },
-  "plain": {
-    "positive": [
-      "a plain white surface",
-      "a dull gray background",
-      "a simple unadorned shape",
-      "a basic neutral color",
-      "a plain textured wall",
-      "a simple geometric form",
-      "a plain solid color",
-      "a dull matte finish"
-    ],
-    "negative": [
-      "a highly ornate design",
-      "a vibrant colorful pattern",
-      "a complex intricate detail",
-      "a flashy decorated object",
-      "a bright vivid hue",
-      "a elaborate decorative style",
-      "a complex textured surface",
-      "a shiny metallic reflection"
-    ]
-  },
-  "pourable": {
-    "positive": [
-      "a liquid in a container",
-      "a viscous fluid substance",
-      "a flowing granular material",
-      "a pourable condiment bottle",
-      "a stream of liquid",
-      "a spilled sugary mixture",
-      "a salty powder being poured",
-      "a generic pourable substance"
-    ],
-    "negative": [
-      "a solid rock formation",
-      "a rigid wooden block",
-      "a stationary stone statue",
-      "a solid metal beam",
-      "a fixed concrete pillar",
-      "a non-liquid solid object",
-      "a rigid structural element",
-      "a stationary heavy object"
-    ]
-  },
   "modern": {
     "positive": [
       "a sleek modern design",
@@ -5587,28 +4773,6 @@
       "an object with no wings"
     ]
   },
-  "powerful": {
-    "positive": [
-      "a forceful impact",
-      "a strong influence",
-      "a powerful entity",
-      "a mighty force",
-      "a potent effect",
-      "a robust mechanism",
-      "a commanding presence",
-      "a vigorous action"
-    ],
-    "negative": [
-      "a weak influence",
-      "a subtle effect",
-      "a gentle touch",
-      "a faint presence",
-      "a minor impact",
-      "a powerless entity",
-      "a fragile object",
-      "a mild action"
-    ]
-  },
   "symbolic": {
     "positive": [
       "a symbolic representation",
@@ -5629,94 +4793,6 @@
       "a basic utility",
       "a straightforward item",
       "a concrete object"
-    ]
-  },
-  "leafy": {
-    "positive": [
-      "lush green vegetation",
-      "dense botanical growth",
-      "vibrant foliage texture",
-      "verdant plant matter",
-      "thick garden greenery",
-      "natural leafy elements",
-      "organic plant life",
-      "abundant green leaves"
-    ],
-    "negative": [
-      "a barren surface",
-      "completely smooth texture",
-      "a dry desert landscape",
-      "sterile artificial material",
-      "an arid environment",
-      "devoid of life",
-      "a metallic structure",
-      "a lifeless void"
-    ]
-  },
-  "vegetable": {
-    "positive": [
-      "a fresh edible plant",
-      "organic garden produce",
-      "a harvested crop",
-      "raw agricultural product",
-      "freshly picked vegetation",
-      "a nutritious plant item",
-      "earthy botanical food",
-      "a natural plant specimen"
-    ],
-    "negative": [
-      "a synthetic plastic item",
-      "a purely inorganic object",
-      "an artificial manufactured product",
-      "a non-edible mineral",
-      "a metallic manufactured item",
-      "a processed chemical substance",
-      "a purely synthetic material",
-      "a non-biological object"
-    ]
-  },
-  "long": {
-    "positive": [
-      "a long slender item",
-      "a very narrow shape",
-      "a straight elongated form",
-      "a thin stretched object",
-      "a lengthy linear piece",
-      "a slim upright structure",
-      "a narrow extended shape",
-      "a stretched out form"
-    ],
-    "negative": [
-      "a wide bulky mass",
-      "a perfectly round sphere",
-      "a short stout shape",
-      "a wide circular object",
-      "a thick compact form",
-      "a squat wide shape",
-      "a broad voluminous object",
-      "a wide squat mass"
-    ]
-  },
-  "portable": {
-    "positive": [
-      "a lightweight handheld item",
-      "easily carried object",
-      "compact mobile device",
-      "something highly transportable",
-      "a small movable piece",
-      "portable gear",
-      "an easy to carry item",
-      "a mobile unit"
-    ],
-    "negative": [
-      "a fixed heavy structure",
-      "a permanent installation",
-      "something immovably rooted",
-      "a massive stationary object",
-      "an anchored fixture",
-      "a heavy built-in item",
-      "a non-movable entity",
-      "a static large object"
     ]
   },
   "mechanical": {
@@ -5741,358 +4817,6 @@
       "purely natural phenomenon"
     ]
   },
-  "tall": {
-    "positive": [
-      "a very tall object",
-      "an upright vertical structure",
-      "a towering presence",
-      "a high reaching form",
-      "a slender vertical shape",
-      "an elongated vertical item",
-      "a lofty silhouette",
-      "a soaring structure"
-    ],
-    "negative": [
-      "a short squat object",
-      "a low profile item",
-      "a flat horizontal shape",
-      "a tiny compact form",
-      "a miniature object",
-      "a wide low structure",
-      "a stunted small item",
-      "a ground level form"
-    ]
-  },
-  "ornate": {
-    "positive": [
-      "highly detailed pattern",
-      "intricately carved surface",
-      "elaborate decorative design",
-      "ornamented complex structure",
-      "finely detailed embellishment",
-      "excessively decorated item",
-      "complex aesthetic motifs",
-      "grandly patterned object"
-    ],
-    "negative": [
-      "plain minimalist surface",
-      "simple undecorated form",
-      "smooth featureless texture",
-      "unadorned basic shape",
-      "minimalist aesthetic design",
-      "extremely basic appearance",
-      "plainly styled item",
-      "strictly functional form"
-    ]
-  },
-  "earthy": {
-    "positive": [
-      "a textured earthen object",
-      "something with organic tones",
-      "a rustic natural item",
-      "an object with soil hues",
-      "a weathered mineral piece",
-      "something with clay-like colors",
-      "a gritty natural substance",
-      "an item with muted tones"
-    ],
-    "negative": [
-      "a bright neon object",
-      "something highly polished",
-      "a sleek synthetic item",
-      "an ultra-vibrant object",
-      "something metallic and shiny",
-      "a colorful plastic item",
-      "a glowing artificial object",
-      "something perfectly smooth"
-    ]
-  },
-  "granular": {
-    "positive": [
-      "a coarse textured surface",
-      "highly irregular bumpy texture",
-      "rough grainy material",
-      "uneven gritty surface",
-      "heavily pebbled exterior",
-      "a bumpy tactile surface",
-      "rough and granular matter",
-      "a highly textured object"
-    ],
-    "negative": [
-      "a perfectly smooth surface",
-      "a sleek polished object",
-      "a seamless glossy finish",
-      "an ultra smooth texture",
-      "a flat even surface",
-      "a polished mirror finish",
-      "a perfectly uniform surface",
-      "a silky smooth object"
-    ]
-  },
-  "reusable": {
-    "positive": [
-      "a reusable item",
-      "recyclable material object",
-      "eco friendly product",
-      "sustainable manufactured item",
-      "recycled material object",
-      "multi use item",
-      "waste reducing object",
-      "environmentally conscious item"
-    ],
-    "negative": [
-      "a single use item",
-      "disposable object",
-      "non recyclable material",
-      "a consumable item",
-      "wasteful object",
-      "one time use item",
-      "non reusable item",
-      "a throwaway object"
-    ]
-  },
-  "storage": {
-    "positive": [
-      "a container for items",
-      "an organized holding space",
-      "a vessel for keeping things",
-      "a structured repository",
-      "a space for keeping goods",
-      "an item for retention",
-      "a place for organization",
-      "a unit for housing objects"
-    ],
-    "negative": [
-      "an open empty void",
-      "a completely dispersed mess",
-      "something scattered widely",
-      "a lack of containment",
-      "an unstructured expanse",
-      "a void with no capacity",
-      "items without a place",
-      "a completely uncontained mass"
-    ]
-  },
-  "paper": {
-    "positive": [
-      "a thin paper material",
-      "a lightweight paper object",
-      "something made of paper",
-      "a pressed cellulose item",
-      "a flat paper surface",
-      "an item of stationery",
-      "a fibrous paper texture",
-      "a thin sheet material"
-    ],
-    "negative": [
-      "a solid metal object",
-      "a hard stone item",
-      "a liquid substance",
-      "a piece of fabric",
-      "a heavy wooden block",
-      "a natural rock formation",
-      "a metallic structure",
-      "a soft organic matter"
-    ]
-  },
-  "component": {
-    "positive": [
-      "a modular assembly",
-      "an interlocking structure",
-      "a multi-part construction",
-      "a segmented system",
-      "a collection of parts",
-      "a divisible unit",
-      "a discrete element",
-      "a composite arrangement"
-    ],
-    "negative": [
-      "a single solid mass",
-      "a monolithic form",
-      "an indivisible whole",
-      "a continuous entity",
-      "a seamless object",
-      "a unified structure",
-      "an unbroken shape",
-      "a single piece"
-    ]
-  },
-  "adjustable": {
-    "positive": [
-      "an adjustable mechanism",
-      "a movable component",
-      "a highly versatile item",
-      "a customisable structure",
-      "a sliding part",
-      "a flexible configuration",
-      "a repositionable element",
-      "a variable setup"
-    ],
-    "negative": [
-      "a fixed structure",
-      "a rigid object",
-      "a static item",
-      "an unchangeable form",
-      "a stationary piece",
-      "an immobile entity",
-      "a permanent arrangement",
-      "a non-adjustable unit"
-    ]
-  },
-  "stationery": {
-    "positive": [
-      "writing tools",
-      "office supplies",
-      "paper goods",
-      "desk accessories",
-      "notetaking items",
-      "correspondence materials",
-      "educational supplies",
-      "desktop essentials"
-    ],
-    "negative": [
-      "raw natural elements",
-      "wild organic matter",
-      "unprocessed biological items",
-      "wildlife in nature",
-      "geological formations",
-      "natural landscape features",
-      "untamed wilderness objects",
-      "purely organic substances"
-    ]
-  },
-  "flesh-toned": {
-    "positive": [
-      "flesh-toned surface texture",
-      "skin-covered material",
-      "flesh-colored exterior",
-      "a skin-like coating",
-      "flesh-toned smooth finish",
-      "surface with skin tone",
-      "flesh-colored matte texture",
-      "a skin-toned object"
-    ],
-    "negative": [
-      "vibrant multicolored surface",
-      "metallic cold texture",
-      "brightly colored object",
-      "darkly pigmented material",
-      "high contrast colors",
-      "monochrome neutral surface",
-      "a rainbow patterned item",
-      "deeply saturated hues"
-    ]
-  },
-  "urban": {
-    "positive": [
-      "a sleek modern structure",
-      "contemporary metropolitan design",
-      "industrial city aesthetic",
-      "sophisticated urban style",
-      "high-tech metropolitan piece",
-      "metropolitan architectural element",
-      "polished city object",
-      "stylized urban form"
-    ],
-    "negative": [
-      "a rustic primitive item",
-      "wild natural element",
-      "organic forest object",
-      "raw earthy material",
-      "untamed wilderness piece",
-      "primitive handcrafted item",
-      "natural landscape feature",
-      "unprocessed organic matter"
-    ]
-  },
-  "oval": {
-    "positive": [
-      "an oval shaped item",
-      "a rounded elliptical form",
-      "an egg shaped object",
-      "a curved lozenge shape",
-      "a smooth oval silhouette",
-      "an elongated circular form",
-      "a symmetrical oval figure",
-      "a soft rounded contour"
-    ],
-    "negative": [
-      "a sharp angular object",
-      "a perfectly square form",
-      "a strictly rectangular item",
-      "a jagged irregular shape",
-      "a pointed geometric figure",
-      "a straight edged object",
-      "a sharp cornered item",
-      "a precise cubic form"
-    ]
-  },
-  "weapon": {
-    "positive": [
-      "a tactical military item",
-      "an armored piece of gear",
-      "a combat ready object",
-      "a heavy ballistic tool",
-      "a specialized weaponized device",
-      "an offensive military apparatus",
-      "a hardened combat implement",
-      "a defensive armored unit"
-    ],
-    "negative": [
-      "a fragile delicate item",
-      "a soft harmless object",
-      "a peaceful civilian item",
-      "a non-combat tool",
-      "a harmless domestic object",
-      "a blunt blunt object",
-      "a non-threatening item",
-      "a defenseless soft object"
-    ]
-  },
-  "adorned": {
-    "positive": [
-      "an intricately decorated item",
-      "ornate ceremonial object",
-      "heavily embellished piece",
-      "finely detailed artifact",
-      "highly patterned surface",
-      "lavishly decorated thing",
-      "adorned ritualistic object",
-      "gilded decorative item"
-    ],
-    "negative": [
-      "a plain simple object",
-      "unadorned basic item",
-      "completely featureless thing",
-      "a minimalist object",
-      "plain undecorated piece",
-      "a stark simple item",
-      "smooth unpatterned surface",
-      "a basic utilitarian object"
-    ]
-  },
-  "adhesive": {
-    "positive": [
-      "a very sticky surface",
-      "a tacky coating",
-      "an extremely gummy texture",
-      "a viscous liquid substance",
-      "a gluey material",
-      "a clingy substance",
-      "a highly adherent layer",
-      "a thick syrupy texture"
-    ],
-    "negative": [
-      "a smooth nonstick surface",
-      "a dry slippery texture",
-      "a perfectly smooth finish",
-      "a non-adhesive coating",
-      "a dry powdery substance",
-      "a slick polished surface",
-      "a frictionless material",
-      "a clean non-tacky surface"
-    ]
-  },
   "rolled": {
     "positive": [
       "a coiled spiral shape",
@@ -6113,28 +4837,6 @@
       "a straight unbent shape",
       "a non-coiled item",
       "a rigid straight piece"
-    ]
-  },
-  "interactive": {
-    "positive": [
-      "a digital interface",
-      "an interactive electronic device",
-      "a responsive touch screen",
-      "a high-tech digital tool",
-      "a programmable electronic item",
-      "a user-driven digital system",
-      "a computerized interactive device",
-      "a modern digital apparatus"
-    ],
-    "negative": [
-      "a static inanimate object",
-      "a non-responsive physical item",
-      "a purely natural object",
-      "a simple analog item",
-      "a non-digital artifact",
-      "a motionless physical entity",
-      "a primitive manual object",
-      "a non-electronic item"
     ]
   },
   "angular": {
@@ -6159,94 +4861,6 @@
       "wavy flowing lines"
     ]
   },
-  "disposable": {
-    "positive": [
-      "a single-use item",
-      "a temporary object",
-      "an ephemeral product",
-      "a throwaway item",
-      "a short-lived object",
-      "a non-reusable item",
-      "a transient object",
-      "a momentary item"
-    ],
-    "negative": [
-      "a permanent object",
-      "a durable item",
-      "a long-lasting object",
-      "an everlasting item",
-      "a reusable object",
-      "a sturdy item",
-      "a perennial object",
-      "a timeless item"
-    ]
-  },
-  "linear": {
-    "positive": [
-      "a straight edge shape",
-      "a perfectly straight form",
-      "a direct longitudinal axis",
-      "a non-curved silhouette",
-      "a rectilinear structure",
-      "a continuous straight line",
-      "a flat linear path",
-      "a rigid straight profile"
-    ],
-    "negative": [
-      "a curved organic shape",
-      "a circular rounded form",
-      "a swirling spiral pattern",
-      "a wavy irregular contour",
-      "a bulbous rounded object",
-      "a twisted chaotic shape",
-      "a highly curved silhouette",
-      "a bent non-linear form"
-    ]
-  },
-  "raw": {
-    "positive": [
-      "unrefined natural material",
-      "pure unprocessed substance",
-      "natural state item",
-      "completely untouched matter",
-      "original primitive form",
-      "unaltered organic matter",
-      "minimally treated material",
-      "crude natural element"
-    ],
-    "negative": [
-      "highly processed item",
-      "refined manufactured good",
-      "artificially altered object",
-      "chemically treated substance",
-      "heavily engineered product",
-      "sophisticated manufactured item",
-      "thoroughly purified material",
-      "complex synthetic object"
-    ]
-  },
-  "jewelry": {
-    "positive": [
-      "a precious gemstone",
-      "ornate decorative piece",
-      "shining metallic ornament",
-      "glittering luxury item",
-      "polished sparkling object",
-      "intricate crafted accessory",
-      "a brilliant faceted stone",
-      "elegant embellished item"
-    ],
-    "negative": [
-      "a plain rough stone",
-      "an unadorned natural rock",
-      "a piece of raw wood",
-      "a simple organic matter",
-      "a dull common pebble",
-      "an untreated natural element",
-      "a plain featureless object",
-      "raw earthen material"
-    ]
-  },
   "architectural": {
     "positive": [
       "a structured manmade construction",
@@ -6267,182 +4881,6 @@
       "a spontaneous natural object",
       "a non-constructed natural item",
       "a chaotic organic mass"
-    ]
-  },
-  "carved": {
-    "positive": [
-      "intricately carved surface",
-      "deeply engraved patterns",
-      "etched decorative details",
-      "finely sculpted textures",
-      "ornate relief carvings",
-      "detailed incisions",
-      "hand-carved features",
-      "engraved geometric motifs"
-    ],
-    "negative": [
-      "smooth unblemished surface",
-      "perfectly flat texture",
-      "seamless polished finish",
-      "natural organic shape",
-      "completely plain exterior",
-      "unmarked uniform surface",
-      "undisturbed pristine texture",
-      "featureless matte surface"
-    ]
-  },
-  "draped": {
-    "positive": [
-      "soft fabric draped loosely",
-      "material bundled in folds",
-      "cloth hanging in ripples",
-      "layers of draped textile",
-      "folded and draped surface",
-      "flowing draped material",
-      "bunched up fabric",
-      "cascading draped cloth"
-    ],
-    "negative": [
-      "rigid and stiff structure",
-      "tightly stretched surface",
-      "hard unyielding form",
-      "smooth flat plane",
-      "firm solid shape",
-      "taut and straight material",
-      "unyielding geometric object",
-      "fixed structural form"
-    ]
-  },
-  "engineered": {
-    "positive": [
-      "a precision manufactured item",
-      "an intricately designed structure",
-      "a highly technical creation",
-      "a complex synthetic object",
-      "a custom built component",
-      "a mathematically structured form",
-      "a sophisticated constructed piece",
-      "an artificial assembly"
-    ],
-    "negative": [
-      "a raw natural element",
-      "an organic unformed mass",
-      "a wild primitive object",
-      "a spontaneous natural growth",
-      "an untouched organic matter",
-      "a random natural shape",
-      "a simple unrefined substance",
-      "a purely biological entity"
-    ]
-  },
-  "jointed": {
-    "positive": [
-      "a flexible articulated structure",
-      "an object with moving segments",
-      "a multi-segmented connected item",
-      "an item with mechanical hinges",
-      "a series of connected parts",
-      "a flexible interlocking mechanism",
-      "a piece with pivot points",
-      "a modular articulated form"
-    ],
-    "negative": [
-      "a single solid piece",
-      "a rigid unbroken mass",
-      "a continuous seamless object",
-      "a stiff unyielding shape",
-      "a uniform solid block",
-      "a fixed monolithic structure",
-      "a non-moving solid item",
-      "a perfectly smooth surface"
-    ]
-  },
-  "permanent": {
-    "positive": [
-      "an everlasting structure",
-      "a fixed enduring form",
-      "a constant unchanging entity",
-      "a timeless solid object",
-      "a deeply rooted fixture",
-      "a stable permanent item",
-      "an immutable physical presence",
-      "a lifelong durable thing"
-    ],
-    "negative": [
-      "a fleeting momentary thing",
-      "a transient passing object",
-      "something short lived",
-      "an ephemeral delicate item",
-      "a temporary shifting form",
-      "a vanishing evanescent shape",
-      "a momentary presence",
-      "a temporary unstable object"
-    ]
-  },
-  "sharp": {
-    "positive": [
-      "a keen edged item",
-      "a pointed implement",
-      "an object with sharp edges",
-      "a finely honed tool",
-      "a slicing instrument",
-      "a razor thin surface",
-      "a piercing object",
-      "a cutting edge"
-    ],
-    "negative": [
-      "a blunt rounded object",
-      "a smooth soft surface",
-      "a dull unsharpened item",
-      "a curved harmless shape",
-      "a rounded edge object",
-      "a soft textured item",
-      "a smooth featureless object",
-      "a non-pointed shape"
-    ]
-  },
-  "visual": {
-    "positive": [
-      "a visible entity",
-      "clearly perceptible form",
-      "an observable item",
-      "distinctly seen object",
-      "an eye-catching shape",
-      "a bright luminous thing",
-      "a discernible presence",
-      "a visually apparent matter"
-    ],
-    "negative": [
-      "an invisible presence",
-      "something completely unseen",
-      "a transparent void",
-      "an imperceptible entity",
-      "a hidden object",
-      "something totally obscured",
-      "a non-visual element",
-      "an undetectable form"
-    ]
-  },
-  "office supply": {
-    "positive": [
-      "an office supply item",
-      "stationery for workspace",
-      "professional desk accessory",
-      "workplace equipment",
-      "an office tool",
-      "business administrative object",
-      "desktop utility item",
-      "corporate supply item"
-    ],
-    "negative": [
-      "a natural object",
-      "wild organic matter",
-      "something from nature",
-      "an unrefined element",
-      "raw biological material",
-      "wildlife from the forest",
-      "a natural specimen",
-      "an outdoor organic item"
     ]
   },
   "beaked": {
@@ -6467,50 +4905,6 @@
       "a smooth uniform contour"
     ]
   },
-  "powdery": {
-    "positive": [
-      "a fine powdery substance",
-      "dusty textured material",
-      "soft granular particles",
-      "a coating of powder",
-      "fine milled texture",
-      "a loose powdery mass",
-      "softly dusted surface",
-      "fine particulate matter"
-    ],
-    "negative": [
-      "a solid smooth object",
-      "a hard polished surface",
-      "a liquid flowing substance",
-      "a dense heavy mass",
-      "a sleek metallic item",
-      "a firm rigid structure",
-      "a wet glossy surface",
-      "a seamless solid piece"
-    ]
-  },
-  "cultivated": {
-    "positive": [
-      "a cultivated specimen",
-      "an intentionally grown item",
-      "a tended organism",
-      "a domesticated plant",
-      "a nurtured growth",
-      "a farmed biological entity",
-      "a selectively bred subject",
-      "a cultivated living thing"
-    ],
-    "negative": [
-      "a wild specimen",
-      "an untamed organism",
-      "a naturally occurring object",
-      "a spontaneous growth",
-      "an uncultivated entity",
-      "a feral biological item",
-      "a wild growing thing",
-      "a natural wilderness object"
-    ]
-  },
   "personal": {
     "positive": [
       "a private possession",
@@ -6533,94 +4927,6 @@
       "a non-individualized object"
     ]
   },
-  "sleek": {
-    "positive": [
-      "a sleek minimalist design",
-      "smooth polished surface",
-      "streamlined modern form",
-      "elegant clean lines",
-      "a polished seamless object",
-      "refined aerodynamic shape",
-      "minimalist aesthetic structure",
-      "a sleek sophisticated item"
-    ],
-    "negative": [
-      "a rough textured object",
-      "cluttered uneven surface",
-      "an ornate complex shape",
-      "rugged irregular form",
-      "a jagged primitive item",
-      "distressed weathered texture",
-      "an asymmetrical messy object",
-      "a bulky coarse item"
-    ]
-  },
-  "playful": {
-    "positive": [
-      "brightly colored item",
-      "vibrant and cheerful object",
-      "soft and rounded shape",
-      "whimsical patterned thing",
-      "engaging and lively piece",
-      "friendly looking item",
-      "joyful aesthetic object",
-      "fun and colorful thing"
-    ],
-    "negative": [
-      "stern and serious object",
-      "monotone and dull item",
-      "sharp and jagged thing",
-      "grim and somber piece",
-      "austere and rigid object",
-      "cold and clinical item",
-      "drab and colorless thing",
-      "harsh and intimidating object"
-    ]
-  },
-  "tactile": {
-    "positive": [
-      "a highly textured surface",
-      "rough coarse material",
-      "deeply embossed pattern",
-      "grainy physical feel",
-      "ridged uneven surface",
-      "distinctly bumpy texture",
-      "pronounced tactile relief",
-      "striated physical grain"
-    ],
-    "negative": [
-      "a perfectly smooth surface",
-      "completely seamless texture",
-      "slick polished finish",
-      "ultra glib surface",
-      "featureless flat plane",
-      "glassy even texture",
-      "uniform non-textured surface",
-      "perfectly even coating"
-    ]
-  },
-  "appendage": {
-    "positive": [
-      "object with sharp claws",
-      "item featuring pointed appendages",
-      "structure with grasping limbs",
-      "entity with curved talons",
-      "form with protruding claws",
-      "surface with hooked extensions",
-      "shape with articulated appendages",
-      "thing with clawed tips"
-    ],
-    "negative": [
-      "smooth seamless surface",
-      "perfectly rounded object",
-      "featureless blunt shape",
-      "completely flat surface",
-      "uniform smooth texture",
-      "soft rounded form",
-      "featureless simple shape",
-      "smooth continuous edge"
-    ]
-  },
   "marked": {
     "positive": [
       "a clearly labelled item",
@@ -6641,116 +4947,6 @@
       "a pristine unmarked surface",
       "an item without markings",
       "a simple plain object"
-    ]
-  },
-  "headwear": {
-    "positive": [
-      "an item worn on head",
-      "a head covering",
-      "something atop a head",
-      "an accessory for the scalp",
-      "a cranial garment",
-      "headgear worn by person",
-      "a piece of headwear",
-      "an object for head protection"
-    ],
-    "negative": [
-      "bare exposed scalp",
-      "uncovered human head",
-      "a naked head",
-      "no head covering",
-      "an uncovered cranium",
-      "completely bare head",
-      "exposed hair and skin",
-      "a head without accessories"
-    ]
-  },
-  "muscular": {
-    "positive": [
-      "a heavily built figure",
-      "a powerful athletic form",
-      "a robust and toned physique",
-      "a well-defined muscular shape",
-      "a strong sturdy frame",
-      "a ripped and sinewy body",
-      "a massive burly silhouette",
-      "a sculpted athletic build"
-    ],
-    "negative": [
-      "a slender frail shape",
-      "a thin delicate frame",
-      "a soft slight build",
-      "a weak spindly form",
-      "a petite petite physique",
-      "a lanky thin silhouette",
-      "a slim petite figure",
-      "a diminutive slight shape"
-    ]
-  },
-  "form-fitting": {
-    "positive": [
-      "tightly contoured shape",
-      "snug and sleek silhouette",
-      "closely following every curve",
-      "streamlined and compressed form",
-      "perfectly molded outline",
-      "skin tight appearance",
-      "precisely shaped surface",
-      "seamlessly hugging the form"
-    ],
-    "negative": [
-      "loose and baggy structure",
-      "oversized and voluminous shape",
-      "shapeless and billowing form",
-      "wide and flowing silhouette",
-      "bulky and unstructured mass",
-      "relaxed and draped appearance",
-      "unstructured and baggy profile",
-      "excessively roomy dimensions"
-    ]
-  },
-  "grazing": {
-    "positive": [
-      "an animal grazing",
-      "creature eating grass",
-      "livestock feeding on pasture",
-      "grazing in a meadow",
-      "herbivore eating greenery",
-      "animal foraging on ground",
-      "grazing in open field",
-      "pasture feeding activity"
-    ],
-    "negative": [
-      "predator hunting prey",
-      "an object eating nothing",
-      "an inanimate stone",
-      "something consuming meat",
-      "a non-living entity",
-      "an object in stasis",
-      "something strictly carnivorous",
-      "a sterile artificial item"
-    ]
-  },
-  "fragmented": {
-    "positive": [
-      "a shattered surface",
-      "broken pieces scattered",
-      "cracked and splintered",
-      "highly fractured material",
-      "disconnected jagged parts",
-      "a crumbled structure",
-      "split into shards",
-      "disintegrated and uneven"
-    ],
-    "negative": [
-      "a solid whole",
-      "completely intact form",
-      "seamless smooth surface",
-      "unbroken continuous shape",
-      "perfectly unified object",
-      "entire and whole",
-      "flawless unbroken piece",
-      "a steady cohesive mass"
     ]
   },
   "combustible": {
@@ -6841,50 +5037,6 @@
       "a surface without scales"
     ]
   },
-  "comfortable": {
-    "positive": [
-      "a cozy soft item",
-      "plush comfortable material",
-      "an ergonomic supportive object",
-      "something soft and cushioning",
-      "a relaxing plush surface",
-      "comfortably padded object",
-      "soft tactile material",
-      "a cozy lounging item"
-    ],
-    "negative": [
-      "a hard rigid object",
-      "sharp uncomfortable edges",
-      "an abrasive rough surface",
-      "stiff inflexible material",
-      "a prickly painful object",
-      "cold hard surface",
-      "uncomfortable jagged item",
-      "a stiff restrictive object"
-    ]
-  },
-  "plaid": {
-    "positive": [
-      "a plaid patterned object",
-      "checkered surface texture",
-      "an item with plaid print",
-      "a checkered fabric piece",
-      "plaid design material",
-      "something with a grid pattern",
-      "a checkered textile",
-      "plaid colored surface"
-    ],
-    "negative": [
-      "a solid color object",
-      "plain monochromatic surface",
-      "an item with no pattern",
-      "smooth single-tone material",
-      "a blank colored surface",
-      "completely uniform color",
-      "non-patterned plain object",
-      "a solid hue item"
-    ]
-  },
   "body part": {
     "positive": [
       "a biological body part",
@@ -6905,50 +5057,6 @@
       "something entirely non-organic",
       "a manmade metallic item",
       "an inorganic inanimate thing"
-    ]
-  },
-  "speckled": {
-    "positive": [
-      "a speckled surface",
-      "an object with speckles",
-      "a finely dotted texture",
-      "speckled pattern on material",
-      "something with small spots",
-      "a mottled speckled item",
-      "surface covered in speckles",
-      "an object with flecks"
-    ],
-    "negative": [
-      "a solid color surface",
-      "a perfectly smooth tone",
-      "an object with uniform color",
-      "plain monochromatic material",
-      "a seamless flat color",
-      "completely solid hue",
-      "an item without spots",
-      "a clean single-tone surface"
-    ]
-  },
-  "safety": {
-    "positive": [
-      "a safety device",
-      "protective emergency equipment",
-      "a secure safety tool",
-      "certified protective gear",
-      "an emergency rescue item",
-      "a safety-rated object",
-      "protective security hardware",
-      "an emergency safeguard"
-    ],
-    "negative": [
-      "a dangerous object",
-      "hazardous unstable item",
-      "an unsafe tool",
-      "a risky device",
-      "something inherently perilous",
-      "an unprotected hazard",
-      "a precarious object",
-      "something lacking safety features"
     ]
   },
   "slatted": {
@@ -6973,92 +5081,554 @@
       "uniform seamless texture"
     ]
   },
-  "broad": {
+  "mounted": {
     "positive": [
-      "a broad surface",
-      "an expansive wide object",
-      "something with broad dimensions",
-      "a wide flat item",
-      "a broad structural element",
-      "an object of broad width",
-      "a wide sprawling piece",
-      "something notably broad"
+      "a wall mounted device",
+      "secured to the surface",
+      "affixed to the wall",
+      "installed on vertical surface",
+      "attached fixture",
+      "permanently mounted unit",
+      "displayed on wall",
+      "fixed installation"
     ],
     "negative": [
-      "a narrow object",
-      "something very thin",
-      "a slender item",
-      "a slim narrow piece",
-      "something with minimal width",
-      "a tight narrow form",
-      "a thin sliver",
-      "an object of narrow proportions"
+      "a loose object",
+      "sitting on table",
+      "lying on floor",
+      "unattached item",
+      "free standing object",
+      "resting on surface",
+      "detached from wall",
+      "unmounted piece"
     ]
   },
-  "frame": {
+  "appliance": {
     "positive": [
-      "an open-frame structure",
-      "a skeletal frame object",
-      "item with visible framing",
-      "a framed outer shell",
-      "object featuring a frame",
-      "an open-frame design",
-      "a structural metal frame",
-      "item with a border frame"
+      "a functional machine",
+      "a household electronic device",
+      "a powered mechanical tool",
+      "an automated home gadget",
+      "a consumer electrical unit",
+      "a motor-driven appliance",
+      "a utility electronic device",
+      "a powered domestic machine"
     ],
     "negative": [
-      "a solid seamless object",
-      "completely filled volume",
-      "a frameless design",
-      "solid monolithic block",
-      "object without any frame",
-      "a continuous solid mass",
-      "seamless integrated form",
-      "non-framed solid item"
+      "a raw natural stone",
+      "an unprocessed organic item",
+      "a wild living creature",
+      "a unshaped natural element",
+      "a non-powered artifact",
+      "a simple physical matter",
+      "a raw unrefined material",
+      "a non-electric organic form"
     ]
   },
-  "bushy": {
+  "kitchenware": {
     "positive": [
-      "a bushy growth",
-      "thick bushy foliage",
-      "dense bushy texture",
-      "a lush bushy plant",
-      "bushy organic fibers",
-      "thickly branched greenery",
-      "a bushy cluster",
-      "dense voluminous growth"
+      "a set of cooking utensils",
+      "items for food preparation",
+      "kitchen tools arranged together",
+      "dishes and serving ware",
+      "household food handling items",
+      "table setting components",
+      "cups and plates grouped",
+      "kitchen equipment cluster"
     ],
     "negative": [
-      "a thin sparse stem",
-      "bare smooth surface",
-      "minimal lean growth",
-      "a sleek thin line",
-      "sparse hairless texture",
-      "completely bald surface",
-      "thin wispy strands",
-      "a stripped bare branch"
+      "a natural rock formation",
+      "an unaltered forest branch",
+      "raw wildlife in habitat",
+      "a wild blooming flower",
+      "untouched nature scenery",
+      "organic living creature",
+      "untamed mountain landscape",
+      "natural earth elements"
     ]
   },
-  "exoskeleton": {
+  "beverage": {
     "positive": [
-      "an object with exoskeleton",
-      "hard outer shell structure",
-      "rigid external casing",
-      "armored exterior surface",
-      "protective outer skeleton",
-      "stiff external frame",
-      "hardened outer layer",
-      "structural exterior plating"
+      "a refreshing drink ready to consume",
+      "a vessel containing liquid beverage",
+      "a cup filled with a drink",
+      "a bottle holding a beverage",
+      "a glass with a drink inside",
+      "a container for liquid refreshment",
+      "a mug with hot beverage",
+      "a can of cold drink"
     ],
     "negative": [
-      "a soft bodied object",
-      "squishy internal structure",
-      "flexible gelatinous form",
-      "object with no shell",
-      "soft fleshy exterior",
-      "pliable organic matter",
-      "completely soft surface",
-      "non-rigid form"
+      "a solid non-drinkable item",
+      "an object with no liquid",
+      "a dry non-consumable thing",
+      "a structural building material",
+      "a piece of dry wood",
+      "a non-liquid solid object",
+      "an item not meant to drink",
+      "a static inanimate object"
+    ]
+  },
+  "wild": {
+    "positive": [
+      "a wild creature",
+      "untamed nature",
+      "a fierce beast",
+      "wild growth",
+      "untamed landscape",
+      "a wild animal",
+      "untouched wilderness",
+      "a feral spirit"
+    ],
+    "negative": [
+      "a domestic pet",
+      "a tame animal",
+      "tended garden",
+      "a trained horse",
+      "tamed landscape",
+      "a house cat",
+      "cultivated field",
+      "a trained dog"
+    ]
+  },
+  "baked": {
+    "positive": [
+      "a freshly baked loaf",
+      "a perfectly fried fish",
+      "a salty pretzel",
+      "a roasted vegetable",
+      "a grilled steak",
+      "a crispy fried chicken",
+      "a baked potato",
+      "a seasoned snack"
+    ],
+    "negative": [
+      "a raw ingredient",
+      "a fresh uncooked meal",
+      "a natural unprocessed food",
+      "a raw vegetable",
+      "a fresh unseasoned item",
+      "a natural raw state",
+      "an uncooked dish",
+      "a fresh raw product"
+    ]
+  },
+  "elaborate": {
+    "positive": [
+      "a highly detailed intricate design",
+      "an elaborate ornate structure",
+      "a complex intricately crafted item",
+      "a sophisticated elaborate mechanism",
+      "a detailed intricate pattern",
+      "an elaborate decorative object",
+      "a complex intricate construction",
+      "a highly elaborate framework"
+    ],
+    "negative": [
+      "a simple plain object",
+      "a basic unadorned item",
+      "a crude rough object",
+      "a simple unrefined shape",
+      "a plain basic structure",
+      "a simple unworked item",
+      "a plain unadorned form",
+      "a basic unembellished object"
+    ]
+  },
+  "avian": {
+    "positive": [
+      "a feathered creature",
+      "a flying winged being",
+      "a beaked animal",
+      "a perched bird",
+      "a winged vertebrate",
+      "a singing avian",
+      "a nesting bird",
+      "a winged lifeform"
+    ],
+    "negative": [
+      "a scale-covered reptile",
+      "a four-legged mammal",
+      "a finned aquatic creature",
+      "a shell-less invertebrate",
+      "a legless worm",
+      "a horned bovine",
+      "a furry rodent",
+      "a clawed predator"
+    ]
+  },
+  "multi-part": {
+    "positive": [
+      "a multi-part assembly",
+      "a composite structure",
+      "a complex constructed item",
+      "a multi-piece object",
+      "a segmented entity",
+      "a combined mechanical part",
+      "a compound object",
+      "a multi-component device"
+    ],
+    "negative": [
+      "a single solid piece",
+      "a monolithic object",
+      "a unified whole",
+      "an indivisible item",
+      "a simple singular form",
+      "a seamless single unit",
+      "a pure single element",
+      "a non-composite object"
+    ]
+  },
+  "insulating": {
+    "positive": [
+      "a well insulated container",
+      "an insulated thermal vessel",
+      "a heat resistant barrier",
+      "a thermally protected item",
+      "an insulated protective shell",
+      "a heat shielding object",
+      "a thermally isolated piece",
+      "an insulated storage unit"
+    ],
+    "negative": [
+      "a poorly insulated item",
+      "a heat conducting object",
+      "a thermally exposed piece",
+      "a bare unprotected item",
+      "a heat transmitting object",
+      "a thermally open container",
+      "a non insulated vessel",
+      "a heat leaking object"
+    ]
+  },
+  "corded": {
+    "positive": [
+      "a device with a power cord",
+      "an object connected by wire",
+      "a wired electronic gadget",
+      "something tethered to electricity",
+      "a plugged-in machine",
+      "an appliance with a cable",
+      "a corded tool",
+      "a wired connection device"
+    ],
+    "negative": [
+      "a battery powered item",
+      "a wireless device",
+      "a cordless tool",
+      "a battery operated gadget",
+      "a standalone wireless object",
+      "a cordless appliance",
+      "a wireless electronic item",
+      "a battery powered machine"
+    ]
+  },
+  "plated": {
+    "positive": [
+      "a shiny metallic surface",
+      "a coated protective layer",
+      "a decorated with gold",
+      "a covered in silver",
+      "a plated electronic device",
+      "a chrome finished object",
+      "a gilded decorative item",
+      "a layered metal coating"
+    ],
+    "negative": [
+      "a raw uncoated material",
+      "a bare natural surface",
+      "an unadorned plain object",
+      "a matte unfinished item",
+      "a solid unpainted stone",
+      "a rough untreated wood",
+      "a simple uncoated plastic",
+      "a bare organic texture"
+    ]
+  },
+  "labelled": {
+    "positive": [
+      "a labeled item",
+      "an object with a tag",
+      "a marked container",
+      "a labeled package",
+      "a tagged object",
+      "a labeled box",
+      "a labeled document",
+      "a labeled container"
+    ],
+    "negative": [
+      "an unlabeled object",
+      "a tagless item",
+      "an unmarked object",
+      "a bare object",
+      "an anonymous item",
+      "a label-free object",
+      "an untagged object",
+      "a generic object"
+    ]
+  },
+  "movable": {
+    "positive": [
+      "a portable item",
+      "an object that can move",
+      "a hand-held thing",
+      "a transportable object",
+      "a movable artifact",
+      "a relocatable item",
+      "a movable object",
+      "a portable artifact"
+    ],
+    "negative": [
+      "a fixed structure",
+      "a stationary object",
+      "an immovable item",
+      "a permanent fixture",
+      "a built-in object",
+      "a non-portable thing",
+      "a fixed installation",
+      "a stationary artifact"
+    ]
+  },
+  "smooth surface": {
+    "positive": [
+      "a polished glass sphere",
+      "a sleek metal plate",
+      "a smooth ceramic tile",
+      "a glossy plastic sheet",
+      "a refined stone slab",
+      "a smooth wooden plank",
+      "a polished marble block",
+      "a smooth glass window"
+    ],
+    "negative": [
+      "a rough boulder",
+      "a jagged rock fragment",
+      "a coarse sandpaper sheet",
+      "a textured fabric weave",
+      "a rough tree bark",
+      "a pitted metal surface",
+      "a rough concrete block",
+      "a coarse gravel pile"
+    ]
+  },
+  "educational": {
+    "positive": [
+      "a structured learning tool",
+      "an organized educational resource",
+      "a designed instructional item",
+      "a purposeful study aid",
+      "a curated knowledge object",
+      "a systematic teaching device",
+      "an arranged educational artifact",
+      "a constructed learning instrument"
+    ],
+    "negative": [
+      "a chaotic natural object",
+      "an unstructured random item",
+      "a wild organic entity",
+      "a disorganized natural thing",
+      "a spontaneous organic form",
+      "a raw unshaped material",
+      "a disorderly natural element",
+      "an uncurated wild object"
+    ]
+  },
+  "laced": {
+    "positive": [
+      "a laced shoe",
+      "a stringed instrument",
+      "a laced corset",
+      "a stringed puppet",
+      "a laced boot",
+      "a stringed kite",
+      "a laced sandal",
+      "a stringed lantern"
+    ],
+    "negative": [
+      "a smooth stone",
+      "a solid block",
+      "a plain sphere",
+      "a smooth egg",
+      "a solid cube",
+      "a plain ball",
+      "a smooth rock",
+      "a solid sheet"
+    ]
+  },
+  "formal": {
+    "positive": [
+      "a formal gathering",
+      "wearing formal attire",
+      "a formal event",
+      "formal dress code",
+      "a formal occasion",
+      "formal ceremony",
+      "a formal setting",
+      "formal documents"
+    ],
+    "negative": [
+      "a casual outfit",
+      "informal gathering",
+      "casual clothing",
+      "relaxed atmosphere",
+      "informal event",
+      "casual attire",
+      "informal setting",
+      "relaxed dress code"
+    ]
+  },
+  "claws": {
+    "positive": [
+      "sharp pointed claws",
+      "animal with sharp claws",
+      "claws extended forward",
+      "sharp curved claws",
+      "claws gripping surface",
+      "sharp clawed paws",
+      "claws digging in",
+      "sharp clawed appendage"
+    ],
+    "negative": [
+      "smooth rounded surface",
+      "blunt unsharped edge",
+      "smooth featureless limb",
+      "rounded soft extremity",
+      "smooth unclawed surface",
+      "blunt flat appendage",
+      "smooth padded paw",
+      "rounded unsharped tip"
+    ]
+  },
+  "brittle": {
+    "positive": [
+      "a fragile glass shard",
+      "a brittle dry twig",
+      "a crumbly old cookie",
+      "a brittle piece of chalk",
+      "a shattered ceramic plate",
+      "a brittle dried leaf",
+      "a fragile ice cube",
+      "a brittle piece of drywall"
+    ],
+    "negative": [
+      "a flexible rubber band",
+      "a sturdy steel beam",
+      "a tough leather belt",
+      "a flexible plastic hose",
+      "a strong metal chain",
+      "a resilient rubber ball",
+      "a flexible cloth strip",
+      "a durable wooden log"
+    ]
+  },
+  "garden": {
+    "positive": [
+      "a cultivated garden space",
+      "a manicured garden area",
+      "a landscaped garden plot",
+      "a tamed garden environment",
+      "a designed garden zone",
+      "a tended garden setting",
+      "a structured garden feature",
+      "a curated garden display"
+    ],
+    "negative": [
+      "a wild untamed landscape",
+      "a natural overgrown terrain",
+      "a feral wild space",
+      "a raw nature expanse",
+      "an unmanaged wilderness area",
+      "a rugged natural habitat",
+      "a primitive wild zone",
+      "an untouched natural ground"
+    ]
+  },
+  "camouflaged": {
+    "positive": [
+      "blending into surroundings",
+      "hidden by natural patterns",
+      "matching the background",
+      "disguised in earth tones",
+      "camouflaged against terrain",
+      "ground-covering appearance",
+      "seamlessly merged with environment",
+      "obscured by texture"
+    ],
+    "negative": [
+      "brightly contrasting colors",
+      "standing out clearly",
+      "highly visible object",
+      "distinct from background",
+      "isolated from surroundings",
+      "bold contrasting pattern",
+      "obvious and separate",
+      "clearly defined edges"
+    ]
+  },
+  "renewable": {
+    "positive": [
+      "a renewable energy source",
+      "an infinite natural resource",
+      "a self-replenishing material",
+      "a sustainable supply chain",
+      "a continuously regenerating item",
+      "an eco-friendly renewable good",
+      "a naturally replenished resource",
+      "a perpetually available source"
+    ],
+    "negative": [
+      "a finite non-renewable resource",
+      "a depleting natural asset",
+      "a scarce exhaustible material",
+      "a one-time use item",
+      "a non-sustainable supply",
+      "a permanently diminishing resource",
+      "a limited non-regenerating object",
+      "a finite consumption good"
+    ]
+  },
+  "utility": {
+    "positive": [
+      "a highly functional tool",
+      "an object with clear purpose",
+      "a useful everyday item",
+      "a practical device",
+      "a utilitarian construct",
+      "a functional piece of gear",
+      "a service-oriented object",
+      "a purposeful artifact"
+    ],
+    "negative": [
+      "a purely decorative ornament",
+      "a useless abstract shape",
+      "a non-functional sculpture",
+      "a purely aesthetic form",
+      "a meaningless visual element",
+      "a decorative-only item",
+      "a non-utilitarian object",
+      "a useless natural stone"
+    ]
+  },
+  "beaded": {
+    "positive": [
+      "a beaded accessory",
+      "an item with beads",
+      "a beaded decoration",
+      "a beaded ornament",
+      "a beaded garment",
+      "a beaded craft",
+      "a beaded piece",
+      "a beaded design"
+    ],
+    "negative": [
+      "a smooth surface",
+      "a plain object",
+      "a featureless item",
+      "a simple design",
+      "a bare surface",
+      "a plain texture",
+      "a smooth finish",
+      "a simple object"
     ]
   }
 }

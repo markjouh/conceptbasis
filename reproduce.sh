@@ -6,7 +6,7 @@
 #       data/raw/object_images_CC0/   (1,854 CC0 images — dictionary mining)
 #       data/raw/object_images/       (26,107 images — training)
 #   - pip install -e .   (installs deps + the conceptbasis package)
-#   - a local OpenAI-compatible VLM server for steps 1, 3, 5, and 6:
+#   - a local OpenAI-compatible VLM server for steps 2, 4, 6, and 7:
 #       export VLM_API_URL=http://127.0.0.1:1234/v1/chat/completions
 #       export VLM_MODEL=qwen/qwen3.6-35b-a3b
 #     (reasoning must be off / reasoning_effort "none" — handled by the scripts)
@@ -14,38 +14,59 @@
 # VLM calls are resumable. The other steps are local compute.
 set -euo pipefail
 
-# 1. mine candidate attributes from the CC0 set (bottom-up concept discovery)
-python scripts/data/mine_attributes.py --img-dir data/raw/object_images_CC0 --n-images 1854 --workers 8 --out data/attributes.jsonl
+# 1. freeze the class-level train/dev/test split before any annotation
+python scripts/data/make_class_splits.py
 
-# 2. cluster attribute mentions into the 256-concept dictionary
+# 2. tag discovery and development CC0 images separately; test remains sealed
+python scripts/data/mine_attributes.py --split train --workers 8
+python scripts/data/mine_attributes.py --split dev --workers 8
+
+# 3. cluster train-class attribute mentions into the fixed dictionary
 python scripts/dictionary/build_dictionary.py --merge-corr 0.5 --max-twin-corr 0.75
 
-# 3. caption all 26k training images (contrastive supervision)
+# 4. caption all 26k images (the adapter consumes train classes only)
 python scripts/data/caption_images.py --workers 8
 
-# 4. frozen-backbone embeddings + GMM-calibrated soft labels + splits
+# 5. frozen embeddings + train-fitted GMM labels + class-level splits
 python scripts/data/compute_labels.py
 
-# 5. contrastive prompt pairs per concept (semantic axes need real negatives)
+# 6. contrastive prompt pairs per concept
 python scripts/dictionary/generate_contrastive_prompts.py
 
-# 6. VLM-verified positive/negative anchors
+# 7. VLM-verified anchors sampled only from train classes
 python scripts/dictionary/verify_concepts.py --per-side 24 --workers 8
 
-# 7. final directions (best-of-three per concept, validated) + relabel
+# 8. frozen direction choices selected on development classes + relabel
 python scripts/dictionary/build_directions.py
 
-# 8. train the adapter (flagship: contrastive + smooth weighted orthogonality)
+# 9. matched adapters; checkpoint evaluation uses development classes only
+python -m conceptbasis.train --lambda_orth 0 --corr_exempt 0 \
+  --run_name classsplit_clip_only
 python -m conceptbasis.train --lambda_orth 8 --corr_exempt 0.15 \
   --corr_weighting smooth --corr_weight_power 4 --corr_weight_floor 0.01 \
-  --run_name flagship
-ln -sfn flagship outputs/checkpoints/latest
+  --run_name classsplit_clip_orth
+ln -sfn classsplit_clip_orth outputs/checkpoints/latest
 
-# 9. build the public site (docs/ = GitHub Pages, CC0 gallery) and the
-#    local full-gallery playgrounds (outputs/, not redistributable)
+# 10. class-disjoint development evaluation; the test partition remains sealed
+python scripts/evaluation/build_groupmean_profiles.py \
+  --embeddings data/image_embeddings.npy \
+  --cc0-embeddings data/image_embeddings_cc0.npy \
+  --labels data/labels.parquet --include-frozen \
+  --checkpoint clip_only=outputs/checkpoints/classsplit_clip_only/ckpt.pt \
+  --checkpoint clip_orth=outputs/checkpoints/classsplit_clip_orth/ckpt.pt \
+  --out outputs/evals/classsplit_dev_profiles.npz
+python scripts/evaluation/eval_playground_subset_composability.py \
+  --dictionary data/dictionary.json \
+  --profiles-npz outputs/evals/classsplit_dev_profiles.npz \
+  --reference-model clip_orth --eval-split dev \
+  --subset-sizes 1,2,4,6,8,10,12,14 --rollouts 24 \
+  --out outputs/evals/classsplit_dev_composability.json
+
+# 11. public and local galleries use development classes, never test
 python scripts/visualization/make_playground_directions.py --cc0 --out docs/playground.html
 python scripts/visualization/make_playground_frozen.py --cc0 --out docs/playground-baseline.html
 python scripts/visualization/make_attribute_preview.py
 python scripts/visualization/make_dictionary_preview.py
 python scripts/visualization/make_playground_directions.py
 python scripts/visualization/make_playground_frozen.py
+python scripts/visualization/make_readme_composability_chart.py

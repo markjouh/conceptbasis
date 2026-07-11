@@ -20,6 +20,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
 from tqdm import tqdm
 
+from conceptbasis.splits import image_class, load_split_manifest
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 API_URL = os.environ.get("VLM_API_URL", "https://openrouter.ai/api/v1/chat/completions")
 MODEL = os.environ.get("VLM_MODEL", "google/gemma-4-26b-a4b-it")
@@ -104,26 +106,44 @@ def attrs_one(api_key: str, path: str, subject: str = "", retries: int = 4) -> l
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--img-dir", required=True)
-    ap.add_argument("--out", default="data/attributes.jsonl")
-    ap.add_argument("--n-images", type=int, default=300)
+    ap.add_argument("--img-dir", default="data/raw/object_images_CC0")
+    ap.add_argument("--out", default=None)
+    ap.add_argument("--n-images", type=int, default=None)
     ap.add_argument("--workers", type=int, default=24)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--split-manifest", default="data/splits.json")
+    ap.add_argument("--split", choices=("train", "dev", "test"), default="train")
+    ap.add_argument("--allow-test", action="store_true")
     args = ap.parse_args()
+    if args.split == "test" and not args.allow_test:
+        raise ValueError("tagging test requires --allow-test")
+    if args.out is None:
+        args.out = (
+            "data/heldout/attributes_test.jsonl"
+            if args.split == "test"
+            else f"data/attributes_{args.split}.jsonl"
+        )
     api_key = os.environ.get("OPENROUTER_API_KEY", "lm-studio")
     if not LOCAL and api_key == "lm-studio":
         sys.exit("set OPENROUTER_API_KEY")
     print(f"endpoint: {API_URL}  model: {MODEL}")
 
     img_dir = os.path.join(ROOT, args.img_dir)
+    manifest = load_split_manifest(ROOT, args.split_manifest)
     paths = []
     for cur, _, files in os.walk(img_dir):
         for fn in files:
             if fn.lower().endswith((".jpg", ".jpeg", ".png")):
                 paths.append(os.path.join(cur, fn))
     paths.sort()
+    paths = [
+        path
+        for path in paths
+        if manifest["classes"][image_class(os.path.relpath(path, img_dir))] == args.split
+    ]
     random.Random(args.seed).shuffle(paths)
-    paths = paths[:args.n_images]
+    if args.n_images is not None:
+        paths = paths[:args.n_images]
     print(f"found images, sampling {len(paths)}")
 
     out_path = os.path.join(ROOT, args.out)

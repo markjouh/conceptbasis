@@ -1,4 +1,4 @@
-"""Train the concept-axis adapter on frozen backbone features.
+"""Train the concept-basis adapter on frozen backbone features.
 
 Both towers are precomputed (image embeddings from compute_labels.py;
 caption embeddings computed+cached here on first run), so each epoch is a few
@@ -15,6 +15,7 @@ seconds of MLP math on MPS.
 """
 from __future__ import annotations
 import argparse
+import hashlib
 import json
 import os
 
@@ -26,6 +27,7 @@ from sklearn.metrics import roc_auc_score
 
 from conceptbasis.losses import ConceptOrthogonalityLoss, symmetric_clip_loss
 from conceptbasis.models import Adapter
+from conceptbasis.splits import load_split_manifest, split_for_image
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 from conceptbasis import BACKBONE as MODEL, BACKBONE_PRETRAINED as PRETRAINED
@@ -116,6 +118,7 @@ def main():
     ap.add_argument("--caption_embeddings", default="data/caption_embeddings.npy")
     ap.add_argument("--captions", default="data/captions.jsonl")
     ap.add_argument("--labels", default=os.environ.get("LABELS", "data/labels.parquet"))
+    ap.add_argument("--split_manifest", default="data/splits.json")
     ap.add_argument("--run_name", default="adapter_d320")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--device", choices=("auto", "mps", "cpu"), default="auto")
@@ -133,11 +136,18 @@ def main():
                                 os.path.join(ROOT, args.caption_embeddings))
     df = pd.read_parquet(os.path.join(ROOT, args.labels))
     assert list(df.image_id) == ids
+    manifest = load_split_manifest(ROOT, args.split_manifest)
+    expected_splits = [split_for_image(manifest, image_id) for image_id in ids]
+    if list(df.split) != expected_splits:
+        raise ValueError("labels do not follow the class-level split manifest")
+    split_path = os.path.join(ROOT, args.split_manifest)
+    with open(split_path, "rb") as file:
+        args.split_manifest_sha256 = hashlib.sha256(file.read()).hexdigest()
     scols = [c for c in df.columns if c.startswith("s_")]
     S_all = df[scols].to_numpy(dtype=np.float32)
     n_concepts = len(scols)
 
-    masks = {s: (df.split == s).to_numpy() for s in ("train", "val", "test")}
+    masks = {s: (df.split == s).to_numpy() for s in ("train", "dev", "test")}
     fi = {s: torch.from_numpy(fi_all[m]) for s, m in masks.items()}
     ft = {s: torch.from_numpy(ft_all[m]) for s, m in masks.items()}
     S = {s: torch.from_numpy(S_all[m]) for s, m in masks.items()}
@@ -206,11 +216,11 @@ def main():
         sched.step()
         n = agg["n"]
         if ep % 5 == 4 or ep == args.epochs - 1:
-            ev = evaluate(img_ad, txt_ad, fi["val"], ft["val"], S["val"], dev, n_concepts)
+            ev = evaluate(img_ad, txt_ad, fi["dev"], ft["dev"], S["dev"], dev, n_concepts)
             history.append({"epoch": ep, "train": {k: agg[k] / n for k in ("clip", "orth")},
-                            "val": ev})
+                            "dev": ev})
             print(f"ep{ep:03d} clip={agg['clip']/n:.3f} orth={agg['orth']/n:.4f} "
-                  f"| val R@1={ev['R@k'][1]:.3f} "
+                  f"| dev R@1={ev['R@k'][1]:.3f} "
                   f"R@5={ev['R@k'][5]:.3f} auroc={ev['auroc']:.3f} "
                   f"orth_rms={ev['orth_rms']:.4f}", flush=True)
 
