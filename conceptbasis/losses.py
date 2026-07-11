@@ -1,17 +1,13 @@
-"""Losses for training an embedding with an explicit concept basis.
+"""Losses for training an embedding with selectively orthogonal concepts.
 
 Total objective:
 
-  L = L_contrastive + lambda_id * L_identify + lambda_orth * L_orthogonality
+  L = L_contrastive + lambda_orth * L_orthogonality
 
 - L_contrastive keeps the space a retrieval embedding (image <-> caption).
-- L_identify makes each concept linearly readable: for every concept there is
-  a direction in the embedding along which that concept's score increases.
 - L_orthogonality pushes those concept directions apart -- but only for
-  concept pairs that are statistically independent in the data (conditional
-  orthogonality). Naturally co-occurring concepts (e.g. `manmade`/`crafted`)
-  are exempted: forcing perpendicularity on them is unsatisfiable and degrades
-  the most-connected concepts.
+  concept pairs weighted as independently manipulable. Weights may be a hard
+  correlation mask or a smooth correlation-derived function.
 """
 from __future__ import annotations
 import torch
@@ -19,27 +15,15 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-def masked_clip_loss(img_n, txt_n, logit_scale, keys):
-    """Symmetric InfoNCE over a batch of L2-normalized image/text embeddings.
-
-    `keys` assigns an identity to each row; off-diagonal pairs with equal keys
-    are excluded from the negatives. With one unique caption per image this is
-    a no-op guard; with duplicated or templated captions it prevents true
-    matches from being treated as negatives.
-
-    img_n, txt_n: [B, d] (unit norm)   logit_scale: scalar   keys: [B]
-    """
-    logits = logit_scale * img_n @ txt_n.t()                       # [B, B]
-    b = logits.size(0)
-    same = keys.view(-1, 1) == keys.view(1, -1)
-    eye = torch.eye(b, dtype=torch.bool, device=logits.device)
-    logits = logits.masked_fill(same & ~eye, float("-inf"))        # false negatives
-    target = torch.arange(b, device=logits.device)
+def symmetric_clip_loss(img_n, txt_n, logit_scale):
+    """Symmetric InfoNCE for aligned, L2-normalized image/text batches."""
+    logits = logit_scale * img_n @ txt_n.t()
+    target = torch.arange(logits.size(0), device=logits.device)
     return 0.5 * (F.cross_entropy(logits, target) + F.cross_entropy(logits.t(), target))
 
 
-class ConceptLossSoft(nn.Module):
-    """Identification + conditional orthogonality over soft-labeled concepts.
+class ConceptOrthogonalityLoss(nn.Module):
+    """Conditional orthogonality over soft-labeled concept directions.
 
     Supervision is a soft score s_k in [0, 1] per image and concept (here:
     calibrated zero-shot scores from a frozen vision-language model -- no
@@ -48,15 +32,12 @@ class ConceptLossSoft(nn.Module):
 
         d_k = normalize( mean_{s_k}(z)  -  mean_{1-s_k}(z) ),
 
-    which is differentiable in the embedding z, so both losses reshape the
-    encoder rather than just fitting a readout:
+    which is differentiable in the embedding z, so the loss reshapes the
+    encoder:
 
-    - identification: BCE( a_k * <z, d_k> + b_k  ->  s_k ), i.e. the projection
-      onto d_k must predict the concept (a_k, b_k are a learned per-concept
-      logistic calibration).
     - orthogonality: mean of squared cosines <d_j, d_k> over penalized pairs.
-      By default all pairs are penalized; call `set_pair_mask` to exempt
-      concept pairs whose labels are correlated in the data.
+      By default all pairs are penalized; call `set_pair_mask` for a hard
+      exemption graph or `set_pair_weights` for continuous pressure.
 
     Exponential-moving-average class means are kept as buffers so that a
     concept with no batch support (rare concepts, small batches) still has a
@@ -66,21 +47,10 @@ class ConceptLossSoft(nn.Module):
     def __init__(self, n_concepts: int, dim: int, ema: float = 0.9, eps: float = 1e-6):
         super().__init__()
         self.n, self.dim, self.ema, self.eps = n_concepts, dim, ema, eps
-        # per-concept logistic calibration for the identification BCE
-        self.a = nn.Parameter(torch.ones(n_concepts))
-        self.b = nn.Parameter(torch.zeros(n_concepts))
         # EMA class means (detached): fallback directions for unsupported concepts
         self.register_buffer("mu_pos", torch.zeros(n_concepts, dim))
         self.register_buffer("mu_neg", torch.zeros(n_concepts, dim))
         self.register_buffer("inited", torch.zeros(n_concepts, dtype=torch.bool))
-
-    @torch.no_grad()
-    def _update_ema(self, k, mp, mn):
-        if not self.inited[k]:
-            self.mu_pos[k], self.mu_neg[k], self.inited[k] = mp, mn, True
-        else:
-            self.mu_pos[k] = self.ema * self.mu_pos[k] + (1 - self.ema) * mp
-            self.mu_neg[k] = self.ema * self.mu_neg[k] + (1 - self.ema) * mn
 
     def set_pair_mask(self, mask: torch.Tensor):
         """Restrict the orthogonality penalty to selected concept pairs.
@@ -91,36 +61,67 @@ class ConceptLossSoft(nn.Module):
         """
         self.register_buffer("pair_mask", mask.bool(), persistent=False)
 
+    def set_pair_weights(self, weights: torch.Tensor):
+        """Continuously weight pairwise orthogonality penalties.
+
+        weights: nonnegative [n, n] matrix. The orthogonality loss is the
+        weighted mean squared cosine over off-diagonal pairs. This is mutually
+        exclusive with ``set_pair_mask``.
+        """
+        if hasattr(self, "pair_mask"):
+            raise ValueError("pair mask and pair weights are mutually exclusive")
+        if weights.shape != (self.n, self.n):
+            raise ValueError(f"expected pair weights {(self.n, self.n)}, got {weights.shape}")
+        if (weights < 0).any():
+            raise ValueError("pair weights must be nonnegative")
+        self.register_buffer("pair_weights", weights.float(), persistent=False)
+
     def forward(self, Z, S):
         """Z: [B, dim] raw (unnormalized) image embeddings. S: [B, n] soft labels.
 
-        Returns {"id": scalar, "orth": scalar, "D": [n, dim] detached unit
-        concept directions for logging/eval}.
+        Returns {"orth": scalar, "D": [n, dim] detached unit concept
+        directions for logging/eval}.
         """
-        dirs, id_losses = [], []
-        for k in range(self.n):
-            s = S[:, k]
-            wp, wn = s, 1.0 - s
-            sp, sn = wp.sum(), wn.sum()
-            if sp > 1e-3 and sn > 1e-3:
-                # soft class means -> differentiable concept direction
-                mp = (wp.unsqueeze(1) * Z).sum(0) / sp
-                mn = (wn.unsqueeze(1) * Z).sum(0) / sn
-                self._update_ema(k, mp.detach(), mn.detach())
-                dhat = (mp - mn) / (mp - mn).norm().clamp(min=self.eps)
-                id_losses.append(F.binary_cross_entropy_with_logits(
-                    self.a[k] * (Z @ dhat) + self.b[k], s))
-            elif self.inited[k]:
-                # no batch support: EMA fallback keeps the direction defined
-                d = self.mu_pos[k] - self.mu_neg[k]
-                dhat = d / d.norm().clamp(min=self.eps)
-            else:
-                dhat = torch.zeros(self.dim, device=Z.device)
-            dirs.append(dhat)
-        D = torch.stack(dirs, 0)
+        # Vectorized soft class means for every concept. The previous
+        # per-concept Python loop forced hundreds of device synchronizations on
+        # MPS per batch; these two matrix multiplies compute the same means.
+        sp = S.sum(0)
+        sn = (1.0 - S).sum(0)
+        supported = (sp > 1e-3) & (sn > 1e-3)
+        mp = (S.T @ Z) / sp.clamp(min=self.eps).unsqueeze(1)
+        mn = ((1.0 - S).T @ Z) / sn.clamp(min=self.eps).unsqueeze(1)
+
+        with torch.no_grad():
+            was_inited = self.inited.clone()
+            next_pos = torch.where(
+                was_inited.unsqueeze(1),
+                self.ema * self.mu_pos + (1 - self.ema) * mp.detach(),
+                mp.detach(),
+            )
+            next_neg = torch.where(
+                was_inited.unsqueeze(1),
+                self.ema * self.mu_neg + (1 - self.ema) * mn.detach(),
+                mn.detach(),
+            )
+            self.mu_pos.copy_(torch.where(supported.unsqueeze(1), next_pos, self.mu_pos))
+            self.mu_neg.copy_(torch.where(supported.unsqueeze(1), next_neg, self.mu_neg))
+            self.inited.logical_or_(supported)
+
+        batch_delta = mp - mn
+        batch_dirs = batch_delta / batch_delta.norm(dim=1, keepdim=True).clamp(min=self.eps)
+        ema_delta = self.mu_pos - self.mu_neg
+        ema_dirs = ema_delta / ema_delta.norm(dim=1, keepdim=True).clamp(min=self.eps)
+        fallback_dirs = torch.where(self.inited.unsqueeze(1), ema_dirs, torch.zeros_like(ema_dirs))
+        D = torch.where(supported.unsqueeze(1), batch_dirs, fallback_dirs)
+
         G = D @ D.t()                                            # pairwise cosines
         off = ~torch.eye(self.n, dtype=torch.bool, device=Z.device)
         if hasattr(self, "pair_mask"):
             off = off & self.pair_mask                           # conditional orth
-        loss_id = torch.stack(id_losses).mean() if id_losses else Z.new_zeros(())
-        return {"id": loss_id, "orth": (G[off] ** 2).mean(), "D": D.detach()}
+        squared = G[off] ** 2
+        if hasattr(self, "pair_weights"):
+            weights = self.pair_weights[off]
+            loss_orth = (weights * squared).sum() / weights.sum().clamp(min=self.eps)
+        else:
+            loss_orth = squared.mean()
+        return {"orth": loss_orth, "D": D.detach()}

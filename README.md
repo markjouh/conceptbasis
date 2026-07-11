@@ -1,75 +1,84 @@
-# Concept-Axis Embeddings on THINGS
+# ConceptBasis
 
-**Live demo: <https://markjouh.github.io/conceptbasis/>**
+**[Live playground](https://markjouh.github.io/conceptbasis/)**
 
-A label-free pipeline that trains an image-text embedding around a
-**conceptual basis**: ~256 human-interpretable visual concepts become
-explicit, (conditionally) orthogonal directions, and every object is
-representable as its profile of concept activations — while the vector
-remains a normal retrieval embedding. Concepts you can read off, compose,
-and slide along ("sliders you can search with").
+ConceptBasis learns an image–text embedding organized around a dictionary of
+human-readable concepts. Each concept is represented by a direction in the
+embedding space, so images can be described by concept activations and queries
+can be edited through **sliders you can search with**.
 
-Trained on [THINGS](https://things-initiative.org/) (26,107 object images),
-supervised entirely by pretrained foundation models (SigLIP2 + a local VLM);
-no human annotation anywhere in training.
+The project has two main parts:
 
-## Pipeline (scripts in run order)
+1. A pipeline for constructing a concept dictionary and recovering semantic
+   directions already present in a pretrained embedding, using lightweight
+   model-generated image attributes and text prompts rather than a large
+   human-labeled concept dataset.
+2. An orthogonality loss that pushes those directions toward a useful basis
+   while preserving the embedding's ordinary image–text retrieval behavior.
 
-| step | script | output |
-|---|---|---|
-| 1. mine attributes (local VLM) | `scripts/mine_attributes.py` | `data/attributes.jsonl` |
-| 2. build 256-concept dictionary | `scripts/build_dictionary.py` | `data/dictionary.json` |
-| 3. caption 26k images (local VLM) | `scripts/caption_images.py` | `data/captions.jsonl` |
-| 4. embeddings + soft labels | `scripts/compute_labels.py` | `data/labels.parquet`, `data/*_embeddings.npy` |
-| 5. contrastive prompt pairs | `scripts/generate_contrastive_prompts.py` | `data/contrastive_prompts.json` |
-| 6. validate direction constructions | `scripts/validate_directions.py` | `data/concept_directions_contrastive.npy` |
-| 7. VLM-verified anchors | `scripts/verify_concepts.py` | `data/concept_judgments.jsonl`, `data/direction_sources.json` |
-| 8. train adapter | `python -m conceptbasis.train` (package: `conceptbasis/`) | `outputs/checkpoints/*` |
-| 9. playgrounds/viewers | `scripts/make_playground_{directions,axis_aligned,frozen}.py`, `scripts/make_*_preview.py` | `outputs/*.html` |
+The training objective is standard symmetric image–text contrastive loss plus
+a correlation-weighted penalty on pairwise concept-direction overlap. Concept
+pairs that are strongly dependent in the data receive less orthogonality
+pressure.
 
-Checkpoint: `outputs/checkpoints/latest` (conditional orthogonality:
-`--lambda_orth 5 --corr_exempt 0.15`).
+In the ideal linear picture, orthogonal concept directions are independently
+decodable and can be added without one component overwriting another. Real
+semantic concepts are neither independent nor perfectly orthogonal, so we do
+not force that ideal. The goal is to recover some of its useful behavior while
+retaining a strong general-purpose embedding.
 
-## Demos (`docs/` — served via GitHub Pages, CC0 images only)
+## Evidence from additive retrieval
 
-- `index.html` — landing page.
-- `playground.html` — **the playground**: objects as profiles over the model's
-  concept directions; sliders compose and retrieve live.
-- `playground-axis-aligned.html` — experiment: the same model with the concept
-  basis rotated onto coordinate axes.
-- `playground-baseline.html` — no-training control (raw SigLIP2 + text
-  directions).
-- `dictionary.html`, `attributes.html` — the mined concept dictionary and
-  per-image attributes.
+Adding concept directions provides a direct behavioral test of the geometry:
+does each added concept preserve useful information? The model is never trained
+on this retrieval task. In the matched SigLIP2-B ablation, adding the
+orthogonality loss nearly doubles Recall@10 over a contrastive-only adapter at
+14 concepts.
 
-All demos are static, self-contained HTML: the model's outputs over the
-gallery are precomputed at build time; the browser only does dot products.
-`outputs/` holds local-only artifacts (checkpoints, full-gallery variants).
+![Recall at 10 as concept attributes are composed](docs/assets/composability-retrieval.svg)
 
-## Data & licensing
+The benchmark uses a 1,854-image CC0 gallery, 24 nested attribute-subset
+rollouts per image, and identical queries across models. Full metrics and
+provenance are in
+[`research/experiments/2026-07-10-composability-ablation.md`](research/experiments/2026-07-10-composability-ablation.md).
 
-- **THINGS images are NOT included and must not be redistributed**
-  (research/non-commercial license). Download via the
-  [THINGS OSF](https://osf.io/jum2f/); the CC0 subset (1,854 images) is
-  freely licensed.
-- Generated annotations in `data/` (captions, attributes, VLM judgments,
-  dictionary) are our own model-generated artifacts (captioner/judge:
-  Qwen3.6-35B, Apache-2.0).
-- Some HTML viewers embed full-set THINGS images and are therefore
-  **git-ignored** (see `.gitignore`); viewers built on the CC0 subset
-  (`attribute_preview.html`, `dictionary_preview.html`) are shareable.
-- Large regenerable caches (`*.npy`, `*.parquet`, checkpoints) are ignored;
-  rerun steps 4/8 to rebuild.
+## Pipeline
+
+| Stage | Entry point |
+|---|---|
+| Mine image attributes and captions | `scripts/data/` |
+| Construct the 256-concept dictionary | `scripts/dictionary/build_dictionary.py` |
+| Build and verify concept directions | `scripts/dictionary/` |
+| Train the adapter | `python -m conceptbasis.train` |
+| Evaluate basis behavior and additive retrieval | `scripts/evaluation/` |
+| Generate playgrounds and galleries | `scripts/visualization/` |
+
+The checked-in dictionary is pinned to the original OpenCLIP ViT-B/32 recipe
+and can be regenerated byte-for-byte. The active adapter objective uses smooth,
+correlation-weighted orthogonality; its reference configuration is recorded in
+`reproduce.sh`.
+
+## Repository layout
+
+- `conceptbasis/` — model, loss, and training implementation.
+- `scripts/` — data, dictionary, evaluation, sweep, and visualization CLIs.
+- `research/` — experiment notes, compact results, and artifact provenance.
+- `docs/` — static public playground and inspection galleries.
+- `data/` — tracked annotations plus ignored regenerable arrays.
+- `outputs/` — ignored checkpoints and local generated artifacts.
 
 ## Setup
 
 ```bash
-pip install -e .        # installs dependencies + the conceptbasis package
-./reproduce.sh          # full pipeline (see prereqs in the script header)
+pip install -e .
+./reproduce.sh
+python -m unittest discover -s tests
 ```
 
-Python ≥3.10. VLM steps expect an OpenAI-compatible server (e.g. LM Studio)
-at `http://127.0.0.1:1234` — set `VLM_API_URL`/`VLM_MODEL`; reasoning must be
-disabled (`reasoning_effort: "none"`, handled by the scripts) — thinking mode
-is much slower on these calls and degrades output quality.
+Python 3.10 or newer is required. Attribute mining, captioning, and concept
+verification use an OpenAI-compatible local VLM endpoint configured with
+`VLM_API_URL` and `VLM_MODEL`.
 
+THINGS images are not redistributed. The public demos use the freely licensed
+THINGSplus CC0 subset; the full THINGS dataset remains subject to its original
+research license.

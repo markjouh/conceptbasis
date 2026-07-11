@@ -11,10 +11,22 @@ data/*.parquet
 # --- local-only material ---
 archive/
 .claude/
+.env
+.env.*
+!.env.example
 
 # --- junk ---
+.venv/
 __pycache__/
 *.egg-info/
 *.pyc
 .DS_Store
 build/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.log
+*.tmp
+wandb/

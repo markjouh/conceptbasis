@@ -22,29 +22,24 @@
 </style></head><body>
 <main>
 <h1>Concept Basis</h1>
-<p class="tag">image embeddings you can read, compose, and slide along</p>
+<p class="tag">sliders you can search with</p>
 <p class="lead">
-An image–text embedding trained so that ~256 human-interpretable visual concepts
-(<i>metallic, furry, edible, manmade…</i>) become explicit, conditionally-orthogonal
-directions — a <b>conceptual basis</b>. Every object is representable as its profile
-of concept activations while the vector remains a normal retrieval embedding.
-The concept vocabulary is mined automatically and the training is label-free:
-all supervision is distilled from pretrained vision-language models.
-The demos below are fully static — the model's outputs over the gallery are
-precomputed, and your browser only does dot products.
+ConceptBasis organizes an image–text embedding around 256 human-readable
+concept directions (<i>metallic, furry, edible, manmade…</i>). It recovers
+semantic structure already present in a pretrained embedding, then applies an
+orthogonality loss to make the directions behave more like a basis while
+preserving ordinary retrieval. The demos are static: model outputs are
+precomputed and the browser only performs retrieval over them.
 </p>
 <div class="grid">
 <a class="card primary" href="playground.html"><h3>▶ Playground</h3>
 <p>256 concept sliders over the trained embedding. Compose properties
 (pointed + metallic + handheld…), load a real object's profile, edit it, retrieve live.</p></a>
-<a class="card" href="playground-axis-aligned.html"><h3>Axis-aligned variant</h3>
-<p>The same model with its concept basis rotated onto coordinate axes — one named
-concept per embedding dimension.</p></a>
 <a class="card" href="playground-baseline.html"><h3>Frozen baseline</h3>
-<p>No-training control: raw SigLIP2 features with text-derived concept directions.
-Compare how composition degrades without the trained basis.</p></a>
+<p>No-training control using the frozen backbone and the same concept interface.
+Compare it with the adapter trained to organize the basis.</p></a>
 <a class="card" href="dictionary.html"><h3>Concept dictionary</h3>
-<p>The 256 automatically-mined concepts, each with its strongest example images.</p></a>
+<p>The 256 constructed concepts, each with its strongest example images.</p></a>
 <a class="card" href="attributes.html"><h3>Mined attributes</h3>
 <p>The raw per-image attributes a vision-language model produced — the seed
 material the dictionary was clustered from.</p></a>
@@ -53,7 +48,7 @@ material the dictionary was clustered from.</p></a>
 Images: the CC0-licensed subset of the
 <a href="https://things-initiative.org/">THINGS database</a> (Hebart et al.;
 THINGSplus, Stoinski et al.) — one image per object concept.
-Model backbone: SigLIP2. Code: MIT-licensed.
+Model backbone: Meta Perception Encoder (PE-Core-G, 1.9B). Code: MIT-licensed.
 </footer>
 </main>
 </body></html>

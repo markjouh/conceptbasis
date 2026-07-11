@@ -1,4 +1,4 @@
-"""Train the concept-axis adapter on frozen SigLIP2 features.
+"""Train the concept-axis adapter on frozen backbone features.
 
 Both towers are precomputed (image embeddings from compute_labels.py;
 caption embeddings computed+cached here on first run), so each epoch is a few
@@ -7,39 +7,28 @@ seconds of MLP math on MPS.
   z_img = img_adapter(f_img)   [B, d]   d = 256 concept + residual
   z_txt = txt_adapter(f_txt)   [B, d]
 
-  L = clip(masked) + lambda_id * identification + lambda_orth * orthogonality
-      (concept losses on the raw image embedding via soft mu+/mu- class-mean
-      directions; conditional orthogonality via --corr_exempt)
+  L = clip(masked) + lambda_orth * orthogonality
+      (orthogonality on soft mu+/mu- class-mean directions; correlation-aware
+      pair weighting via --corr_exempt/--corr_weighting)
 
-  python -m conceptbasis.train [--embed_dim 320 --lambda_orth 5 ...]
+  python -m conceptbasis.train [--embed_dim 320 ...]
 """
 from __future__ import annotations
 import argparse
 import json
 import os
-import sys
 
 import numpy as np
 import pandas as pd
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
 from sklearn.metrics import roc_auc_score
 
-from conceptbasis.losses import ConceptLossSoft, masked_clip_loss
+from conceptbasis.losses import ConceptOrthogonalityLoss, symmetric_clip_loss
+from conceptbasis.models import Adapter
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-MODEL, PRETRAINED = "ViT-B-16-SigLIP2-256", "webli"
-
-
-class Adapter(nn.Module):
-    def __init__(self, d_in: int, d_out: int, hidden: int = 1024):
-        super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(d_in, hidden), nn.GELU(), nn.Linear(hidden, d_out))
-
-    def forward(self, x):
-        return self.net(x)
+from conceptbasis import BACKBONE as MODEL, BACKBONE_PRETRAINED as PRETRAINED
 
 
 @torch.no_grad()
@@ -112,23 +101,37 @@ def main():
     ap.add_argument("--batch", type=int, default=1024)
     ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--weight_decay", type=float, default=1e-4)
-    ap.add_argument("--lambda_id", type=float, default=1.0)
-    ap.add_argument("--lambda_orth", type=float, default=5.0)
+    ap.add_argument("--lambda_orth", type=float, default=8.0)
     ap.add_argument("--ema", type=float, default=0.9)
-    ap.add_argument("--corr_exempt", type=float, default=0.0,
-                    help=">0: exempt concept pairs with |label corr| above this "
-                         "from the orthogonality penalty (correlation-aware orth)")
+    ap.add_argument("--corr_exempt", type=float, default=0.15,
+                    help="correlation scale/threshold; set 0 for unconditional orthogonality")
+    ap.add_argument("--corr_weighting", choices=("hard", "smooth"), default="smooth",
+                    help="hard threshold mask or smooth correlation weighting")
+    ap.add_argument("--corr_weight_floor", type=float, default=0.01,
+                    help="minimum pair weight in smooth mode")
+    ap.add_argument("--corr_weight_power", type=float, default=4.0,
+                    help="exponent in exp(-(|corr|/corr_exempt)^power)")
+    ap.add_argument("--image_ids", default="data/image_ids.json")
+    ap.add_argument("--image_embeddings", default="data/image_embeddings.npy")
+    ap.add_argument("--caption_embeddings", default="data/caption_embeddings.npy")
+    ap.add_argument("--captions", default="data/captions.jsonl")
+    ap.add_argument("--labels", default=os.environ.get("LABELS", "data/labels.parquet"))
     ap.add_argument("--run_name", default="adapter_d320")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--device", choices=("auto", "mps", "cpu"), default="auto")
     args = ap.parse_args()
     torch.manual_seed(args.seed); np.random.seed(args.seed)
-    dev = "mps" if torch.backends.mps.is_available() else "cpu"
+    if args.device == "mps" and not torch.backends.mps.is_available():
+        raise RuntimeError("--device mps requested, but MPS is unavailable")
+    dev = ("mps" if torch.backends.mps.is_available() else "cpu") \
+        if args.device == "auto" else args.device
+    print(f"device={dev}", flush=True)
 
-    ids = json.load(open(os.path.join(ROOT, "data/image_ids.json")))
-    fi_all = np.load(os.path.join(ROOT, "data/image_embeddings.npy"))
-    ft_all = caption_embeddings(ids, os.path.join(ROOT, "data/captions.jsonl"),
-                                os.path.join(ROOT, "data/caption_embeddings.npy"))
-    df = pd.read_parquet(os.path.join(ROOT, os.environ.get("LABELS", "data/labels.parquet")))
+    ids = json.load(open(os.path.join(ROOT, args.image_ids)))
+    fi_all = np.load(os.path.join(ROOT, args.image_embeddings))
+    ft_all = caption_embeddings(ids, os.path.join(ROOT, args.captions),
+                                os.path.join(ROOT, args.caption_embeddings))
+    df = pd.read_parquet(os.path.join(ROOT, args.labels))
     assert list(df.image_id) == ids
     scols = [c for c in df.columns if c.startswith("s_")]
     S_all = df[scols].to_numpy(dtype=np.float32)
@@ -142,15 +145,34 @@ def main():
 
     img_ad = Adapter(fi_all.shape[1], args.embed_dim).to(dev)
     txt_ad = Adapter(ft_all.shape[1], args.embed_dim).to(dev)
-    closs = ConceptLossSoft(n_concepts, args.embed_dim, args.ema).to(dev)
+    closs = ConceptOrthogonalityLoss(n_concepts, args.embed_dim, args.ema).to(dev)
     if args.corr_exempt > 0:
         C = np.corrcoef(S_all[masks["train"]].T)
-        mask = torch.from_numpy(np.abs(C) < args.corr_exempt).to(dev)
-        closs.set_pair_mask(mask)
-        n_ex = int((~mask.cpu().numpy() & ~np.eye(n_concepts, dtype=bool)).sum() / 2)
-        print(f"correlation-aware orth: exempting {n_ex} naturally-correlated pairs "
-              f"(|corr| >= {args.corr_exempt})")
-    logit_scale = nn.Parameter(torch.tensor(np.log(1 / 0.07), dtype=torch.float32, device=dev))
+        if args.corr_weighting == "hard":
+            mask = torch.from_numpy(np.abs(C) < args.corr_exempt).to(dev)
+            closs.set_pair_mask(mask)
+            n_ex = int((~mask.cpu().numpy() & ~np.eye(n_concepts, dtype=bool)).sum() / 2)
+            print(f"correlation-aware orth: exempting {n_ex} naturally-correlated pairs "
+                  f"(|corr| >= {args.corr_exempt})")
+        else:
+            if not 0 <= args.corr_weight_floor < 1:
+                raise ValueError("--corr_weight_floor must be in [0, 1)")
+            if args.corr_weight_power <= 0:
+                raise ValueError("--corr_weight_power must be positive")
+            weights = args.corr_weight_floor + (1 - args.corr_weight_floor) * np.exp(
+                -(np.abs(C) / args.corr_exempt) ** args.corr_weight_power)
+            weights = weights.astype(np.float32)
+            np.fill_diagonal(weights, 0.0)
+            closs.set_pair_weights(torch.from_numpy(weights).to(dev))
+            off = ~np.eye(n_concepts, dtype=bool)
+            q = np.quantile(weights[off], [0, .1, .25, .5, .75, .9, 1])
+            print("smooth correlation-aware orth: "
+                  f"tau={args.corr_exempt} floor={args.corr_weight_floor} "
+                  f"power={args.corr_weight_power} mean_weight={weights[off].mean():.4f} "
+                  f"quantiles={np.round(q, 4).tolist()}")
+    logit_scale = torch.nn.Parameter(
+        torch.tensor(np.log(1 / 0.07), dtype=torch.float32, device=dev)
+    )
     params = list(img_ad.parameters()) + list(txt_ad.parameters()) + \
         list(closs.parameters()) + [logit_scale]
     opt = torch.optim.AdamW(params, lr=args.lr, weight_decay=args.weight_decay)
@@ -164,34 +186,36 @@ def main():
 
     for ep in range(args.epochs):
         perm = torch.randperm(ntr)
-        agg = {"clip": 0.0, "id": 0.0, "orth": 0.0, "n": 0}
+        agg = {"clip": 0.0, "orth": 0.0, "n": 0}
         for i in range(0, ntr - args.batch + 1, args.batch):
             idx = perm[i:i + args.batch]
             x = fi["train"][idx].to(dev)
             t = ft["train"][idx].to(dev)
             y = S["train"][idx].to(dev)
             zi, zt = img_ad(x), txt_ad(t)
-            keys = idx.to(dev)                       # captions unique per image
-            l_clip = masked_clip_loss(F.normalize(zi, dim=-1), F.normalize(zt, dim=-1),
-                                      logit_scale.clamp(max=np.log(100)).exp(), keys)
+            l_clip = symmetric_clip_loss(
+                F.normalize(zi, dim=-1),
+                F.normalize(zt, dim=-1),
+                logit_scale.clamp(max=np.log(100)).exp(),
+            )
             cl = closs(zi, y)
-            loss = l_clip + args.lambda_id * cl["id"] + args.lambda_orth * cl["orth"]
+            loss = l_clip + args.lambda_orth * cl["orth"]
             opt.zero_grad(); loss.backward(); opt.step()
-            agg["clip"] += l_clip.item(); agg["id"] += cl["id"].item()
+            agg["clip"] += l_clip.item()
             agg["orth"] += cl["orth"].item(); agg["n"] += 1
         sched.step()
         n = agg["n"]
         if ep % 5 == 4 or ep == args.epochs - 1:
             ev = evaluate(img_ad, txt_ad, fi["val"], ft["val"], S["val"], dev, n_concepts)
-            history.append({"epoch": ep, "train": {k: agg[k] / n for k in ("clip", "id", "orth")},
+            history.append({"epoch": ep, "train": {k: agg[k] / n for k in ("clip", "orth")},
                             "val": ev})
-            print(f"ep{ep:03d} clip={agg['clip']/n:.3f} id={agg['id']/n:.3f} "
-                  f"orth={agg['orth']/n:.4f} | val R@1={ev['R@k'][1]:.3f} "
+            print(f"ep{ep:03d} clip={agg['clip']/n:.3f} orth={agg['orth']/n:.4f} "
+                  f"| val R@1={ev['R@k'][1]:.3f} "
                   f"R@5={ev['R@k'][5]:.3f} auroc={ev['auroc']:.3f} "
                   f"orth_rms={ev['orth_rms']:.4f}", flush=True)
 
     torch.save({"img_adapter": img_ad.state_dict(), "txt_adapter": txt_ad.state_dict(),
-                "concept_loss": closs.state_dict(), "logit_scale": logit_scale.detach().cpu(),
+                "orthogonality_loss": closs.state_dict(), "logit_scale": logit_scale.detach().cpu(),
                 "config": vars(args)}, os.path.join(run_dir, "ckpt.pt"))
     json.dump(history, open(os.path.join(run_dir, "history.json"), "w"), indent=2)
     print("saved", run_dir)

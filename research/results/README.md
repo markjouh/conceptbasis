@@ -1,0 +1,10 @@
+# Tracked results
+
+- `composability_ablation_k14.json` — frozen, contrastive-only,
+  hard/unconditional orthogonality, smooth orthogonality, and legacy v4
+  comparison across attribute-subset sizes through `k=14`.
+- `smooth_orth_finalists_k14.json` — final smooth-weighting candidates.
+- `smooth_orth_sweep_summary.json` — compact hyperparameter sweep summary.
+
+These files are small enough to review and version. Large arrays and model
+weights used to produce them are intentionally excluded from Git.
