@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="860" height="448" viewBox="0 0 860 448" role="img" aria-labelledby="title desc">
-<title id="title">Compositional retrieval across three training objectives</title>
-<desc id="desc">Recall at five as one to fourteen concept attributes are composed. Reverse-ridge orthogonality performs best, followed by group-mean orthogonality and contrastive-only training.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="448" viewBox="0 0 1120 448" role="img" aria-labelledby="title desc">
+<title id="title">Compositional and ordinary retrieval across three training objectives</title>
+<desc id="desc">Reverse-ridge orthogonality substantially improves compositional retrieval while retaining ordinary image-text retrieval performance.</desc>
 <style>
 .text{fill:#1f2328;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}
 .muted{fill:#57606a}.grid{stroke:#d8dee4;stroke-width:1}.axis{stroke:#8c959f;stroke-width:1}
@@ -8,85 +8,102 @@
 .groupmean{stroke:#0969da}.point.groupmean{fill:#0969da}
 .reverse{stroke:#1a7f37}.point.reverse{fill:#1a7f37}
 .series{fill:none;stroke-width:3}.point{stroke-width:0}
+.bar{fill-opacity:.16;stroke-width:2}.bar.contrastive{fill:#6e7781}
+.bar.groupmean{fill:#0969da}.bar.reverse{fill:#1a7f37}
 .label{font-size:13px}.small{font-size:12px}.title{font-size:17px;font-weight:500}
-@media(prefers-color-scheme:dark){.text{fill:#e6edf3}.muted{fill:#9da7b1}.grid{stroke:#30363d}.axis{stroke:#6e7681}.contrastive{stroke:#9da7b1}.point.contrastive{fill:#9da7b1}.groupmean{stroke:#58a6ff}.point.groupmean{fill:#58a6ff}.reverse{stroke:#3fb950}.point.reverse{fill:#3fb950}}
+@media(prefers-color-scheme:dark){.text{fill:#e6edf3}.muted{fill:#9da7b1}.grid{stroke:#30363d}.axis{stroke:#6e7681}.contrastive{stroke:#9da7b1}.point.contrastive{fill:#9da7b1}.bar.contrastive{fill:#9da7b1}.groupmean{stroke:#58a6ff}.point.groupmean{fill:#58a6ff}.bar.groupmean{fill:#58a6ff}.reverse{stroke:#3fb950}.point.reverse{fill:#3fb950}.bar.reverse{fill:#3fb950}}
 </style>
-<text class="text title" x="74" y="30">Compositional retrieval improves with cleaner concept directions</text>
+<text class="text title" x="74" y="30">Compositional retrieval</text>
 <text class="text muted small" x="74" y="50">278-class dev gallery · all classes with ≥k attributes · Recall@5</text>
-<line class="grid" x1="74" y1="372.0" x2="628" y2="372.0"/>
+<text class="text title" x="820" y="30">Ordinary image–text retrieval</text>
+<text class="text muted small" x="820" y="50">3,914 dev pairs · mean of 5 matched runs · Recall@5</text>
+<line class="grid" x1="74" y1="372.0" x2="620" y2="372.0"/>
+<line class="grid" x1="820" y1="372.0" x2="1100" y2="372.0"/>
 <text class="text muted small" x="62" y="376.0" text-anchor="end">0%</text>
-<line class="grid" x1="74" y1="338.4" x2="628" y2="338.4"/>
-<text class="text muted small" x="62" y="342.4" text-anchor="end">10%</text>
-<line class="grid" x1="74" y1="304.9" x2="628" y2="304.9"/>
-<text class="text muted small" x="62" y="308.9" text-anchor="end">20%</text>
-<line class="grid" x1="74" y1="271.3" x2="628" y2="271.3"/>
-<text class="text muted small" x="62" y="275.3" text-anchor="end">30%</text>
-<line class="grid" x1="74" y1="237.8" x2="628" y2="237.8"/>
-<text class="text muted small" x="62" y="241.8" text-anchor="end">40%</text>
-<line class="grid" x1="74" y1="204.2" x2="628" y2="204.2"/>
-<text class="text muted small" x="62" y="208.2" text-anchor="end">50%</text>
-<line class="grid" x1="74" y1="170.7" x2="628" y2="170.7"/>
-<text class="text muted small" x="62" y="174.7" text-anchor="end">60%</text>
-<line class="grid" x1="74" y1="137.1" x2="628" y2="137.1"/>
-<text class="text muted small" x="62" y="141.1" text-anchor="end">70%</text>
-<line class="grid" x1="74" y1="103.6" x2="628" y2="103.6"/>
-<text class="text muted small" x="62" y="107.6" text-anchor="end">80%</text>
-<line class="grid" x1="74" y1="70.0" x2="628" y2="70.0"/>
-<text class="text muted small" x="62" y="74.0" text-anchor="end">90%</text>
+<line class="grid" x1="74" y1="311.6" x2="620" y2="311.6"/>
+<line class="grid" x1="820" y1="311.6" x2="1100" y2="311.6"/>
+<text class="text muted small" x="62" y="315.6" text-anchor="end">20%</text>
+<line class="grid" x1="74" y1="251.2" x2="620" y2="251.2"/>
+<line class="grid" x1="820" y1="251.2" x2="1100" y2="251.2"/>
+<text class="text muted small" x="62" y="255.2" text-anchor="end">40%</text>
+<line class="grid" x1="74" y1="190.8" x2="620" y2="190.8"/>
+<line class="grid" x1="820" y1="190.8" x2="1100" y2="190.8"/>
+<text class="text muted small" x="62" y="194.8" text-anchor="end">60%</text>
+<line class="grid" x1="74" y1="130.4" x2="620" y2="130.4"/>
+<line class="grid" x1="820" y1="130.4" x2="1100" y2="130.4"/>
+<text class="text muted small" x="62" y="134.4" text-anchor="end">80%</text>
+<line class="grid" x1="74" y1="70.0" x2="620" y2="70.0"/>
+<line class="grid" x1="820" y1="70.0" x2="1100" y2="70.0"/>
+<text class="text muted small" x="62" y="74.0" text-anchor="end">100%</text>
 <line class="axis" x1="74" y1="70" x2="74" y2="372"/>
-<line class="axis" x1="74" y1="372" x2="628" y2="372"/>
+<line class="axis" x1="74" y1="372" x2="620" y2="372"/>
+<line class="axis" x1="820" y1="70" x2="820" y2="372"/>
+<line class="axis" x1="820" y1="372" x2="1100" y2="372"/>
 <text class="text small" x="74.0" y="392" text-anchor="middle">1</text>
 <text class="text muted small" x="74.0" y="408" text-anchor="middle">n=278</text>
-<text class="text small" x="153.1" y="392" text-anchor="middle">2</text>
-<text class="text muted small" x="153.1" y="408" text-anchor="middle">n=277</text>
-<text class="text small" x="232.3" y="392" text-anchor="middle">4</text>
-<text class="text muted small" x="232.3" y="408" text-anchor="middle">n=277</text>
-<text class="text small" x="311.4" y="392" text-anchor="middle">6</text>
-<text class="text muted small" x="311.4" y="408" text-anchor="middle">n=277</text>
-<text class="text small" x="390.6" y="392" text-anchor="middle">8</text>
-<text class="text muted small" x="390.6" y="408" text-anchor="middle">n=274</text>
-<text class="text small" x="469.7" y="392" text-anchor="middle">10</text>
-<text class="text muted small" x="469.7" y="408" text-anchor="middle">n=259</text>
-<text class="text small" x="548.9" y="392" text-anchor="middle">12</text>
-<text class="text muted small" x="548.9" y="408" text-anchor="middle">n=195</text>
-<text class="text small" x="628.0" y="392" text-anchor="middle">14</text>
-<text class="text muted small" x="628.0" y="408" text-anchor="middle">n=52</text>
-<text class="text muted label" x="351.0" y="436" text-anchor="middle">Attributes in query (k)</text>
+<text class="text small" x="152.0" y="392" text-anchor="middle">2</text>
+<text class="text muted small" x="152.0" y="408" text-anchor="middle">n=277</text>
+<text class="text small" x="230.0" y="392" text-anchor="middle">4</text>
+<text class="text muted small" x="230.0" y="408" text-anchor="middle">n=277</text>
+<text class="text small" x="308.0" y="392" text-anchor="middle">6</text>
+<text class="text muted small" x="308.0" y="408" text-anchor="middle">n=277</text>
+<text class="text small" x="386.0" y="392" text-anchor="middle">8</text>
+<text class="text muted small" x="386.0" y="408" text-anchor="middle">n=274</text>
+<text class="text small" x="464.0" y="392" text-anchor="middle">10</text>
+<text class="text muted small" x="464.0" y="408" text-anchor="middle">n=259</text>
+<text class="text small" x="542.0" y="392" text-anchor="middle">12</text>
+<text class="text muted small" x="542.0" y="408" text-anchor="middle">n=195</text>
+<text class="text small" x="620.0" y="392" text-anchor="middle">14</text>
+<text class="text muted small" x="620.0" y="408" text-anchor="middle">n=52</text>
+<text class="text muted label" x="347.0" y="436" text-anchor="middle">Attributes in query (k)</text>
 <text class="text muted label" transform="translate(20 221.0) rotate(-90)" text-anchor="middle">Recall@5</text>
-<path class="series contrastive" d="M 74.0 345.2 L 153.1 327.7 L 232.3 301.7 L 311.4 282.9 L 390.6 267.2 L 469.7 253.3 L 548.9 231.9 L 628.0 217.2"/>
-<circle class="point contrastive" cx="74.0" cy="345.2" r="3.5"/>
-<circle class="point contrastive" cx="153.1" cy="327.7" r="3.5"/>
-<circle class="point contrastive" cx="232.3" cy="301.7" r="3.5"/>
-<circle class="point contrastive" cx="311.4" cy="282.9" r="3.5"/>
-<circle class="point contrastive" cx="390.6" cy="267.2" r="3.5"/>
-<circle class="point contrastive" cx="469.7" cy="253.3" r="3.5"/>
-<circle class="point contrastive" cx="548.9" cy="231.9" r="3.5"/>
-<circle class="point contrastive" cx="628.0" cy="217.2" r="3.5"/>
-<line class="series contrastive" x1="628" y1="217.2" x2="642" y2="217.2"/>
-<text class="text label" x="648" y="215.2">Contrastive only</text>
-<text class="text muted small" x="648" y="231.2">46.1% at k=14</text>
-<path class="series groupmean" d="M 74.0 334.2 L 153.1 312.5 L 232.3 272.1 L 311.4 241.7 L 390.6 222.1 L 469.7 200.8 L 548.9 178.4 L 628.0 141.8"/>
-<rect class="point groupmean" x="70.5" y="330.7" width="7" height="7"/>
-<rect class="point groupmean" x="149.6" y="309.0" width="7" height="7"/>
-<rect class="point groupmean" x="228.8" y="268.6" width="7" height="7"/>
-<rect class="point groupmean" x="307.9" y="238.2" width="7" height="7"/>
-<rect class="point groupmean" x="387.1" y="218.6" width="7" height="7"/>
-<rect class="point groupmean" x="466.2" y="197.3" width="7" height="7"/>
-<rect class="point groupmean" x="545.4" y="174.9" width="7" height="7"/>
-<rect class="point groupmean" x="624.5" y="138.3" width="7" height="7"/>
-<line class="series groupmean" x1="628" y1="141.8" x2="642" y2="141.8"/>
-<text class="text label" x="648" y="139.8">+ group-mean orthogonality</text>
-<text class="text muted small" x="648" y="155.8">68.6% at k=14</text>
-<path class="series reverse" d="M 74.0 331.3 L 153.1 302.5 L 232.3 251.1 L 311.4 209.4 L 390.6 175.1 L 469.7 142.4 L 548.9 117.1 L 628.0 88.7"/>
-<path class="point reverse" d="M 74.0 326.3 L 79.0 331.3 L 74.0 336.3 L 69.0 331.3 Z"/>
-<path class="point reverse" d="M 153.1 297.5 L 158.1 302.5 L 153.1 307.5 L 148.1 302.5 Z"/>
-<path class="point reverse" d="M 232.3 246.1 L 237.3 251.1 L 232.3 256.1 L 227.3 251.1 Z"/>
-<path class="point reverse" d="M 311.4 204.4 L 316.4 209.4 L 311.4 214.4 L 306.4 209.4 Z"/>
-<path class="point reverse" d="M 390.6 170.1 L 395.6 175.1 L 390.6 180.1 L 385.6 175.1 Z"/>
-<path class="point reverse" d="M 469.7 137.4 L 474.7 142.4 L 469.7 147.4 L 464.7 142.4 Z"/>
-<path class="point reverse" d="M 548.9 112.1 L 553.9 117.1 L 548.9 122.1 L 543.9 117.1 Z"/>
-<path class="point reverse" d="M 628.0 83.7 L 633.0 88.7 L 628.0 93.7 L 623.0 88.7 Z"/>
-<line class="series reverse" x1="628" y1="88.7" x2="642" y2="88.7"/>
-<text class="text label" x="648" y="86.7">+ reverse-ridge orthogonality</text>
-<text class="text muted small" x="648" y="102.7">84.4% at k=14</text>
+<path class="series contrastive" d="M 74.0 347.9 L 152.0 332.1 L 230.0 308.8 L 308.0 291.8 L 386.0 277.7 L 464.0 265.2 L 542.0 245.9 L 620.0 232.7"/>
+<circle class="point contrastive" cx="74.0" cy="347.9" r="3.5"/>
+<circle class="point contrastive" cx="152.0" cy="332.1" r="3.5"/>
+<circle class="point contrastive" cx="230.0" cy="308.8" r="3.5"/>
+<circle class="point contrastive" cx="308.0" cy="291.8" r="3.5"/>
+<circle class="point contrastive" cx="386.0" cy="277.7" r="3.5"/>
+<circle class="point contrastive" cx="464.0" cy="265.2" r="3.5"/>
+<circle class="point contrastive" cx="542.0" cy="245.9" r="3.5"/>
+<circle class="point contrastive" cx="620.0" cy="232.7" r="3.5"/>
+<line class="series contrastive" x1="620" y1="232.7" x2="634" y2="232.7"/>
+<text class="text label" x="640" y="230.7">Contrastive</text>
+<text class="text muted small" x="640" y="246.7">46.1% at k=14</text>
+<path class="series groupmean" d="M 74.0 338.0 L 152.0 318.5 L 230.0 282.1 L 308.0 254.7 L 386.0 237.1 L 464.0 217.9 L 542.0 197.8 L 620.0 164.9"/>
+<rect class="point groupmean" x="70.5" y="334.5" width="7" height="7"/>
+<rect class="point groupmean" x="148.5" y="315.0" width="7" height="7"/>
+<rect class="point groupmean" x="226.5" y="278.6" width="7" height="7"/>
+<rect class="point groupmean" x="304.5" y="251.2" width="7" height="7"/>
+<rect class="point groupmean" x="382.5" y="233.6" width="7" height="7"/>
+<rect class="point groupmean" x="460.5" y="214.4" width="7" height="7"/>
+<rect class="point groupmean" x="538.5" y="194.3" width="7" height="7"/>
+<rect class="point groupmean" x="616.5" y="161.4" width="7" height="7"/>
+<line class="series groupmean" x1="620" y1="164.9" x2="634" y2="164.9"/>
+<text class="text label" x="640" y="162.9">Group-mean orthogonality</text>
+<text class="text muted small" x="640" y="178.9">68.6% at k=14</text>
+<path class="series reverse" d="M 74.0 335.3 L 152.0 309.5 L 230.0 263.1 L 308.0 225.6 L 386.0 194.8 L 464.0 165.3 L 542.0 142.6 L 620.0 117.0"/>
+<path class="point reverse" d="M 74.0 330.3 L 79.0 335.3 L 74.0 340.3 L 69.0 335.3 Z"/>
+<path class="point reverse" d="M 152.0 304.5 L 157.0 309.5 L 152.0 314.5 L 147.0 309.5 Z"/>
+<path class="point reverse" d="M 230.0 258.1 L 235.0 263.1 L 230.0 268.1 L 225.0 263.1 Z"/>
+<path class="point reverse" d="M 308.0 220.6 L 313.0 225.6 L 308.0 230.6 L 303.0 225.6 Z"/>
+<path class="point reverse" d="M 386.0 189.8 L 391.0 194.8 L 386.0 199.8 L 381.0 194.8 Z"/>
+<path class="point reverse" d="M 464.0 160.3 L 469.0 165.3 L 464.0 170.3 L 459.0 165.3 Z"/>
+<path class="point reverse" d="M 542.0 137.6 L 547.0 142.6 L 542.0 147.6 L 537.0 142.6 Z"/>
+<path class="point reverse" d="M 620.0 112.0 L 625.0 117.0 L 620.0 122.0 L 615.0 117.0 Z"/>
+<line class="series reverse" x1="620" y1="117.0" x2="634" y2="117.0"/>
+<text class="text label" x="640" y="115.0">Reverse-ridge orthogonality</text>
+<text class="text muted small" x="640" y="131.0">84.4% at k=14</text>
+<rect class="bar contrastive" x="826" y="103.3" width="48" height="268.7"/>
+<circle class="point contrastive" cx="850" cy="103.3" r="4"/>
+<text class="text label" x="850" y="93.3" text-anchor="middle">89.0%</text>
+<text class="text small" x="850" y="394" text-anchor="middle">Contrastive</text>
+<rect class="bar groupmean" x="926" y="104.7" width="48" height="267.3"/>
+<rect class="point groupmean" x="946" y="100.7" width="8" height="8"/>
+<text class="text label" x="950" y="94.7" text-anchor="middle">88.5%</text>
+<text class="text small" x="950" y="394" text-anchor="middle">Group-mean</text>
+<rect class="bar reverse" x="1026" y="100.3" width="48" height="271.7"/>
+<path class="point reverse" d="M 1050 94.8 L 1055.5 100.3 L 1050 105.8 L 1044.5 100.3 Z"/>
+<text class="text label" x="1050" y="90.3" text-anchor="middle">90.0%</text>
+<text class="text small" x="1050" y="394" text-anchor="middle">Reverse-ridge</text>
+<text class="text muted label" x="960.0" y="436" text-anchor="middle">Training objective</text>
 </svg>

@@ -11,6 +11,8 @@
 - `three_model_dev_composability.json` — the README comparison of contrastive,
   group-mean, and reverse-ridge directions. Each attribute count uses every
   eligible development class and approximately 6,700 sampled queries.
+- `matched_retrieval_dev.json` — five-seed matched ordinary image–text
+  retrieval results for the three objectives shown in the README chart.
 
 These files are small enough to review and version. Large arrays and model
 weights used to produce them are intentionally excluded from Git.

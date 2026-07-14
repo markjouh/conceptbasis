@@ -1,32 +1,20 @@
 # ConceptBasis
 
+ConceptBasis asks whether an orthogonality loss can make an image–text
+embedding more compositional without sacrificing ordinary retrieval. Alongside
+standard contrastive training, it penalizes overlap between concept directions
+so attributes can be combined more cleanly.
+
+The resulting directions approximate a conceptual basis, with human-readable
+axes for constructing additive queries.
+
 **[Live playground](https://markjouh.github.io/conceptbasis/)**
 
-ConceptBasis learns an image–text embedding organized around a dictionary of
-human-readable concepts. Each concept is represented by a direction in the
-embedding space, so images can be described by concept activations and queries
-can be edited through **sliders you can search with**.
+The partial embedding effects of concepts are estimated using a regression on
+synthetic concept labels; group-mean-derived directions remain as a baseline.
 
-The project has three main parts:
-
-1. A pipeline for constructing a concept dictionary and labeling training
-   images against it with a local vision-language model.
-2. A reverse-ridge estimator that recovers each concept's partial embedding
-   effect while controlling for the other dictionary labels.
-3. An orthogonality loss that pushes those partial effects toward a useful
-   basis while preserving ordinary image–text retrieval behavior.
-
-The active development objective is standard symmetric image–text contrastive
-loss plus pairwise overlap among reverse-ridge directions. It alternates
-minibatch contrastive updates with one exact full-training-set reverse-ridge
-update per epoch. Marginal group means remain a baseline, not the direction
-definition used by the active model.
-
-In the ideal linear picture, orthogonal concept directions are independently
-decodable and can be added without one component overwriting another. Real
-semantic concepts are neither independent nor perfectly orthogonal, so we do
-not force that ideal. The goal is to recover some of its useful behavior while
-retaining a strong general-purpose embedding.
+Training alternates minibatch contrastive updates with one full-training-set
+orthogonality update per epoch.
 
 ## Evidence from compositional retrieval
 
@@ -35,16 +23,11 @@ Can a partial attribute description retrieve the correct held-out object? At
 to 68.6% with group-mean orthogonality, and 84.4% with reverse-ridge
 orthogonality.
 
-![Recall at five across the three incremental objectives](docs/assets/composability-retrieval.svg)
+Meanwhile, the reverse-ridge model retains the performance of the contrastive
+baseline on standard image–text retrieval: 90.0% versus 89.0% development
+Recall@5, averaged over five matched runs.
 
-The gallery always contains all 278 development classes. At each attribute
-count, every class with at least that many mapped attributes is used as a
-query; the chart reports that class count below each point. Sampling is
-balanced to roughly 6,700 queries per point, with identical queries across the
-three models. The sealed test split remains unused. Full details are in
-[`research/experiments/2026-07-11-reverse-ridge-basis-adapter.md`](research/experiments/2026-07-11-reverse-ridge-basis-adapter.md),
-with tracked chart metrics in
-[`research/results/three_model_dev_composability.json`](research/results/three_model_dev_composability.json).
+![Compositional and ordinary Recall at five across the three incremental objectives](docs/assets/composability-retrieval.svg)
 
 ## Pipeline
 

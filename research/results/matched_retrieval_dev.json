@@ -1,0 +1,24 @@
+{
+  "eval_split": "dev",
+  "pairs": 3914,
+  "protocol": {
+    "seeds": [0, 1, 2, 3, 4],
+    "epochs": 30,
+    "embed_dim": 320,
+    "group_mean_lambda": 8.0,
+    "reverse_ridge_alpha": 0.001,
+    "reverse_ridge_lambda": 512.0
+  },
+  "mean_percent_recall": {
+    "contrastive": {"R@1": 57.675, "R@5": 88.983, "R@10": 96.919},
+    "group_mean": {"R@1": 56.122, "R@5": 88.523, "R@10": 96.561},
+    "reverse_schedule_control": {"R@1": 57.716, "R@5": 88.988, "R@10": 96.924},
+    "reverse_ridge": {"R@1": 58.217, "R@5": 89.980, "R@10": 97.276}
+  },
+  "sample_sd_percent_recall": {
+    "contrastive": {"R@1": 0.567, "R@5": 0.249, "R@10": 0.141},
+    "group_mean": {"R@1": 0.251, "R@5": 0.296, "R@10": 0.098},
+    "reverse_schedule_control": {"R@1": 0.580, "R@5": 0.252, "R@10": 0.141},
+    "reverse_ridge": {"R@1": 0.179, "R@5": 0.110, "R@10": 0.111}
+  }
+}
