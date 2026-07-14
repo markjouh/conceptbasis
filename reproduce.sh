@@ -69,6 +69,7 @@ python scripts/evaluation/eval_playground_subset_composability.py \
   --profiles-npz outputs/evals/classsplit_dev_profiles.npz \
   --reference-model reverse_ridge --eval-split dev \
   --subset-sizes 1,2,4,6,8,10,12,14 --rollouts 24 \
+  --rollouts-by-size 2:25,4:25,6:25,8:25,10:26,12:35,14:129 \
   --out outputs/evals/classsplit_dev_composability.json
 
 # 11. public and local galleries use development classes, never test

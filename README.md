@@ -28,25 +28,23 @@ semantic concepts are neither independent nor perfectly orthogonal, so we do
 not force that ideal. The goal is to recover some of its useful behavior while
 retaining a strong general-purpose embedding.
 
-## Evidence from additive retrieval
+## Evidence from compositional retrieval
 
-Adding concept directions provides a direct behavioral test of the geometry:
-does each added concept preserve useful information? The model is never trained
-on this retrieval task. On classes excluded from dictionary construction and
-adapter training, pure reverse-ridge orthogonality raises Recall@5 from 73.0%
-to 84.5% over a matched contrastive-only adapter at 14 concepts. Ordinary
-image–text Recall@5 remains essentially unchanged (89.1% versus 89.7%; the
-latter is the legacy first-2,000-example sweep diagnostic).
+Can a partial attribute description retrieve the correct held-out object? At
+14 attributes, Recall@5 improves from 46.1% with contrastive training alone,
+to 68.6% with group-mean orthogonality, and 84.4% with reverse-ridge
+orthogonality.
 
 ![Recall at five across the three incremental objectives](docs/assets/composability-retrieval.svg)
 
-This development benchmark retrieves 52 eligible query classes against the
-278-class development gallery, with 24 nested attribute-subset rollouts per
-query and identical queries across models. It is evidence on classes unseen
-during training, not the sealed final test. Full metrics and provenance are in
+The gallery always contains all 278 development classes. At each attribute
+count, every class with at least that many mapped attributes is used as a
+query; the chart reports that class count below each point. Sampling is
+balanced to roughly 6,700 queries per point, with identical queries across the
+three models. The sealed test split remains unused. Full details are in
 [`research/experiments/2026-07-11-reverse-ridge-basis-adapter.md`](research/experiments/2026-07-11-reverse-ridge-basis-adapter.md),
-with compact tracked metrics in
-[`research/results/reverse_ridge_dev_results.json`](research/results/reverse_ridge_dev_results.json).
+with tracked chart metrics in
+[`research/results/three_model_dev_composability.json`](research/results/three_model_dev_composability.json).
 
 ## Pipeline
 
@@ -59,7 +57,7 @@ with compact tracked metrics in
 | Build and verify concept directions | `scripts/dictionary/` |
 | Train the selected reverse-ridge adapter | `python -m conceptbasis.train --objective reverse-ridge` |
 | Reproduce the incremental baselines | `python -m conceptbasis.train --objective {contrastive,group-mean,reverse-ridge}` |
-| Evaluate basis behavior and additive retrieval | `scripts/evaluation/` |
+| Evaluate basis behavior and compositional retrieval | `scripts/evaluation/` |
 | Generate playgrounds and galleries | `scripts/visualization/` |
 
 The dictionary is constructed only from train-class CC0 images and is then held

@@ -92,6 +92,26 @@ def parse_sizes(value: str) -> list[int]:
     return sizes
 
 
+def parse_rollout_schedule(
+    sizes: list[int],
+    default_rollouts: int,
+    value: str | None,
+) -> dict[int, int]:
+    if default_rollouts < 1:
+        raise ValueError("--rollouts must be positive")
+    schedule = {size: default_rollouts for size in sizes}
+    if value:
+        for item in value.split(","):
+            size_text, separator, rollouts_text = item.strip().partition(":")
+            if not separator:
+                raise ValueError("--rollouts-by-size must use K:N entries")
+            size, rollouts = int(size_text), int(rollouts_text)
+            if size not in schedule or rollouts < 1:
+                raise ValueError(f"invalid rollout override: {item!r}")
+            schedule[size] = rollouts
+    return schedule
+
+
 def mapped_concepts(rows: list[dict], dictionary: list[dict], flags: dict,
                     include_flagged: bool) -> list[np.ndarray]:
     member_to_concept = {}
@@ -114,22 +134,29 @@ def mapped_concepts(rows: list[dict], dictionary: list[dict], flags: dict,
     return out
 
 
-def build_rollouts(concepts: list[np.ndarray], n_axes: int, sizes: list[int],
-                   rollouts: int, seed: int):
+def build_rollouts(
+    concepts: list[np.ndarray],
+    n_axes: int,
+    sizes: list[int],
+    rollouts_by_size: dict[int, int],
+    seed: int,
+):
     """Return nested true/random concept sequences and their source-image rows."""
+    min_size = min(sizes)
     max_size = max(sizes)
+    max_rollouts = max(rollouts_by_size.values())
     rng = np.random.default_rng(seed)
     true_seq, random_seq, targets, rollout_ids, lengths = [], [], [], [], []
     universe = np.arange(n_axes, dtype=np.int32)
 
     for image_i, available in enumerate(concepts):
-        # Keep one fixed image cohort across the entire attribute-budget curve.
-        if len(available) < max_size:
+        # Each point uses every image that supports that attribute budget.
+        if len(available) < min_size:
             continue
         excluded = np.zeros(n_axes, dtype=bool)
         excluded[available] = True
         complement = universe[~excluded]
-        for rollout_i in range(rollouts):
+        for rollout_i in range(max_rollouts):
             true = rng.permutation(available)
             usable = min(len(true), max_size)
             padded = np.zeros(max_size, dtype=np.int32)
@@ -151,8 +178,16 @@ def build_rollouts(concepts: list[np.ndarray], n_axes: int, sizes: list[int],
     }
 
 
-def rank_prefixes(profiles: np.ndarray, sequences: np.ndarray, targets: np.ndarray,
-                  lengths: np.ndarray, sizes: list[int], batch: int) -> np.ndarray:
+def rank_prefixes(
+    profiles: np.ndarray,
+    sequences: np.ndarray,
+    targets: np.ndarray,
+    rollout_ids: np.ndarray,
+    lengths: np.ndarray,
+    sizes: list[int],
+    rollouts_by_size: dict[int, int],
+    batch: int,
+) -> np.ndarray:
     """Average-tie rank of each target for every valid prefix size."""
     ranks = np.full((len(sequences), len(sizes)), np.nan, dtype=np.float32)
     for start in range(0, len(sequences), batch):
@@ -162,15 +197,24 @@ def rank_prefixes(profiles: np.ndarray, sequences: np.ndarray, targets: np.ndarr
         cumulative = np.cumsum(profiles[:, seq], axis=2)
         batch_targets = targets[start:stop]
         batch_lengths = lengths[start:stop]
+        batch_rollouts = rollout_ids[start:stop]
         for si, size in enumerate(sizes):
-            valid = batch_lengths >= size
+            valid = (batch_lengths >= size) & (
+                batch_rollouts < rollouts_by_size[size]
+            )
             if not valid.any():
                 continue
             scores = cumulative[:, valid, size - 1].T
             target_scores = scores[np.arange(len(scores)), batch_targets[valid]]
             greater = (scores > target_scores[:, None] + 1e-7).sum(axis=1)
-            equal = np.isclose(scores, target_scores[:, None], atol=1e-7, rtol=0).sum(axis=1)
-            ranks[start:stop, si][valid] = 1 + greater + 0.5 * (equal - 1)
+            equal = np.isclose(
+                scores,
+                target_scores[:, None],
+                atol=1e-7,
+                rtol=0,
+            ).sum(axis=1)
+            batch_ranks = 1 + greater + 0.5 * (equal - 1)
+            ranks[start:stop, si][valid] = batch_ranks
     return ranks
 
 
@@ -216,14 +260,22 @@ def monotonicity(ranks: np.ndarray, sizes: list[int]) -> dict:
     return out
 
 
-def model_eval(profiles: np.ndarray, rollout_data: dict, sizes: list[int], batch: int):
+def model_eval(
+    profiles: np.ndarray,
+    rollout_data: dict,
+    sizes: list[int],
+    rollouts_by_size: dict[int, int],
+    batch: int,
+):
     true_ranks = rank_prefixes(
         profiles, rollout_data["true"], rollout_data["target"],
-        rollout_data["length"], sizes, batch,
+        rollout_data["rollout"], rollout_data["length"], sizes,
+        rollouts_by_size, batch,
     )
     random_ranks = rank_prefixes(
         profiles, rollout_data["random"], rollout_data["target"],
-        rollout_data["length"], sizes, batch,
+        rollout_data["rollout"], rollout_data["length"], sizes,
+        rollouts_by_size, batch,
     )
     return {
         "true_attributes": curve(true_ranks, rollout_data["target"], sizes, len(profiles)),
@@ -246,11 +298,16 @@ def main() -> None:
     ap.add_argument("--dictionary-git", default=None,
                     help="git object containing the matching dictionary")
     ap.add_argument("--profiles-npz", default=None,
-                    help="optional NPZ with matched group-mean profile matrices")
+                    help="optional NPZ with matched concept-profile matrices")
     ap.add_argument("--reference-model", default=None,
                     help="profile key used as the reference for paired rank comparisons")
     ap.add_argument("--subset-sizes", default="1,2,3,4,6,8")
     ap.add_argument("--rollouts", type=int, default=24)
+    ap.add_argument(
+        "--rollouts-by-size",
+        default=None,
+        help="optional comma-separated K:N overrides, e.g. 12:35,14:129",
+    )
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--batch", type=int, default=128)
     ap.add_argument("--include-flagged", action="store_true")
@@ -260,6 +317,9 @@ def main() -> None:
         raise ValueError("reading test requires --allow-test")
 
     sizes = parse_sizes(args.subset_sizes)
+    rollouts_by_size = parse_rollout_schedule(
+        sizes, args.rollouts, args.rollouts_by_size
+    )
     trained_path = os.path.join(ROOT, args.trained_html)
     frozen_path = os.path.join(ROOT, args.frozen_html)
     attrs_path = os.path.join(ROOT, args.attributes)
@@ -293,7 +353,9 @@ def main() -> None:
             raise ValueError("trained and frozen playground flag sets differ")
     concepts = mapped_concepts(rows, dictionary, flags, args.include_flagged)
     counts = np.array([len(x) for x in concepts])
-    rollout_data = build_rollouts(concepts, len(names), sizes, args.rollouts, args.seed)
+    rollout_data = build_rollouts(
+        concepts, len(names), sizes, rollouts_by_size, args.seed
+    )
 
     profile_path = None
     if args.profiles_npz:
@@ -317,7 +379,9 @@ def main() -> None:
     rank_arrays = {}
     for label, matrix in profiles.items():
         print(f"evaluating {label}: {matrix.shape}", flush=True)
-        ev = model_eval(matrix, rollout_data, sizes, args.batch)
+        ev = model_eval(
+            matrix, rollout_data, sizes, rollouts_by_size, args.batch
+        )
         rank_arrays[label] = ev.pop("_true_ranks")
         evaluations[label] = ev
 
@@ -350,7 +414,10 @@ def main() -> None:
         "created_at": datetime.now(timezone.utc).isoformat(),
         "metric": "source-image retrieval from sums of standardized concept-direction profiles",
         "subset_sizes": sizes,
-        "rollouts_per_image": args.rollouts,
+        "rollouts_per_image": {
+            str(size): rollouts_by_size[size] for size in sizes
+        },
+        "query_cohort": "all images with at least k mapped concepts",
         "seed": args.seed,
         "eval_split": args.eval_split,
         "exclude_flagged": not args.include_flagged,

@@ -36,33 +36,36 @@ Uncertain cells are mean-imputed per concept, making their centered target
 zero. Rows with more than 25% uncertain cells are excluded from the ridge solve
 but remain in contrastive training.
 
-## Selected development result
+## Three-stage development comparison
 
 The selected run uses `α=0.001`, reverse orthogonality weight 512, output
-dimension 320, batch size 1,024, seed 0, and 30 epochs.
+dimension 320, batch size 1,024, seed 0, and 30 epochs. The README comparison
+uses every development class eligible at each attribute count, while retaining
+all 278 classes in the retrieval gallery.
 
-| Model | Reverse RMS overlap | Ordinary dev R@5* | Composition R@5 at 1 / 4 / 8 / 14 concepts |
-|---|---:|---:|---:|
-| Contrastive control, post-hoc reverse directions | 0.10485 | 0.891 | .107 / .284 / .489 / .730 |
-| Pure reverse `p0_l512` | **0.06326** | **.8965** | **.139 / .393 / .627 / .845** |
-| Reverse + probe `p1_l512` | 0.06291 | .8970 | .144 / .395 / .629 / .841 |
-| Reverse + probe `p8_l128` | 0.07247 | .8990 | .133 / .377 / .609 / **.863** |
+| Model and direction definition | Composition R@5 at 1 / 4 / 8 / 14 attributes |
+|---|---:|
+| Contrastive only, group-mean directions | .080 / .209 / .312 / .461 |
+| Group-mean orthogonality | .113 / .298 / .447 / .686 |
+| Pure reverse ridge `p0_l512` | **.121 / .360 / .587 / .844** |
 
-`*` The recorded sweep checkpoint used the legacy first-2,000 dev retrieval
-diagnostic. The refactored trainer evaluates the complete development set.
+The eligible class counts are 278 / 277 / 274 / 52 at those four points.
+Rollout counts increase from 24 to 129 as the cohort shrinks, keeping the
+number of sampled queries near 6,700 per point. All models receive identical
+queries. Adapter profile construction uses CUDA when available; the small
+278-item rank calculation remains a vectorized NumPy operation.
 
-The pure model reduces reverse-direction RMS overlap by about 40% relative to
-the matched contrastive control. Its ordinary image-text retrieval is
-effectively unchanged, while the compositional advantage grows with the number
-of attributes. The fourteen-concept R@5 gain is 11.5 percentage points.
+The selected pure model's reverse-direction RMS overlap is 0.06326. Its
+14-attribute R@5 is 38.3 percentage points above contrastive-only directions
+and 15.8 points above group-mean orthogonality.
 
 ## Scope and limitations
 
 These results are development evidence, not a final confirmatory result. The
-sweep used one training seed and selected hyperparameters on 52 development
-source images with 24 correlated rollouts per image. The appropriate next
-check is a small multi-seed rerun of the pure configuration, followed by one
-sealed-test evaluation after the recipe is frozen.
+reverse-ridge hyperparameters were originally selected on the fixed 52-class,
+24-rollout development benchmark, so the rebalanced three-model graph is not
+an independent confirmation. The appropriate next check is a small multi-seed
+rerun, followed by one sealed-test evaluation after the recipe is frozen.
 
 Reverse effects are the principled directions for isolated embedding edits,
 but the current benchmark evaluates retrieval from sums of standardized
@@ -78,6 +81,7 @@ holding other predicted attributes and object identity fixed.
 - Profile builder: `scripts/evaluation/build_groupmean_profiles.py`
 - Unit test: `tests/test_reverse_ridge_loss.py`
 - Tracked compact results: `research/results/reverse_ridge_dev_results.json`
+- Tracked three-model comparison: `research/results/three_model_dev_composability.json`
 - Selected local checkpoint:
   `outputs/checkpoints_reverse_ridge/reverse_sweep_v1_p0_l512/`
 

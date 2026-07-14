@@ -12,7 +12,7 @@ import torch
 from conceptbasis.losses import reverse_ridge_objective
 from conceptbasis.models import Adapter
 from conceptbasis.splits import load_split_manifest, split_for_image
-from conceptbasis.train import load_dictionary_labels
+from conceptbasis.train import adapted, load_dictionary_labels, resolve_device
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -81,10 +81,12 @@ def main() -> None:
         help="auto uses reverse ridge only for reverse-ridge checkpoints",
     )
     parser.add_argument("--ridge-alpha", type=float, default=None)
+    parser.add_argument("--device", choices=("auto", "cuda", "mps", "cpu"), default="auto")
     parser.add_argument("--out", required=True)
     args = parser.parse_args()
     if args.cc0_split == "test" and not args.allow_test:
         raise ValueError("reading test requires --allow-test")
+    device = resolve_device(args.device)
 
     embeddings = np.load(ROOT / args.embeddings).astype(np.float32)
     cc0_all = np.load(ROOT / args.cc0_embeddings).astype(np.float32)
@@ -131,12 +133,11 @@ def main() -> None:
             embeddings.shape[1],
             config["embed_dim"],
             config.get("hidden_dim", 1024),
-        )
+        ).to(device)
         adapter.load_state_dict(checkpoint["img_adapter"])
         adapter.eval()
-        with torch.no_grad():
-            z = adapter(torch.from_numpy(embeddings)).numpy()
-            z_cc0 = adapter(torch.from_numpy(cc0)).numpy()
+        z = adapted(adapter, torch.from_numpy(embeddings), device).numpy()
+        z_cc0 = adapted(adapter, torch.from_numpy(cc0), device).numpy()
 
         kind = checkpoint_direction_kind(checkpoint, args.direction_kind)
         if kind == "group-mean":
@@ -163,12 +164,12 @@ def main() -> None:
             if alpha is None:
                 alpha = float(config.get("ridge_alpha", 1e-3))
             result = reverse_ridge_objective(
-                torch.from_numpy(z[positions]),
-                targets,
-                observed,
+                torch.from_numpy(z[positions]).to(device),
+                targets.to(device),
+                observed.to(device),
                 alpha=alpha,
             )
-            directions = result["directions"].numpy()
+            directions = result["directions"].detach().cpu().numpy()
             arrays[label] = standardized_profile(z[positions], z_cc0, directions)
             print(
                 f"{label}: reverse alpha={alpha:g} "
@@ -180,7 +181,7 @@ def main() -> None:
     output = ROOT / args.out
     output.parent.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(output, **arrays)
-    print(f"wrote {output}")
+    print(f"wrote {output} device={device}")
 
 
 if __name__ == "__main__":

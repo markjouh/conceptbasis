@@ -13,14 +13,9 @@ ROOT = Path(__file__).resolve().parents[2]
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--baseline-metrics",
-        default="research/results/classsplit_dev_composability.json",
-        help="tracked contrastive and group-mean development metrics",
-    )
-    parser.add_argument(
-        "--reverse-metrics",
-        default="research/results/reverse_ridge_dev_results.json",
-        help="tracked selected reverse-ridge development metrics",
+        "--metrics",
+        default="research/results/three_model_dev_composability.json",
+        help="tracked three-model development metrics",
     )
     parser.add_argument(
         "--out",
@@ -28,18 +23,15 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    baseline = json.loads((ROOT / args.baseline_metrics).read_text())
-    reverse = json.loads((ROOT / args.reverse_metrics).read_text())
-    subset_sizes = [int(value) for value in baseline["subset_sizes"]]
-    if subset_sizes != reverse["protocol"]["attribute_counts"]:
-        raise ValueError("baseline and reverse-ridge subset sizes differ")
+    metrics = json.loads((ROOT / args.metrics).read_text())
+    subset_sizes = [int(value) for value in metrics["subset_sizes"]]
 
     series = [
         (
             "contrastive",
             "Contrastive only",
             [
-                baseline["models"]["clip_only"]["true_attributes"][str(size)]["R@5"]
+                metrics["models"]["contrastive"]["true_attributes"][str(size)]["R@5"]
                 for size in subset_sizes
             ],
             "circle",
@@ -48,7 +40,7 @@ def main() -> None:
             "groupmean",
             "+ group-mean orthogonality",
             [
-                baseline["models"]["clip_orth"]["true_attributes"][str(size)]["R@5"]
+                metrics["models"]["group_mean"]["true_attributes"][str(size)]["R@5"]
                 for size in subset_sizes
             ],
             "square",
@@ -57,15 +49,27 @@ def main() -> None:
             "reverse",
             "+ reverse-ridge orthogonality",
             [
-                reverse["r5_composition"]["pure_reverse_p0_l512"][str(size)]
+                metrics["models"]["reverse_ridge"]["true_attributes"][str(size)]["R@5"]
                 for size in subset_sizes
             ],
             "diamond",
         ),
     ]
 
-    width, height = 860, 430
-    left, right, top, bottom = 74, 232, 70, 58
+    cohort_sizes = [
+        metrics["models"]["reverse_ridge"]["true_attributes"][str(size)]["n_images"]
+        for size in subset_sizes
+    ]
+    for model in ("contrastive", "group_mean"):
+        observed = [
+            metrics["models"][model]["true_attributes"][str(size)]["n_images"]
+            for size in subset_sizes
+        ]
+        if observed != cohort_sizes:
+            raise ValueError("model query cohorts differ")
+
+    width, height = 860, 448
+    left, right, top, bottom = 74, 232, 70, 76
     plot_width = width - left - right
     plot_height = height - top - bottom
     y_max = 0.9
@@ -97,7 +101,7 @@ def main() -> None:
         ".reverse{stroke:#3fb950}.point.reverse{fill:#3fb950}}",
         "</style>",
         '<text class="text title" x="74" y="30">Compositional retrieval improves with cleaner concept directions</text>',
-        '<text class="text muted small" x="74" y="50">278-class dev gallery · 52 query classes · Recall@5</text>',
+        '<text class="text muted small" x="74" y="50">278-class dev gallery · all classes with ≥k attributes · Recall@5</text>',
     ]
 
     for tick in range(10):
@@ -122,12 +126,16 @@ def main() -> None:
     for index, size in enumerate(subset_sizes):
         x = x_pos(index)
         lines.append(
-            f'<text class="text muted small" x="{x:.1f}" y="{height-bottom+22}" '
+            f'<text class="text small" x="{x:.1f}" y="{height-bottom+20}" '
             f'text-anchor="middle">{size}</text>'
+        )
+        lines.append(
+            f'<text class="text muted small" x="{x:.1f}" y="{height-bottom+36}" '
+            f'text-anchor="middle">n={cohort_sizes[index]}</text>'
         )
     lines.append(
         f'<text class="text muted label" x="{left+plot_width/2:.1f}" y="{height-12}" '
-        'text-anchor="middle">Composed attributes (k)</text>'
+        'text-anchor="middle">Attributes in query (k)</text>'
     )
     lines.append(
         f'<text class="text muted label" transform="translate(20 {top+plot_height/2:.1f}) '

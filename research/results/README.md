@@ -8,6 +8,9 @@
 - `reverse_ridge_dev_results.json` — compact pure reverse-ridge sweep and
   class-disjoint compositional-retrieval results. These are development-only;
   the sealed test split remains unused.
+- `three_model_dev_composability.json` — the README comparison of contrastive,
+  group-mean, and reverse-ridge directions. Each attribute count uses every
+  eligible development class and approximately 6,700 sampled queries.
 
 These files are small enough to review and version. Large arrays and model
 weights used to produce them are intentionally excluded from Git.

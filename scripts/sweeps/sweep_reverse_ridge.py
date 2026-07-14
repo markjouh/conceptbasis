@@ -131,7 +131,7 @@ def train(configs: list[Config], *, epochs: int, device: str, seed: int) -> None
         status_path.write_text(json.dumps(status, indent=2) + "\n")
 
 
-def evaluate(configs: list[Config], *, epochs: int, seed: int) -> None:
+def evaluate(configs: list[Config], *, epochs: int, device: str, seed: int) -> None:
     checkpoints = {
         config.name: completed_checkpoint(config, epochs, seed)
         for config in configs
@@ -148,6 +148,7 @@ def evaluate(configs: list[Config], *, epochs: int, seed: int) -> None:
         "--embeddings", "data/image_embeddings.npy",
         "--cc0-embeddings", "data/image_embeddings_cc0.npy",
         "--labels", "data/labels.parquet",
+        "--device", device,
         "--out", profiles,
     ]
     for name, checkpoint in checkpoints.items():
@@ -169,6 +170,7 @@ def evaluate(configs: list[Config], *, epochs: int, seed: int) -> None:
             "--profiles-npz", profiles,
             "--subset-sizes", "1,2,4,6,8,10,12,14",
             "--rollouts", "24",
+            "--rollouts-by-size", "2:25,4:25,6:25,8:25,10:26,12:35,14:129",
             "--seed", str(seed),
             "--out", metrics_path,
         ],
@@ -246,7 +248,7 @@ def main() -> None:
     if not args.evaluate_only:
         train(configs, epochs=args.epochs, device=args.device, seed=args.seed)
     if not args.train_only:
-        evaluate(configs, epochs=args.epochs, seed=args.seed)
+        evaluate(configs, epochs=args.epochs, device=args.device, seed=args.seed)
 
 
 if __name__ == "__main__":
