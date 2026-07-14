@@ -1,0 +1,105 @@
+{
+  "status": "development-only",
+  "selected_model": "p0_l512",
+  "selection_reason": "Best pure-reverse sweep average; effectively tied with p1_l512 while using no forward-probe or reconstruction loss.",
+  "protocol": {
+    "split": "dev",
+    "source_images": 52,
+    "rollouts_per_image": 24,
+    "rollout_queries_per_attribute_count": 1248,
+    "attribute_counts": [1, 2, 4, 6, 8, 10, 12, 14],
+    "training_seed": 0,
+    "evaluation_seed": 0,
+    "note": "Hyperparameters were selected on this development protocol. The sealed test split was not used."
+  },
+  "inputs": {
+    "dictionary_sha256": "fb2ca2578ae8790ac793d7fa6f32f79f0d47a52918dabe595264f81ee2e7c470",
+    "labels_sha256": "ec384605957a8c62feefd8099bdd9be6c81b8360e1d522c736f75b8867350e82",
+    "split_manifest_sha256": "ee6bdf93feeb1367fde2da4f53474efa4e80f0a6dc0188e2636d51d09bb57027"
+  },
+  "selected_config": {
+    "epochs": 30,
+    "embed_dim": 320,
+    "batch": 1024,
+    "ridge_alpha": 0.001,
+    "lambda_probe": 0.0,
+    "lambda_forward_orth": 0.0,
+    "lambda_reconstruction": 0.0,
+    "lambda_reverse_orth": 512.0,
+    "reverse_orth_rms": 0.0632583424448967,
+    "legacy_dev_R@5_first_2000": 0.8964999914169312
+  },
+  "r5_composition": {
+    "contrastive_control_reverse": {
+      "1": 0.10657051282051282,
+      "2": 0.16105769230769232,
+      "4": 0.2844551282051282,
+      "6": 0.39903846153846156,
+      "8": 0.48878205128205127,
+      "10": 0.5600961538461539,
+      "12": 0.6578525641025641,
+      "14": 0.7299679487179487
+    },
+    "pure_reverse_p0_l512": {
+      "1": 0.13942307692307693,
+      "2": 0.2419871794871795,
+      "4": 0.3926282051282051,
+      "6": 0.5328525641025641,
+      "8": 0.6274038461538461,
+      "10": 0.717948717948718,
+      "12": 0.7756410256410257,
+      "14": 0.844551282051282
+    }
+  },
+  "compact_sweep": [
+    {
+      "name": "p0_l32",
+      "lambda_probe": 0.0,
+      "lambda_reverse_orth": 32.0,
+      "reverse_orth_rms": 0.09270600974559784,
+      "r5_k4_k8_k14_mean": 0.5801282051282052
+    },
+    {
+      "name": "p0_l64",
+      "lambda_probe": 0.0,
+      "lambda_reverse_orth": 64.0,
+      "reverse_orth_rms": 0.08356891572475433,
+      "r5_k4_k8_k14_mean": 0.5900106837606837
+    },
+    {
+      "name": "p0_l128",
+      "lambda_probe": 0.0,
+      "lambda_reverse_orth": 128.0,
+      "reverse_orth_rms": 0.07434958964586258,
+      "r5_k4_k8_k14_mean": 0.5926816239316239
+    },
+    {
+      "name": "p0_l256",
+      "lambda_probe": 0.0,
+      "lambda_reverse_orth": 256.0,
+      "reverse_orth_rms": 0.0670526921749115,
+      "r5_k4_k8_k14_mean": 0.6028311965811967
+    },
+    {
+      "name": "p0_l512",
+      "lambda_probe": 0.0,
+      "lambda_reverse_orth": 512.0,
+      "reverse_orth_rms": 0.0632583424448967,
+      "r5_k4_k8_k14_mean": 0.6215277777777778
+    },
+    {
+      "name": "p1_l512",
+      "lambda_probe": 1.0,
+      "lambda_reverse_orth": 512.0,
+      "reverse_orth_rms": 0.0629098191857338,
+      "r5_k4_k8_k14_mean": 0.6217948717948718
+    },
+    {
+      "name": "p8_l128",
+      "lambda_probe": 8.0,
+      "lambda_reverse_orth": 128.0,
+      "reverse_orth_rms": 0.07246958464384079,
+      "r5_k4_k8_k14_mean": 0.6164529914529915
+    }
+  ]
+}

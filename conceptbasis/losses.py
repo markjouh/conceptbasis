@@ -1,14 +1,4 @@
-"""Losses for training an embedding with selectively orthogonal concepts.
-
-Total objective:
-
-  L = L_contrastive + lambda_orth * L_orthogonality
-
-- L_contrastive keeps the space a retrieval embedding (image <-> caption).
-- L_orthogonality pushes those concept directions apart -- but only for
-  concept pairs weighted as independently manipulable. Weights may be a hard
-  correlation mask or a smooth correlation-derived function.
-"""
+"""Contrastive, group-mean, and reverse-ridge training objectives."""
 from __future__ import annotations
 import torch
 import torch.nn as nn
@@ -22,7 +12,7 @@ def symmetric_clip_loss(img_n, txt_n, logit_scale):
     return 0.5 * (F.cross_entropy(logits, target) + F.cross_entropy(logits.t(), target))
 
 
-class ConceptOrthogonalityLoss(nn.Module):
+class GroupMeanOrthogonalityLoss(nn.Module):
     """Conditional orthogonality over soft-labeled concept directions.
 
     Supervision is a soft score s_k in [0, 1] per image and concept (here:
@@ -125,3 +115,136 @@ class ConceptOrthogonalityLoss(nn.Module):
         else:
             loss_orth = squared.mean()
         return {"orth": loss_orth, "D": D.detach()}
+
+
+# Backward-compatible name used by historical checkpoints and imports.
+ConceptOrthogonalityLoss = GroupMeanOrthogonalityLoss
+
+
+def reverse_ridge_objective(
+    embeddings: torch.Tensor,
+    targets: torch.Tensor,
+    observed: torch.Tensor,
+    *,
+    alpha: float,
+    max_uncertain_fraction: float = 0.25,
+    min_positives: int = 1,
+    eps: float = 1e-6,
+) -> dict[str, torch.Tensor]:
+    """Fit concept-to-embedding partial effects and measure orthogonality.
+
+    For centered labels ``Y`` and centered embeddings ``Z``, this solves
+
+        B = (Y.T @ Y / n + alpha I)^-1 (Y.T @ Z / n).
+
+    Row ``B[k]`` is the regularized embedding effect of concept ``k`` while
+    controlling for the other labels. Increasing ``alpha`` suppresses weakly
+    identified label-covariance modes and approaches marginal group-mean
+    directions, up to per-concept scale.
+    """
+    if embeddings.ndim != 2 or targets.ndim != 2 or observed.shape != targets.shape:
+        raise ValueError("expected embeddings [B,D] and targets/observed [B,C]")
+    if len(embeddings) != len(targets):
+        raise ValueError("embedding and target batch sizes differ")
+    if alpha <= 0:
+        raise ValueError("ridge alpha must be positive")
+    if not 0 <= max_uncertain_fraction < 1:
+        raise ValueError("max_uncertain_fraction must be in [0, 1)")
+
+    keep = observed.mean(dim=1) >= 1.0 - max_uncertain_fraction
+    z = embeddings[keep]
+    y = targets[keep]
+    mask = observed[keep]
+    if len(z) < 2:
+        raise ValueError("too few rows remain after uncertainty filtering")
+
+    definite = mask.sum(dim=0).clamp(min=1.0)
+    prevalence = (y * mask).sum(dim=0) / definite
+    filled = torch.where(mask.bool(), y, prevalence.unsqueeze(0))
+    centered_y = filled - prevalence.unsqueeze(0)
+
+    x = z - z.mean(dim=0, keepdim=True)
+    # A detached scalar fixes the ridge scale without changing directions.
+    rms = x.square().mean().sqrt().clamp(min=eps).detach()
+    x = x / rms
+
+    n = x.shape[0]
+    label_covariance = (centered_y.T @ centered_y) / n
+    label_embedding_covariance = (centered_y.T @ x) / n
+    eye = torch.eye(label_covariance.shape[0], dtype=x.dtype, device=x.device)
+    effects = torch.linalg.solve(
+        label_covariance + alpha * eye,
+        label_embedding_covariance,
+    )
+
+    reconstruction = centered_y @ effects
+    fit_mse = (reconstruction - x).square().mean()
+    ridge_penalty = alpha * effects.square().sum() / embeddings.shape[1]
+    reconstruction_objective = fit_mse + ridge_penalty
+
+    positive = (y * mask).sum(dim=0)
+    negative = ((1.0 - y) * mask).sum(dim=0)
+    effect_norm = effects.norm(dim=1)
+    supported = (
+        (positive >= min_positives)
+        & (negative >= min_positives)
+        & (effect_norm > eps)
+    )
+    directions = F.normalize(effects, dim=1, eps=eps)
+    gram = directions @ directions.T
+    pair_mask = supported[:, None] & supported[None, :]
+    pair_mask.fill_diagonal_(False)
+    if pair_mask.any():
+        orth = gram[pair_mask].square().mean()
+        orth_rms = orth.sqrt()
+    else:
+        orth = embeddings.sum() * 0.0
+        orth_rms = orth.detach()
+
+    explained_fraction = 1.0 - fit_mse / x.square().mean().clamp(min=eps)
+    return {
+        "reconstruction": reconstruction_objective,
+        "fit_mse": fit_mse,
+        "ridge_penalty": ridge_penalty,
+        "explained_fraction": explained_fraction,
+        "orth": orth,
+        "orth_rms": orth_rms,
+        "directions": directions,
+        "effects": effects,
+        "effect_norm": effect_norm,
+        "supported": supported,
+        "kept_rows": keep.sum(),
+    }
+
+
+class ReverseRidgeOrthogonalityLoss(nn.Module):
+    """Module wrapper around the differentiable full-data reverse-ridge solve."""
+
+    def __init__(
+        self,
+        alpha: float = 1e-3,
+        max_uncertain_fraction: float = 0.25,
+        min_positives: int = 1,
+        eps: float = 1e-6,
+    ):
+        super().__init__()
+        self.alpha = alpha
+        self.max_uncertain_fraction = max_uncertain_fraction
+        self.min_positives = min_positives
+        self.eps = eps
+
+    def forward(
+        self,
+        embeddings: torch.Tensor,
+        targets: torch.Tensor,
+        observed: torch.Tensor,
+    ) -> dict[str, torch.Tensor]:
+        return reverse_ridge_objective(
+            embeddings,
+            targets,
+            observed,
+            alpha=self.alpha,
+            max_uncertain_fraction=self.max_uncertain_fraction,
+            min_positives=self.min_positives,
+            eps=self.eps,
+        )

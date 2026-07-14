@@ -76,9 +76,8 @@ def main():
                         "top": top})
 
     html = (HTML.replace("concept-direction sliders", "FROZEN control — text-direction profiles")
-                .replace("Nearest objects (model's true concept directions)",
-                         "Nearest objects (frozen backbone, no adapter)")
-                .replace("Green theme = default (true directions).", "Amber theme = control.")
+                .replace("__DIRECTION_LABEL__", "frozen backbone, no adapter")
+                .replace("Green theme = trained adapter.", "Amber theme = control.")
                 .replace("#6be0a8", "#ffb86b").replace("#2fb77f", "#e0a06b")
                 .replace("#12171c", "#1a1512").replace("#182027", "#241d18")
                 .replace("#24303a", "#3a2d24").replace("#2b3a44", "#473a2d")

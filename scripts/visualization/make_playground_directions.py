@@ -1,11 +1,8 @@
-"""Default playground: sliders act on the model's TRUE mu+ - mu- concept directions
-(trained adapter space). No orthonormalization rotation, no cosine-vs-gallery-norm
-division — score(g) = w_anchor * cos(z_g, z_base) + sum_k v_k * zscore_k(g),
-where zscore_k(g) = (z_g . d_k - mean_k) / std_k.
+"""Default playground: sliders act on the selected trained concept directions.
 
-Trade: axes are the model's honest (correlated) directions — pushing 'manmade'
-may honestly co-move its family. Extremes should now match the 0%-intruder
-ceiling measured for the raw directions.
+No orthonormalization rotation or cosine-vs-gallery-norm division is applied:
+score(g) = w_anchor * cos(z_g, z_base) + sum_k v_k * zscore_k(g),
+where zscore_k(g) = (z_g . d_k - mean_k) / std_k.
 """
 from __future__ import annotations
 import argparse
@@ -66,7 +63,11 @@ def main():
     S = df[scols].to_numpy(dtype=np.float32)
     flags = json.load(open(os.path.join(ROOT, "data/direction_sources.json")))["flags"]
 
-    img_ad = Adapter(fi.shape[1], ck["config"]["embed_dim"])
+    img_ad = Adapter(
+        fi.shape[1],
+        ck["config"]["embed_dim"],
+        ck["config"].get("hidden_dim", 1024),
+    )
     img_ad.load_state_dict(ck["img_adapter"])
     img_ad.eval()
     with torch.no_grad():
@@ -75,14 +76,27 @@ def main():
     tr = (df.split == "train").to_numpy()
     gallery_mask = (df.split == args.gallery_split).to_numpy()
 
-    # true soft mu+ - mu- directions (train), per-axis projection stats
-    dirs = []
-    for k in range(len(names)):
-        s = S[tr, k]
-        mp = (s[:, None] * Z[tr]).sum(0) / max(s.sum(), 1e-3)
-        mn = ((1 - s)[:, None] * Z[tr]).sum(0) / max((1 - s).sum(), 1e-3)
-        dirs.append(l2(mp - mn))
-    D = np.stack(dirs)
+    is_reverse = (
+        ck["config"].get("objective") == "reverse-ridge"
+        or "final_reverse_ridge" in ck
+    )
+    if is_reverse:
+        checkpoint_names = ck.get("concept_names")
+        if checkpoint_names is not None and checkpoint_names != names:
+            raise ValueError("checkpoint and soft-label concept order differs")
+        D = l2(np.load(os.path.join(ROOT, args.run_dir, "concept_directions.npy")))
+        if D.shape != (len(names), ck["config"]["embed_dim"]):
+            raise ValueError("reverse-ridge direction array has the wrong shape")
+        direction_label = "reverse-ridge partial-effect directions"
+    else:
+        dirs = []
+        for k in range(len(names)):
+            s = S[tr, k]
+            mp = (s[:, None] * Z[tr]).sum(0) / max(s.sum(), 1e-3)
+            mn = ((1 - s)[:, None] * Z[tr]).sum(0) / max((1 - s).sum(), 1e-3)
+            dirs.append(l2(mp - mn))
+        D = np.stack(dirs)
+        direction_label = "group-mean directions"
     P_tr = Z[tr] @ D.T
     mu, sd = P_tr.mean(0), P_tr.std(0) + 1e-6
 
@@ -129,7 +143,9 @@ def main():
 
     order = list(np.argsort([-S[:, k].mean() for k in range(len(names))]))
     data = {"names": names, "flags": flags, "gallery": gal}
-    html = HTML.replace("__DATA__", json.dumps(data))
+    html = HTML.replace("__DATA__", json.dumps(data)).replace(
+        "__DIRECTION_LABEL__", direction_label
+    )
     if args.cc0:
         html = html.replace("<body>", "<body>" + NAV_PUBLIC)
     out = os.path.join(ROOT, args.out)
@@ -173,10 +189,10 @@ HTML = r"""<!doctype html><html><head><meta charset="utf-8"><title>concept-direc
  <div id="sliders"></div>
 </div>
 <div id="right">
- <h2>Nearest objects (model's true concept directions)</h2>
- <div class="hint">Sliders = the object's projection profile onto the model's true concept
+ <h2>Nearest objects (__DIRECTION_LABEL__)</h2>
+ <div class="hint">Sliders = the object's projection profile onto the selected concept
  directions. Load an item to SEE its embedding on the sliders, then edit any axis and retrieve.
- Struck-through sliders = flagged degenerate axes. Green theme = default (true directions).</div>
+ Struck-through sliders = flagged degenerate axes. Green theme = trained adapter.</div>
  <div id="grid"></div>
 </div>
 <script>

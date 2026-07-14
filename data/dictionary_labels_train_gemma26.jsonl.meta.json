@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "prompt_version": "gemma26-literal-names-v1",
+  "system_prompt": "Return precise structured visual labels.",
+  "prompt": "Use each concept's ordinary literal meaning. Mark YES only when it\nis clearly visible, defining of the labeled object type, or an explicitly\ndepicted state/context. A component counts only when it is prominent and the\nconcept naturally describes the object. Ignore other objects and background;\ndo not infer incidental traits. Avoid opposing labels unless they clearly\ndescribe different visible regions. True tautologies count.\n\nFor all concepts, return only JSON using exact names from the list:\n{\"yes\": [concept names], \"uncertain\": [concept names]}\nEvery omitted concept is NO.\n\nConcepts:\n- manmade\n- rigid\n- handheld\n- smooth\n- shiny\n- textured\n- metallic\n- opaque\n- solid\n- natural\n- flexible\n- organic\n- durable\n- decorative\n- brown\n- rectangular\n- edible\n- white\n- functional\n- black\n- reflective\n- cylindrical\n- tool\n- utilitarian\n- soft\n- elongated\n- container\n- colorful\n- industrial\n- outdoor\n- plastic\n- circular\n- transparent\n- wooden\n- small\n- curved\n- wearable\n- heavy\n- green\n- folded\n- fabric\n- yellow\n- lightweight\n- mechanical\n- flat\n- living\n- blue\n- animal\n- electronic\n- vertical\n- red\n- compact\n- layered\n- gray\n- clothing\n- indoor\n- sturdy\n- patterned\n- stationary\n- rounded\n- structural\n- large\n- rough\n- furry\n- four-legged\n- furniture\n- weathered\n- matte\n- golden\n- orange\n- stackable\n- biological\n- synthetic\n- recreational\n- household\n- woven\n- mobile\n- crafted\n- porous\n- pink\n- transportation\n- thin\n- vehicle\n- baked\n- enclosed\n- hard\n- hanging\n- kitchenware\n- mounted\n- wheeled\n- plant\n- hinged\n- painted\n- warm\n- grounded\n- printed\n- complex\n- moist\n- ground-dwelling\n- wild\n- pointed\n- simple\n- display\n- striped\n- sweet\n- polished\n- protective\n- instrument\n- tapered\n- leather\n- fibrous\n- ceramic\n- human\n- visible\n- static\n- creamy\n- irregular\n- accessory\n- bright\n- common\n- geometric\n- liquid\n- feathered\n- thick\n- clean\n- architectural\n- supportive\n- padded\n- fastener\n- appliance\n- casual\n- dense\n- sliced\n- packaged\n- aquatic\n- game\n- segmented\n- delicate\n- fragile\n- articulated\n- public\n- precision\n- freestanding\n- toy\n- dry\n- waterproof\n- sports equipment\n- wrinkled\n- terrestrial\n- festive\n- tabletop\n- military\n- glowing\n- streamlined\n- assembled\n- commercial\n- plush\n- consumable\n- absorbent\n- beverage\n- clustered\n- traditional\n- glistening\n- served\n- footwear\n- elaborate\n- inflatable\n- open\n- medical\n- malleable\n- contained\n- tailored\n- handle\n- sealed\n- rotating\n- symmetrical\n- watercraft\n- bipedal\n- detailed\n- domesticated\n- spotted\n- varied\n- avian\n- slatted\n- screen\n- three-dimensional\n- viscous\n- spreadable\n- beaked\n- body part\n- twisted\n- modern\n- floating\n- control\n- multi-part\n- insect\n- fleshy\n- cold\n- cosmetic\n- buttoned\n- insulating\n- sculptural\n- modular\n- mineral\n- corded\n- ergonomic\n- bumpy\n- used\n- collectible\n- repeating\n- faceted\n- wavy\n- substance\n- symbolic\n- bowl-shaped\n- scaly\n- perforated\n- weather-resistant\n- plated\n- elevated\n- measuring\n- labelled\n- movable\n- strap\n- part\n- grid-like\n- angular\n- garnished\n- wrapped\n- smooth surface\n- desktop\n- personal\n- educational\n- long-sleeved\n- worn\n- laced\n- spiky\n- interlocking\n- formal\n- box-like\n- winged\n- claws\n- hollow\n- brittle\n- scattered\n- rolled\n- garden\n- camouflaged\n- stone\n- dial\n- marked\n- aromatic\n- combustible\n- renewable\n- utility\n- beaded\n\nThe labeled main object is: {object_label}",
+  "prompt_sha256": "dcfcd27006addd6bebcd7036f339d424acafbcb5510585f598bfdfe1bc6f4015",
+  "dictionary": "data/dictionary.json",
+  "dictionary_sha256": "fb2ca2578ae8790ac793d7fa6f32f79f0d47a52918dabe595264f81ee2e7c470",
+  "split_manifest": "data/splits.json",
+  "split_manifest_sha256": "ee6bdf93feeb1367fde2da4f53474efa4e80f0a6dc0188e2636d51d09bb57027",
+  "image_dir": "data/raw/object_images",
+  "split": "train",
+  "source_image_count": 18211,
+  "selection_sha256": "2771c88ac6c05381f75039be7eea9ece0c22a758a82c97e6b9eb44713ca1bcb2",
+  "model": "google/gemma-4-26b-a4b-qat",
+  "api_url": "http://127.0.0.1:1234/v1/chat/completions",
+  "temperature": 0,
+  "reasoning_effort": "none",
+  "max_output_tokens": 1600,
+  "max_image_side": 512,
+  "workers": 4,
+  "created_at": "2026-07-11T09:43:17.985879+00:00"
+}

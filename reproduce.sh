@@ -24,6 +24,10 @@ python scripts/data/mine_attributes.py --split dev --workers 8
 # 3. cluster train-class attribute mentions into the fixed dictionary
 python scripts/dictionary/build_dictionary.py --merge-corr 0.5 --max-twin-corr 0.75
 
+# 3b. label every train image against that dictionary for reverse ridge
+python scripts/data/label_dictionary_concepts.py \
+  --model google/gemma-4-26b-a4b-qat --workers 4
+
 # 4. caption all 26k images (the adapter consumes train classes only)
 python scripts/data/caption_images.py --workers 8
 
@@ -39,26 +43,31 @@ python scripts/dictionary/verify_concepts.py --per-side 24 --workers 8
 # 8. frozen direction choices selected on development classes + relabel
 python scripts/dictionary/build_directions.py
 
-# 9. matched adapters; checkpoint evaluation uses development classes only
-python -m conceptbasis.train --lambda_orth 0 --corr_exempt 0 \
-  --run_name classsplit_clip_only
-python -m conceptbasis.train --lambda_orth 8 --corr_exempt 0.15 \
+# 9. matched incremental objectives; evaluation uses development classes only
+python -m conceptbasis.train --objective contrastive \
+  --run_name classsplit_contrastive
+python -m conceptbasis.train --objective group-mean --lambda_orth 8 \
+  --corr_exempt 0.15 \
   --corr_weighting smooth --corr_weight_power 4 --corr_weight_floor 0.01 \
-  --run_name classsplit_clip_orth
-ln -sfn classsplit_clip_orth outputs/checkpoints/latest
+  --run_name classsplit_group_mean
+python -m conceptbasis.train --objective reverse-ridge \
+  --ridge_alpha 0.001 --lambda_orth 512 \
+  --run_name classsplit_reverse_ridge
+ln -sfn classsplit_reverse_ridge outputs/checkpoints/latest
 
 # 10. class-disjoint development evaluation; the test partition remains sealed
 python scripts/evaluation/build_groupmean_profiles.py \
   --embeddings data/image_embeddings.npy \
   --cc0-embeddings data/image_embeddings_cc0.npy \
   --labels data/labels.parquet --include-frozen \
-  --checkpoint clip_only=outputs/checkpoints/classsplit_clip_only/ckpt.pt \
-  --checkpoint clip_orth=outputs/checkpoints/classsplit_clip_orth/ckpt.pt \
+  --checkpoint contrastive=outputs/checkpoints/classsplit_contrastive/ckpt.pt \
+  --checkpoint group_mean=outputs/checkpoints/classsplit_group_mean/ckpt.pt \
+  --checkpoint reverse_ridge=outputs/checkpoints/classsplit_reverse_ridge/ckpt.pt \
   --out outputs/evals/classsplit_dev_profiles.npz
 python scripts/evaluation/eval_playground_subset_composability.py \
   --dictionary data/dictionary.json \
   --profiles-npz outputs/evals/classsplit_dev_profiles.npz \
-  --reference-model clip_orth --eval-split dev \
+  --reference-model reverse_ridge --eval-split dev \
   --subset-sizes 1,2,4,6,8,10,12,14 --rollouts 24 \
   --out outputs/evals/classsplit_dev_composability.json
 

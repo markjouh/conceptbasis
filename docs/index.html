@@ -25,19 +25,19 @@
 <p class="tag">sliders you can search with</p>
 <p class="lead">
 ConceptBasis organizes an image–text embedding around 256 human-readable
-concept directions (<i>metallic, furry, edible, manmade…</i>). It recovers
-semantic structure already present in a pretrained embedding, then applies an
-orthogonality loss to make the directions behave more like a basis while
+concept directions (<i>metallic, furry, edible, manmade…</i>). A reverse-ridge
+estimator separates each concept's partial embedding effect from correlated
+attributes, and training pushes those effects toward an orthogonal basis while
 preserving ordinary retrieval. The demos are static: model outputs are
 precomputed and the browser only performs retrieval over them.
 </p>
 <div class="grid">
 <a class="card primary" href="playground.html"><h3>▶ Playground</h3>
-<p>256 concept sliders over the trained embedding. Compose properties
-(pointed + metallic + handheld…), load a real object's profile, edit it, retrieve live.</p></a>
+<p>256 reverse-ridge concept sliders over the trained embedding. Compose properties
+(pointed + metallic + handheld…), load a real object's profile, edit it, and retrieve live.</p></a>
 <a class="card" href="playground-baseline.html"><h3>Frozen baseline</h3>
 <p>No-training control using the frozen backbone and the same concept interface.
-Compare it with the adapter trained to organize the basis.</p></a>
+Compare it with the reverse-ridge adapter.</p></a>
 <a class="card" href="dictionary.html"><h3>Concept dictionary</h3>
 <p>The 256 train-constructed concepts, illustrated with held-out development images.</p></a>
 <a class="card" href="attributes.html"><h3>Mined attributes</h3>
