@@ -82,6 +82,7 @@ holding other predicted attributes and object identity fixed.
 - Unit test: `tests/test_reverse_ridge_loss.py`
 - Tracked compact results: `research/results/reverse_ridge_dev_results.json`
 - Tracked three-model comparison: `research/results/three_model_dev_composability.json`
+- Matched ordinary retrieval: `research/experiments/2026-07-13-matched-retrieval-confirmation.md`
 - Selected local checkpoint:
   `outputs/checkpoints_reverse_ridge/reverse_sweep_v1_p0_l512/`
 
