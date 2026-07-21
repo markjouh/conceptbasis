@@ -1,0 +1,278 @@
+{"image_id": "elephant.jpg", "attributes": ["grey", "large", "textured", "matte", "organic", "natural", "living", "animal", "massive", "solid"]}
+{"image_id": "ferret.jpg", "attributes": ["cream", "white", "furry", "soft", "organic", "animal", "living", "small", "flexible", "natural"]}
+{"image_id": "chinchilla.jpg", "attributes": ["gray", "soft", "fuzzy", "organic", "living", "animal", "natural", "small", "rounded", "textured"]}
+{"image_id": "chipmunk.jpg", "attributes": ["brown", "striped", "furry", "small", "organic", "animal", "natural", "living", "four-legged", "mammal"]}
+{"image_id": "visor.jpg", "attributes": ["purple", "fabric", "textured", "curved", "flexible", "manmade", "wearable", "accessory", "soft", "opaque"]}
+{"image_id": "burrito.jpg", "attributes": ["multicolored", "textured", "soft", "irregular", "opaque", "food", "edible", "manmade", "organic", "handheld"]}
+{"image_id": "french_horn.jpg", "attributes": ["gold", "metallic", "reflective", "shiny", "curved", "rigid", "manmade", "musical instrument", "handheld", "complex shape"]}
+{"image_id": "dynamite.jpg", "attributes": ["pink", "cylindrical", "paper", "matte", "wrapped", "manmade", "small", "handheld", "rigid", "bundled", "solid"]}
+{"image_id": "electric_chair.jpg", "attributes": ["brown", "wooden", "rectangular", "rigid", "manmade", "furniture", "large", "smooth", "stationary", "functional", "structural"]}
+{"image_id": "blindfold.jpg", "attributes": ["light blue", "patterned", "fabric", "soft", "flexible", "manmade", "textile", "wearable", "small", "lightweight"]}
+{"image_id": "cordon_bleu.jpg", "attributes": ["golden", "brown", "textured", "irregular", "rough", "edible", "food", "manmade", "cooked", "solid", "organic"]}
+{"image_id": "snowball.jpg", "attributes": ["white", "opaque", "spherical", "irregular", "textured", "soft", "cold", "natural", "frozen", "small", "handheld"]}
+{"image_id": "wig.jpg", "attributes": ["colorful", "textured", "fibrous", "soft", "manmade", "wearable", "decorative", "synthetic", "irregular", "lightweight", "accessory"]}
+{"image_id": "sorbet.jpg", "attributes": ["red", "textured", "spherical", "soft", "cold", "edible", "food", "organic", "small", "moist", "sweet"]}
+{"image_id": "apron.jpg", "attributes": ["sage green", "fabric", "matte", "soft", "flexible", "manmade", "wearable", "clothing", "textile", "lightweight", "functional"]}
+{"image_id": "dishwashing_liquid.jpg", "attributes": ["white", "opaque", "plastic", "smooth", "rigid", "manmade", "container", "liquid", "cleaning tool", "handheld", "household item"]}
+{"image_id": "nut.jpg", "attributes": ["brown", "tan", "oval", "textured", "matte", "small", "irregular", "edible", "natural", "food", "solid", "dry"]}
+{"image_id": "grill.jpg", "attributes": ["black", "metallic", "silver", "round", "rigid", "manmade", "tool", "outdoor", "portable", "reflective", "smooth", "large"]}
+{"image_id": "slug.jpg", "attributes": ["orange", "brown", "elongated", "smooth", "moist", "shiny", "soft", "flexible", "natural", "animal", "living", "small"]}
+{"image_id": "speaker.jpg", "attributes": ["black", "yellow", "white", "rounded", "rigid", "manmade", "electronic", "portable", "handheld", "wired", "plastic", "matte"]}
+{"image_id": "cash_machine.jpg", "attributes": ["grey", "metallic", "rectangular", "rigid", "manmade", "electronic", "mechanical", "functional", "stationary", "complex", "durable", "industrial"]}
+{"image_id": "harmonica.jpg", "attributes": ["silver", "metallic", "rectangular", "rigid", "reflective", "manmade", "small", "handheld", "musical", "instrument", "smooth", "compact"]}
+{"image_id": "gauge.jpg", "attributes": ["circular", "white", "metallic", "reflective", "rigid", "manmade", "tool", "instrument", "analog", "handheld", "small", "transparent"]}
+{"image_id": "freezer.jpg", "attributes": ["white", "rectangular", "large", "rigid", "smooth", "opaque", "manmade", "appliance", "electronic", "stationary", "metallic", "functional"]}
+{"image_id": "faucet.jpg", "attributes": ["silver", "metallic", "reflective", "shiny", "smooth", "curved", "rigid", "manmade", "tool", "plumbing", "household", "stationary"]}
+{"image_id": "fire_alarm.jpg", "attributes": ["red", "rectangular", "rigid", "smooth", "manmade", "plastic", "metallic", "tool", "wall-mounted", "stationary", "functional", "small"]}
+{"image_id": "fossil.jpg", "attributes": ["brown", "tan", "textured", "organic", "natural", "rigid", "flat", "patterned", "irregular", "ancient", "mineralized", "fragile"]}
+{"image_id": "parsley.jpg", "attributes": ["green", "organic", "plant", "natural", "leafy", "textured", "soft", "edible", "small", "irregular", "matte", "vegetable"]}
+{"image_id": "butterfly.jpg", "attributes": ["orange", "black", "white", "patterned", "winged", "delicate", "natural", "animal", "living", "small", "fragile", "colorful"]}
+{"image_id": "juicer1.jpg", "attributes": ["yellow", "plastic", "smooth", "glossy", "rounded", "rigid", "manmade", "kitchenware", "tool", "container", "handheld", "small"]}
+{"image_id": "bubble_wrap.jpg", "attributes": ["transparent", "reflective", "circular", "repetitive", "manmade", "plastic", "flexible", "textured", "lightweight", "protective", "synthetic", "smooth"]}
+{"image_id": "straightjacket.jpg", "attributes": ["white", "fabric", "textile", "soft", "flexible", "manmade", "clothing", "wearable", "opaque", "plain", "large", "unstructured"]}
+{"image_id": "orchid.jpg", "attributes": ["pink", "purple", "organic", "natural", "plant", "delicate", "soft", "fragile", "colorful", "biological", "veined", "living"]}
+{"image_id": "ferry.jpg", "attributes": ["large", "white", "manmade", "vehicle", "metallic", "rigid", "multilevel", "floating", "transportation", "watercraft", "outdoor", "functional"]}
+{"image_id": "chalice.jpg", "attributes": ["gold", "metallic", "reflective", "shiny", "smooth", "rigid", "manmade", "container", "vessel", "handheld", "decorative", "polished"]}
+{"image_id": "clothespin.jpg", "attributes": ["light brown", "wooden", "metallic", "rectangular", "rigid", "matte", "natural", "manmade", "handheld", "small", "utilitarian", "household item"]}
+{"image_id": "skin.jpg", "attributes": ["tan", "flesh-toned", "textured", "matte", "organic", "natural", "biological", "soft", "flexible", "moist", "irregular", "opaque"]}
+{"image_id": "broom.jpg", "attributes": ["tan", "brown", "natural", "manmade", "long", "cylindrical", "rigid", "textured", "fibrous", "tool", "handheld", "household"]}
+{"image_id": "cap.jpg", "attributes": ["blue", "red", "black", "plastic", "smooth", "cylindrical", "rigid", "manmade", "small", "reflective", "container component", "handheld"]}
+{"image_id": "machete.jpg", "attributes": ["metallic", "dark", "rigid", "blunt", "manmade", "tool", "handheld", "dull", "heavy", "functional", "solid", "grey"]}
+{"image_id": "hanger.jpg", "attributes": ["multicolored", "plastic", "smooth", "rigid", "manmade", "tool", "household", "curved", "slender", "lightweight", "functional", "synthetic"]}
+{"image_id": "wire.jpg", "attributes": ["colorful", "long", "cylindrical", "flexible", "smooth", "manmade", "synthetic", "coiled", "linear", "durable", "utilitarian", "industrial"]}
+{"image_id": "eclair.jpg", "attributes": ["brown", "golden", "elongated", "cylindrical", "soft", "glossy", "smooth", "edible", "food", "manmade", "sweet", "baked"]}
+{"image_id": "wafer.jpg", "attributes": ["beige", "pink", "textured", "patterned", "rectangular", "fragile", "edible", "food", "manmade", "dry", "lightweight", "solid"]}
+{"image_id": "sausage.jpg", "attributes": ["orange", "red", "brown", "cylindrical", "long", "smooth", "textured", "fleshy", "edible", "food", "manmade", "organic"]}
+{"image_id": "headphones.jpg", "attributes": ["black", "brown", "metallic", "textured", "leather-like", "rigid", "manmade", "electronic", "handheld", "portable", "audio device", "accessory"]}
+{"image_id": "iron.jpg", "attributes": ["white", "smooth", "plastic", "metallic", "curved", "rigid", "manmade", "electronic", "household", "handheld", "plugged-in", "functional"]}
+{"image_id": "bowl.jpg", "attributes": ["multicolored", "ceramic", "glossy", "smooth", "reflective", "curved", "round", "rigid", "manmade", "container", "handheld", "kitchenware"]}
+{"image_id": "baseball_bat.jpg", "attributes": ["cylindrical", "long", "rigid", "manmade", "smooth", "colorful", "metallic", "handheld", "sporting", "solid", "tapered", "durable"]}
+{"image_id": "wasp.jpg", "attributes": ["yellow", "black", "patterned", "striped", "small", "organic", "natural", "animal", "living", "segmented", "textured", "delicate", "winged"]}
+{"image_id": "flashbulb.jpg", "attributes": ["black", "metallic", "rectangular", "rigid", "manmade", "electronic", "handheld", "reflective", "textured", "dark", "complex", "mechanical", "optical"]}
+{"image_id": "boxer_shorts.jpg", "attributes": ["soft", "flexible", "manmade", "clothing", "wearable", "textile", "lightweight", "opaque", "plain", "folded", "various colors", "cotton-like"]}
+{"image_id": "pill.jpg", "attributes": ["white", "orange", "green", "opaque", "smooth", "round", "oval", "small", "solid", "manmade", "medical", "edible", "handheld"]}
+{"image_id": "roof_rack.jpg", "attributes": ["yellow", "grey", "smooth", "curved", "rigid", "manmade", "plastic", "large", "outdoor", "functional", "portable", "weatherproof", "synthetic"]}
+{"image_id": "cake.jpg", "attributes": ["yellow", "colorful", "textured", "soft", "edible", "food", "manmade", "sweet", "circular", "layered", "organic", "small", "handheld"]}
+{"image_id": "reel.jpg", "attributes": ["black", "dark", "circular", "rigid", "smooth", "matte", "manmade", "synthetic", "plastic", "mechanical", "hollow", "perforated", "handheld"]}
+{"image_id": "hairdryer.jpg", "attributes": ["black", "glossy", "smooth", "reflective", "rigid", "manmade", "electronic", "handheld", "plastic", "metallic", "curved", "tool", "appliance"]}
+{"image_id": "cocktail.jpg", "attributes": ["colorful", "transparent", "liquid", "reflective", "manmade", "edible", "drinkable", "glass", "fragile", "layered", "decorative", "small", "handheld"]}
+{"image_id": "ski.jpg", "attributes": ["colorful", "long", "narrow", "rigid", "smooth", "manmade", "sporting equipment", "outdoor", "slender", "glossy", "synthetic", "durable", "functional"]}
+{"image_id": "lamp.jpg", "attributes": ["warm-toned", "textured", "cylindrical", "wooden", "fabric", "manmade", "decorative", "stationary", "rigid", "translucent", "household item", "furniture", "electric"]}
+{"image_id": "nightshirt.jpg", "attributes": ["patterned", "colorful", "soft", "flexible", "textile", "clothing", "manmade", "wearable", "lightweight", "hanging", "folded", "long", "various colors"]}
+{"image_id": "bag.jpg", "attributes": ["white", "off-white", "fabric", "textile", "rectangular", "flexible", "soft", "matte", "manmade", "container", "handheld", "portable", "lightweight"]}
+{"image_id": "goblet.jpg", "attributes": ["colorful", "patterned", "reflective", "translucent", "ornate", "rigid", "manmade", "decorative", "container", "glassware", "handheld", "fragile", "smooth"]}
+{"image_id": "pothole.jpg", "attributes": ["grey", "dark", "rough", "irregular", "textured", "uneven", "matte", "granular", "manmade", "outdoor", "ground", "liquid", "wet", "solid"]}
+{"image_id": "wire_cutters.jpg", "attributes": ["silver", "red", "metallic", "matte", "rigid", "manmade", "tool", "handheld", "mechanical", "hard", "smooth"]}
+{"image_id": "toe.jpg", "attributes": ["flesh-toned", "organic", "natural", "textured", "matte", "flexible", "biological", "rounded", "skin-covered", "living"]}
+{"image_id": "airboat.jpg", "attributes": ["metallic", "silver", "gray", "rigid", "manmade", "vehicle", "watercraft", "mechanical", "large", "functional", "outdoor", "industrial"]}
+{"image_id": "moose.jpg", "attributes": ["brown", "black", "textured", "large", "organic", "natural", "animal", "living", "mammal", "wild"]}
+{"image_id": "strawberry.jpg", "attributes": ["red", "natural", "edible", "organic", "textured", "shiny", "small", "conical", "plant", "food", "moist", "colorful"]}
+{"image_id": "beetle.jpg", "attributes": ["blue", "brown", "metallic", "shiny", "textured", "oval", "rigid", "natural", "animal", "living"]}
+{"image_id": "mustache.jpg", "attributes": ["gray", "dark", "textured", "fibrous", "organic", "natural", "biological", "soft", "irregular", "particulate"]}
+{"image_id": "cactus.jpg", "attributes": ["green", "textured", "spiky", "cylindrical", "rigid", "natural", "plant", "organic", "vertical", "living"]}
+{"image_id": "potpie.jpg", "attributes": ["brown", "beige", "circular", "textured", "matte", "flaky", "edible", "food", "manmade", "cooked", "solid", "soft"]}
+{"image_id": "donkey.jpg", "attributes": ["brown", "grey", "furry", "textured", "organic", "natural", "living", "animal", "mammal", "biological"]}
+{"image_id": "bongo.jpg", "attributes": ["red", "dark", "metallic", "cylindrical", "round", "smooth", "rigid", "manmade", "musical instrument", "handheld", "percussive"]}
+{"image_id": "fish.jpg", "attributes": ["colorful", "patterned", "striped", "organic", "natural", "living", "animal", "aquatic", "small", "smooth", "flexible"]}
+{"image_id": "mulberry.jpg", "attributes": ["black", "red", "green", "textured", "bumpy", "small", "oval", "natural", "plant", "edible", "organic", "fruit"]}
+{"image_id": "crow.jpg", "attributes": ["black", "dark", "textured", "organic", "natural", "living", "animal", "small", "biological", "irregular", "matte", "reflective"]}
+{"image_id": "toilet_paper.jpg", "attributes": ["white", "cylindrical", "soft", "patterned", "paper", "manmade", "absorbent", "disposable", "rolled", "thin", "textured", "household item"]}
+{"image_id": "tomato.jpg", "attributes": ["red", "round", "smooth", "shiny", "organic", "edible", "natural", "plant", "food", "small", "soft", "moist"]}
+{"image_id": "mistletoe.jpg", "attributes": ["green", "white", "organic", "natural", "plant", "small", "spherical", "leafy", "flexible", "textured", "matte", "growing"]}
+{"image_id": "badger.jpg", "attributes": ["grey", "white", "black", "textured", "organic", "natural", "living", "animal", "furred", "irregular", "matte"]}
+{"image_id": "cobra.jpg", "attributes": ["brown", "patterned", "scaled", "textured", "organic", "animal", "living", "natural", "flexible", "slender", "biological"]}
+{"image_id": "lamb_chop.jpg", "attributes": ["brown", "dark", "textured", "irregular", "glossy", "moist", "organic", "edible", "food", "manmade", "cooked", "protein"]}
+{"image_id": "trap.jpg", "attributes": ["brown", "wooden", "rectangular", "rigid", "textured", "manmade", "tool", "metallic", "weathered", "matte", "small", "handheld"]}
+{"image_id": "mouth.jpg", "attributes": ["flesh-toned", "smooth", "organic", "natural", "moist", "flexible", "curved", "white", "pink", "red", "living", "human"]}
+{"image_id": "duct_tape.jpg", "attributes": ["brown", "matte", "textured", "cylindrical", "opaque", "flexible", "manmade", "tool", "adhesive", "handheld", "roll"]}
+{"image_id": "modem.jpg", "attributes": ["black", "matte", "rectangular", "rigid", "manmade", "electronic", "handheld", "metallic", "dark", "functional", "solid", "technical"]}
+{"image_id": "record.jpg", "attributes": ["black", "circular", "flat", "smooth", "reflective", "rigid", "manmade", "analog", "media", "handheld", "round"]}
+{"image_id": "whale.jpg", "attributes": ["dark", "large", "organic", "natural", "living", "animal", "wet", "textured", "massive", "smooth", "biological", "aquatic"]}
+{"image_id": "dandelion.jpg", "attributes": ["yellow", "green", "organic", "natural", "plant", "floral", "soft", "delicate", "small", "bright", "textured", "living"]}
+{"image_id": "typewriter.jpg", "attributes": ["black", "metallic", "rectangular", "rigid", "manmade", "mechanical", "handheld", "complex", "dark", "solid", "functional", "vintage", "durable"]}
+{"image_id": "windowsill.jpg", "attributes": ["red", "brown", "rectangular", "rough", "matte", "rigid", "manmade", "architectural", "structural", "stationary", "outdoor", "weathered"]}
+{"image_id": "coin.jpg", "attributes": ["metallic", "circular", "rigid", "reflective", "manmade", "small", "flat", "textured", "brown", "silver", "hard", "currency", "handheld"]}
+{"image_id": "antelope.jpg", "attributes": ["brown", "white", "organic", "natural", "living", "animal", "furred", "slender", "curved", "biological", "mammalian"]}
+{"image_id": "shield.jpg", "attributes": ["metallic", "rigid", "colorful", "manmade", "decorative", "hard", "reflective", "pointed", "ornate", "handheld", "protective", "solid"]}
+{"image_id": "cage.jpg", "attributes": ["brown", "metallic", "curved", "wireframe", "rigid", "manmade", "outdoor", "open", "weathered", "structural", "large", "hollow"]}
+{"image_id": "mast.jpg", "attributes": ["tall", "slender", "vertical", "white", "rigid", "manmade", "structural", "metallic", "smooth", "linear", "outdoor", "functional"]}
+{"image_id": "chariot.jpg", "attributes": ["white", "metallic", "ornate", "rigid", "manmade", "vehicle", "transportation", "outdoor", "large", "functional", "complex", "historical"]}
+{"image_id": "trolley.jpg", "attributes": ["blue", "yellow", "metallic", "rectangular", "rigid", "manmade", "vehicle", "large", "mechanical", "outdoor", "transportation", "multi-colored"]}
+{"image_id": "fencepost.jpg", "attributes": ["brown", "wooden", "textured", "rough", "weathered", "irregular", "rigid", "natural", "manmade", "outdoor", "structural", "stationary"]}
+{"image_id": "ambulance.jpg", "attributes": ["white", "red", "metallic", "glossy", "large", "rectangular", "rigid", "manmade", "vehicle", "motorized", "mechanical", "transportation"]}
+{"image_id": "bird.jpg", "attributes": ["small", "colorful", "organic", "natural", "living", "animal", "feathered", "winged", "lightweight", "delicate", "textured", "biological"]}
+{"image_id": "olive.jpg", "attributes": ["dark", "oval", "smooth", "small", "natural", "edible", "organic", "plant", "matte", "rigid", "spherical", "dark-colored"]}
+{"image_id": "bee.jpg", "attributes": ["brown", "black", "yellow", "fuzzy", "textured", "small", "organic", "natural", "living", "animal", "winged", "delicate"]}
+{"image_id": "pancake.jpg", "attributes": ["brown", "tan", "circular", "flat", "soft", "matte", "edible", "food", "manmade", "organic", "stacked"]}
+{"image_id": "refrigerator.jpg", "attributes": ["white", "rectangular", "large", "rigid", "smooth", "manmade", "appliance", "electronic", "household", "metallic", "stationary"]}
+{"image_id": "paint.jpg", "attributes": ["colorful", "liquid", "viscous", "glossy", "reflective", "manmade", "fluid", "artistic", "contained", "translucent", "smooth", "wet"]}
+{"image_id": "nail_file.jpg", "attributes": ["black", "white", "metallic", "plastic", "rectangular", "long", "slim", "rigid", "smooth", "manmade", "tool", "handheld", "small"]}
+{"image_id": "aircraft_carrier.jpg", "attributes": ["grey", "metallic", "large", "rigid", "manmade", "vehicle", "maritime", "industrial", "massive", "functional", "complex", "outdoor"]}
+{"image_id": "soy_sauce.jpg", "attributes": ["dark", "liquid", "reflective", "smooth", "curved", "transparent", "manmade", "container", "edible", "small", "bottled", "handheld"]}
+{"image_id": "headdress.jpg", "attributes": ["multicolored", "feathered", "textured", "soft", "ornamental", "manmade", "wearable", "handcrafted", "decorative", "complex", "lightweight", "patterned"]}
+{"image_id": "bagel.jpg", "attributes": ["brown", "golden", "circular", "toroidal", "textured", "matte", "soft", "edible", "food", "manmade", "baked", "small"]}
+{"image_id": "measuring_cup.jpg", "attributes": ["transparent", "reflective", "smooth", "clear", "rigid", "manmade", "container", "kitchenware", "handheld", "cylindrical", "liquid-filled", "functional"]}
+{"image_id": "tortilla.jpg", "attributes": ["beige", "circular", "flat", "thin", "soft", "textured", "edible", "food", "natural", "organic", "handmade", "stackable"]}
+{"image_id": "chips.jpg", "attributes": ["orange", "yellow", "textured", "curved", "irregular", "thin", "brittle", "dry", "edible", "food", "manmade", "processed", "handheld"]}
+{"image_id": "spring_roll.jpg", "attributes": ["golden brown", "cylindrical", "fried", "textured", "edible", "food", "manmade", "small", "handheld", "solid", "irregular", "opaque"]}
+{"image_id": "ladder.jpg", "attributes": ["silver", "metallic", "reflective", "rigid", "rectangular", "manmade", "tool", "handheld", "structural", "slender", "hard", "functional"]}
+{"image_id": "lettuce.jpg", "attributes": ["green", "organic", "natural", "leafy", "moist", "textured", "irregular", "soft", "edible", "plant", "food", "translucent", "wet"]}
+{"image_id": "pomegranate.jpg", "attributes": ["red", "spherical", "organic", "natural", "edible", "textured", "matte", "smooth", "fruit", "food", "small", "solid"]}
+{"image_id": "roller.jpg", "attributes": ["black", "dark", "cylindrical", "large", "heavy", "rigid", "textured", "dirty", "manmade", "tool", "metallic", "handheld", "outdoor"]}
+{"image_id": "scraper.jpg", "attributes": ["silver", "brown", "metallic", "plastic", "rectangular", "flat", "rigid", "smooth", "manmade", "tool", "handheld", "durable"]}
+{"image_id": "wall.jpg", "attributes": ["grey", "dark", "textured", "rough", "irregular", "rigid", "opaque", "matte", "natural", "manmade", "structural", "stationary", "outdoor"]}
+{"image_id": "honeycomb.jpg", "attributes": ["golden", "amber", "translucent", "hexagonal", "repetitive", "patterned", "sticky", "viscous", "wet", "reflective", "natural", "edible", "organic"]}
+{"image_id": "plastic_film.jpg", "attributes": ["transparent", "reflective", "thin", "flexible", "smooth", "clear", "manmade", "synthetic", "cylindrical", "white", "solid", "lightweight", "plastic"]}
+{"image_id": "easter_egg.jpg", "attributes": ["colorful", "oval", "smooth", "spherical", "fragile", "manmade", "small", "handheld", "decorative", "matte", "organic", "food", "container", "lightweight"]}
+{"image_id": "kayak.jpg", "attributes": ["yellow", "bright", "smooth", "rigid", "manmade", "watercraft", "outdoor", "recreational", "floating", "long", "slender", "synthetic", "durable"]}
+{"image_id": "gallows.jpg", "attributes": ["brown", "wooden", "textured", "rigid", "manmade", "outdoor", "structural", "weathered", "linear", "fibrous", "white", "coarse", "large", "stationary"]}
+{"image_id": "ram.jpg", "attributes": ["brown", "textured", "organic", "natural", "living", "animal", "mammal", "curved", "large", "furred"]}
+{"image_id": "anteater.jpg", "attributes": ["brown", "black", "textured", "organic", "natural", "animal", "living", "large", "mammal", "furred"]}
+{"image_id": "lizard.jpg", "attributes": ["brown", "patterned", "textured", "elongated", "organic", "natural", "living", "animal", "small", "flexible"]}
+{"image_id": "barbed_wire.jpg", "attributes": ["grey", "metallic", "matte", "textured", "thin", "rigid", "manmade", "tool", "outdoor", "structural", "linear", "hard"]}
+{"image_id": "shell1.jpg", "attributes": ["gold", "metallic", "cylindrical", "rigid", "reflective", "smooth", "small", "manmade", "handheld", "hard"]}
+{"image_id": "aquarium.jpg", "attributes": ["rectangular", "transparent", "reflective", "blue", "manmade", "container", "rigid", "smooth", "large", "decorative", "indoor", "glass"]}
+{"image_id": "gun.jpg", "attributes": ["silver", "metallic", "matte", "textured", "rectangular", "rigid", "manmade", "tool", "handheld", "mechanical"]}
+{"image_id": "printer.jpg", "attributes": ["grey", "plastic", "matte", "rectangular", "rigid", "manmade", "electronic", "stationary", "office equipment", "functional", "solid"]}
+{"image_id": "shovel.jpg", "attributes": ["brown", "wooden", "metallic", "long", "rigid", "textured", "matte", "manmade", "tool", "handheld", "outdoor"]}
+{"image_id": "whoopee_cushion.jpg", "attributes": ["green", "matte", "flexible", "smooth", "irregular", "manmade", "toy", "handheld", "inflatable", "synthetic", "lightweight"]}
+{"image_id": "potholder.jpg", "attributes": ["orange", "textile", "crocheted", "soft", "flexible", "woven", "manmade", "household", "kitchenware", "rectangular", "textured", "matte"]}
+{"image_id": "goalpost.jpg", "attributes": ["yellow", "metallic", "slender", "rigid", "manmade", "outdoor", "structural", "large", "stationary", "tall", "linear", "sports equipment"]}
+{"image_id": "ferris_wheel.jpg", "attributes": ["multicolored", "metallic", "circular", "large", "rigid", "manmade", "structural", "mechanical", "outdoor", "complex", "reflective", "open"]}
+{"image_id": "treasure.jpg", "attributes": ["brown", "metallic", "rectangular", "rigid", "textured", "reflective", "manmade", "decorative", "container", "handheld", "ornate", "multicolored"]}
+{"image_id": "koala.jpg", "attributes": ["grey", "white", "brown", "fuzzy", "soft", "organic", "living", "animal", "natural", "small", "biological"]}
+{"image_id": "hole.jpg", "attributes": ["dark", "irregular", "rough", "opaque", "textured", "manmade", "structural", "void", "asymmetrical", "unpolished"]}
+{"image_id": "scrambled_egg.jpg", "attributes": ["yellow", "textured", "irregular", "soft", "moist", "organic", "edible", "food", "manmade", "cooked", "small", "solid"]}
+{"image_id": "aloe.jpg", "attributes": ["green", "spotted", "pointed", "elongated", "rigid", "organic", "natural", "living", "plant", "small", "contained", "textured"]}
+{"image_id": "hook2.jpg", "attributes": ["dark", "black", "metallic", "matte", "textured", "curved", "rigid", "manmade", "tool", "hardware", "handheld", "heavy"]}
+{"image_id": "tool.jpg", "attributes": ["metallic", "hard", "rigid", "manmade", "tool", "handheld", "various colors", "smooth", "reflective", "solid", "functional", "small", "durable"]}
+{"image_id": "eraser.jpg", "attributes": ["red", "blue", "rectangular", "matte", "opaque", "soft", "flexible", "manmade", "small", "handheld", "stationary", "tool"]}
+{"image_id": "coverall.jpg", "attributes": ["white", "wrinkled", "opaque", "textile", "manmade", "wearable", "protective", "loose", "full-length", "lightweight"]}
+{"image_id": "blimp.jpg", "attributes": ["white", "yellow", "cylindrical", "large", "smooth", "manmade", "vehicle", "aerodynamic", "portable", "outdoor", "inflated", "lightweight"]}
+{"image_id": "shutter.jpg", "attributes": ["green", "wooden", "rectangular", "vertical", "matte", "textured", "rigid", "manmade", "architectural", "outdoor", "functional", "stationary"]}
+{"image_id": "llama.jpg", "attributes": ["tan", "brown", "textured", "fuzzy", "organic", "natural", "living", "animal", "mammal", "four-legged"]}
+{"image_id": "mat.jpg", "attributes": ["green", "rectangular", "textured", "flat", "manmade", "floor covering", "durable", "flexible", "matte", "functional"]}
+{"image_id": "bottle_opener.jpg", "attributes": ["silver", "metallic", "reflective", "rigid", "manmade", "tool", "handheld", "small", "solid", "smooth", "durable"]}
+{"image_id": "panties.jpg", "attributes": ["maroon", "pink", "lacey", "patterned", "soft", "flexible", "manmade", "clothing", "wearable", "textile", "thin", "intricate"]}
+{"image_id": "poster.jpg", "attributes": ["colorful", "rectangular", "paper", "printed", "manmade", "flat", "thin", "flexible", "matte", "decorative", "informational", "visual"]}
+{"image_id": "stretcher.jpg", "attributes": ["yellow", "black", "metallic", "rigid", "manmade", "mechanical", "wheeled", "large", "functional", "industrial", "smooth", "sturdy", "portable", "equipment"]}
+{"image_id": "corset.jpg", "attributes": ["striped", "teal", "fabric", "textile", "patterned", "manmade", "clothing", "wearable", "structured", "rigid", "decorative", "soft", "fitted"]}
+{"image_id": "lollipop.jpg", "attributes": ["colorful", "spherical", "translucent", "smooth", "shiny", "small", "edible", "food", "manmade", "handheld", "sweet", "rigid"]}
+{"image_id": "baton3.jpg", "attributes": ["cylindrical", "long", "tapered", "smooth", "multicolored", "patterned", "manmade", "handheld", "rigid", "instrumental", "slender", "matte"]}
+{"image_id": "chicken_wire.jpg", "attributes": ["metallic", "grey", "patterned", "rigid", "manmade", "structural", "perforated", "wire", "mesh", "outdoor", "functional", "industrial"]}
+{"image_id": "money.jpg", "attributes": ["silver", "metallic", "circular", "rigid", "reflective", "manmade", "currency", "paper", "thin", "flat", "printed", "small", "valuable"]}
+{"image_id": "garlic.jpg", "attributes": ["white", "off-white", "organic", "natural", "edible", "food", "textured", "papery", "irregular", "rounded", "small", "fragile"]}
+{"image_id": "silicone.jpg", "attributes": ["translucent", "smooth", "oval", "flexible", "manmade", "gelatinous", "reflective", "soft", "clear", "handheld", "synthetic"]}
+{"image_id": "briefcase.jpg", "attributes": ["tan", "leather", "smooth", "rectangular", "rigid", "manmade", "accessory", "handheld", "functional", "carrier", "matte", "large"]}
+{"image_id": "seesaw.jpg", "attributes": ["brown", "wooden", "cylindrical", "long", "rigid", "textured", "manmade", "outdoor", "plaything", "large", "sturdy"]}
+{"image_id": "sailboat.jpg", "attributes": ["white", "large", "triangular", "manmade", "vehicle", "floating", "rigid", "smooth", "outdoor", "transportation", "watercraft", "mechanical"]}
+{"image_id": "chopsticks.jpg", "attributes": ["brown", "tan", "wooden", "cylindrical", "long", "slender", "smooth", "rigid", "manmade", "tool", "handheld", "dining"]}
+{"image_id": "fishnet_stockings.jpg", "attributes": ["black", "patterned", "mesh", "transparent", "flexible", "textile", "manmade", "wearable", "clothing", "thin", "soft", "elastic"]}
+{"image_id": "totem_pole.jpg", "attributes": ["multicolored", "wooden", "painted", "matte", "textured", "vertical", "large", "manmade", "sculptural", "outdoor", "rigid", "ornamental"]}
+{"image_id": "anvil.jpg", "attributes": ["dark", "metallic", "textured", "rough", "heavy", "rigid", "opaque", "manmade", "tool", "industrial", "stationary", "solid"]}
+{"image_id": "stump.jpg", "attributes": ["brown", "green", "organic", "natural", "cylindrical", "rough", "textured", "rigid", "weathered", "matte", "irregular", "stationary"]}
+{"image_id": "potpourri.jpg", "attributes": ["multicolored", "organic", "natural", "textured", "irregular", "dry", "fragile", "matte", "botanical", "fragmented", "loose", "earthy"]}
+{"image_id": "banana_split.jpg", "attributes": ["colorful", "sweet", "edible", "food", "soft", "creamy", "manmade", "liquid", "solid", "multi-colored", "textured", "organic"]}
+{"image_id": "sugar_cube.jpg", "attributes": ["white", "crystalline", "rectangular", "granular", "opaque", "matte", "small", "solid", "manmade", "edible", "food", "fragile"]}
+{"image_id": "zucchini.jpg", "attributes": ["green", "dark", "cylindrical", "elongated", "smooth", "organic", "natural", "edible", "plant", "food", "solid", "matte"]}
+{"image_id": "candle.jpg", "attributes": ["cylindrical", "solid", "opaque", "smooth", "manmade", "decorative", "waxen", "colored", "vertical", "stationary", "small", "burnable"]}
+{"image_id": "firetruck.jpg", "attributes": ["red", "white", "metallic", "reflective", "large", "rigid", "manmade", "vehicle", "mechanical", "heavy", "outdoor", "functional"]}
+{"image_id": "paper_towel.jpg", "attributes": ["white", "textured", "matte", "cylindrical", "flexible", "thin", "absorbent", "manmade", "disposable", "household item", "paper", "roll"]}
+{"image_id": "button1.jpg", "attributes": ["round", "small", "flat", "hard", "manmade", "smooth", "various colors", "plastic", "metallic", "decorative", "functional", "clothing accessory", "handheld", "solid", "opaque"]}
+{"image_id": "beachball.jpg", "attributes": ["multicolored", "spherical", "smooth", "glossy", "lightweight", "manmade", "inflatable", "toy", "recreational", "waterproof", "buoyant", "plastic"]}
+{"image_id": "safety_pin.jpg", "attributes": ["silver", "metallic", "shiny", "reflective", "smooth", "rigid", "thin", "curved", "manmade", "tool", "small", "handheld", "metal"]}
+{"image_id": "nail_polish.jpg", "attributes": ["colorful", "transparent", "reflective", "smooth", "liquid", "manmade", "small", "cosmetic", "glass", "plastic", "cylindrical", "handheld", "decorative"]}
+{"image_id": "suitcase.jpg", "attributes": ["red", "rectangular", "fabric", "soft", "manmade", "container", "portable", "large", "structured", "functional", "durable", "textile"]}
+{"image_id": "sarcophagus.jpg", "attributes": ["multicolored", "painted", "matte", "textured", "humanoid", "sculpted", "manmade", "rigid", "ornate", "ancient", "decorative", "symbolic"]}
+{"image_id": "map.jpg", "attributes": ["colorful", "paper", "rectangular", "flexible", "printed", "manmade", "informational", "flat", "matte", "thin", "large", "portable"]}
+{"image_id": "appetizer.jpg", "attributes": ["colorful", "edible", "manmade", "small", "bite-sized", "varied", "textured", "organic", "food", "handheld", "circular", "rectangular", "soft", "savory"]}
+{"image_id": "shower_cap.jpg", "attributes": ["white", "translucent", "patterned", "flexible", "soft", "manmade", "textile", "wearable", "lightweight", "folded", "synthetic"]}
+{"image_id": "melon.jpg", "attributes": ["orange", "green", "fleshy", "organic", "natural", "edible", "moist", "rounded", "textured", "food", "fruit", "soft"]}
+{"image_id": "cruise_ship.jpg", "attributes": ["white", "large", "massive", "manmade", "metallic", "rigid", "smooth", "rectangular", "vehicle", "transportation", "watercraft", "floating", "complex"]}
+{"image_id": "rain_gauge.jpg", "attributes": ["transparent", "cylindrical", "rigid", "smooth", "manmade", "tool", "container", "weather instrument", "clear", "vertical", "plastic", "white", "outdoor"]}
+{"image_id": "teacup.jpg", "attributes": ["white", "ceramic", "smooth", "glossy", "curved", "rigid", "manmade", "container", "handheld", "fragile", "decorative"]}
+{"image_id": "lava.jpg", "attributes": ["dark", "orange", "red", "textured", "rough", "irregular", "solid", "viscous", "natural", "geological", "glowing", "opaque"]}
+{"image_id": "stove2.jpg", "attributes": ["black", "metallic", "matte", "dark", "rigid", "manmade", "heavy", "stationary", "functional", "heat-producing", "metal", "large"]}
+{"image_id": "shaker.jpg", "attributes": ["silver", "metallic", "shiny", "reflective", "smooth", "cylindrical", "rigid", "manmade", "tool", "container", "handheld", "kitchenware"]}
+{"image_id": "horn.jpg", "attributes": ["silver", "metallic", "reflective", "shiny", "smooth", "curved", "rigid", "manmade", "tool", "mechanical", "outdoor"]}
+{"image_id": "polaroid.jpg", "attributes": ["white", "rectangular", "flat", "paper", "manmade", "thin", "matte", "lightweight", "stationary", "printed"]}
+{"image_id": "duct.jpg", "attributes": ["silver", "metallic", "gray", "rectangular", "rigid", "reflective", "manmade", "industrial", "large", "structural", "complex", "functional"]}
+{"image_id": "workbench.jpg", "attributes": ["brown", "wooden", "rectangular", "rigid", "matte", "textured", "manmade", "tool", "furniture", "stationary", "large", "heavy"]}
+{"image_id": "belt.jpg", "attributes": ["black", "dark", "long", "flexible", "thin", "smooth", "manmade", "wearable", "accessory", "leather-like", "rigid", "metallic"]}
+{"image_id": "sword.jpg", "attributes": ["dark", "metallic", "matte", "textured", "long", "tapered", "rigid", "manmade", "tool", "weapon", "handheld", "metal"]}
+{"image_id": "vise.jpg", "attributes": ["grey", "metallic", "matte", "rough", "irregular", "rigid", "heavy", "manmade", "tool", "mechanical", "industrial"]}
+{"image_id": "kaleidoscope.jpg", "attributes": ["colorful", "cylindrical", "patterned", "rigid", "manmade", "handheld", "toy", "smooth", "bright", "decorative", "small", "plastic"]}
+{"image_id": "horse.jpg", "attributes": ["brown", "white", "organic", "natural", "living", "animal", "large", "furred", "muscular", "mammal"]}
+{"image_id": "thermostat.jpg", "attributes": ["white", "rectangular", "smooth", "rigid", "manmade", "electronic", "digital", "wall-mounted", "functional", "small", "plastic", "matte"]}
+{"image_id": "pine_tree.jpg", "attributes": ["green", "white", "textured", "conical", "organic", "natural", "large", "rigid", "plant", "living"]}
+{"image_id": "clipper1.jpg", "attributes": ["brown", "metallic", "wooden", "rusty", "textured", "long", "rigid", "manmade", "tool", "handheld", "weathered"]}
+{"image_id": "lectern.jpg", "attributes": ["brown", "wooden", "gold", "textured", "reflective", "curved", "rigid", "manmade", "furniture", "stationary", "large", "decorative"]}
+{"image_id": "snowplow.jpg", "attributes": ["yellow", "orange", "metallic", "large", "rigid", "manmade", "vehicle", "mechanical", "heavy", "outdoor", "functional"]}
+{"image_id": "brace.jpg", "attributes": ["black", "dark", "textile", "fabric", "flexible", "soft", "matte", "manmade", "protective", "wearable", "athletic", "functional"]}
+{"image_id": "lighter.jpg", "attributes": ["green", "metallic", "plastic", "smooth", "shiny", "reflective", "rectangular", "rigid", "manmade", "handheld", "small", "tool"]}
+{"image_id": "balance_beam.jpg", "attributes": ["brown", "wooden", "rectangular", "rigid", "manmade", "outdoor", "large", "textured", "matte", "sturdy", "furniture", "equipment"]}
+{"image_id": "dumbwaiter.jpg", "attributes": ["silver", "metallic", "rectangular", "rigid", "reflective", "smooth", "manmade", "mechanical", "industrial", "stationary", "functional", "large"]}
+{"image_id": "curtain.jpg", "attributes": ["beige", "cream", "fabric", "textile", "soft", "flexible", "translucent", "thin", "manmade", "decorative", "functional", "hanging", "vertical", "folded"]}
+{"image_id": "diamond.jpg", "attributes": ["clear", "transparent", "reflective", "brilliant", "circular", "faceted", "hard", "rigid", "small", "manmade", "mineral", "decorative", "precious", "handheld"]}
+{"image_id": "chime.jpg", "attributes": ["brown", "black", "metallic", "cylindrical", "rigid", "smooth", "manmade", "decorative", "hanging", "outdoor", "small", "ornamental"]}
+{"image_id": "bobsled.jpg", "attributes": ["blue", "red", "white", "smooth", "shiny", "reflective", "aerodynamic", "curved", "rigid", "manmade", "vehicle", "sporting equipment", "mechanical", "fast"]}
+{"image_id": "salami.jpg", "attributes": ["cylindrical", "reddish", "textured", "matte", "edible", "food", "manmade", "organic", "sliced", "solid", "small", "handheld"]}
+{"image_id": "cigarette_holder.jpg", "attributes": ["white", "black", "cylindrical", "smooth", "rigid", "manmade", "ornate", "handheld", "small", "decorative", "accessory", "solid"]}
+{"image_id": "pastry.jpg", "attributes": ["golden", "brown", "baked", "flaky", "irregular", "round", "textured", "soft", "edible", "food", "manmade", "small"]}
+{"image_id": "bedpan.jpg", "attributes": ["silver", "metallic", "reflective", "smooth", "circular", "rigid", "manmade", "container", "kitchenware", "handheld", "polished"]}
+{"image_id": "scaffold.jpg", "attributes": ["silver", "metallic", "grey", "cylindrical", "rigid", "manmade", "structural", "industrial", "outdoor", "large", "complex", "modular", "utilitarian"]}
+{"image_id": "acorn.jpg", "attributes": ["brown", "tan", "oval", "textured", "smooth", "rigid", "natural", "plant", "small", "organic", "matte", "solid"]}
+{"image_id": "nose.jpg", "attributes": ["flesh-toned", "organic", "natural", "soft", "textured", "matte", "irregular", "biological", "human", "uneven", "fleshy"]}
+{"image_id": "timer.jpg", "attributes": ["yellow", "shiny", "smooth", "reflective", "rounded", "rigid", "manmade", "small", "handheld", "plastic", "functional", "decorative"]}
+{"image_id": "rifle.jpg", "attributes": ["brown", "black", "wooden", "metallic", "long", "rigid", "manmade", "tool", "handheld", "mechanical", "textured", "matte"]}
+{"image_id": "scissors.jpg", "attributes": ["silver", "black", "pink", "metallic", "plastic", "reflective", "smooth", "rigid", "manmade", "tool", "handheld", "sharp"]}
+{"image_id": "airplane.jpg", "attributes": ["white", "metallic", "smooth", "large", "rigid", "manmade", "vehicle", "mechanical", "aerodynamic", "complex", "transportation", "outdoor"]}
+{"image_id": "pen.jpg", "attributes": ["blue", "silver", "metallic", "plastic", "cylindrical", "smooth", "reflective", "rigid", "manmade", "tool", "handheld", "writing instrument"]}
+{"image_id": "leopard.jpg", "attributes": ["spotted", "tan", "black", "furred", "organic", "natural", "living", "animal", "flexible", "patterned", "textured"]}
+{"image_id": "stereo.jpg", "attributes": ["red", "rectangular", "plastic", "rigid", "manmade", "electronic", "portable", "handheld", "matte", "solid", "functional", "mechanical"]}
+{"image_id": "mold1.jpg", "attributes": ["pink", "matte", "flexible", "smooth", "rectangular", "manmade", "tool", "container", "kitchenware", "silicone", "hollow", "indented"]}
+{"image_id": "flashlight.jpg", "attributes": ["grey", "metallic", "cylindrical", "rigid", "textured", "manmade", "electronic", "handheld", "portable", "reflective", "tool", "light-emitting"]}
+{"image_id": "lemonade.jpg", "attributes": ["yellow", "transparent", "reflective", "smooth", "liquid", "manmade", "container", "edible", "fragile", "handheld", "cylindrical", "clear"]}
+{"image_id": "guillotine.jpg", "attributes": ["dark", "metallic", "brown", "rectangular", "rigid", "manmade", "large", "heavy", "industrial", "tool", "matte", "textured"]}
+{"image_id": "stir_fry.jpg", "attributes": ["colorful", "multicolored", "organic", "natural", "edible", "food", "solid", "textured", "glossy", "irregular", "small", "varied"]}
+{"image_id": "coffee_bean.jpg", "attributes": ["brown", "organic", "small", "oval", "textured", "natural", "edible", "matte", "irregular", "solid", "food", "dry"]}
+{"image_id": "sandcastle.jpg", "attributes": ["tan", "granular", "textured", "matte", "irregular", "brown", "earthy", "manmade", "fragile", "temporary", "small", "handbuilt"]}
+{"image_id": "shuffleboard.jpg", "attributes": ["pink", "purple", "reflective", "smooth", "large", "rectangular", "manmade", "rigid", "furniture", "game equipment", "indoor", "solid"]}
+{"image_id": "yolk.jpg", "attributes": ["yellow", "spherical", "glossy", "reflective", "translucent", "liquid", "viscous", "organic", "edible", "food", "natural", "soft", "smooth"]}
+{"image_id": "bagpipe.jpg", "attributes": ["multicolored", "patterned", "textile", "manmade", "rigid", "cylindrical", "long", "decorative", "musical", "handheld", "traditional", "complex"]}
+{"image_id": "springboard.jpg", "attributes": ["orange", "rectangular", "matte", "textured", "rigid", "manmade", "large", "flat", "solid", "functional", "durable", "outdoor"]}
+{"image_id": "kimono.jpg", "attributes": ["floral", "patterned", "multicolored", "soft", "flexible", "textile", "manmade", "clothing", "wearable", "long", "loose", "opaque"]}
+{"image_id": "casserole.jpg", "attributes": ["yellow", "white", "red", "green", "ceramic", "oval", "textured", "solid", "manmade", "edible", "food", "container", "cooked"]}
+{"image_id": "walnut.jpg", "attributes": ["brown", "tan", "textured", "rough", "irregular", "organic", "natural", "edible", "food", "solid", "small", "handheld"]}
+{"image_id": "doorknob.jpg", "attributes": ["white", "metallic", "spherical", "smooth", "shiny", "reflective", "rigid", "manmade", "hardware", "handheld", "functional", "small"]}
+{"image_id": "mint.jpg", "attributes": ["green", "organic", "natural", "plant", "textured", "leafy", "soft", "matte", "veined", "growing", "multiple", "small", "fragile"]}
+{"image_id": "earplug.jpg", "attributes": ["multicolored", "swirled", "patterned", "white", "blue", "green", "soft", "flexible", "foam", "small", "handheld", "manmade", "synthetic", "lightweight", "cylindrical"]}
+{"image_id": "lid.jpg", "attributes": ["white", "opaque", "smooth", "circular", "plastic", "manmade", "rigid", "stackable", "container part", "disposable", "small", "lightweight"]}
+{"image_id": "beer.jpg", "attributes": ["golden", "transparent", "liquid", "cylindrical", "reflective", "manmade", "container", "edible", "beverage", "glass", "smooth", "handheld"]}
+{"image_id": "subway.jpg", "attributes": ["blue", "green", "metallic", "rectangular", "rigid", "reflective", "manmade", "vehicle", "electronic", "large", "mechanical", "smooth"]}
+{"image_id": "honey.jpg", "attributes": ["amber", "golden", "transparent", "reflective", "liquid", "viscous", "smooth", "glass", "wooden", "manmade", "container", "edible", "food", "handheld"]}
+{"image_id": "engine.jpg", "attributes": ["metallic", "multicolored", "complex", "rigid", "manmade", "mechanical", "industrial", "shiny", "intricate", "large", "asymmetrical", "functional", "heavy"]}
+{"image_id": "mop.jpg", "attributes": ["long", "cylindrical", "rigid", "manmade", "tool", "cleaning supply", "textile", "fibrous", "white", "metallic", "blue", "yellow", "plastic", "handheld"]}
+{"image_id": "neck.jpg", "attributes": ["flesh-toned", "smooth", "moist", "reflective", "organic", "natural", "living", "curved", "soft", "flexible"]}
+{"image_id": "branch.jpg", "attributes": ["green", "brown", "organic", "natural", "textured", "irregular", "rigid", "branching", "plant", "matte", "complex", "living"]}
+{"image_id": "jeans.jpg", "attributes": ["blue", "fabric", "textile", "soft", "flexible", "textured", "manmade", "clothing", "wearable", "folded", "stacked"]}
+{"image_id": "cutting_board.jpg", "attributes": ["tan", "wood", "rectangular", "flat", "rigid", "textured", "natural", "manmade", "kitchenware", "handheld", "matte", "solid"]}
+{"image_id": "cart.jpg", "attributes": ["multicolored", "wooden", "weathered", "textured", "rectangular", "rigid", "manmade", "large", "outdoor", "functional", "rustic", "heavy", "structural"]}
+{"image_id": "bat1.jpg", "attributes": ["brown", "dark", "fuzzy", "textured", "organic", "natural", "animal", "living", "small", "soft"]}
+{"image_id": "guinea_pig.jpg", "attributes": ["brown", "white", "furry", "soft", "organic", "animal", "living", "small", "natural", "fleshy"]}
+{"image_id": "tiger.jpg", "attributes": ["orange", "black", "white", "striped", "furry", "organic", "animal", "natural", "living", "large", "textured"]}
+{"image_id": "sandpaper.jpg", "attributes": ["brown", "textured", "flexible", "rectangular", "matte", "manmade", "tool", "abrasive", "thin", "flat", "dull"]}
+{"image_id": "moccasin.jpg", "attributes": ["brown", "tan", "textured", "matte", "flexible", "soft", "manmade", "clothing", "wearable", "footwear", "beaded", "patterned", "handmade"]}
+{"image_id": "light_switch.jpg", "attributes": ["white", "square", "smooth", "rigid", "plastic", "manmade", "electronic", "stationary", "functional", "small", "matte", "wall-mounted"]}
+{"image_id": "candlestick.jpg", "attributes": ["silver", "metallic", "dark", "reflective", "curved", "vertical", "rigid", "manmade", "decorative", "handheld", "stationary", "ornamental"]}
+{"image_id": "croissant.jpg", "attributes": ["golden", "brown", "layered", "flaky", "curved", "textured", "shiny", "edible", "food", "baked", "manmade", "small"]}
+{"image_id": "grate.jpg", "attributes": ["grey", "metallic", "rectangular", "perforated", "rigid", "textured", "manmade", "industrial", "structural", "hard", "patterned", "durable"]}
+{"image_id": "swab.jpg", "attributes": ["white", "blue", "yellow", "soft", "cylindrical", "small", "rigid", "manmade", "tool", "handheld", "absorbent", "disposable"]}
+{"image_id": "pillow.jpg", "attributes": ["black", "red", "soft", "patterned", "square", "textile", "manmade", "fabric", "flexible", "decorative", "home decor", "cushioned"]}
+{"image_id": "tripod.jpg", "attributes": ["black", "dark", "matte", "metallic", "rigid", "slender", "angular", "manmade", "tool", "equipment", "supportive", "portable", "mechanical"]}
+{"image_id": "microscope.jpg", "attributes": ["white", "metallic", "rigid", "manmade", "electronic", "scientific", "optical", "complex", "mechanical", "stationary", "smooth", "rectangular", "instrumental"]}
+{"image_id": "keyboard.jpg", "attributes": ["white", "rectangular", "rigid", "manmade", "electronic", "portable", "matte", "plastic", "input device", "desktop accessory", "functional", "small"]}
+{"image_id": "waffle_iron.jpg", "attributes": ["white", "black", "plastic", "metallic", "smooth", "rigid", "manmade", "electronic", "kitchenware", "appliance", "plugged", "heated", "handheld"]}
+{"image_id": "record_player.jpg", "attributes": ["black", "circular", "metallic", "rigid", "reflective", "smooth", "manmade", "electronic", "mechanical", "handheld", "audio device", "stationary"]}
+{"image_id": "veil.jpg", "attributes": ["white", "translucent", "soft", "lightweight", "flexible", "textile", "manmade", "clothing", "wearable", "delicate", "sheer", "smooth"]}
+{"image_id": "sewage.jpg", "attributes": ["brown", "opaque", "liquid", "turbid", "viscous", "foamy", "manmade", "flowing", "wet", "dirty", "cylindrical", "metallic", "rigid", "industrial"]}

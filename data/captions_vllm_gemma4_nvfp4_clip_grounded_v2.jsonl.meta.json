@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "run_id": "gemma4-26b-a4b-nvfp4-full-clip-grounded-caption-v2",
+  "model": "nvidia/Gemma-4-26B-A4B-NVFP4",
+  "api_url": "http://127.0.0.1:8000/v1/chat/completions",
+  "model_revision": "a19cfe00be84568a6867111c9a68c9c44fdcffe6",
+  "server_profile": "gemma4-nvfp4-quality-v280-s64-t16384-u082",
+  "prompt_sha256": "3e6c26495061c5cf2c1ab816fcaaa8ba80bf904d763f5d4388080cc5e4a1648d",
+  "image_transport": "file",
+  "client_transform": "none",
+  "max_image_side": null,
+  "max_output_tokens": 64,
+  "retry_max_output_tokens": 90,
+  "temperature": 0.3,
+  "caption_word_bounds": [
+    8,
+    30
+  ],
+  "image_dir": "data/raw/object_images",
+  "source_image_count": 26107,
+  "selection_seed": 0,
+  "selection_sha256": "815c53a9ab674135a22704c0ae784bea8d8e3235745155b473599ae2c393018b"
+}

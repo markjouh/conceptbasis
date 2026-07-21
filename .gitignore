@@ -9,6 +9,23 @@ data/*.npy
 data/*.parquet
 data/heldout/
 
+# --- resumable local VLM shards ---
+# Keep only the promoted discovery/evaluation artifacts below. Interrupted
+# shards, retries, and prompt experiments stay local and are summarized under
+# research/results/ instead of appearing as unreviewed data additions.
+data/*_vllm_*.jsonl
+data/*_vllm_*.jsonl.meta.json
+!data/attributes_dev_vllm_gemma4_nvfp4.jsonl
+!data/attributes_dev_vllm_gemma4_nvfp4.jsonl.meta.json
+!data/attributes_train_vllm_gemma4_nvfp4_open_tags_nonredundant_v8.jsonl
+!data/attributes_train_vllm_gemma4_nvfp4_open_tags_nonredundant_v8.jsonl.meta.json
+!data/captions_vllm_gemma4_nvfp4_clip_grounded_v2.jsonl
+!data/captions_vllm_gemma4_nvfp4_clip_grounded_v2.jsonl.meta.json
+!data/dictionary_labels_train_vllm_gemma4_nvfp4_usage_profile_v8_object_grounded_v11_merged.jsonl
+!data/dictionary_labels_train_vllm_gemma4_nvfp4_usage_profile_v8_object_grounded_v11_merged.jsonl.meta.json
+!data/dictionary_labels_cc0_dev_vllm_gemma4_nvfp4_usage_profile_v8_object_grounded_v11.jsonl
+!data/dictionary_labels_cc0_dev_vllm_gemma4_nvfp4_usage_profile_v8_object_grounded_v11.jsonl.meta.json
+
 # --- local-only material ---
 archive/
 .claude/
@@ -18,6 +35,7 @@ archive/
 
 # --- junk ---
 .venv/
+.venv-vllm/
 __pycache__/
 *.egg-info/
 *.pyc

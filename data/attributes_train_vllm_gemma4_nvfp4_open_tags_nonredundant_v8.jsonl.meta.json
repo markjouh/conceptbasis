@@ -1,0 +1,22 @@
+{
+  "schema_version": 2,
+  "run_id": "gemma4-26b-a4b-nvfp4-full-train-open-tags-nonredundant-v8",
+  "model": "nvidia/Gemma-4-26B-A4B-NVFP4",
+  "api_url": "http://127.0.0.1:8000/v1/chat/completions",
+  "model_revision": "a19cfe00be84568a6867111c9a68c9c44fdcffe6",
+  "server_profile": "gemma4-nvfp4-quality-v280-s64-t16384-u082",
+  "prompt_sha256": "3018cd2476e48a5a1cc929f5e926d4104d7b37f85ba295d61ba3e31d02c08dc3",
+  "image_transport": "file",
+  "client_transform": "none",
+  "max_image_side": null,
+  "max_output_tokens": 192,
+  "retry_max_output_tokens": 300,
+  "temperature": 0.3,
+  "image_dir": "data/raw/object_images",
+  "split": "train",
+  "split_manifest": "data/splits.json",
+  "split_manifest_sha256": "ee6bdf93feeb1367fde2da4f53474efa4e80f0a6dc0188e2636d51d09bb57027",
+  "source_image_count": 18211,
+  "selection_seed": 0,
+  "selection_sha256": "3918ce2a3af67490f77b50730a301cee408e4b77f493c5c99b628892aef65806"
+}
