@@ -1,0 +1,82 @@
+{
+  "schema": "conceptbasis.adapter-rerun-result/v1",
+  "date": "2026-07-19",
+  "status": "development-provisional",
+  "test_split_read": false,
+  "comparison_checkpoint": "siglip2_giant_edgeavg085_reverse_ridge_s0",
+  "candidate_checkpoint": "siglip2_giant_edgeavg085_interim_v9_reverse_ridge_s0",
+  "inputs": {
+    "encoder": {
+      "model": "ViT-gopt-16-SigLIP2-384",
+      "pretrained": "webli",
+      "revision": "ad3410bee2c3373be5ed01e7c4e7fcd2bf95a183"
+    },
+    "dictionary_sha256": "8df7ad33155bc88366091d0629dccfbd52ad6e566cfcedc6b5c4fbec0bf288f1",
+    "hard_train_labels": {
+      "path": "data/dictionary_labels_train_vllm_gemma4_nvfp4_edge_average_085_interim_mixed_v9.jsonl",
+      "sha256": "1fdc340d1991cd085f555a77e39cdd877be3ffb5b5604cae06cae4f88476cd38",
+      "rows": 18211,
+      "mean_positive_labels_per_image": 33.6064,
+      "zero_support_concepts": 0
+    }
+  },
+  "training": {
+    "seed": 0,
+    "epochs": 30,
+    "batch_size": 1024,
+    "steps": 540,
+    "embed_dim": 320,
+    "hidden_dim": 1024,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "reverse_ridge_alpha": 0.001,
+    "reverse_ridge_orthogonality_weight": 512
+  },
+  "controls": {
+    "contrastive": {
+      "checkpoint_sha256": "dc108ecf647b6ec3d18ce32238291ef44afa88489fa77b983c4630401a1b305d",
+      "dev_retrieval": {"R@1": 0.6269800663, "R@5": 0.9146652818, "R@10": 0.9821155071},
+      "dev_auroc": 0.8280841833,
+      "note": "Numerically reproduces the previous control because this objective does not consume hard dictionary labels."
+    },
+    "group_mean": {
+      "checkpoint_sha256": "c2df79031481b79e85b0da62e230dfd3a4e95a0a372f0bd36482f3f4e41dc5ea",
+      "dev_retrieval": {"R@1": 0.6065406203, "R@5": 0.9054675698, "R@10": 0.9821155071},
+      "dev_auroc": 0.8265428083,
+      "note": "Numerically reproduces the previous control because this objective does not consume hard dictionary labels."
+    }
+  },
+  "reverse_ridge": {
+    "checkpoint_sha256": "5a4fb2ea884e5fd109e56f369921438575da7a0360e8aab4aa19c588c395b3a2",
+    "elapsed_seconds": 4.6,
+    "old": {
+      "dev_retrieval": {"R@1": 0.6236586571, "R@5": 0.9146652818, "R@10": 0.9810935259},
+      "dev_auroc": 0.8542003861,
+      "direction_orth_rms": 0.0624032058,
+      "explained_fraction": 0.2249121666,
+      "composition_R@5": {"1": 0.1133093525, "2": 0.2025899281, "4": 0.3328057554, "6": 0.4674820144, "8": 0.5878700361, "10": 0.7161406969, "12": 0.7545454545}
+    },
+    "new": {
+      "dev_retrieval": {"R@1": 0.6336228848, "R@5": 0.9184976816, "R@10": 0.9833929539},
+      "dev_auroc": 0.8565979707,
+      "direction_orth_rms": 0.0549654216,
+      "explained_fraction": 0.3388873935,
+      "composition_R@5": {"1": 0.1095623501, "2": 0.1801438849, "4": 0.3211510791, "6": 0.4464748201, "8": 0.5757400722, "10": 0.7092373439, "12": 0.8134199134}
+    },
+    "delta_new_minus_old": {
+      "dev_retrieval": {"R@1": 0.0099642277, "R@5": 0.0038323998, "R@10": 0.0022994280},
+      "dev_auroc": 0.0023975846,
+      "direction_orth_rms": -0.0074377842,
+      "explained_fraction": 0.1139752269,
+      "composition_R@5": {"1": -0.0037470024, "2": -0.0224460432, "4": -0.0116546763, "6": -0.0210071943, "8": -0.0121299639, "10": -0.0069033531, "12": 0.0588744589}
+    }
+  },
+  "composition_protocol": {
+    "split": "dev",
+    "eligible_images": {"1": 278, "2": 278, "4": 278, "6": 278, "8": 277, "10": 234, "12": 66, "14": 4},
+    "seed": 0,
+    "test_split_read": false
+  },
+  "interpretation": "The denser labels improve ordinary retrieval, AUROC, direction overlap, support, and explained fraction. Composition is modestly worse for k=2 through k=10 and substantially better at k=12, so this is not yet an unconditional replacement for the prior checkpoint.",
+  "full_eval_sha256": "32162c6b1f0c33bb83ad32aa1f2d71e9ed61246d843dd549620447c663ac4d28"
+}

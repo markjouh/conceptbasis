@@ -1,0 +1,121 @@
+{
+  "adjudicated_edge_weights": "approved_pair_text_cosine",
+  "adjudicated_linkage": "average",
+  "adjudicated_min_similarity": 0.25,
+  "attribute_split": "train",
+  "cluster_candidates": {
+    "count": 287,
+    "path": "outputs/dictionary_candidates/siglip2-gopt-p16-384@ad3410b/edge-average-085-v1/all_clusters.json",
+    "sha256": "ade3f5ea01fe7b2a8af49eb5d0cdc46caa0467ee2b672f74f68524763cbb5d50"
+  },
+  "coefficient_domain": "nonnegative",
+  "concept_policy": "affirmatively-present-traits-only",
+  "dictionary_sha256": "8df7ad33155bc88366091d0629dccfbd52ad6e566cfcedc6b5c4fbec0bf288f1",
+  "embedding_cache": {
+    "directory": "outputs/encoder_candidates/siglip2-gopt-p16-384@ad3410b",
+    "image_embeddings_sha256": "141f0b1f974a5516c31fae5ccc9e9e428ee798f552f7e5d68eb6ffd1ad18d849",
+    "image_ids_sha256": "4e54330ce08a3434e3941441b0a30d8a6e6d69fb0c0a309db56474a5bcc6d02d",
+    "manifest": "outputs/encoder_candidates/siglip2-gopt-p16-384@ad3410b/encoder_manifest.json",
+    "manifest_sha256": "f9539e9d803b35542d7426263aafc1c0985e68f72fabb37fd0f514ec6e189e02",
+    "source": {
+      "checkpoint_filename": "open_clip_model.safetensors",
+      "context_length": 64,
+      "embedding_dimension": 1536,
+      "hf_repo": "timm/ViT-gopt-16-SigLIP2-384",
+      "hf_revision": "ad3410bee2c3373be5ed01e7c4e7fcd2bf95a183",
+      "image_size": 384,
+      "open_clip_version": "3.3.0",
+      "patch_size": null,
+      "preprocess": {
+        "interpolation": "bicubic",
+        "mean": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "resize_mode": "squash",
+        "std": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      },
+      "pretrained_tag": "webli"
+    }
+  },
+  "encoder": {
+    "model": "ViT-gopt-16-SigLIP2-384",
+    "name": "siglip2-gopt-p16-384",
+    "pretrained": "webli",
+    "revision": "ad3410bee2c3373be5ed01e7c4e7fcd2bf95a183"
+  },
+  "encoder_source": {
+    "checkpoint_filename": "open_clip_model.safetensors",
+    "context_length": 64,
+    "embedding_dimension": 1536,
+    "hf_repo": "timm/ViT-gopt-16-SigLIP2-384",
+    "hf_revision": "ad3410bee2c3373be5ed01e7c4e7fcd2bf95a183",
+    "image_size": 384,
+    "open_clip_version": "3.3.0",
+    "patch_size": null,
+    "preprocess": {
+      "interpolation": "bicubic",
+      "mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "resize_mode": "squash",
+      "std": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "pretrained_tag": "webli"
+  },
+  "excluded_lexical_negations": {
+    "non-edible": "edible",
+    "non-electronic": "electronic",
+    "non-living": "living",
+    "non-metallic": "metallic",
+    "non-reflective": "reflective",
+    "non-transparent": "transparent",
+    "unpolished": "polished",
+    "unstructured": "structured"
+  },
+  "inputs": {
+    "data/attributes_train_full_vllm_gemma4_nvfp4.jsonl": "0924dbbf9347675acafcf9fd5ab6c7061eeb99b768eaf84210324785beb40fa2",
+    "data/splits.json": "ee6bdf93feeb1367fde2da4f53474efa4e80f0a6dc0188e2636d51d09bb57027"
+  },
+  "k": 256,
+  "max_text_twin_cosine": 0.98,
+  "max_twin_corr": 0.75,
+  "merge_adjudication": {
+    "model": "nvidia/Gemma-4-26B-A4B-NVFP4",
+    "n_accepted_edges": 1607,
+    "n_proposed_edges": 20881,
+    "path": "outputs/dictionary_candidates/siglip2-gopt-p16-384@ad3410b/edge-average-085-v1/adjudication.json",
+    "prompt_sha256": "9fead6760dd47f9806d680684bda880555757e11cb5fd10cda2b5740c79ebdb4",
+    "sha256": "4d3e1141a8c0e30732a95a120db61d47abc0d14714354c53c9d080e4b63173db"
+  },
+  "merge_corr": 0.5,
+  "merge_method": "adjudicated",
+  "min_class_support": 3,
+  "min_mentions": 3,
+  "n_attribute_images": 18210,
+  "n_candidate_phrases_before_negation_filter": 793,
+  "n_clusters": 287,
+  "n_phrase_profiles": 785,
+  "n_profile_classes": 1298,
+  "n_raw_phrases": 1593,
+  "near_twins_skipped": [],
+  "negation_policy": "exclude",
+  "precision": "fp16",
+  "profile_unit": "things_object_class_mean",
+  "remove_components": 1,
+  "schema": "conceptbasis.dictionary-build/v4",
+  "selection_method": "frequency",
+  "text_merge_cosine": 0.95,
+  "text_template": "an object that is {phrase}"
+}

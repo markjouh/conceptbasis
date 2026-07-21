@@ -1,0 +1,80 @@
+{
+  "schema": "conceptbasis.research-result/v1",
+  "date": "2026-07-19",
+  "status": "complete",
+  "experiment": "research/experiments/2026-07-19-positive-only-dictionary-construction.md",
+  "dictionary": {
+    "path": "data/dictionary_positive_only_edge_average_085.json",
+    "sha256": "8df7ad33155bc88366091d0629dccfbd52ad6e566cfcedc6b5c4fbec0bf288f1",
+    "leaders": 256,
+    "prompt_scope": "canonical_leaders_only"
+  },
+  "inference": {
+    "model": "nvidia/Gemma-4-26B-A4B-NVFP4",
+    "model_revision": "a19cfe00be84568a6867111c9a68c9c44fdcffe6",
+    "prompt_version": "gemma26-canonical-leaders-v2",
+    "prompt_sha256": "4cb2c3eae91e416f92c9ad084d0cc5686b85f035698d8c7ca8b48162a9912af8",
+    "server_profile": "gemma4-nvfp4-quality-v280-s64-t16384-u090",
+    "temperature": 0,
+    "reasoning_effort": "none",
+    "structured_output": true,
+    "image_transport": "file",
+    "client_workers": 80
+  },
+  "train": {
+    "path": "data/dictionary_labels_train_vllm_gemma4_nvfp4_edge_average_085_leaders_v2.jsonl",
+    "sha256": "85ddfc1f4c10d8dc14dbddd8f767eaaedfb25fec3fa1bccbe3c85e88b54c3c50",
+    "metadata_sha256": "57daf6f93d1f2f9582ee977ea3ea5e7104de43d4e9eb0bbd7fe6830f9c83855a",
+    "rows": 18211,
+    "unique_image_ids": 18211,
+    "failed_rows": 0,
+    "retried_rows": 0,
+    "wall_seconds": 1346.4,
+    "images_per_second": 13.525,
+    "mean_present": 12.100598539344352,
+    "mean_uncertain": 7.367854593377629,
+    "minimum_present": 1,
+    "maximum_present": 42
+  },
+  "development": {
+    "path": "data/dictionary_labels_dev_vllm_gemma4_nvfp4_edge_average_085_leaders_v2.jsonl",
+    "sha256": "37b9be0050491ab6beed72a1fc2b8c64d767e9474d2756cc8ce2544b7bdcea7a",
+    "metadata_sha256": "75e90f4b7dd2eb3f3f6a0c96a81023ba01a3d8fdb1f127a26c50cb6003aa37be",
+    "rows": 3914,
+    "unique_image_ids": 3914,
+    "failed_rows": 0,
+    "retried_rows": 0,
+    "wall_seconds": 278.9,
+    "images_per_second": 14.032,
+    "mean_present": 12.116249361267245,
+    "mean_uncertain": 7.315533980582524,
+    "minimum_present": 1,
+    "maximum_present": 32
+  },
+  "combined_validation": {
+    "missing_image_ids": 0,
+    "extra_image_ids": 0,
+    "duplicate_image_ids": 0,
+    "noncanonical_labels": 0,
+    "present_uncertain_overlaps": 0,
+    "leaders_present": 250,
+    "leaders_present_or_uncertain": 255,
+    "leaders_never_present": [
+      "four-legged",
+      "veined",
+      "modular",
+      "insulated",
+      "gaseous",
+      "seasonal"
+    ],
+    "leaders_never_present_or_uncertain": [
+      "four-legged"
+    ],
+    "test_split_accessed": false
+  },
+  "abandoned_pilot": {
+    "path": "outputs/labeling_experiments/gemma4-positive-family-edge-average-085-train-v2",
+    "rows": 4225,
+    "reason": "member-aware prompts changed leader semantics; canonical leaders are the production targets"
+  }
+}

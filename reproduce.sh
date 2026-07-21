@@ -1,82 +1,104 @@
 #!/usr/bin/env bash
-# End-to-end reproduction of the concept-basis pipeline on THINGS.
+# Reproduce the reported SigLIP2 Giant / usage-profile-v8 experiment (Stages 0
+# and 4–7 in scripts/README.md). This intentionally pins the accepted
+# dictionary, captions, open tags, and fixed labels instead of rerunning VLM
+# annotation.
 #
-# Prereqs:
-#   - THINGS images downloaded (see README "Data & licensing"):
-#       data/raw/object_images_CC0/   (1,854 CC0 images — dictionary mining)
-#       data/raw/object_images/       (26,107 images — training)
-#   - pip install -e .   (installs deps + the conceptbasis package)
-#   - a local OpenAI-compatible VLM server for steps 2, 4, 6, and 7:
-#       export VLM_API_URL=http://127.0.0.1:1234/v1/chat/completions
-#       export VLM_MODEL=qwen/qwen3.6-35b-a3b
-#     (reasoning must be off / reasoning_effort "none" — handled by the scripts)
-#
-# VLM calls are resumable. The other steps are local compute.
+# VLM annotations and the accepted dictionary are frozen inputs here. Creating
+# a new annotation release is a different experiment; use the versioned
+# wrappers under scripts/vllm/ and promote its artifacts deliberately.
 set -euo pipefail
 
-# 1. freeze the class-level train/dev/test split before any annotation
-python scripts/data/make_class_splits.py
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$repo_root"
 
-# 2. tag discovery and development CC0 images separately; test remains sealed
-python scripts/data/mine_attributes.py --split train --workers 8
-python scripts/data/mine_attributes.py --split dev --workers 8
+python_bin="${CONCEPTBASIS_PYTHON:-$repo_root/.venv/bin/python}"
+if [[ ! -x "$python_bin" ]]; then
+  echo "ConceptBasis Python is missing from $python_bin" >&2
+  exit 1
+fi
+if [[ ! -d data/raw/object_images || ! -d data/raw/object_images_CC0 ]]; then
+  echo "missing THINGS images; see README 'Data and licensing'" >&2
+  exit 1
+fi
 
-# 3. cluster train-class attribute mentions into the fixed dictionary
-python scripts/dictionary/build_dictionary.py --merge-corr 0.5 --max-twin-corr 0.75
+encoder_key="siglip2-gopt-p16-384@ad3410b"
+dictionary_key="usage-profile-v8-v1"
+input_dir="outputs/training_inputs/$encoder_key/$dictionary_key"
+dictionary="data/dictionary_usage_profile_v8.json"
+captions="data/captions_vllm_gemma4_nvfp4_clip_grounded_v2.jsonl"
+dev_labels="data/dictionary_labels_cc0_dev_vllm_gemma4_nvfp4_usage_profile_v8_object_grounded_v11.jsonl"
+train_labels="data/dictionary_labels_train_vllm_gemma4_nvfp4_usage_profile_v8_object_grounded_v11_merged.jsonl"
+smoke="${REPRODUCE_SMOKE:-0}"
 
-# 3b. label every train image against that dictionary for reverse ridge
-python scripts/data/label_dictionary_concepts.py \
-  --model google/gemma-4-26b-a4b-qat --workers 4
+require_file() {
+  if [[ ! -f "$1" ]]; then
+    echo "missing required artifact: $1" >&2
+    exit 1
+  fi
+}
 
-# 4. caption all 26k images (the adapter consumes train classes only)
-python scripts/data/caption_images.py --workers 8
+"$python_bin" scripts/data/make_class_splits.py
 
-# 5. frozen embeddings + train-fitted GMM labels + class-level splits
-python scripts/data/compute_labels.py
+require_file "$dictionary"
+require_file "$captions"
+require_file "$train_labels"
+require_file "$dev_labels"
 
-# 6. contrastive prompt pairs per concept
-python scripts/dictionary/generate_contrastive_prompts.py
+# Bind the selected dictionary to a checksummed SigLIP2 cache. Existing valid
+# stages are reused, so this command is also the resume entry point.
+scripts/data/build_siglip2_training_inputs.sh \
+  --output-dir "$input_dir" --dictionary "$dictionary" \
+  --batch-size 16 --preprocess-workers 8 --prefetch-batches 3
 
-# 7. VLM-verified anchors sampled only from train classes
-python scripts/dictionary/verify_concepts.py --per-side 24 --workers 8
+training_args=()
+seeds=(0 1 2 3 4)
+if [[ "$smoke" == "1" ]]; then
+  training_args=(--epochs 1 --max_steps 1 --eval_every 1)
+  seeds=(0)
+  echo "REPRODUCE_SMOKE=1: running one step for one seed" >&2
+fi
 
-# 8. frozen direction choices selected on development classes + relabel
-python scripts/dictionary/build_directions.py
+checkpoint_args=()
+for seed in "${seeds[@]}"; do
+  for objective in contrastive group-mean reverse-ridge; do
+    family="${objective//-/_}"
+    run_name="siglip2_giant_usage_profile_v8_v11_${family}_s${seed}"
+    "$python_bin" -m conceptbasis.train \
+      --objective "$objective" --seed "$seed" --run_name "$run_name" \
+      --image_ids "$input_dir/image_ids.json" \
+      --image_embeddings "$input_dir/image_embeddings.npy" \
+      --caption_embeddings "$input_dir/caption_embeddings.npy" \
+      --soft-labels "$input_dir/labels.parquet" \
+      --captions "$captions" --dictionary "$dictionary" \
+      --fixed-labels "$train_labels" "${training_args[@]}"
+    checkpoint_args+=(--checkpoint "${family}_s${seed}=outputs/checkpoints/${run_name}/ckpt.pt")
+  done
+done
 
-# 9. matched incremental objectives; evaluation uses development classes only
-python -m conceptbasis.train --objective contrastive \
-  --run_name classsplit_contrastive
-python -m conceptbasis.train --objective group-mean --lambda_orth 8 \
-  --corr_exempt 0.15 \
-  --corr_weighting smooth --corr_weight_power 4 --corr_weight_floor 0.01 \
-  --run_name classsplit_group_mean
-python -m conceptbasis.train --objective reverse-ridge \
-  --ridge_alpha 0.001 --lambda_orth 512 \
-  --run_name classsplit_reverse_ridge
-ln -sfn classsplit_reverse_ridge outputs/checkpoints/latest
+profiles="outputs/evals/siglip2_usage_profile_v8_v11_exhaustive_cc0_dev_profiles.npz"
+metrics="outputs/evals/siglip2_usage_profile_v8_v11_exhaustive_cc0_dev_k20.json"
+"$python_bin" scripts/evaluation/build_retrieval_profiles.py \
+  --embeddings "$input_dir/image_embeddings.npy" \
+  --cc0-embeddings "$input_dir/image_embeddings_cc0.npy" \
+  --soft-labels "$input_dir/labels.parquet" --image-ids "$input_dir/image_ids.json" \
+  --dictionary "$dictionary" --train-fixed-labels "$train_labels" \
+  --eval-fixed-labels "$dev_labels" "${checkpoint_args[@]}" --out "$profiles"
 
-# 10. class-disjoint development evaluation; the test partition remains sealed
-python scripts/evaluation/build_groupmean_profiles.py \
-  --embeddings data/image_embeddings.npy \
-  --cc0-embeddings data/image_embeddings_cc0.npy \
-  --labels data/labels.parquet --include-frozen \
-  --checkpoint contrastive=outputs/checkpoints/classsplit_contrastive/ckpt.pt \
-  --checkpoint group_mean=outputs/checkpoints/classsplit_group_mean/ckpt.pt \
-  --checkpoint reverse_ridge=outputs/checkpoints/classsplit_reverse_ridge/ckpt.pt \
-  --out outputs/evals/classsplit_dev_profiles.npz
-python scripts/evaluation/eval_playground_subset_composability.py \
-  --dictionary data/dictionary.json \
-  --profiles-npz outputs/evals/classsplit_dev_profiles.npz \
-  --reference-model reverse_ridge --eval-split dev \
-  --subset-sizes 1,2,4,6,8,10,12,14 --rollouts 24 \
-  --rollouts-by-size 2:25,4:25,6:25,8:25,10:26,12:35,14:129 \
-  --out outputs/evals/classsplit_dev_composability.json
+"$python_bin" scripts/evaluation/evaluate_compositional_retrieval.py \
+  --dictionary "$dictionary" --profiles-npz "$profiles" \
+  --fixed-labels "$dev_labels" --label-field present \
+  --reference-model reverse_ridge_s0 --eval-split dev \
+  --include-flagged \
+  --subset-sizes 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 \
+  --rollouts 24 --out "$metrics"
 
-# 11. public and local galleries use development classes, never test
-python scripts/visualization/make_playground_directions.py --cc0 --out docs/playground.html
-python scripts/visualization/make_playground_frozen.py --cc0 --out docs/playground-baseline.html
-python scripts/visualization/make_attribute_preview.py
-python scripts/visualization/make_dictionary_preview.py
-python scripts/visualization/make_playground_directions.py
-python scripts/visualization/make_playground_frozen.py
-python scripts/visualization/make_readme_composability_chart.py
+if [[ "$smoke" != "1" ]]; then
+  "$python_bin" scripts/evaluation/summarize_seeded_composability.py \
+    --metrics "$metrics" \
+    --history contrastive=outputs/checkpoints/siglip2_giant_usage_profile_v8_v11_contrastive_s{seed}/history.json \
+    --history group_mean=outputs/checkpoints/siglip2_giant_usage_profile_v8_v11_group_mean_s{seed}/history.json \
+    --history reverse_ridge=outputs/checkpoints/siglip2_giant_usage_profile_v8_v11_reverse_ridge_s{seed}/history.json \
+    --out research/results/siglip2_usage_profile_v8_v11_exhaustive_cc0_dev_k20.json
+  "$python_bin" scripts/visualization/make_readme_composability_chart.py
+fi

@@ -1,0 +1,281 @@
+{
+  "schema": "conceptbasis.seeded-composability-summary/v1",
+  "created_at": "2026-07-19T23:33:08.718249+00:00",
+  "status": "development",
+  "eval_split": "dev",
+  "test_split_read": false,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "subset_sizes": [
+    1,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20
+  ],
+  "cohort_images": {
+    "1": 278,
+    "2": 278,
+    "4": 278,
+    "6": 278,
+    "8": 278,
+    "10": 278,
+    "12": 278,
+    "14": 278,
+    "16": 278,
+    "18": 278,
+    "20": 276
+  },
+  "mapped_concepts_per_image": {
+    "min": 18,
+    "mean": 33.64748201438849,
+    "median": 33.0,
+    "max": 57
+  },
+  "models": {
+    "contrastive": {
+      "ordinary_R@5": {
+        "mean": 0.9159938573837281,
+        "sample_std": 0.0011901772152400555
+      },
+      "composition_R@5": {
+        "1": {
+          "mean": 0.06321942446043166,
+          "sample_std": 0.0019088393854835724
+        },
+        "2": {
+          "mean": 0.08483213429256595,
+          "sample_std": 0.0012761830310196657
+        },
+        "4": {
+          "mean": 0.11516786570743405,
+          "sample_std": 0.0035635549097687556
+        },
+        "6": {
+          "mean": 0.13717026378896882,
+          "sample_std": 0.004869834736173491
+        },
+        "8": {
+          "mean": 0.1494904076738609,
+          "sample_std": 0.005887064274996387
+        },
+        "10": {
+          "mean": 0.15593525179856116,
+          "sample_std": 0.006783295629136962
+        },
+        "12": {
+          "mean": 0.16297961630695443,
+          "sample_std": 0.006778326302473696
+        },
+        "14": {
+          "mean": 0.1671462829736211,
+          "sample_std": 0.00934102973010122
+        },
+        "16": {
+          "mean": 0.17077338129496403,
+          "sample_std": 0.009444586944687859
+        },
+        "18": {
+          "mean": 0.17520983213429256,
+          "sample_std": 0.009452551594405605
+        },
+        "20": {
+          "mean": 0.17967995169082127,
+          "sample_std": 0.009748371718149634
+        }
+      }
+    },
+    "group_mean": {
+      "ordinary_R@5": {
+        "mean": 0.9088400602340698,
+        "sample_std": 0.0027481773222481714
+      },
+      "composition_R@5": {
+        "1": {
+          "mean": 0.07446043165467627,
+          "sample_std": 0.0014469446506171642
+        },
+        "2": {
+          "mean": 0.10833333333333334,
+          "sample_std": 0.003921878420797937
+        },
+        "4": {
+          "mean": 0.15857314148681054,
+          "sample_std": 0.003651357228740958
+        },
+        "6": {
+          "mean": 0.19991007194244603,
+          "sample_std": 0.004943090100187216
+        },
+        "8": {
+          "mean": 0.22598920863309352,
+          "sample_std": 0.006902950697940173
+        },
+        "10": {
+          "mean": 0.2480515587529976,
+          "sample_std": 0.006984315980025326
+        },
+        "12": {
+          "mean": 0.2666966426858513,
+          "sample_std": 0.008232906984076863
+        },
+        "14": {
+          "mean": 0.2794064748201439,
+          "sample_std": 0.01159727205731699
+        },
+        "16": {
+          "mean": 0.2863908872901679,
+          "sample_std": 0.010411759363723978
+        },
+        "18": {
+          "mean": 0.2937350119904077,
+          "sample_std": 0.00912079188490599
+        },
+        "20": {
+          "mean": 0.3027475845410628,
+          "sample_std": 0.009852553263609934
+        }
+      }
+    },
+    "reverse_ridge": {
+      "ordinary_R@5": {
+        "mean": 0.9198262572288514,
+        "sample_std": 0.0015996274860485176
+      },
+      "composition_R@5": {
+        "1": {
+          "mean": 0.09607314148681055,
+          "sample_std": 0.0029255427601833244
+        },
+        "2": {
+          "mean": 0.16333932853717026,
+          "sample_std": 0.0023588860695755057
+        },
+        "4": {
+          "mean": 0.2956235011990408,
+          "sample_std": 0.002690754747003759
+        },
+        "6": {
+          "mean": 0.415347721822542,
+          "sample_std": 0.003921878420797941
+        },
+        "8": {
+          "mean": 0.5238609112709832,
+          "sample_std": 0.007797655135028739
+        },
+        "10": {
+          "mean": 0.616726618705036,
+          "sample_std": 0.010061744544659159
+        },
+        "12": {
+          "mean": 0.688968824940048,
+          "sample_std": 0.006403231337740236
+        },
+        "14": {
+          "mean": 0.7490407673860912,
+          "sample_std": 0.007717442427003244
+        },
+        "16": {
+          "mean": 0.7961930455635492,
+          "sample_std": 0.006193694091091984
+        },
+        "18": {
+          "mean": 0.8375599520383693,
+          "sample_std": 0.006249658537216298
+        },
+        "20": {
+          "mean": 0.8732487922705314,
+          "sample_std": 0.006225959622599992
+        }
+      }
+    }
+  },
+  "inputs": {
+    "composability": {
+      "path": "outputs/evals/siglip2_giant_edgeavg085_exhaustive_cc0_dev_k20_seed_composability.json",
+      "sha256": "f7eb4a58ed08c3b22fe8e2fa76b26a8d6bb6b1badab632b67f6df149a6f6bae1"
+    },
+    "attributes": "data/dictionary_labels_cc0_dev_vllm_gemma4_nvfp4_edge_average_085_named_binary_v9_merged.jsonl",
+    "attributes_sha256": "57e9df20c61cfc205bf5ea5b3a84101b13d9afaa337bfe290727d769d1e54e49",
+    "attribute_field": "present",
+    "histories": {
+      "contrastive": {
+        "0": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_contrastive_s0/history.json",
+          "sha256": "ba36bcd0076e6292814477b2c4254c3d371fd7bad2d2355292b25ccdaa45e298"
+        },
+        "1": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_contrastive_s1/history.json",
+          "sha256": "b7561acc7e2e1c98a1928eb7bc6cef28f75a6c653713e036dc6818e212cbe8b7"
+        },
+        "2": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_contrastive_s2/history.json",
+          "sha256": "7f9b70e374dd3a6b11ccf212a2d75219cf6e434e76ed291c283af7237263aecf"
+        },
+        "3": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_contrastive_s3/history.json",
+          "sha256": "06c42d62439450973c8b424295113d13082a56afe7d0cfa98720bd24a2f6ac3f"
+        },
+        "4": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_contrastive_s4/history.json",
+          "sha256": "55a59104ff1e629d5458e9c2a22ba17d64b0e5270ea2ee7ccf47acbbeab09828"
+        }
+      },
+      "group_mean": {
+        "0": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_group_mean_s0/history.json",
+          "sha256": "81d0df99bbe4f262e013bae717573e02d7de3501028e9931dd4f2b6d20ef117e"
+        },
+        "1": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_group_mean_s1/history.json",
+          "sha256": "ef4cdb5705e27406b879e01ddb7070956805723e271ea7f7fd6b2bbe48118c48"
+        },
+        "2": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_group_mean_s2/history.json",
+          "sha256": "28ad3f0023a4cccb6593a9b2bb595f78edb18ee0476f5aaf6df0f1d9d0cbb35f"
+        },
+        "3": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_group_mean_s3/history.json",
+          "sha256": "b7334919823cfd7dbd76502d9f595d1da579fd0d9fbac44d922cbb9b6231a03a"
+        },
+        "4": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_group_mean_s4/history.json",
+          "sha256": "457544286c5dcdc46f3e5bac2ce4e081e7b26dee1765a2e38a8e419a254ff4ff"
+        }
+      },
+      "reverse_ridge": {
+        "0": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_rr_a0p01_l1024_s0/history.json",
+          "sha256": "42e7696a20ef7ae5b471b85dff03c977c2ae0d10b61926f3ad8c9e5c46f266ad"
+        },
+        "1": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_rr_a0p01_l1024_s1/history.json",
+          "sha256": "999febe58e53979d6a94090884be74f361966811a5446854f50ad0a66b4b01aa"
+        },
+        "2": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_rr_a0p01_l1024_s2/history.json",
+          "sha256": "6830f1dffbe4023d83d897bcf28588280c5566355874d70c51cdfc5f3a4d0642"
+        },
+        "3": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_rr_a0p01_l1024_s3/history.json",
+          "sha256": "ae845ae6c12c6776700cb4933237085d70921b1ee2381b66c40681d2ebb73d5a"
+        },
+        "4": {
+          "path": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_rr_a0p01_l1024_s4/history.json",
+          "sha256": "2317085aa57ef2781f0043f2e337c8801f40d4f3dc4e040292017ec092d51010"
+        }
+      }
+    }
+  }
+}

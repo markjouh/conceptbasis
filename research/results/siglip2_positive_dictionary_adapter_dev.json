@@ -1,0 +1,76 @@
+{
+  "schema": "conceptbasis.adapter-suite-result/v1",
+  "date": "2026-07-19",
+  "status": "development-selected",
+  "selected_objective": "reverse-ridge",
+  "test_split_read": false,
+  "inputs": {
+    "encoder": {
+      "model": "ViT-gopt-16-SigLIP2-384",
+      "pretrained": "webli",
+      "revision": "ad3410bee2c3373be5ed01e7c4e7fcd2bf95a183"
+    },
+    "dictionary_sha256": "8df7ad33155bc88366091d0629dccfbd52ad6e566cfcedc6b5c4fbec0bf288f1",
+    "hard_train_labels_sha256": "85ddfc1f4c10d8dc14dbddd8f767eaaedfb25fec3fa1bccbe3c85e88b54c3c50",
+    "encoder_manifest_sha256": "3b72372147f58e99fd5381deb6f46affb61c1c056cd519084d99dabdd21f7cc7",
+    "caption_manifest_sha256": "80f9b1e7957d01c930e438dd45c8325481e31cd4879cee9877c09aba9e26ee8b",
+    "image_embeddings_sha256": "141f0b1f974a5516c31fae5ccc9e9e428ee798f552f7e5d68eb6ffd1ad18d849",
+    "caption_embeddings_sha256": "17ab5f0d39ca4cf56825cd12cff92f07a97701bae568a7d8729ffbc580881fa3",
+    "soft_labels_sha256": "e02fa8b108db7f8b79620a6a4502a68e92186ea74774b38de27697e51fcc8861",
+    "split_counts": {
+      "train": 18211,
+      "dev": 3914,
+      "test": 3982
+    }
+  },
+  "training": {
+    "seed": 0,
+    "epochs": 30,
+    "batch_size": 1024,
+    "steps": 540,
+    "embed_dim": 320,
+    "hidden_dim": 1024,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001
+  },
+  "models": {
+    "contrastive": {
+      "checkpoint_sha256": "f837d2e609d3f9b108ab44001a45b3035e1fd52f85db1371e6e05e3ddd218e50",
+      "elapsed_seconds": 3.9,
+      "dev_retrieval": {"R@1": 0.6269800663, "R@5": 0.9146652818, "R@10": 0.9821155071},
+      "dev_auroc": 0.8280841833,
+      "direction_orth_rms": 0.2957157195,
+      "composition_R@5": {"1": 0.0918764988, "4": 0.1879136691, "8": 0.2284476534, "10": 0.2582182774, "12": 0.2783549784}
+    },
+    "group_mean": {
+      "checkpoint_sha256": "88f1d7b086d69bcb12b29d4adb2cb115ff4b2f5f47e1e04be4c8201ba2410935",
+      "elapsed_seconds": 4.6,
+      "dev_retrieval": {"R@1": 0.6065406203, "R@5": 0.9054675698, "R@10": 0.9821155071},
+      "dev_auroc": 0.8265428083,
+      "direction_orth_rms": 0.2018826902,
+      "composition_R@5": {"1": 0.1068645084, "4": 0.2612949640, "8": 0.3617328520, "10": 0.4245562130, "12": 0.4735930736}
+    },
+    "reverse_ridge": {
+      "checkpoint_sha256": "c16b47ec60130a891e628e6bc3b2a01af37b382d98a2fb089fc02c065a719f3c",
+      "elapsed_seconds": 4.5,
+      "dev_retrieval": {"R@1": 0.6236586571, "R@5": 0.9146652818, "R@10": 0.9810935259},
+      "dev_auroc": 0.8542003861,
+      "direction_orth_rms": 0.0624032058,
+      "explained_fraction": 0.2249121666,
+      "composition_R@5": {"1": 0.1133093525, "4": 0.3328057554, "8": 0.5878700361, "10": 0.7161406969, "12": 0.7545454545}
+    }
+  },
+  "frozen_composition_R@5": {"1": 0.0810851319, "4": 0.1048920863, "8": 0.0986281588, "10": 0.0880999343, "12": 0.1142857143},
+  "composition_cohort_images": {"1": 278, "4": 278, "8": 277, "10": 234, "12": 66, "14": 4},
+  "unsupported_reverse_concepts": [
+    "four-legged",
+    "wire",
+    "veined",
+    "modular",
+    "insulated",
+    "gaseous",
+    "seasonal",
+    "minimalist"
+  ],
+  "full_eval_sha256": "8ee50b3ad892ce971d7c5bc175bdec6f0a9c68e1cfc824865857dc89f04da96f"
+}

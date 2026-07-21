@@ -1,0 +1,123 @@
+{
+  "attribute_split": "train",
+  "coefficient_domain": "nonnegative",
+  "concept_policy": "affirmatively-present-traits-only",
+  "dictionary_sha256": "dca532bfadaa803b351042fcef0f325efa6a86722bff7f54b493a58d8700c5f1",
+  "embedding_cache": {
+    "directory": "outputs/encoder_candidates/siglip2-gopt-p16-384@ad3410b",
+    "image_embeddings_sha256": "141f0b1f974a5516c31fae5ccc9e9e428ee798f552f7e5d68eb6ffd1ad18d849",
+    "image_ids_sha256": "4e54330ce08a3434e3941441b0a30d8a6e6d69fb0c0a309db56474a5bcc6d02d",
+    "manifest": "outputs/encoder_candidates/siglip2-gopt-p16-384@ad3410b/encoder_manifest.json",
+    "manifest_sha256": "f9539e9d803b35542d7426263aafc1c0985e68f72fabb37fd0f514ec6e189e02",
+    "source": {
+      "checkpoint_filename": "open_clip_model.safetensors",
+      "context_length": 64,
+      "embedding_dimension": 1536,
+      "hf_repo": "timm/ViT-gopt-16-SigLIP2-384",
+      "hf_revision": "ad3410bee2c3373be5ed01e7c4e7fcd2bf95a183",
+      "image_size": 384,
+      "open_clip_version": "3.3.0",
+      "patch_size": null,
+      "preprocess": {
+        "interpolation": "bicubic",
+        "mean": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "resize_mode": "squash",
+        "std": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      },
+      "pretrained_tag": "webli"
+    }
+  },
+  "encoder": {
+    "model": "ViT-gopt-16-SigLIP2-384",
+    "name": "siglip2-gopt-p16-384",
+    "pretrained": "webli",
+    "revision": "ad3410bee2c3373be5ed01e7c4e7fcd2bf95a183"
+  },
+  "encoder_source": {
+    "checkpoint_filename": "open_clip_model.safetensors",
+    "context_length": 64,
+    "embedding_dimension": 1536,
+    "hf_repo": "timm/ViT-gopt-16-SigLIP2-384",
+    "hf_revision": "ad3410bee2c3373be5ed01e7c4e7fcd2bf95a183",
+    "image_size": 384,
+    "open_clip_version": "3.3.0",
+    "patch_size": null,
+    "preprocess": {
+      "interpolation": "bicubic",
+      "mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "resize_mode": "squash",
+      "std": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "pretrained_tag": "webli"
+  },
+  "excluded_lexical_negations": {
+    "unpolished": "polished"
+  },
+  "inputs": {
+    "data/attributes_train_vllm_gemma4_nvfp4_open_tags_nonredundant_v8.jsonl": "26839a54ae13db3f871ef18de1efdca97c9ced18ffcc8da5608adee9bf4ee4d5",
+    "data/splits.json": "ee6bdf93feeb1367fde2da4f53474efa4e80f0a6dc0188e2636d51d09bb57027"
+  },
+  "k": 256,
+  "max_text_twin_cosine": 0.98,
+  "max_twin_corr": 0.75,
+  "merge_corr": 0.5,
+  "merge_method": "profile",
+  "min_class_support": 3,
+  "min_mentions": 3,
+  "n_attribute_images": 18211,
+  "n_candidate_phrases_before_negation_filter": 643,
+  "n_clusters": 303,
+  "n_phrase_profiles": 642,
+  "n_profile_classes": 1298,
+  "n_raw_phrases": 1349,
+  "near_twins_skipped": [
+    {
+      "candidate": "clothing",
+      "profile_correlation": 0.753363311290741,
+      "selected_twin": "wearable",
+      "text_cosine": 0.916236400604248
+    },
+    {
+      "candidate": "granular",
+      "profile_correlation": 0.7610991597175598,
+      "selected_twin": "rough",
+      "text_cosine": 0.9381364583969116
+    },
+    {
+      "candidate": "ornamental",
+      "profile_correlation": 0.7801199555397034,
+      "selected_twin": "decorative",
+      "text_cosine": 0.9559028148651123
+    },
+    {
+      "candidate": "lime green",
+      "profile_correlation": 0.7765098810195923,
+      "selected_twin": "green",
+      "text_cosine": 0.909588634967804
+    }
+  ],
+  "negation_policy": "exclude",
+  "precision": "fp16",
+  "profile_unit": "things_object_class_mean",
+  "remove_components": 1,
+  "schema": "conceptbasis.dictionary-build/v5",
+  "selection_method": "profile",
+  "text_merge_cosine": 0.95,
+  "text_template": "an object that is {phrase}"
+}

@@ -1,0 +1,35 @@
+{
+  "artifact": {
+    "path": "data/dictionary_labels_train_vllm_gemma4_nvfp4_usage_profile_v8_object_grounded_v11_merged.jsonl",
+    "sha256": "7deaa3ea63226900c5e5372935e5978d888d426b269d1e47e291d0abccdafd9a"
+  },
+  "concepts": 256,
+  "created_at": "2026-07-21T14:58:06.322075+00:00",
+  "dictionary": {
+    "path": "data/dictionary_usage_profile_v8.json",
+    "sha256": "dca532bfadaa803b351042fcef0f325efa6a86722bff7f54b493a58d8700c5f1"
+  },
+  "image_ids": {
+    "path": "data/image_ids.json",
+    "sha256": "92745b40133a4d9203cf515786e790b235d4d37c1878bbf5fb1b7ce3bc859911"
+  },
+  "rows": 18211,
+  "schema": "conceptbasis.merged-dictionary-labels/v1",
+  "sources": [
+    {
+      "path": "data/dictionary_labels_train_vllm_gemma4_nvfp4_usage_profile_v8_object_grounded_v11.jsonl",
+      "rows": 18202,
+      "sha256": "78669cbe2a7550924ed1753ca0c38fbe053fe2dbbb3139a94bc0806bc2a9ca41"
+    },
+    {
+      "path": "data/dictionary_labels_train_vllm_gemma4_nvfp4_usage_profile_v8_object_grounded_v11_grammar_rescue.jsonl",
+      "rows": 9,
+      "sha256": "17d7d4b916f9423b381315e9c61069582d3d7a5aad4446b4530a3c21afae5d09"
+    }
+  ],
+  "split": "train",
+  "split_manifest": {
+    "path": "data/splits.json",
+    "sha256": "ee6bdf93feeb1367fde2da4f53474efa4e80f0a6dc0188e2636d51d09bb57027"
+  }
+}

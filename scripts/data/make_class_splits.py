@@ -1,4 +1,8 @@
-"""Create the deterministic class-grouped THINGS/CC0 split manifest."""
+"""Stage 0 — Create the deterministic THINGS train/dev/test split.
+
+Writes ``data/splits.json`` at object-class granularity so every full-set image
+and its matching CC0 representative remain in the same partition.
+"""
 
 from __future__ import annotations
 
@@ -25,7 +29,7 @@ def sha256(path: str) -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
     parser.add_argument("--seed", type=int, default=20260710)
     parser.add_argument("--train-fraction", type=float, default=0.70)
     parser.add_argument("--dev-fraction", type=float, default=0.15)

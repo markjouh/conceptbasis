@@ -1,0 +1,98 @@
+{
+  "schema": "conceptbasis.reverse-ridge-sweep-result/v1",
+  "date": "2026-07-19",
+  "status": "development-selected",
+  "test_split_read": false,
+  "inputs": {
+    "encoder": {
+      "model": "ViT-gopt-16-SigLIP2-384",
+      "pretrained": "webli",
+      "revision": "ad3410bee2c3373be5ed01e7c4e7fcd2bf95a183"
+    },
+    "dictionary_sha256": "8df7ad33155bc88366091d0629dccfbd52ad6e566cfcedc6b5c4fbec0bf288f1",
+    "hard_train_labels_sha256": "1fdc340d1991cd085f555a77e39cdd877be3ffb5b5604cae06cae4f88476cd38",
+    "hard_train_label_rows": 18211
+  },
+  "sweep": {
+    "seed": 0,
+    "broad_grid": {
+      "ridge_alpha": [0.0001, 0.001, 0.01, 0.1],
+      "lambda_orth": [32, 64, 128, 256, 512, 1024],
+      "configurations": 24
+    },
+    "focused_grid": {
+      "ridge_alpha": [0.02, 0.03, 0.05],
+      "lambda_orth": [512, 768, 1024, 1536],
+      "configurations": 12
+    },
+    "selection_criterion": "Pareto balance of ordinary development retrieval, soft-label AUROC, direction overlap, and class-disjoint compositional retrieval from k=1 through k=12."
+  },
+  "selected": {
+    "ridge_alpha": 0.01,
+    "lambda_orth": 1024,
+    "seed0_checkpoint": "outputs/checkpoints/siglip2_giant_edgeavg085_interim_v9_rr_a0p01_l1024_s0/ckpt.pt",
+    "seed0_checkpoint_sha256": "f60378b9f3cedd67a942a86e5e240878353b54bbae0c485d075aa109011d4f2f",
+    "seed0": {
+      "dev_retrieval": {"R@1": 0.6241696477, "R@5": 0.9187532067, "R@10": 0.9828819633},
+      "dev_auroc": 0.8577929455,
+      "direction_orth_rms": 0.0568471737,
+      "explained_fraction": 0.3293190002,
+      "composition_R@5": {"1": 0.1152577938, "2": 0.1959712230, "4": 0.3558273381, "6": 0.4929496403, "8": 0.6164620939, "10": 0.7496712689, "12": 0.8774891775}
+    },
+    "five_seed_mean": {
+      "dev_retrieval": {"R@1": 0.6269289732, "R@5": 0.9198262572, "R@10": 0.9830352545},
+      "dev_auroc": 0.8580461017,
+      "direction_orth_rms": 0.0559120797,
+      "explained_fraction": 0.3242735267,
+      "composition_R@5": {"1": 0.1113609113, "2": 0.1981007194, "4": 0.3582158273, "6": 0.4905035971, "8": 0.6154223827, "10": 0.7304076266, "12": 0.8296969697}
+    },
+    "five_seed_sample_std": {
+      "dev_retrieval": {"R@1": 0.0021784393, "R@5": 0.0015996275, "R@10": 0.0011929094},
+      "dev_auroc": 0.0007156297,
+      "direction_orth_rms": 0.0013755585,
+      "explained_fraction": 0.0064111347,
+      "composition_R@5": {"1": 0.0030106879, "2": 0.0017218159, "4": 0.0014623972, "6": 0.0074508204, "8": 0.0046450185, "10": 0.0150730468, "12": 0.0403348459}
+    },
+    "checkpoint_sha256_by_seed": {
+      "0": "f60378b9f3cedd67a942a86e5e240878353b54bbae0c485d075aa109011d4f2f",
+      "1": "b281fa6b219d24efd3efc05679d2c94445e4bf80bac57be1767c486cfd3e98ae",
+      "2": "6e081f7ed68b6239ae6b9506274472cea17f71bb2cfc47973ee8fa8e3b13edb3",
+      "3": "d98163440af0b7fb364f0a6ae12fe779d56e472c76c9c9b152307f791ef527b4",
+      "4": "ece4b43c58fd25563cf2bcaa5687a25e1b09a4f24a6abe751521b710ebd5ef35"
+    }
+  },
+  "seed0_comparison": {
+    "old_labels_old_hyperparameters": {
+      "dev_retrieval": {"R@1": 0.6236586571, "R@5": 0.9146652818, "R@10": 0.9810935259},
+      "dev_auroc": 0.8542003861,
+      "direction_orth_rms": 0.0624032058,
+      "composition_R@5": {"1": 0.1133093525, "2": 0.2025899281, "4": 0.3328057554, "6": 0.4674820144, "8": 0.5878700361, "10": 0.7161406969, "12": 0.7545454545}
+    },
+    "exhaustive_labels_old_hyperparameters": {
+      "dev_retrieval": {"R@1": 0.6336228848, "R@5": 0.9184976816, "R@10": 0.9833929539},
+      "dev_auroc": 0.8565979707,
+      "direction_orth_rms": 0.0549654216,
+      "composition_R@5": {"1": 0.1095623501, "2": 0.1801438849, "4": 0.3211510791, "6": 0.4464748201, "8": 0.5757400722, "10": 0.7092373439, "12": 0.8134199134}
+    },
+    "exhaustive_labels_tuned_hyperparameters": {
+      "dev_retrieval": {"R@1": 0.6241696477, "R@5": 0.9187532067, "R@10": 0.9828819633},
+      "dev_auroc": 0.8577929455,
+      "direction_orth_rms": 0.0568471737,
+      "composition_R@5": {"1": 0.1152577938, "2": 0.1959712230, "4": 0.3558273381, "6": 0.4929496403, "8": 0.6164620939, "10": 0.7496712689, "12": 0.8774891775}
+    }
+  },
+  "composition_protocol": {
+    "split": "dev",
+    "eligible_images": {"1": 278, "2": 278, "4": 278, "6": 278, "8": 277, "10": 234, "12": 66, "14": 4},
+    "seed": 0,
+    "include_flagged": true,
+    "test_split_read": false
+  },
+  "artifacts": {
+    "broad_sweep_eval_sha256": "56a28c22dcf8b5d53d91b556dd2e3d174441f4566b039248ae3df2dda534abf9",
+    "focused_sweep_eval_sha256": "130c230e2ace203356884d4ae1762bd40c2f5a2aedae0c5dc5379b04b315b080",
+    "selected_comparison_eval_sha256": "63ea88bae50c2843d859b59aaa34481d3df0a71bec2895625e28ca3b8ce6964b",
+    "five_seed_eval_sha256": "fde720dc3265ae0ce3704a447276a64f18f5f6503a2adefc1964d716cc701d8e"
+  },
+  "interpretation": "The tuned exhaustive-label adapter restores the mid-order compositional performance lost by the untuned rerun, improves ordinary retrieval and AUROC over the original adapter, and improves paired source-image ranks more often than it worsens them at every evaluated subset size from k=1 through k=12."
+}

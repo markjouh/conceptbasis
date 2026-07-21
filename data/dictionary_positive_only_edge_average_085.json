@@ -1,0 +1,3058 @@
+[
+  {
+    "class_support": 1050,
+    "image_prevalence": 0.7654585392641405,
+    "members": [
+      "artificial",
+      "manmade",
+      "plastic",
+      "synthetic"
+    ],
+    "mentions": 13939,
+    "name": "manmade",
+    "prevalence": 0.7721833384918173
+  },
+  {
+    "class_support": 895,
+    "image_prevalence": 0.558154859967051,
+    "members": [
+      "firm",
+      "frozen",
+      "hard",
+      "rigid"
+    ],
+    "mentions": 10164,
+    "name": "rigid",
+    "prevalence": 0.5624825593003238
+  },
+  {
+    "class_support": 988,
+    "image_prevalence": 0.4798462383305876,
+    "members": [
+      "polished",
+      "reflective",
+      "smooth",
+      "smooth finish",
+      "smooth texture"
+    ],
+    "mentions": 8738,
+    "name": "smooth",
+    "prevalence": 0.484935115733489
+  },
+  {
+    "class_support": 977,
+    "image_prevalence": 0.4071938495332235,
+    "members": [
+      "grainy",
+      "mottled",
+      "patterned",
+      "speckled",
+      "spotted",
+      "textural",
+      "textured"
+    ],
+    "mentions": 7415,
+    "name": "textured",
+    "prevalence": 0.4019637055126398
+  },
+  {
+    "class_support": 729,
+    "image_prevalence": 0.3328390993959363,
+    "members": [
+      "handheld",
+      "mobile",
+      "portable"
+    ],
+    "mentions": 6061,
+    "name": "handheld",
+    "prevalence": 0.34244368200764896
+  },
+  {
+    "class_support": 626,
+    "image_prevalence": 0.2931905546403075,
+    "members": [
+      "metal",
+      "metallic",
+      "metallic finish",
+      "plated"
+    ],
+    "mentions": 5339,
+    "name": "metallic",
+    "prevalence": 0.2962882510781696
+  },
+  {
+    "class_support": 662,
+    "image_prevalence": 0.28522789676002197,
+    "members": [
+      "compact",
+      "miniature",
+      "small",
+      "small-scale",
+      "tiny"
+    ],
+    "mentions": 5194,
+    "name": "small",
+    "prevalence": 0.2870089888105876
+  },
+  {
+    "class_support": 849,
+    "image_prevalence": 0.25930807248764415,
+    "members": [
+      "dull",
+      "dull finish",
+      "matte",
+      "matte finish"
+    ],
+    "mentions": 4722,
+    "name": "matte",
+    "prevalence": 0.26112131711210673
+  },
+  {
+    "class_support": 475,
+    "image_prevalence": 0.2605161998901702,
+    "members": [
+      "fresh",
+      "natural",
+      "natural finish",
+      "natural grain",
+      "natural material",
+      "natural texture",
+      "raw"
+    ],
+    "mentions": 4744,
+    "name": "natural",
+    "prevalence": 0.25422053342175155
+  },
+  {
+    "class_support": 749,
+    "image_prevalence": 0.2556836902800659,
+    "members": [
+      "beige",
+      "blonde",
+      "brown",
+      "brownish",
+      "dark brown",
+      "light brown",
+      "tan"
+    ],
+    "mentions": 4656,
+    "name": "brown",
+    "prevalence": 0.25228272393202217
+  },
+  {
+    "class_support": 819,
+    "image_prevalence": 0.24459088412959912,
+    "members": [
+      "black",
+      "dark",
+      "dark gray",
+      "dark grey",
+      "dark-colored",
+      "gray",
+      "grey",
+      "light gray",
+      "light grey"
+    ],
+    "mentions": 4454,
+    "name": "black",
+    "prevalence": 0.2447528239677372
+  },
+  {
+    "class_support": 415,
+    "image_prevalence": 0.24936847885777044,
+    "members": [
+      "organic",
+      "organic shape"
+    ],
+    "mentions": 4541,
+    "name": "organic",
+    "prevalence": 0.24271975978545265
+  },
+  {
+    "class_support": 492,
+    "image_prevalence": 0.2043931905546403,
+    "members": [
+      "box-shaped",
+      "cubic",
+      "cuboid",
+      "rectangular",
+      "square"
+    ],
+    "mentions": 3722,
+    "name": "rectangular",
+    "prevalence": 0.20775025834493938
+  },
+  {
+    "class_support": 759,
+    "image_prevalence": 0.2070840197693575,
+    "members": [
+      "cream",
+      "cream colored",
+      "cream-colored",
+      "creamy",
+      "off-white",
+      "white"
+    ],
+    "mentions": 3771,
+    "name": "white",
+    "prevalence": 0.20432187314131145
+  },
+  {
+    "class_support": 422,
+    "image_prevalence": 0.20356946732564524,
+    "members": [
+      "silky",
+      "soft",
+      "soft texture"
+    ],
+    "mentions": 3707,
+    "name": "soft",
+    "prevalence": 0.20338717418797753
+  },
+  {
+    "class_support": 238,
+    "image_prevalence": 0.1686985172981878,
+    "members": [
+      "consumable",
+      "edible",
+      "food",
+      "produce"
+    ],
+    "mentions": 3072,
+    "name": "edible",
+    "prevalence": 0.16672889730886792
+  },
+  {
+    "class_support": 410,
+    "image_prevalence": 0.171279516749039,
+    "members": [
+      "bulky",
+      "chunky",
+      "dense",
+      "large",
+      "massive",
+      "medium-sized",
+      "monumental",
+      "thick"
+    ],
+    "mentions": 3119,
+    "name": "large",
+    "prevalence": 0.16664531525790321
+  },
+  {
+    "class_support": 358,
+    "image_prevalence": 0.1543657331136738,
+    "members": [
+      "equipment",
+      "instrumental",
+      "tool"
+    ],
+    "mentions": 2811,
+    "name": "tool",
+    "prevalence": 0.16345527417013914
+  },
+  {
+    "class_support": 340,
+    "image_prevalence": 0.15606809445359693,
+    "members": [
+      "elastic",
+      "flexible",
+      "malleable",
+      "pliable",
+      "stretchy",
+      "supple"
+    ],
+    "mentions": 2842,
+    "name": "flexible",
+    "prevalence": 0.15983098444936614
+  },
+  {
+    "class_support": 396,
+    "image_prevalence": 0.14332784184514002,
+    "members": [
+      "cylindrical",
+      "tubular"
+    ],
+    "mentions": 2610,
+    "name": "cylindrical",
+    "prevalence": 0.1453304470582779
+  },
+  {
+    "class_support": 415,
+    "image_prevalence": 0.1400878638110928,
+    "members": [
+      "circular",
+      "radial",
+      "round",
+      "rounded",
+      "spherical"
+    ],
+    "mentions": 2551,
+    "name": "circular",
+    "prevalence": 0.13760418015230133
+  },
+  {
+    "class_support": 553,
+    "image_prevalence": 0.1303679297089511,
+    "members": [
+      "glittery",
+      "glossy",
+      "lustrous",
+      "shimmering",
+      "shimmery",
+      "shiny",
+      "sparkling"
+    ],
+    "mentions": 2374,
+    "name": "shiny",
+    "prevalence": 0.1310403864249323
+  },
+  {
+    "class_support": 477,
+    "image_prevalence": 0.12921471718835806,
+    "members": [
+      "functional",
+      "utilitarian",
+      "utility"
+    ],
+    "mentions": 2353,
+    "name": "functional",
+    "prevalence": 0.12987121418159694
+  },
+  {
+    "class_support": 395,
+    "image_prevalence": 0.12685337726523888,
+    "members": [
+      "asymmetric",
+      "asymmetrical",
+      "complex shape",
+      "irregular",
+      "irregular shape",
+      "irregular shapes"
+    ],
+    "mentions": 2310,
+    "name": "irregular",
+    "prevalence": 0.12700204165460907
+  },
+  {
+    "class_support": 510,
+    "image_prevalence": 0.12817133443163098,
+    "members": [
+      "colorful",
+      "multi-colored",
+      "multicolored",
+      "multiple colors",
+      "pastel",
+      "various colors"
+    ],
+    "mentions": 2334,
+    "name": "colorful",
+    "prevalence": 0.12662610406956212
+  },
+  {
+    "class_support": 523,
+    "image_prevalence": 0.12108731466227347,
+    "members": [
+      "repetitive",
+      "solid",
+      "uniform"
+    ],
+    "mentions": 2205,
+    "name": "solid",
+    "prevalence": 0.1214531579105322
+  },
+  {
+    "class_support": 336,
+    "image_prevalence": 0.12070291048874245,
+    "members": [
+      "artistic",
+      "decorated",
+      "decorative",
+      "intricate",
+      "ornamental",
+      "ornate"
+    ],
+    "mentions": 2198,
+    "name": "decorative",
+    "prevalence": 0.12046835185485621
+  },
+  {
+    "class_support": 579,
+    "image_prevalence": 0.11965952773201538,
+    "members": [
+      "opaque"
+    ],
+    "mentions": 2179,
+    "name": "opaque",
+    "prevalence": 0.11982493053922905
+  },
+  {
+    "class_support": 186,
+    "image_prevalence": 0.12361339923119165,
+    "members": [
+      "animal",
+      "growing",
+      "living",
+      "perennial"
+    ],
+    "mentions": 2251,
+    "name": "living",
+    "prevalence": 0.11743315564811603
+  },
+  {
+    "class_support": 603,
+    "image_prevalence": 0.11378363536518396,
+    "members": [
+      "burgundy",
+      "dark purple",
+      "dark red",
+      "magenta",
+      "maroon",
+      "pink",
+      "pinkish",
+      "purple",
+      "red",
+      "reddish"
+    ],
+    "mentions": 2072,
+    "name": "red",
+    "prevalence": 0.11435816824382508
+  },
+  {
+    "class_support": 332,
+    "image_prevalence": 0.1101043382756727,
+    "members": [
+      "aerodynamic",
+      "linear",
+      "narrow",
+      "slender",
+      "slim",
+      "streamlined",
+      "thin"
+    ],
+    "mentions": 2005,
+    "name": "thin",
+    "prevalence": 0.11190044149978834
+  },
+  {
+    "class_support": 229,
+    "image_prevalence": 0.1071938495332235,
+    "members": [
+      "outdoor"
+    ],
+    "mentions": 1952,
+    "name": "outdoor",
+    "prevalence": 0.10582592534529786
+  },
+  {
+    "class_support": 321,
+    "image_prevalence": 0.10313014827018122,
+    "members": [
+      "clear",
+      "glass",
+      "glassy",
+      "semi-transparent",
+      "translucent",
+      "transparent"
+    ],
+    "mentions": 1878,
+    "name": "transparent",
+    "prevalence": 0.1036955348051426
+  },
+  {
+    "class_support": 293,
+    "image_prevalence": 0.10291048874244921,
+    "members": [
+      "grounded",
+      "static",
+      "stationary"
+    ],
+    "mentions": 1874,
+    "name": "stationary",
+    "prevalence": 0.10261970049667365
+  },
+  {
+    "class_support": 203,
+    "image_prevalence": 0.09752883031301483,
+    "members": [
+      "mechanical",
+      "motorized"
+    ],
+    "mentions": 1776,
+    "name": "mechanical",
+    "prevalence": 0.09783764335053649
+  },
+  {
+    "class_support": 390,
+    "image_prevalence": 0.09681493684788578,
+    "members": [
+      "curved"
+    ],
+    "mentions": 1763,
+    "name": "curved",
+    "prevalence": 0.0973747650257296
+  },
+  {
+    "class_support": 381,
+    "image_prevalence": 0.09362987369577155,
+    "members": [
+      "silver"
+    ],
+    "mentions": 1705,
+    "name": "silver",
+    "prevalence": 0.09697433161929572
+  },
+  {
+    "class_support": 197,
+    "image_prevalence": 0.09225700164744646,
+    "members": [
+      "braided",
+      "cloth",
+      "fabric",
+      "knitted",
+      "textile",
+      "woven"
+    ],
+    "mentions": 1680,
+    "name": "textile",
+    "prevalence": 0.09358065940284
+  },
+  {
+    "class_support": 212,
+    "image_prevalence": 0.09099395936298738,
+    "members": [
+      "container",
+      "liquid vessel",
+      "vessel"
+    ],
+    "mentions": 1657,
+    "name": "container",
+    "prevalence": 0.09080454240386525
+  },
+  {
+    "class_support": 152,
+    "image_prevalence": 0.0872597473915431,
+    "members": [
+      "accessory",
+      "apparel",
+      "clothing",
+      "clothing accessory",
+      "headwear",
+      "jewelry",
+      "wearable"
+    ],
+    "mentions": 1589,
+    "name": "wearable",
+    "prevalence": 0.08772584966184192
+  },
+  {
+    "class_support": 250,
+    "image_prevalence": 0.08182317408017573,
+    "members": [
+      "wood",
+      "wood-like",
+      "wood-textured",
+      "wooden",
+      "woodgrain",
+      "woody"
+    ],
+    "mentions": 1490,
+    "name": "wooden",
+    "prevalence": 0.08315307646921061
+  },
+  {
+    "class_support": 426,
+    "image_prevalence": 0.08028555738605161,
+    "members": [
+      "dark green",
+      "green",
+      "greenish",
+      "light green",
+      "lime green",
+      "olive green",
+      "pale green"
+    ],
+    "mentions": 1462,
+    "name": "green",
+    "prevalence": 0.07917853662415406
+  },
+  {
+    "class_support": 151,
+    "image_prevalence": 0.0758374519494783,
+    "members": [
+      "battery-powered",
+      "electric",
+      "electrical",
+      "electronic"
+    ],
+    "mentions": 1381,
+    "name": "electronic",
+    "prevalence": 0.07905561334297256
+  },
+  {
+    "class_support": 373,
+    "image_prevalence": 0.07347611202635915,
+    "members": [
+      "pale yellow",
+      "yellow",
+      "yellowish"
+    ],
+    "mentions": 1338,
+    "name": "yellow",
+    "prevalence": 0.07180503828823198
+  },
+  {
+    "class_support": 482,
+    "image_prevalence": 0.07078528281164195,
+    "members": [
+      "blue",
+      "blueish",
+      "cyan",
+      "dark blue",
+      "light blue",
+      "teal",
+      "turquoise"
+    ],
+    "mentions": 1289,
+    "name": "blue",
+    "prevalence": 0.07153843512626432
+  },
+  {
+    "class_support": 225,
+    "image_prevalence": 0.06836902800658978,
+    "members": [
+      "long",
+      "long-sleeved",
+      "media",
+      "medium"
+    ],
+    "mentions": 1245,
+    "name": "long",
+    "prevalence": 0.0697404784286901
+  },
+  {
+    "class_support": 235,
+    "image_prevalence": 0.05870400878638111,
+    "members": [
+      "lightweight"
+    ],
+    "mentions": 1069,
+    "name": "lightweight",
+    "prevalence": 0.059751227886206924
+  },
+  {
+    "class_support": 194,
+    "image_prevalence": 0.05892366831411312,
+    "members": [
+      "absorbent",
+      "damp",
+      "moist",
+      "wet"
+    ],
+    "mentions": 1073,
+    "name": "moist",
+    "prevalence": 0.05895716696528973
+  },
+  {
+    "class_support": 173,
+    "image_prevalence": 0.05782537067545305,
+    "members": [
+      "flat",
+      "low",
+      "low profile",
+      "low-profile",
+      "shallow"
+    ],
+    "mentions": 1053,
+    "name": "flat",
+    "prevalence": 0.05851315201264754
+  },
+  {
+    "class_support": 99,
+    "image_prevalence": 0.05557386051619989,
+    "members": [
+      "botanical",
+      "foliage",
+      "leafy",
+      "plant",
+      "vegetable",
+      "vegetation",
+      "vegetative"
+    ],
+    "mentions": 1012,
+    "name": "plant",
+    "prevalence": 0.055578354318688336
+  },
+  {
+    "class_support": 156,
+    "image_prevalence": 0.05628775398132894,
+    "members": [
+      "animate",
+      "biological",
+      "multicellular"
+    ],
+    "mentions": 1025,
+    "name": "biological",
+    "prevalence": 0.0545683445846235
+  },
+  {
+    "class_support": 210,
+    "image_prevalence": 0.05315760571114772,
+    "members": [
+      "complex",
+      "detailed"
+    ],
+    "mentions": 968,
+    "name": "complex",
+    "prevalence": 0.05304821380315125
+  },
+  {
+    "class_support": 143,
+    "image_prevalence": 0.04914881933003844,
+    "members": [
+      "architectural",
+      "structural",
+      "structured"
+    ],
+    "mentions": 895,
+    "name": "structural",
+    "prevalence": 0.04769057344203759
+  },
+  {
+    "class_support": 228,
+    "image_prevalence": 0.047666117517847335,
+    "members": [
+      "durable",
+      "heavy-duty",
+      "sturdy"
+    ],
+    "mentions": 868,
+    "name": "durable",
+    "prevalence": 0.04758968441903281
+  },
+  {
+    "class_support": 111,
+    "image_prevalence": 0.04772103239978034,
+    "members": [
+      "fluffy",
+      "furred",
+      "furry",
+      "fuzzy",
+      "hairy",
+      "plush",
+      "puffy",
+      "velvet"
+    ],
+    "mentions": 869,
+    "name": "fuzzy",
+    "prevalence": 0.046630542501100686
+  },
+  {
+    "class_support": 165,
+    "image_prevalence": 0.04689730917078528,
+    "members": [
+      "heavy",
+      "heavyweight"
+    ],
+    "mentions": 854,
+    "name": "heavy",
+    "prevalence": 0.04626581760252518
+  },
+  {
+    "class_support": 232,
+    "image_prevalence": 0.04409665019220209,
+    "members": [
+      "gold",
+      "gold-colored",
+      "golden",
+      "golden brown"
+    ],
+    "mentions": 803,
+    "name": "gold",
+    "prevalence": 0.04398012757721908
+  },
+  {
+    "class_support": 148,
+    "image_prevalence": 0.04503020318506315,
+    "members": [
+      "delicate",
+      "fine",
+      "fragile",
+      "sheer"
+    ],
+    "mentions": 820,
+    "name": "fragile",
+    "prevalence": 0.043660011495470434
+  },
+  {
+    "class_support": 150,
+    "image_prevalence": 0.04036243822075782,
+    "members": [
+      "industrial",
+      "machined",
+      "processed"
+    ],
+    "mentions": 735,
+    "name": "industrial",
+    "prevalence": 0.04114651216584054
+  },
+  {
+    "class_support": 175,
+    "image_prevalence": 0.040087863811092805,
+    "members": [
+      "elongated",
+      "oblong",
+      "oval",
+      "ovoid"
+    ],
+    "mentions": 730,
+    "name": "oval",
+    "prevalence": 0.04062666825651198
+  },
+  {
+    "class_support": 99,
+    "image_prevalence": 0.04091158704008786,
+    "members": [
+      "amorphous",
+      "fluid",
+      "gelatinous",
+      "liquid",
+      "liquid-containing",
+      "liquid-filled",
+      "liquid-holding",
+      "liquid-like",
+      "pourable",
+      "spreadable"
+    ],
+    "mentions": 745,
+    "name": "liquid",
+    "prevalence": 0.040189813342395075
+  },
+  {
+    "class_support": 265,
+    "image_prevalence": 0.039154310818231744,
+    "members": [
+      "orange",
+      "peach"
+    ],
+    "mentions": 713,
+    "name": "orange",
+    "prevalence": 0.03756318923402575
+  },
+  {
+    "class_support": 56,
+    "image_prevalence": 0.038660076880834705,
+    "members": [
+      "vehicle",
+      "watercraft"
+    ],
+    "mentions": 704,
+    "name": "vehicle",
+    "prevalence": 0.03716590841057363
+  },
+  {
+    "class_support": 188,
+    "image_prevalence": 0.03563975837451949,
+    "members": [
+      "distressed",
+      "earthy",
+      "rustic",
+      "weathered"
+    ],
+    "mentions": 649,
+    "name": "weathered",
+    "prevalence": 0.03524683346422648
+  },
+  {
+    "class_support": 69,
+    "image_prevalence": 0.03520043931905546,
+    "members": [
+      "furniture"
+    ],
+    "mentions": 641,
+    "name": "furniture",
+    "prevalence": 0.034630184836473864
+  },
+  {
+    "class_support": 72,
+    "image_prevalence": 0.03157605711147721,
+    "members": [
+      "cooking tool",
+      "cookware",
+      "household tool",
+      "kitchen tool",
+      "kitchenware"
+    ],
+    "mentions": 575,
+    "name": "kitchenware",
+    "prevalence": 0.03223559446797627
+  },
+  {
+    "class_support": 86,
+    "image_prevalence": 0.026359143327841845,
+    "members": [
+      "anatomical",
+      "flesh-toned",
+      "fleshy",
+      "muscular",
+      "skeletal"
+    ],
+    "mentions": 480,
+    "name": "fleshy",
+    "prevalence": 0.027429942953641
+  },
+  {
+    "class_support": 103,
+    "image_prevalence": 0.027073036792970896,
+    "members": [
+      "angular",
+      "pointed",
+      "sharp",
+      "straight",
+      "triangular"
+    ],
+    "mentions": 493,
+    "name": "pointed",
+    "prevalence": 0.027272956268338543
+  },
+  {
+    "class_support": 58,
+    "image_prevalence": 0.025919824272377816,
+    "members": [
+      "cardboard",
+      "paper",
+      "paper-based",
+      "paper-like"
+    ],
+    "mentions": 472,
+    "name": "paper",
+    "prevalence": 0.026248897665568705
+  },
+  {
+    "class_support": 149,
+    "image_prevalence": 0.026468973091707853,
+    "members": [
+      "bright",
+      "brilliant",
+      "glowing",
+      "illuminated",
+      "light",
+      "light-emitting",
+      "lit",
+      "luminous",
+      "radiant",
+      "vibrant"
+    ],
+    "mentions": 482,
+    "name": "bright",
+    "prevalence": 0.02595466325836221
+  },
+  {
+    "class_support": 120,
+    "image_prevalence": 0.026194398682042833,
+    "members": [
+      "full-length",
+      "standing",
+      "tall",
+      "upright",
+      "vertical"
+    ],
+    "mentions": 477,
+    "name": "vertical",
+    "prevalence": 0.025143593844160803
+  },
+  {
+    "class_support": 114,
+    "image_prevalence": 0.024986271279516747,
+    "members": [
+      "coarse",
+      "rough",
+      "rugged",
+      "uneven"
+    ],
+    "mentions": 455,
+    "name": "rough",
+    "prevalence": 0.024812775363992526
+  },
+  {
+    "class_support": 90,
+    "image_prevalence": 0.02300933552992861,
+    "members": [
+      "appliance",
+      "household appliance",
+      "household item",
+      "kitchen appliance",
+      "small appliance"
+    ],
+    "mentions": 419,
+    "name": "appliance",
+    "prevalence": 0.024060160185158396
+  },
+  {
+    "class_support": 84,
+    "image_prevalence": 0.021636463481603516,
+    "members": [
+      "fibrous",
+      "filamentous",
+      "wispy"
+    ],
+    "mentions": 394,
+    "name": "fibrous",
+    "prevalence": 0.022470433556493558
+  },
+  {
+    "class_support": 100,
+    "image_prevalence": 0.022405271828665568,
+    "members": [
+      "layered",
+      "multi-layered",
+      "stackable",
+      "stacked"
+    ],
+    "mentions": 408,
+    "name": "layered",
+    "prevalence": 0.022373385923733686
+  },
+  {
+    "class_support": 82,
+    "image_prevalence": 0.023393739703459638,
+    "members": [
+      "fragmented",
+      "loose",
+      "scattered",
+      "segmented",
+      "sliced"
+    ],
+    "mentions": 426,
+    "name": "segmented",
+    "prevalence": 0.022329803635229465
+  },
+  {
+    "class_support": 78,
+    "image_prevalence": 0.022460186710598573,
+    "members": [
+      "brittle",
+      "crumbly",
+      "crunchy",
+      "granular",
+      "powdered",
+      "powdery"
+    ],
+    "mentions": 409,
+    "name": "granular",
+    "prevalence": 0.022299061390083776
+  },
+  {
+    "class_support": 71,
+    "image_prevalence": 0.023064250411861616,
+    "members": [
+      "human",
+      "humanoid",
+      "mammal",
+      "mammalian"
+    ],
+    "mentions": 420,
+    "name": "mammal",
+    "prevalence": 0.022162827530343404
+  },
+  {
+    "class_support": 50,
+    "image_prevalence": 0.021361889071938495,
+    "members": [
+      "outdoor equipment",
+      "outdoor gear",
+      "sporting equipment",
+      "sporting gear",
+      "sporting goods",
+      "sporting tool",
+      "sports equipment",
+      "sports gear"
+    ],
+    "mentions": 389,
+    "name": "sporting equipment",
+    "prevalence": 0.02128479826501193
+  },
+  {
+    "class_support": 67,
+    "image_prevalence": 0.021032399780340473,
+    "members": [
+      "indoor",
+      "interior"
+    ],
+    "mentions": 383,
+    "name": "indoor",
+    "prevalence": 0.019398588062035517
+  },
+  {
+    "class_support": 94,
+    "image_prevalence": 0.01927512355848435,
+    "members": [
+      "hollow",
+      "open"
+    ],
+    "mentions": 351,
+    "name": "hollow",
+    "prevalence": 0.019257831540958236
+  },
+  {
+    "class_support": 77,
+    "image_prevalence": 0.017243272926963208,
+    "members": [
+      "household"
+    ],
+    "mentions": 314,
+    "name": "household",
+    "prevalence": 0.017810222892672912
+  },
+  {
+    "class_support": 57,
+    "image_prevalence": 0.0185612300933553,
+    "members": [
+      "bipedal",
+      "four-legged",
+      "legged",
+      "multi-legged",
+      "multilegged"
+    ],
+    "mentions": 338,
+    "name": "four-legged",
+    "prevalence": 0.017644723508054568
+  },
+  {
+    "class_support": 43,
+    "image_prevalence": 0.016694124107633167,
+    "members": [
+      "dried",
+      "dry"
+    ],
+    "mentions": 304,
+    "name": "dry",
+    "prevalence": 0.01731545954875965
+  },
+  {
+    "class_support": 66,
+    "image_prevalence": 0.018451400329489293,
+    "members": [
+      "ceramic",
+      "terracotta"
+    ],
+    "mentions": 336,
+    "name": "ceramic",
+    "prevalence": 0.01723814195314169
+  },
+  {
+    "class_support": 66,
+    "image_prevalence": 0.017627677100494232,
+    "members": [
+      "baked",
+      "cooked",
+      "prepared"
+    ],
+    "mentions": 321,
+    "name": "cooked",
+    "prevalence": 0.017109409586058586
+  },
+  {
+    "class_support": 63,
+    "image_prevalence": 0.01784733662822625,
+    "members": [
+      "hardware",
+      "machine",
+      "machinery"
+    ],
+    "mentions": 325,
+    "name": "hardware",
+    "prevalence": 0.016964594516031117
+  },
+  {
+    "class_support": 77,
+    "image_prevalence": 0.017462932454695223,
+    "members": [
+      "contained",
+      "containment",
+      "enclosed",
+      "held"
+    ],
+    "mentions": 318,
+    "name": "contained",
+    "prevalence": 0.016730447853764506
+  },
+  {
+    "class_support": 86,
+    "image_prevalence": 0.01641954969796815,
+    "members": [
+      "crystalline",
+      "faceted",
+      "geometric",
+      "polygonal"
+    ],
+    "mentions": 299,
+    "name": "geometric",
+    "prevalence": 0.016545370126075376
+  },
+  {
+    "class_support": 56,
+    "image_prevalence": 0.015980230642504117,
+    "members": [
+      "printed"
+    ],
+    "mentions": 291,
+    "name": "printed",
+    "prevalence": 0.016477469838290487
+  },
+  {
+    "class_support": 86,
+    "image_prevalence": 0.015266337177375069,
+    "members": [
+      "conical",
+      "tapered"
+    ],
+    "mentions": 278,
+    "name": "tapered",
+    "prevalence": 0.015894773579548202
+  },
+  {
+    "class_support": 45,
+    "image_prevalence": 0.016309719934102143,
+    "members": [
+      "wheeled"
+    ],
+    "mentions": 297,
+    "name": "wheeled",
+    "prevalence": 0.015850613167974325
+  },
+  {
+    "class_support": 63,
+    "image_prevalence": 0.016035145524437123,
+    "members": [
+      "leather",
+      "leather-like",
+      "leatherlike",
+      "skin",
+      "skin-covered",
+      "skin-like",
+      "skin-textured",
+      "skin-toned"
+    ],
+    "mentions": 292,
+    "name": "leather",
+    "prevalence": 0.015833837966661983
+  },
+  {
+    "class_support": 52,
+    "image_prevalence": 0.015595826468973091,
+    "members": [
+      "fruit",
+      "fruit-based",
+      "plant-based"
+    ],
+    "mentions": 284,
+    "name": "fruit",
+    "prevalence": 0.01574970931300865
+  },
+  {
+    "class_support": 45,
+    "image_prevalence": 0.01543108182317408,
+    "members": [
+      "game component",
+      "game piece",
+      "plaything",
+      "toy"
+    ],
+    "mentions": 281,
+    "name": "toy",
+    "prevalence": 0.015377278989313698
+  },
+  {
+    "class_support": 42,
+    "image_prevalence": 0.015266337177375069,
+    "members": [
+      "greasy",
+      "oily",
+      "slimy",
+      "viscous"
+    ],
+    "mentions": 278,
+    "name": "viscous",
+    "prevalence": 0.0151836563169848
+  },
+  {
+    "class_support": 27,
+    "image_prevalence": 0.013948380010982976,
+    "members": [
+      "audio",
+      "audio device",
+      "audio equipment",
+      "musical instrument"
+    ],
+    "mentions": 254,
+    "name": "musical instrument",
+    "prevalence": 0.01376871704933572
+  },
+  {
+    "class_support": 46,
+    "image_prevalence": 0.013893465129049973,
+    "members": [
+      "calcified",
+      "concrete",
+      "gemstone",
+      "mineral",
+      "stone",
+      "stone-like",
+      "stony"
+    ],
+    "mentions": 253,
+    "name": "stone",
+    "prevalence": 0.013339808945217599
+  },
+  {
+    "class_support": 26,
+    "image_prevalence": 0.015815485996705108,
+    "members": [
+      "avian",
+      "feathered",
+      "winged"
+    ],
+    "mentions": 288,
+    "name": "feathered",
+    "prevalence": 0.013301478017229088
+  },
+  {
+    "class_support": 38,
+    "image_prevalence": 0.012904997254255904,
+    "members": [
+      "containers",
+      "organizer",
+      "storage"
+    ],
+    "mentions": 235,
+    "name": "storage",
+    "prevalence": 0.013285617890881047
+  },
+  {
+    "class_support": 34,
+    "image_prevalence": 0.013454146073585941,
+    "members": [
+      "sweet"
+    ],
+    "mentions": 245,
+    "name": "sweet",
+    "prevalence": 0.013159527637475374
+  },
+  {
+    "class_support": 95,
+    "image_prevalence": 0.012959912136188908,
+    "members": [
+      "pleated",
+      "ribbed",
+      "ridged",
+      "ruffled",
+      "scalloped",
+      "striated",
+      "wavy",
+      "wrinkled"
+    ],
+    "mentions": 236,
+    "name": "ridged",
+    "prevalence": 0.012890817607886495
+  },
+  {
+    "class_support": 35,
+    "image_prevalence": 0.012850082372322899,
+    "members": [
+      "protective"
+    ],
+    "mentions": 234,
+    "name": "protective",
+    "prevalence": 0.012643763473481258
+  },
+  {
+    "class_support": 62,
+    "image_prevalence": 0.012081274025260845,
+    "members": [
+      "indented",
+      "perforated",
+      "pitted",
+      "porous"
+    ],
+    "mentions": 220,
+    "name": "perforated",
+    "prevalence": 0.012227871275727706
+  },
+  {
+    "class_support": 60,
+    "image_prevalence": 0.012465678198791873,
+    "members": [
+      "waterproof",
+      "weatherproof"
+    ],
+    "mentions": 227,
+    "name": "weatherproof",
+    "prevalence": 0.012206210538814401
+  },
+  {
+    "class_support": 55,
+    "image_prevalence": 0.011916529379461834,
+    "members": [
+      "foldable",
+      "folded"
+    ],
+    "mentions": 217,
+    "name": "folded",
+    "prevalence": 0.011876211426245535
+  },
+  {
+    "class_support": 23,
+    "image_prevalence": 0.011037891268533773,
+    "members": [
+      "medical"
+    ],
+    "mentions": 201,
+    "name": "medical",
+    "prevalence": 0.01118750599682803
+  },
+  {
+    "class_support": 36,
+    "image_prevalence": 0.011587040087863812,
+    "members": [
+      "aerospace",
+      "transportation"
+    ],
+    "mentions": 211,
+    "name": "transportation",
+    "prevalence": 0.010872321946949894
+  },
+  {
+    "class_support": 31,
+    "image_prevalence": 0.010378912685337726,
+    "members": [
+      "recreational"
+    ],
+    "mentions": 189,
+    "name": "recreational",
+    "prevalence": 0.010442436426982789
+  },
+  {
+    "class_support": 36,
+    "image_prevalence": 0.010269082921471719,
+    "members": [
+      "aquatic",
+      "marine",
+      "maritime",
+      "nautical"
+    ],
+    "mentions": 187,
+    "name": "aquatic",
+    "prevalence": 0.010437994066653543
+  },
+  {
+    "class_support": 103,
+    "image_prevalence": 0.010488742449203734,
+    "members": [
+      "colored",
+      "light colored",
+      "light-colored",
+      "neutral",
+      "painted",
+      "pale",
+      "pigmented",
+      "solid color"
+    ],
+    "mentions": 191,
+    "name": "pale",
+    "prevalence": 0.01032357965151093
+  },
+  {
+    "class_support": 50,
+    "image_prevalence": 0.010323997803404723,
+    "members": [
+      "hot",
+      "warm",
+      "warm toned",
+      "warm-toned"
+    ],
+    "mentions": 188,
+    "name": "warm",
+    "prevalence": 0.010224397467930028
+  },
+  {
+    "class_support": 47,
+    "image_prevalence": 0.0099945085118067,
+    "members": [
+      "floral",
+      "petal-shaped",
+      "star-shaped"
+    ],
+    "mentions": 182,
+    "name": "floral",
+    "prevalence": 0.009573730778209447
+  },
+  {
+    "class_support": 51,
+    "image_prevalence": 0.009170785282811641,
+    "members": [
+      "combustible",
+      "perishable"
+    ],
+    "mentions": 167,
+    "name": "perishable",
+    "prevalence": 0.009103360609124419
+  },
+  {
+    "class_support": 31,
+    "image_prevalence": 0.0085667215815486,
+    "members": [
+      "hanging"
+    ],
+    "mentions": 156,
+    "name": "hanging",
+    "prevalence": 0.008815575724060795
+  },
+  {
+    "class_support": 31,
+    "image_prevalence": 0.008017572762218561,
+    "members": [
+      "art supply",
+      "art tool",
+      "artistic tool",
+      "craft supply",
+      "instrument",
+      "writing instrument",
+      "writing tool"
+    ],
+    "mentions": 146,
+    "name": "instrument",
+    "prevalence": 0.008202942786691541
+  },
+  {
+    "class_support": 17,
+    "image_prevalence": 0.00785282811641955,
+    "members": [
+      "cold"
+    ],
+    "mentions": 143,
+    "name": "cold",
+    "prevalence": 0.008046750553441008
+  },
+  {
+    "class_support": 48,
+    "image_prevalence": 0.007578253706754531,
+    "members": [
+      "multiple",
+      "multiple items",
+      "varied",
+      "varied shapes",
+      "various",
+      "various shapes",
+      "various sizes"
+    ],
+    "mentions": 138,
+    "name": "various shapes",
+    "prevalence": 0.0077993611019533254
+  },
+  {
+    "class_support": 33,
+    "image_prevalence": 0.007797913234486546,
+    "members": [
+      "desktop",
+      "tabletop",
+      "tableware"
+    ],
+    "mentions": 142,
+    "name": "tableware",
+    "prevalence": 0.007424889057592622
+  },
+  {
+    "class_support": 17,
+    "image_prevalence": 0.006644700713893465,
+    "members": [
+      "optical"
+    ],
+    "mentions": 121,
+    "name": "optical",
+    "prevalence": 0.007418231901033496
+  },
+  {
+    "class_support": 12,
+    "image_prevalence": 0.008182317408017573,
+    "members": [
+      "beverage",
+      "drinkable"
+    ],
+    "mentions": 149,
+    "name": "drinkable",
+    "prevalence": 0.007390052706734241
+  },
+  {
+    "class_support": 22,
+    "image_prevalence": 0.007578253706754531,
+    "members": [
+      "office supply"
+    ],
+    "mentions": 138,
+    "name": "office supply",
+    "prevalence": 0.007345929114177003
+  },
+  {
+    "class_support": 65,
+    "image_prevalence": 0.007084019769357496,
+    "members": [
+      "striped"
+    ],
+    "mentions": 129,
+    "name": "striped",
+    "prevalence": 0.007127190434177368
+  },
+  {
+    "class_support": 28,
+    "image_prevalence": 0.006534870950027458,
+    "members": [
+      "technical",
+      "technological"
+    ],
+    "mentions": 119,
+    "name": "technological",
+    "prevalence": 0.0068775075317946705
+  },
+  {
+    "class_support": 17,
+    "image_prevalence": 0.006699615595826469,
+    "members": [
+      "game"
+    ],
+    "mentions": 122,
+    "name": "game",
+    "prevalence": 0.006643095818750673
+  },
+  {
+    "class_support": 15,
+    "image_prevalence": 0.006974190005491488,
+    "members": [
+      "cushioned",
+      "padded",
+      "upholstered"
+    ],
+    "mentions": 127,
+    "name": "upholstered",
+    "prevalence": 0.006629474146808507
+  },
+  {
+    "class_support": 12,
+    "image_prevalence": 0.005875892366831411,
+    "members": [
+      "cosmetic"
+    ],
+    "mentions": 107,
+    "name": "cosmetic",
+    "prevalence": 0.006577991217821726
+  },
+  {
+    "class_support": 21,
+    "image_prevalence": 0.007029104887424492,
+    "members": [
+      "graphic",
+      "graphical",
+      "two-dimensional",
+      "visual"
+    ],
+    "mentions": 128,
+    "name": "two-dimensional",
+    "prevalence": 0.006479872612992392
+  },
+  {
+    "class_support": 32,
+    "image_prevalence": 0.006150466776496431,
+    "members": [
+      "bundled",
+      "draped",
+      "packaged",
+      "wrapped"
+    ],
+    "mentions": 112,
+    "name": "wrapped",
+    "prevalence": 0.006408686859833421
+  },
+  {
+    "class_support": 18,
+    "image_prevalence": 0.005875892366831411,
+    "members": [
+      "hygiene product",
+      "hygienic",
+      "personal care",
+      "sanitary"
+    ],
+    "mentions": 107,
+    "name": "personal care",
+    "prevalence": 0.006360341635765365
+  },
+  {
+    "class_support": 39,
+    "image_prevalence": 0.006479956068094454,
+    "members": [
+      "athletic",
+      "sporting",
+      "sporty"
+    ],
+    "mentions": 118,
+    "name": "sporting",
+    "prevalence": 0.006186765845474347
+  },
+  {
+    "class_support": 32,
+    "image_prevalence": 0.0057111477210324,
+    "members": [
+      "mountable",
+      "mounted",
+      "wall mounted",
+      "wall-mounted"
+    ],
+    "mentions": 104,
+    "name": "wall-mounted",
+    "prevalence": 0.006037980876294881
+  },
+  {
+    "class_support": 36,
+    "image_prevalence": 0.006150466776496431,
+    "members": [
+      "bumpy",
+      "clumpy",
+      "dimpled",
+      "doughy",
+      "lumpy"
+    ],
+    "mentions": 112,
+    "name": "bumpy",
+    "prevalence": 0.00602319788885093
+  },
+  {
+    "class_support": 44,
+    "image_prevalence": 0.006315211422295442,
+    "members": [
+      "carved",
+      "molded",
+      "sculpted",
+      "shaped",
+      "three-dimensional"
+    ],
+    "mentions": 115,
+    "name": "sculpted",
+    "prevalence": 0.005877724466038471
+  },
+  {
+    "class_support": 10,
+    "image_prevalence": 0.005930807248764415,
+    "members": [
+      "inflatable",
+      "inflated"
+    ],
+    "mentions": 108,
+    "name": "inflated",
+    "prevalence": 0.00581960412468887
+  },
+  {
+    "class_support": 23,
+    "image_prevalence": 0.005381658429434377,
+    "members": [
+      "buoyant",
+      "floating",
+      "suspended"
+    ],
+    "mentions": 98,
+    "name": "floating",
+    "prevalence": 0.005803730168136948
+  },
+  {
+    "class_support": 13,
+    "image_prevalence": 0.006370126304228446,
+    "members": [
+      "footwear"
+    ],
+    "mentions": 116,
+    "name": "footwear",
+    "prevalence": 0.005790878142573058
+  },
+  {
+    "class_support": 48,
+    "image_prevalence": 0.005820977484898408,
+    "members": [
+      "attached",
+      "connected",
+      "fitted",
+      "fixed"
+    ],
+    "mentions": 106,
+    "name": "fixed",
+    "prevalence": 0.005762170206904187
+  },
+  {
+    "class_support": 22,
+    "image_prevalence": 0.0053267435475013725,
+    "members": [
+      "educational",
+      "informational",
+      "informative",
+      "textual",
+      "written"
+    ],
+    "mentions": 97,
+    "name": "educational",
+    "prevalence": 0.005611998427868998
+  },
+  {
+    "class_support": 25,
+    "image_prevalence": 0.005436573311367381,
+    "members": [
+      "plug-in",
+      "plugged",
+      "plugged in",
+      "plugged-in"
+    ],
+    "mentions": 99,
+    "name": "plugged-in",
+    "prevalence": 0.005541791318999169
+  },
+  {
+    "class_support": 22,
+    "image_prevalence": 0.005052169137836354,
+    "members": [
+      "disposable"
+    ],
+    "mentions": 92,
+    "name": "disposable",
+    "prevalence": 0.005457955968923068
+  },
+  {
+    "class_support": 52,
+    "image_prevalence": 0.005107084019769358,
+    "members": [
+      "brass",
+      "bronze",
+      "copper",
+      "copper-colored"
+    ],
+    "mentions": 93,
+    "name": "bronze",
+    "prevalence": 0.0050412857055429335
+  },
+  {
+    "class_support": 23,
+    "image_prevalence": 0.005052169137836354,
+    "members": [
+      "musical"
+    ],
+    "mentions": 92,
+    "name": "musical",
+    "prevalence": 0.004993330448215792
+  },
+  {
+    "class_support": 13,
+    "image_prevalence": 0.005052169137836354,
+    "members": [
+      "bathroom accessory",
+      "bathroom fixture",
+      "plumbing",
+      "plumbing fixture"
+    ],
+    "mentions": 92,
+    "name": "plumbing",
+    "prevalence": 0.004730279384605879
+  },
+  {
+    "class_support": 32,
+    "image_prevalence": 0.004612850082372323,
+    "members": [
+      "buttoned",
+      "embroidered",
+      "quilted",
+      "stitched"
+    ],
+    "mentions": 84,
+    "name": "quilted",
+    "prevalence": 0.004645714296844638
+  },
+  {
+    "class_support": 26,
+    "image_prevalence": 0.00499725425590335,
+    "members": [
+      "slatted",
+      "slotted"
+    ],
+    "mentions": 91,
+    "name": "slatted",
+    "prevalence": 0.004636983986435632
+  },
+  {
+    "class_support": 27,
+    "image_prevalence": 0.004557935200439319,
+    "members": [
+      "bulk",
+      "clumped",
+      "clustered",
+      "mass",
+      "massed"
+    ],
+    "mentions": 83,
+    "name": "clustered",
+    "prevalence": 0.004619162396965352
+  },
+  {
+    "class_support": 27,
+    "image_prevalence": 0.004393190554640308,
+    "members": [
+      "model",
+      "sculptural",
+      "sculpture"
+    ],
+    "mentions": 80,
+    "name": "sculptural",
+    "prevalence": 0.004523652236762905
+  },
+  {
+    "class_support": 14,
+    "image_prevalence": 0.004173531026908292,
+    "members": [
+      "supportive"
+    ],
+    "mentions": 76,
+    "name": "supportive",
+    "prevalence": 0.004447388769422668
+  },
+  {
+    "class_support": 14,
+    "image_prevalence": 0.0042833607907743,
+    "members": [
+      "countertop"
+    ],
+    "mentions": 78,
+    "name": "countertop",
+    "prevalence": 0.004442591306998087
+  },
+  {
+    "class_support": 24,
+    "image_prevalence": 0.004612850082372323,
+    "members": [
+      "coiled",
+      "spiral",
+      "swirled"
+    ],
+    "mentions": 84,
+    "name": "spiral",
+    "prevalence": 0.004408778632817044
+  },
+  {
+    "class_support": 41,
+    "image_prevalence": 0.004612850082372323,
+    "members": [
+      "craft",
+      "crafted",
+      "handcrafted",
+      "handmade"
+    ],
+    "mentions": 84,
+    "name": "handmade",
+    "prevalence": 0.004335731631404422
+  },
+  {
+    "class_support": 13,
+    "image_prevalence": 0.0042833607907743,
+    "members": [
+      "automotive"
+    ],
+    "mentions": 78,
+    "name": "automotive",
+    "prevalence": 0.004288402275690412
+  },
+  {
+    "class_support": 16,
+    "image_prevalence": 0.004063701263042284,
+    "members": [
+      "digital"
+    ],
+    "mentions": 74,
+    "name": "digital",
+    "prevalence": 0.004164409037290393
+  },
+  {
+    "class_support": 13,
+    "image_prevalence": 0.0036792970895112576,
+    "members": [
+      "vehicle component",
+      "vehicle part"
+    ],
+    "mentions": 67,
+    "name": "vehicle part",
+    "prevalence": 0.0038152525440661037
+  },
+  {
+    "class_support": 14,
+    "image_prevalence": 0.004393190554640308,
+    "members": [
+      "bristled",
+      "bristly",
+      "spiky"
+    ],
+    "mentions": 80,
+    "name": "spiky",
+    "prevalence": 0.003743940091148466
+  },
+  {
+    "class_support": 16,
+    "image_prevalence": 0.0037342119714442613,
+    "members": [
+      "outerwear",
+      "sportswear"
+    ],
+    "mentions": 68,
+    "name": "sportswear",
+    "prevalence": 0.003734082531422569
+  },
+  {
+    "class_support": 18,
+    "image_prevalence": 0.0037342119714442613,
+    "members": [
+      "component",
+      "device"
+    ],
+    "mentions": 68,
+    "name": "component",
+    "prevalence": 0.0037202910084266016
+  },
+  {
+    "class_support": 10,
+    "image_prevalence": 0.0034596375617792423,
+    "members": [
+      "adhesive",
+      "sticky"
+    ],
+    "mentions": 63,
+    "name": "adhesive",
+    "prevalence": 0.003705686968398833
+  },
+  {
+    "class_support": 19,
+    "image_prevalence": 0.0032948929159802307,
+    "members": [
+      "corded",
+      "threaded"
+    ],
+    "mentions": 60,
+    "name": "corded",
+    "prevalence": 0.003586092787239348
+  },
+  {
+    "class_support": 22,
+    "image_prevalence": 0.0034596375617792423,
+    "members": [
+      "semi-liquid",
+      "semi-solid"
+    ],
+    "mentions": 63,
+    "name": "semi-solid",
+    "prevalence": 0.0035774987799595797
+  },
+  {
+    "class_support": 24,
+    "image_prevalence": 0.0034596375617792423,
+    "members": [
+      "exterior",
+      "peripheral",
+      "surface"
+    ],
+    "mentions": 63,
+    "name": "surface",
+    "prevalence": 0.003528865617599416
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.003844041735310269,
+    "members": [
+      "formal"
+    ],
+    "mentions": 70,
+    "name": "formal",
+    "prevalence": 0.0035013839600080876
+  },
+  {
+    "class_support": 29,
+    "image_prevalence": 0.003624382207578254,
+    "members": [
+      "wild"
+    ],
+    "mentions": 66,
+    "name": "wild",
+    "prevalence": 0.003493427170684871
+  },
+  {
+    "class_support": 10,
+    "image_prevalence": 0.0034596375617792423,
+    "members": [
+      "form-fitting",
+      "tailored"
+    ],
+    "mentions": 63,
+    "name": "tailored",
+    "prevalence": 0.003390571293113666
+  },
+  {
+    "class_support": 13,
+    "image_prevalence": 0.0030203185063152112,
+    "members": [
+      "protein"
+    ],
+    "mentions": 55,
+    "name": "protein",
+    "prevalence": 0.0033419499521194435
+  },
+  {
+    "class_support": 16,
+    "image_prevalence": 0.002910488742449204,
+    "members": [
+      "iridescent"
+    ],
+    "mentions": 53,
+    "name": "iridescent",
+    "prevalence": 0.0031952117603059518
+  },
+  {
+    "class_support": 31,
+    "image_prevalence": 0.003185063152114223,
+    "members": [
+      "oxidized",
+      "rusty"
+    ],
+    "mentions": 58,
+    "name": "rusty",
+    "prevalence": 0.003166730522164221
+  },
+  {
+    "class_support": 7,
+    "image_prevalence": 0.003239978034047227,
+    "members": [
+      "acoustic"
+    ],
+    "mentions": 59,
+    "name": "acoustic",
+    "prevalence": 0.0031578300396844766
+  },
+  {
+    "class_support": 8,
+    "image_prevalence": 0.0030752333882482154,
+    "members": [
+      "percussion",
+      "percussive"
+    ],
+    "mentions": 56,
+    "name": "percussive",
+    "prevalence": 0.003130489483929165
+  },
+  {
+    "class_support": 19,
+    "image_prevalence": 0.0030203185063152112,
+    "members": [
+      "checkered",
+      "grid pattern",
+      "grid-like",
+      "mesh"
+    ],
+    "mentions": 55,
+    "name": "mesh",
+    "prevalence": 0.0030507157625801694
+  },
+  {
+    "class_support": 14,
+    "image_prevalence": 0.003404722679846238,
+    "members": [
+      "bowl",
+      "bowl-contained",
+      "bowl-shaped",
+      "u-shaped"
+    ],
+    "mentions": 62,
+    "name": "bowl-shaped",
+    "prevalence": 0.0030119685067342096
+  },
+  {
+    "class_support": 16,
+    "image_prevalence": 0.002800658978583196,
+    "members": [
+      "building material",
+      "chemical",
+      "material",
+      "substance"
+    ],
+    "mentions": 51,
+    "name": "building material",
+    "prevalence": 0.0029462063360368444
+  },
+  {
+    "class_support": 12,
+    "image_prevalence": 0.0027457440966501922,
+    "members": [
+      "display"
+    ],
+    "mentions": 50,
+    "name": "display",
+    "prevalence": 0.002860698623410488
+  },
+  {
+    "class_support": 8,
+    "image_prevalence": 0.002800658978583196,
+    "members": [
+      "fixture"
+    ],
+    "mentions": 51,
+    "name": "fixture",
+    "prevalence": 0.002792652262991246
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.0025809994508511807,
+    "members": [
+      "weapon",
+      "weaponry"
+    ],
+    "mentions": 47,
+    "name": "weapon",
+    "prevalence": 0.0027848605366053024
+  },
+  {
+    "class_support": 27,
+    "image_prevalence": 0.002800658978583196,
+    "members": [
+      "ancient",
+      "antique",
+      "antique-style",
+      "vintage"
+    ],
+    "mentions": 51,
+    "name": "antique",
+    "prevalence": 0.002754160512136584
+  },
+  {
+    "class_support": 15,
+    "image_prevalence": 0.0025809994508511807,
+    "members": [
+      "analog"
+    ],
+    "mentions": 47,
+    "name": "analog",
+    "prevalence": 0.0026970910445486716
+  },
+  {
+    "class_support": 10,
+    "image_prevalence": 0.0026908292147171885,
+    "members": [
+      "casual"
+    ],
+    "mentions": 49,
+    "name": "casual",
+    "prevalence": 0.002673127249398436
+  },
+  {
+    "class_support": 12,
+    "image_prevalence": 0.0025809994508511807,
+    "members": [
+      "fastener"
+    ],
+    "mentions": 47,
+    "name": "fastener",
+    "prevalence": 0.0026698348732247038
+  },
+  {
+    "class_support": 14,
+    "image_prevalence": 0.002526084568918177,
+    "members": [
+      "arranged",
+      "compartmentalized",
+      "organized"
+    ],
+    "mentions": 46,
+    "name": "organized",
+    "prevalence": 0.0026252128009356325
+  },
+  {
+    "class_support": 5,
+    "image_prevalence": 0.0026359143327841844,
+    "members": [
+      "laboratory",
+      "laboratory tool"
+    ],
+    "mentions": 48,
+    "name": "laboratory tool",
+    "prevalence": 0.002591584221693893
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.0025809994508511807,
+    "members": [
+      "roll",
+      "rolled"
+    ],
+    "mentions": 47,
+    "name": "roll",
+    "prevalence": 0.002590540344777633
+  },
+  {
+    "class_support": 17,
+    "image_prevalence": 0.0028555738605162,
+    "members": [
+      "dynamic",
+      "fast",
+      "fast-moving",
+      "flowing",
+      "moving"
+    ],
+    "mentions": 52,
+    "name": "dynamic",
+    "prevalence": 0.0025389555005253363
+  },
+  {
+    "class_support": 8,
+    "image_prevalence": 0.0027457440966501922,
+    "members": [
+      "insect",
+      "insectoid",
+      "invertebrate"
+    ],
+    "mentions": 50,
+    "name": "invertebrate",
+    "prevalence": 0.002501350689680437
+  },
+  {
+    "class_support": 17,
+    "image_prevalence": 0.0022515101592531575,
+    "members": [
+      "submerged",
+      "water-based",
+      "waterborne"
+    ],
+    "mentions": 41,
+    "name": "waterborne",
+    "prevalence": 0.0024240589918556018
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.00214168039538715,
+    "members": [
+      "amber"
+    ],
+    "mentions": 39,
+    "name": "amber",
+    "prevalence": 0.002335658691590895
+  },
+  {
+    "class_support": 7,
+    "image_prevalence": 0.0023064250411861617,
+    "members": [
+      "seafood"
+    ],
+    "mentions": 42,
+    "name": "seafood",
+    "prevalence": 0.002328286120659002
+  },
+  {
+    "class_support": 6,
+    "image_prevalence": 0.0023064250411861617,
+    "members": [
+      "projectile"
+    ],
+    "mentions": 42,
+    "name": "projectile",
+    "prevalence": 0.0023189754745088745
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.00214168039538715,
+    "members": [
+      "home decor"
+    ],
+    "mentions": 39,
+    "name": "home decor",
+    "prevalence": 0.0022536786340769128
+  },
+  {
+    "class_support": 19,
+    "image_prevalence": 0.0022515101592531575,
+    "members": [
+      "savory"
+    ],
+    "mentions": 41,
+    "name": "savory",
+    "prevalence": 0.002236125252602138
+  },
+  {
+    "class_support": 7,
+    "image_prevalence": 0.0028555738605162,
+    "members": [
+      "flaky",
+      "reptilian",
+      "scaly"
+    ],
+    "mentions": 52,
+    "name": "scaly",
+    "prevalence": 0.002194308070757669
+  },
+  {
+    "class_support": 9,
+    "image_prevalence": 0.0022515101592531575,
+    "members": [
+      "monochrome"
+    ],
+    "mentions": 41,
+    "name": "monochrome",
+    "prevalence": 0.002163475125420629
+  },
+  {
+    "class_support": 5,
+    "image_prevalence": 0.0019220208676551346,
+    "members": [
+      "cleaning",
+      "cleaning tool"
+    ],
+    "mentions": 35,
+    "name": "cleaning tool",
+    "prevalence": 0.0021532140176207973
+  },
+  {
+    "class_support": 12,
+    "image_prevalence": 0.00214168039538715,
+    "members": [
+      "wire",
+      "wired"
+    ],
+    "mentions": 39,
+    "name": "wire",
+    "prevalence": 0.002135999593626712
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.002086765513454146,
+    "members": [
+      "veined"
+    ],
+    "mentions": 38,
+    "name": "veined",
+    "prevalence": 0.002121748308188986
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.0019769357495881385,
+    "members": [
+      "beaded"
+    ],
+    "mentions": 36,
+    "name": "beaded",
+    "prevalence": 0.0020810404284980553
+  },
+  {
+    "class_support": 5,
+    "image_prevalence": 0.002086765513454146,
+    "members": [
+      "shelter"
+    ],
+    "mentions": 38,
+    "name": "shelter",
+    "prevalence": 0.002079135553711825
+  },
+  {
+    "class_support": 8,
+    "image_prevalence": 0.001812191103789127,
+    "members": [
+      "scientific"
+    ],
+    "mentions": 33,
+    "name": "scientific",
+    "prevalence": 0.001982339694204101
+  },
+  {
+    "class_support": 19,
+    "image_prevalence": 0.002526084568918177,
+    "members": [
+      "horizontal"
+    ],
+    "mentions": 46,
+    "name": "horizontal",
+    "prevalence": 0.0019516798498036602
+  },
+  {
+    "class_support": 12,
+    "image_prevalence": 0.002031850631521142,
+    "members": [
+      "branching",
+      "stemmed"
+    ],
+    "mentions": 37,
+    "name": "branching",
+    "prevalence": 0.001938764127198823
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.001757276221856123,
+    "members": [
+      "liquid dispenser",
+      "liquid holder"
+    ],
+    "mentions": 32,
+    "name": "liquid holder",
+    "prevalence": 0.0017713571738995468
+  },
+  {
+    "class_support": 15,
+    "image_prevalence": 0.0018671059857221306,
+    "members": [
+      "bite-sized"
+    ],
+    "mentions": 34,
+    "name": "bite-sized",
+    "prevalence": 0.0017385198716205696
+  },
+  {
+    "class_support": 4,
+    "image_prevalence": 0.0015925315760571114,
+    "members": [
+      "office equipment"
+    ],
+    "mentions": 29,
+    "name": "office equipment",
+    "prevalence": 0.0016142050040355127
+  },
+  {
+    "class_support": 10,
+    "image_prevalence": 0.0015376166941241077,
+    "members": [
+      "interlocking",
+      "modular"
+    ],
+    "mentions": 28,
+    "name": "modular",
+    "prevalence": 0.0015741673580656633
+  },
+  {
+    "class_support": 4,
+    "image_prevalence": 0.0015376166941241077,
+    "members": [
+      "safety equipment"
+    ],
+    "mentions": 28,
+    "name": "safety equipment",
+    "prevalence": 0.00149309259478751
+  },
+  {
+    "class_support": 14,
+    "image_prevalence": 0.0015925315760571114,
+    "members": [
+      "symmetric",
+      "symmetrical"
+    ],
+    "mentions": 29,
+    "name": "symmetrical",
+    "prevalence": 0.0014711999678153848
+  },
+  {
+    "class_support": 13,
+    "image_prevalence": 0.0013179571663920922,
+    "members": [
+      "flesh colored",
+      "flesh-colored"
+    ],
+    "mentions": 24,
+    "name": "flesh colored",
+    "prevalence": 0.0014709866404781658
+  },
+  {
+    "class_support": 7,
+    "image_prevalence": 0.0014827018121911038,
+    "members": [
+      "precious",
+      "valuable"
+    ],
+    "mentions": 27,
+    "name": "precious",
+    "prevalence": 0.001462873284907183
+  },
+  {
+    "class_support": 10,
+    "image_prevalence": 0.0013179571663920922,
+    "members": [
+      "heat-resistant",
+      "insulated"
+    ],
+    "mentions": 24,
+    "name": "insulated",
+    "prevalence": 0.001455077408467239
+  },
+  {
+    "class_support": 10,
+    "image_prevalence": 0.0014277869302581,
+    "members": [
+      "pear-shaped",
+      "teardrop-shaped"
+    ],
+    "mentions": 26,
+    "name": "teardrop-shaped",
+    "prevalence": 0.0014369105470800386
+  },
+  {
+    "class_support": 8,
+    "image_prevalence": 0.0013728720483250961,
+    "members": [
+      "lace",
+      "laced",
+      "lacey"
+    ],
+    "mentions": 25,
+    "name": "lacey",
+    "prevalence": 0.0014090153303195994
+  },
+  {
+    "class_support": 10,
+    "image_prevalence": 0.0015376166941241077,
+    "members": [
+      "domestic"
+    ],
+    "mentions": 28,
+    "name": "domestic",
+    "prevalence": 0.0013701789992236833
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0011532125205930808,
+    "members": [
+      "religious"
+    ],
+    "mentions": 21,
+    "name": "religious",
+    "prevalence": 0.0012626262626262625
+  },
+  {
+    "class_support": 6,
+    "image_prevalence": 0.0011532125205930808,
+    "members": [
+      "collectible"
+    ],
+    "mentions": 21,
+    "name": "collectible",
+    "prevalence": 0.0012247639366283435
+  },
+  {
+    "class_support": 8,
+    "image_prevalence": 0.001098297638660077,
+    "members": [
+      "denim"
+    ],
+    "mentions": 20,
+    "name": "denim",
+    "prevalence": 0.001168869043534521
+  },
+  {
+    "class_support": 13,
+    "image_prevalence": 0.0012081274025260845,
+    "members": [
+      "composite",
+      "heterogeneous",
+      "mixed"
+    ],
+    "mentions": 22,
+    "name": "heterogeneous",
+    "prevalence": 0.001146902006822246
+  },
+  {
+    "class_support": 5,
+    "image_prevalence": 0.0013728720483250961,
+    "members": [
+      "entertainment"
+    ],
+    "mentions": 25,
+    "name": "entertainment",
+    "prevalence": 0.0011346126908530606
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.0011532125205930808,
+    "members": [
+      "camouflage",
+      "camouflaged"
+    ],
+    "mentions": 21,
+    "name": "camouflage",
+    "prevalence": 0.0011080962980944853
+  },
+  {
+    "class_support": 8,
+    "image_prevalence": 0.001043382756727073,
+    "members": [
+      "various textures"
+    ],
+    "mentions": 19,
+    "name": "various textures",
+    "prevalence": 0.001064025428432208
+  },
+  {
+    "class_support": 8,
+    "image_prevalence": 0.0011532125205930808,
+    "members": [
+      "seating"
+    ],
+    "mentions": 21,
+    "name": "seating",
+    "prevalence": 0.001062352516512763
+  },
+  {
+    "class_support": 8,
+    "image_prevalence": 0.001043382756727073,
+    "members": [
+      "paste",
+      "pasty"
+    ],
+    "mentions": 19,
+    "name": "paste",
+    "prevalence": 0.0010021591900953816
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.0009884678747940692,
+    "members": [
+      "used",
+      "worn"
+    ],
+    "mentions": 18,
+    "name": "worn",
+    "prevalence": 0.000990773152905178
+  },
+  {
+    "class_support": 7,
+    "image_prevalence": 0.0008237232289950577,
+    "members": [
+      "ribbon-like",
+      "ribboned"
+    ],
+    "mentions": 15,
+    "name": "ribbon-like",
+    "prevalence": 0.0008986775935928477
+  },
+  {
+    "class_support": 7,
+    "image_prevalence": 0.0008237232289950577,
+    "members": [
+      "sloped"
+    ],
+    "mentions": 15,
+    "name": "sloped",
+    "prevalence": 0.0008651202569447834
+  },
+  {
+    "class_support": 9,
+    "image_prevalence": 0.0008237232289950577,
+    "members": [
+      "recyclable",
+      "reusable"
+    ],
+    "mentions": 15,
+    "name": "recyclable",
+    "prevalence": 0.0008552680287475901
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0008786381109280615,
+    "members": [
+      "childcare"
+    ],
+    "mentions": 16,
+    "name": "childcare",
+    "prevalence": 0.0008327830361728666
+  },
+  {
+    "class_support": 6,
+    "image_prevalence": 0.00071389346512905,
+    "members": [
+      "framed"
+    ],
+    "mentions": 13,
+    "name": "framed",
+    "prevalence": 0.0007891825688435858
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0006589785831960461,
+    "members": [
+      "gaseous"
+    ],
+    "mentions": 12,
+    "name": "gaseous",
+    "prevalence": 0.0007704160246533128
+  },
+  {
+    "class_support": 5,
+    "image_prevalence": 0.00071389346512905,
+    "members": [
+      "rubber"
+    ],
+    "mentions": 13,
+    "name": "rubber",
+    "prevalence": 0.000767593987932971
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0007688083470620538,
+    "members": [
+      "dairy"
+    ],
+    "mentions": 14,
+    "name": "dairy",
+    "prevalence": 0.0007543656908063687
+  },
+  {
+    "class_support": 11,
+    "image_prevalence": 0.00071389346512905,
+    "members": [
+      "rose gold"
+    ],
+    "mentions": 13,
+    "name": "rose gold",
+    "prevalence": 0.0007511203485779757
+  },
+  {
+    "class_support": 9,
+    "image_prevalence": 0.0006589785831960461,
+    "members": [
+      "dirty"
+    ],
+    "mentions": 12,
+    "name": "dirty",
+    "prevalence": 0.0007312367481859007
+  },
+  {
+    "class_support": 4,
+    "image_prevalence": 0.0006040637012630423,
+    "members": [
+      "temporary"
+    ],
+    "mentions": 11,
+    "name": "temporary",
+    "prevalence": 0.0007062146892655367
+  },
+  {
+    "class_support": 12,
+    "image_prevalence": 0.00071389346512905,
+    "members": [
+      "hexagonal"
+    ],
+    "mentions": 13,
+    "name": "hexagonal",
+    "prevalence": 0.0007049357809577151
+  },
+  {
+    "class_support": 7,
+    "image_prevalence": 0.0006589785831960461,
+    "members": [
+      "engraved"
+    ],
+    "mentions": 12,
+    "name": "engraved",
+    "prevalence": 0.0006921045056638277
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0006040637012630423,
+    "members": [
+      "historical"
+    ],
+    "mentions": 11,
+    "name": "historical",
+    "prevalence": 0.0006829328863227169
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0006589785831960461,
+    "members": [
+      "signage"
+    ],
+    "mentions": 12,
+    "name": "signage",
+    "prevalence": 0.0006778179447670973
+  },
+  {
+    "class_support": 5,
+    "image_prevalence": 0.0006040637012630423,
+    "members": [
+      "ring-shaped"
+    ],
+    "mentions": 11,
+    "name": "ring-shaped",
+    "prevalence": 0.0006661770432956873
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.00071389346512905,
+    "members": [
+      "eyewear"
+    ],
+    "mentions": 13,
+    "name": "eyewear",
+    "prevalence": 0.0006635106336003643
+  },
+  {
+    "class_support": 6,
+    "image_prevalence": 0.0006589785831960461,
+    "members": [
+      "floor-based",
+      "floor-standing"
+    ],
+    "mentions": 12,
+    "name": "floor-based",
+    "prevalence": 0.0006614854072481191
+  },
+  {
+    "class_support": 10,
+    "image_prevalence": 0.0006589785831960461,
+    "members": [
+      "hammered"
+    ],
+    "mentions": 12,
+    "name": "hammered",
+    "prevalence": 0.0006600038379699397
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0006040637012630423,
+    "members": [
+      "adjustable"
+    ],
+    "mentions": 11,
+    "name": "adjustable",
+    "prevalence": 0.0006568290466595552
+  },
+  {
+    "class_support": 5,
+    "image_prevalence": 0.0006040637012630423,
+    "members": [
+      "document",
+      "paperwork"
+    ],
+    "mentions": 11,
+    "name": "paperwork",
+    "prevalence": 0.0006481865592035084
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0005491488193300384,
+    "members": [
+      "seasonal"
+    ],
+    "mentions": 10,
+    "name": "seasonal",
+    "prevalence": 0.0006321362253565644
+  },
+  {
+    "class_support": 5,
+    "image_prevalence": 0.0005491488193300384,
+    "members": [
+      "foamy"
+    ],
+    "mentions": 10,
+    "name": "foamy",
+    "prevalence": 0.0006291730868002054
+  },
+  {
+    "class_support": 5,
+    "image_prevalence": 0.0008786381109280615,
+    "members": [
+      "urban"
+    ],
+    "mentions": 16,
+    "name": "urban",
+    "prevalence": 0.0006272117593655372
+  },
+  {
+    "class_support": 9,
+    "image_prevalence": 0.0006040637012630423,
+    "members": [
+      "brushed",
+      "brushed finish"
+    ],
+    "mentions": 11,
+    "name": "brushed",
+    "prevalence": 0.000625410371173083
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0005491488193300384,
+    "members": [
+      "waste"
+    ],
+    "mentions": 10,
+    "name": "waste",
+    "prevalence": 0.0006047873694932518
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0004942339373970346,
+    "members": [
+      "lighting"
+    ],
+    "mentions": 9,
+    "name": "lighting",
+    "prevalence": 0.0005404200319454556
+  },
+  {
+    "class_support": 7,
+    "image_prevalence": 0.0004942339373970346,
+    "members": [
+      "minimalist"
+    ],
+    "mentions": 9,
+    "name": "minimalist",
+    "prevalence": 0.0005370688633400498
+  },
+  {
+    "class_support": 4,
+    "image_prevalence": 0.0004942339373970346,
+    "members": [
+      "juicy",
+      "pulpous"
+    ],
+    "mentions": 9,
+    "name": "juicy",
+    "prevalence": 0.0004926805774263401
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.0004942339373970346,
+    "members": [
+      "tufted"
+    ],
+    "mentions": 9,
+    "name": "tufted",
+    "prevalence": 0.0004686697483307653
+  },
+  {
+    "class_support": 4,
+    "image_prevalence": 0.0004942339373970346,
+    "members": [
+      "pair"
+    ],
+    "mentions": 9,
+    "name": "pair",
+    "prevalence": 0.0004524665541614694
+  },
+  {
+    "class_support": 3,
+    "image_prevalence": 0.00043931905546403075,
+    "members": [
+      "root"
+    ],
+    "mentions": 8,
+    "name": "root",
+    "prevalence": 0.0004494093477144325
+  },
+  {
+    "class_support": 4,
+    "image_prevalence": 0.00043931905546403075,
+    "members": [
+      "beaked"
+    ],
+    "mentions": 8,
+    "name": "beaked",
+    "prevalence": 0.00044188926122670346
+  }
+]

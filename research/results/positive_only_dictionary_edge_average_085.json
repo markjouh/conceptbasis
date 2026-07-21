@@ -1,0 +1,72 @@
+{
+  "schema": "conceptbasis.research-result/v1",
+  "date": "2026-07-19",
+  "status": "accepted_working_dictionary",
+  "experiment": "research/experiments/2026-07-19-positive-only-dictionary-construction.md",
+  "input": {
+    "attributes": "data/attributes_train_full_vllm_gemma4_nvfp4.jsonl",
+    "attributes_sha256": "0924dbbf9347675acafcf9fd5ab6c7061eeb99b768eaf84210324785beb40fa2",
+    "source_images": 18211,
+    "successful_tag_rows": 18210,
+    "retained_failures": 1,
+    "train_classes": 1298,
+    "raw_phrases": 1593,
+    "eligible_before_negation_filter": 793,
+    "eligible_positive_phrases": 785
+  },
+  "proposal": {
+    "encoder": "siglip2-gopt-p16-384",
+    "model": "ViT-gopt-16-SigLIP2-384",
+    "pretrained": "webli",
+    "revision": "ad3410bee2c3373be5ed01e7c4e7fcd2bf95a183",
+    "text_template": "an object that is {phrase}",
+    "minimum_text_cosine": 0.85,
+    "proposed_edges": 20881,
+    "artifact_sha256": "6655d3becf6c8c22e00968542dd1b02eb58aa850bd7c63fef8c666850ef87ece"
+  },
+  "adjudication": {
+    "model": "nvidia/Gemma-4-26B-A4B-NVFP4",
+    "model_revision": "a19cfe00be84568a6867111c9a68c9c44fdcffe6",
+    "policy": "positive-family",
+    "prompt_sha256": "9fead6760dd47f9806d680684bda880555757e11cb5fd10cda2b5740c79ebdb4",
+    "batch_size": 64,
+    "proposed_edges": 20881,
+    "accepted_edges": 1607,
+    "acceptance_rate": 0.076959915712849,
+    "observed_elapsed_seconds": 105.2,
+    "observed_edges_per_second": 198.5,
+    "artifact_sha256": "4d3e1141a8c0e30732a95a120db61d47abc0d14714354c53c9d080e4b63173db"
+  },
+  "clustering": {
+    "method": "average_linkage",
+    "accepted_edge_weight": "siglip_text_cosine",
+    "rejected_or_unproposed_weight": 0.0,
+    "minimum_average_similarity": 0.25,
+    "clusters_before_selection": 287,
+    "selection": "top_equal_class_weighted_prevalence",
+    "selected_concepts": 256,
+    "selected_unique_phrases": 752,
+    "maximum_cluster_size": 10,
+    "coefficient_domain": "nonnegative",
+    "negative_pole_fields": 0
+  },
+  "output": {
+    "dictionary": "data/dictionary_positive_only_edge_average_085.json",
+    "dictionary_sha256": "8df7ad33155bc88366091d0629dccfbd52ad6e566cfcedc6b5c4fbec0bf288f1",
+    "provenance": "data/dictionary_positive_only_edge_average_085.provenance.json",
+    "provenance_sha256": "0315ae022b1928a01d3a9ba0a779072a9beb6694da3e599dbbb1ba0602ac94db",
+    "preview": "outputs/dictionary_candidates/siglip2-gopt-p16-384@ad3410b/edge-average-085-v1/preview.html"
+  },
+  "validation": {
+    "requested_merges_present": [
+      ["brown", "light brown"],
+      ["yellow", "yellowish"],
+      ["blue", "light blue"]
+    ],
+    "dictionary_terms_are_disjoint": true,
+    "positive_only": true,
+    "preview_cards": 256,
+    "preview_images": 1024,
+    "test_suite": "102 passed, 10 subtests passed"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "status": "exploratory_single_seed",
+  "seed": 0,
+  "training": {
+    "epochs": 30,
+    "embed_dim": 320,
+    "ridge_alpha": 0.001,
+    "composition_weight": 1.0,
+    "composition_batch": 1024,
+    "composition_subset_size": [1, 14],
+    "objective": "image-text contrastive loss plus one sampled exact-source composition-retrieval update per epoch"
+  },
+  "evaluation": {
+    "direction_estimator": "reverse_ridge_for_all_models",
+    "subset_sizes": [1, 2, 4, 6, 8, 10, 12, 14],
+    "dev": {
+      "gallery_images": 278,
+      "r_at_5": {
+        "contrastive": [0.102218, 0.167942, 0.283466, 0.390758, 0.486423, 0.577220, 0.653333, 0.779815],
+        "direct_composition": [0.129946, 0.223682, 0.393357, 0.527942, 0.634161, 0.713098, 0.783883, 0.864490],
+        "reverse_ridge_orthogonality": [0.121403, 0.207653, 0.360433, 0.484621, 0.587007, 0.685031, 0.760000, 0.844216]
+      },
+      "k14": {
+        "contrastive": {"r_at_1": 0.460942, "r_at_5": 0.779815, "r_at_10": 0.879398},
+        "direct_composition": {"r_at_1": 0.466011, "r_at_5": 0.864490, "r_at_10": 0.957066},
+        "reverse_ridge_orthogonality": {"r_at_1": 0.602117, "r_at_5": 0.844216, "r_at_10": 0.889386}
+      }
+    },
+    "train": {
+      "gallery_images": 1298,
+      "r_at_5": {
+        "contrastive": [0.035824, 0.070200, 0.143704, 0.227284, 0.311409, 0.405470, 0.488652, 0.562482],
+        "direct_composition": [0.039452, 0.095378, 0.211111, 0.331358, 0.446568, 0.553634, 0.645887, 0.704894],
+        "reverse_ridge_orthogonality": [0.043978, 0.093159, 0.198704, 0.302747, 0.405696, 0.507898, 0.597557, 0.694691]
+      },
+      "k14": {
+        "contrastive": {"r_at_1": 0.246624, "r_at_5": 0.562482, "r_at_10": 0.681505},
+        "direct_composition": {"r_at_1": 0.373691, "r_at_5": 0.704894, "r_at_10": 0.802605},
+        "reverse_ridge_orthogonality": {"r_at_1": 0.347905, "r_at_5": 0.694691, "r_at_10": 0.791923}
+      }
+    },
+    "ordinary_dev_image_text_retrieval_r_at_5": {
+      "contrastive": 0.890904,
+      "direct_composition": 0.892693,
+      "reverse_ridge_orthogonality": 0.900613
+    },
+    "reverse_direction_off_diagonal_cosine_rms": {
+      "contrastive": 0.11479,
+      "direct_composition": 0.10704,
+      "reverse_ridge_orthogonality": 0.06326
+    }
+  },
+  "caveats": [
+    "one seed and one untuned composition weight",
+    "exact-source cross-entropy treats other attribute-compatible images as negatives",
+    "training concepts and evaluation query concepts come from separate annotations mapped to the same dictionary",
+    "train and dev absolute retrieval values use different gallery sizes"
+  ]
+}
