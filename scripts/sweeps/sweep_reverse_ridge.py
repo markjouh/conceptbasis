@@ -1,4 +1,4 @@
-"""Sweep the production reverse-ridge objective.
+"""Stage 5 experiment — Sweep the production reverse-ridge objective.
 
 This is deliberately a small, matched sweep over the two reverse-ridge
 hyperparameters.  It uses ``conceptbasis.train`` directly so the selected
@@ -90,7 +90,7 @@ def selected_configs(names: str | None) -> list[Config]:
     return selected
 
 
-def train(configs: list[Config], *, epochs: int, device: str, seed: int) -> None:
+def train(configs: list[Config], *, epochs: int, seed: int) -> None:
     suffix = "" if seed == 0 else f"_s{seed}"
     status_path = ROOT / f"outputs/evals/reverse_sweep_v2{suffix}_status.json"
     status_path.parent.mkdir(parents=True, exist_ok=True)
@@ -120,7 +120,6 @@ def train(configs: list[Config], *, epochs: int, device: str, seed: int) -> None
                 "--lambda_orth", str(config.lambda_orth),
                 "--eval_every", str(epochs),
                 "--seed", str(seed),
-                "--device", device,
                 "--run_name", run_name(config, seed),
             ]
             run_streaming(
@@ -131,7 +130,7 @@ def train(configs: list[Config], *, epochs: int, device: str, seed: int) -> None
         status_path.write_text(json.dumps(status, indent=2) + "\n")
 
 
-def evaluate(configs: list[Config], *, epochs: int, device: str, seed: int) -> None:
+def evaluate(configs: list[Config], *, epochs: int, seed: int) -> None:
     checkpoints = {
         config.name: completed_checkpoint(config, epochs, seed)
         for config in configs
@@ -144,11 +143,10 @@ def evaluate(configs: list[Config], *, epochs: int, device: str, seed: int) -> N
     profiles = f"outputs/evals/reverse_sweep_v2{suffix}_profiles.npz"
     profile_command = [
         sys.executable,
-        "scripts/evaluation/build_groupmean_profiles.py",
+        "scripts/evaluation/build_retrieval_profiles.py",
         "--embeddings", "data/image_embeddings.npy",
         "--cc0-embeddings", "data/image_embeddings_cc0.npy",
-        "--labels", "data/labels.parquet",
-        "--device", device,
+        "--soft-labels", "data/labels.parquet",
         "--out", profiles,
     ]
     for name, checkpoint in checkpoints.items():
@@ -165,7 +163,7 @@ def evaluate(configs: list[Config], *, epochs: int, device: str, seed: int) -> N
     run_streaming(
         [
             sys.executable,
-            "scripts/evaluation/eval_playground_subset_composability.py",
+            "scripts/evaluation/evaluate_compositional_retrieval.py",
             "--dictionary", "data/dictionary.json",
             "--profiles-npz", profiles,
             "--subset-sizes", "1,2,4,6,8,10,12,14",
@@ -225,9 +223,8 @@ def evaluate(configs: list[Config], *, epochs: int, device: str, seed: int) -> N
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
     parser.add_argument("--epochs", type=int, default=30)
-    parser.add_argument("--device", choices=("auto", "cuda", "mps", "cpu"), default="auto")
     parser.add_argument(
         "--configs",
         default="p0_l32,p0_l64,p0_l128,p0_l256,p0_l512",
@@ -246,9 +243,9 @@ def main() -> None:
             print(asdict(config))
         return
     if not args.evaluate_only:
-        train(configs, epochs=args.epochs, device=args.device, seed=args.seed)
+        train(configs, epochs=args.epochs, seed=args.seed)
     if not args.train_only:
-        evaluate(configs, epochs=args.epochs, device=args.device, seed=args.seed)
+        evaluate(configs, epochs=args.epochs, seed=args.seed)
 
 
 if __name__ == "__main__":

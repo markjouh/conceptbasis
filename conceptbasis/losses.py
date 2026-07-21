@@ -73,8 +73,8 @@ class GroupMeanOrthogonalityLoss(nn.Module):
         directions for logging/eval}.
         """
         # Vectorized soft class means for every concept. The previous
-        # per-concept Python loop forced hundreds of device synchronizations on
-        # MPS per batch; these two matrix multiplies compute the same means.
+        # per-concept Python loop forced hundreds of accelerator
+        # synchronizations per batch; these matrix multiplies are equivalent.
         sp = S.sum(0)
         sn = (1.0 - S).sum(0)
         supported = (sp > 1e-3) & (sn > 1e-3)

@@ -6,6 +6,7 @@ scikit-learn
 pillow
 tqdm
 requests
+nvidia-ml-py
 torch
 torchvision
 open_clip_torch

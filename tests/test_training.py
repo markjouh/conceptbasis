@@ -8,7 +8,7 @@ from conceptbasis.train import adapted, evaluate, parse_args
 
 @pytest.mark.parametrize(
     ("objective", "expected_lambda"),
-    [("contrastive", 0.0), ("group-mean", 8.0), ("reverse-ridge", 512.0)],
+    [("contrastive", 0.0), ("group-mean", 8.0), ("reverse-ridge", 1024.0)],
 )
 def test_objective_defaults_are_explicit(monkeypatch, objective, expected_lambda):
     monkeypatch.setattr(sys, "argv", ["train", "--objective", objective])

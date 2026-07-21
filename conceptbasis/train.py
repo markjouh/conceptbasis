@@ -1,4 +1,4 @@
-"""Train contrastive, group-mean, or reverse-ridge ConceptBasis adapters.
+"""Stage 5 — Train contrastive, group-mean, or reverse-ridge adapters.
 
 The three objectives preserve the project's incremental development path:
 
@@ -15,6 +15,7 @@ The three objectives preserve the project's incremental development path:
 from __future__ import annotations
 
 import argparse
+from contextlib import nullcontext
 import hashlib
 import json
 import time
@@ -27,17 +28,31 @@ import torch
 import torch.nn.functional as F
 from sklearn.metrics import roc_auc_score
 
-from conceptbasis import BACKBONE as MODEL, BACKBONE_PRETRAINED as PRETRAINED
 from conceptbasis.losses import (
     GroupMeanOrthogonalityLoss,
     ReverseRidgeOrthogonalityLoss,
     symmetric_clip_loss,
+)
+from conceptbasis.encoders import (
+    ENCODER_PRESETS,
+    EncoderSpec,
+    PROJECT_ENCODER,
+    load_open_clip_encoder,
+    release_visual_tower,
+    save_npy_atomic,
+    select_encoder,
+    sha256_json,
+    write_json_atomic,
 )
 from conceptbasis.models import Adapter
 from conceptbasis.splits import load_split_manifest, split_for_image
 
 
 ROOT = Path(__file__).resolve().parents[1]
+SELECTED_INPUT_DIR = (
+    "outputs/training_inputs/"
+    "siglip2-gopt-p16-384@ad3410b/usage-profile-v8-v1"
+)
 
 
 def sha256(path: Path) -> str:
@@ -48,18 +63,11 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def resolve_device(requested: str) -> str:
-    if requested == "auto":
-        if torch.cuda.is_available():
-            return "cuda"
-        if torch.backends.mps.is_available():
-            return "mps"
-        return "cpu"
-    if requested == "cuda" and not torch.cuda.is_available():
-        raise RuntimeError("--device cuda requested, but CUDA is unavailable")
-    if requested == "mps" and not torch.backends.mps.is_available():
-        raise RuntimeError("--device mps requested, but MPS is unavailable")
-    return requested
+def require_cuda() -> str:
+    """Return the production device, failing before a run changes backends."""
+    if not torch.cuda.is_available():
+        raise RuntimeError("ConceptBasis production jobs require an available CUDA GPU")
+    return "cuda"
 
 
 @torch.no_grad()
@@ -68,14 +76,51 @@ def caption_embeddings(
     caption_path: Path,
     cache_path: Path,
     device: str,
-) -> np.ndarray:
+    encoder: EncoderSpec,
+) -> tuple[np.ndarray, dict[str, Any]]:
+    manifest_path = cache_path.with_suffix(cache_path.suffix + ".manifest.json")
+    cache_identity = {
+        "encoder": encoder.as_dict(),
+        "ordered_image_ids_sha256": sha256_json(ids),
+        "captions_sha256": sha256(caption_path),
+    }
     if cache_path.exists():
-        return np.load(cache_path)
-    import open_clip
+        if not manifest_path.exists():
+            if encoder == PROJECT_ENCODER:
+                embeddings = np.load(cache_path)
+                return embeddings, {
+                    "schema": "conceptbasis.caption-embedding-cache/legacy-v0",
+                    "identity": cache_identity,
+                    "artifact": {
+                        "sha256": sha256(cache_path),
+                        "shape": list(embeddings.shape),
+                        "dtype": str(embeddings.dtype),
+                    },
+                    "warning": "legacy project cache predates encoder manifests",
+                }
+            raise ValueError(
+                f"caption cache lacks encoder provenance: {manifest_path}; "
+                "use a fresh --caption_embeddings path"
+            )
+        manifest = json.loads(manifest_path.read_text())
+        if manifest.get("identity") != cache_identity:
+            raise ValueError(f"caption cache identity mismatch: {manifest_path}")
+        if sha256(cache_path) != manifest.get("artifact", {}).get("sha256"):
+            raise ValueError(f"caption cache checksum mismatch: {cache_path}")
+        embeddings = np.load(cache_path)
+        if list(embeddings.shape) != manifest.get("artifact", {}).get("shape"):
+            raise ValueError(f"caption cache shape mismatch: {cache_path}")
+        return embeddings, manifest
 
-    model, _, _ = open_clip.create_model_and_transforms(MODEL, pretrained=PRETRAINED)
-    tokenizer = open_clip.get_tokenizer(MODEL)
-    model.eval().to(device)
+    precision = "fp16" if device == "cuda" else "fp32"
+    model, _, tokenizer, encoder_source = load_open_clip_encoder(
+        encoder,
+        device=device,
+        precision=precision,
+    )
+    # Caption embedding is text-only. Releasing the unused visual tower cuts
+    # the CUDA allocation substantially without affecting encode_text.
+    release_visual_tower(model, device)
     captions = {}
     for line in caption_path.read_text().splitlines():
         if line.strip():
@@ -86,11 +131,24 @@ def caption_embeddings(
     result = []
     for start in range(0, len(texts), 512):
         tokens = tokenizer(texts[start : start + 512]).to(device)
-        encoded = F.normalize(model.encode_text(tokens), dim=-1)
-        result.append(encoded.cpu().numpy().astype(np.float32))
+        context = torch.autocast(device_type="cuda") if device == "cuda" else nullcontext()
+        with context:
+            encoded = F.normalize(model.encode_text(tokens), dim=-1)
+        result.append(encoded.float().cpu().numpy().astype(np.float32))
     embeddings = np.concatenate(result)
-    np.save(cache_path, embeddings)
-    return embeddings
+    save_npy_atomic(cache_path, embeddings)
+    manifest = {
+        "schema": "conceptbasis.caption-embedding-cache/v1",
+        "identity": cache_identity,
+        "encoder_source": encoder_source,
+        "artifact": {
+            "sha256": sha256(cache_path),
+            "shape": list(embeddings.shape),
+            "dtype": str(embeddings.dtype),
+        },
+    }
+    write_json_atomic(manifest_path, manifest)
+    return embeddings, manifest
 
 
 def load_dictionary_labels(
@@ -253,7 +311,7 @@ def configure_group_mean_loss(
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
     parser.add_argument(
         "--objective",
         choices=("contrastive", "group-mean", "reverse-ridge"),
@@ -267,7 +325,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--weight_decay", type=float, default=1e-4)
     parser.add_argument("--lambda_orth", type=float, default=None)
-    parser.add_argument("--ridge_alpha", type=float, default=1e-3)
+    parser.add_argument("--ridge_alpha", type=float, default=1e-2)
     parser.add_argument("--max_uncertain_fraction", type=float, default=0.25)
     parser.add_argument("--min_positives", type=int, default=1)
     parser.add_argument("--ema", type=float, default=0.9)
@@ -277,23 +335,53 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--corr_weight_power", type=float, default=4.0)
     parser.add_argument("--eval_every", type=int, default=5)
     parser.add_argument("--max_steps", type=int, default=None)
-    parser.add_argument("--image_ids", default="data/image_ids.json")
-    parser.add_argument("--image_embeddings", default="data/image_embeddings.npy")
-    parser.add_argument("--caption_embeddings", default="data/caption_embeddings.npy")
-    parser.add_argument("--captions", default="data/captions.jsonl")
-    parser.add_argument("--labels", default="data/labels.parquet")
-    parser.add_argument("--dictionary", default="data/dictionary.json")
     parser.add_argument(
+        "--encoder",
+        choices=tuple(ENCODER_PRESETS),
+        default="siglip2-giant",
+        help="encoder release that produced both image and caption embeddings",
+    )
+    parser.add_argument("--model", help="custom OpenCLIP model (requires --pretrained)")
+    parser.add_argument("--pretrained", help="custom OpenCLIP pretrained tag")
+    parser.add_argument("--revision", help="pinned Hugging Face encoder revision")
+    parser.add_argument("--image_ids", default=f"{SELECTED_INPUT_DIR}/image_ids.json")
+    parser.add_argument(
+        "--image_embeddings",
+        default=f"{SELECTED_INPUT_DIR}/image_embeddings.npy",
+    )
+    parser.add_argument(
+        "--caption_embeddings",
+        default=f"{SELECTED_INPUT_DIR}/caption_embeddings.npy",
+    )
+    parser.add_argument(
+        "--captions",
+        default="data/captions_vllm_gemma4_nvfp4_clip_grounded_v2.jsonl",
+    )
+    parser.add_argument(
+        "--soft-labels",
+        "--labels",
+        dest="soft_labels",
+        default=f"{SELECTED_INPUT_DIR}/labels.parquet",
+    )
+    parser.add_argument(
+        "--dictionary",
+        default="data/dictionary_usage_profile_v8.json",
+    )
+    parser.add_argument(
+        "--fixed-labels",
         "--reverse_labels",
-        default="data/dictionary_labels_train_gemma26.jsonl",
+        dest="fixed_labels",
+        default=(
+            "data/dictionary_labels_train_vllm_gemma4_nvfp4_"
+            "usage_profile_v8_object_grounded_v11_merged.jsonl"
+        ),
     )
     parser.add_argument("--split_manifest", default="data/splits.json")
     parser.add_argument("--run_name", default=None)
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--device", choices=("auto", "cuda", "mps", "cpu"), default="auto")
     args = parser.parse_args()
 
-    defaults = {"contrastive": 0.0, "group-mean": 8.0, "reverse-ridge": 512.0}
+    defaults = {"contrastive": 0.0, "group-mean": 8.0, "reverse-ridge": 1024.0}
     if args.lambda_orth is None:
         args.lambda_orth = defaults[args.objective]
     if args.lambda_orth < 0:
@@ -308,6 +396,15 @@ def parse_args() -> argparse.Namespace:
             "group-mean": f"group_mean_d{args.embed_dim}",
             "reverse-ridge": f"reverse_ridge_d{args.embed_dim}",
         }[args.objective]
+    try:
+        args.encoder_spec = select_encoder(
+            args.encoder,
+            model=args.model,
+            pretrained=args.pretrained,
+            revision=args.revision,
+        )
+    except ValueError as error:
+        parser.error(str(error))
     return args
 
 
@@ -315,20 +412,28 @@ def main() -> None:
     args = parse_args()
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
-    device = resolve_device(args.device)
+    device = require_cuda()
 
     ids_path = ROOT / args.image_ids
     image_path = ROOT / args.image_embeddings
     caption_path = ROOT / args.caption_embeddings
     captions_path = ROOT / args.captions
-    soft_labels_path = ROOT / args.labels
+    soft_labels_path = ROOT / args.soft_labels
     dictionary_path = ROOT / args.dictionary
-    reverse_labels_path = ROOT / args.reverse_labels
+    fixed_labels_path = ROOT / args.fixed_labels
     manifest_path = ROOT / args.split_manifest
 
     image_ids = json.loads(ids_path.read_text())
     image_all = np.load(image_path)
-    text_all = caption_embeddings(image_ids, captions_path, caption_path, device)
+    encoder_spec = args.encoder_spec
+    delattr(args, "encoder_spec")
+    text_all, caption_manifest = caption_embeddings(
+        image_ids,
+        captions_path,
+        caption_path,
+        device,
+        encoder_spec,
+    )
     if len(image_all) != len(image_ids) or len(text_all) != len(image_ids):
         raise ValueError("embedding caches do not match image_ids")
 
@@ -355,7 +460,7 @@ def main() -> None:
         positions, target_np, observed_np, concept_names, label_info = load_dictionary_labels(
             image_ids=image_ids,
             dictionary_path=dictionary_path,
-            labels_path=reverse_labels_path,
+            labels_path=fixed_labels_path,
             manifest_path=manifest_path,
         )
         expected_positions = np.flatnonzero(masks["train"])
@@ -412,12 +517,17 @@ def main() -> None:
             )
         ),
         "inputs": {
+            "encoder": encoder_spec.as_dict(),
+            "image_ids_sha256": sha256(ids_path),
+            "image_embeddings_sha256": sha256(image_path),
+            "caption_embeddings_sha256": sha256(caption_path),
+            "caption_embedding_manifest": caption_manifest,
             "split_manifest_sha256": sha256(manifest_path),
             "soft_labels_sha256": sha256(soft_labels_path),
             **(
                 {
                     "dictionary_sha256": sha256(dictionary_path),
-                    "reverse_labels_sha256": sha256(reverse_labels_path),
+                    "fixed_labels_sha256": sha256(fixed_labels_path),
                 }
                 if args.objective == "reverse-ridge"
                 else {}
