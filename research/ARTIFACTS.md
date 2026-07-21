@@ -1,4 +1,4 @@
-# Local artifact manifest
+# Local historical artifact manifest
 
 Large arrays and checkpoints are intentionally excluded from Git. The
 historical SigLIP2-B ablations documented in `experiments/` currently require:
@@ -11,7 +11,9 @@ historical SigLIP2-B ablations documented in `experiments/` currently require:
 | `archive/data/image_embeddings_cc0_siglip2.npy` | 5.4 MB | `6d35e09cfeb6b5f35417756edbd39b7b511f36604210580b7e2541bff27e5b30` |
 | `outputs/evals/labels_siglip2_final_reconstructed.parquet` | 38 MB | `45baa70d2fc247d58aa8cce1c5ea355587872d70aa5135d878401aa54e11203e` |
 
-The active PE-based pipeline regenerates its own caches under `data/`. This
-manifest exists so local historical artifacts cannot silently change while
-remaining outside version control. Before publication, these files should be
-placed in a versioned external artifact store and cited by release identifier.
+These files belong to historical SigLIP2-B/PE experiments and are not inputs to
+the maintained SigLIP2 Giant CUDA pipeline. The manifest prevents local
+historical artifacts from silently changing while they remain outside version
+control. Before publication, any artifact needed for a reported historical
+result should be placed in a versioned external store and cited by release
+identifier.

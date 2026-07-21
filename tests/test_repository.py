@@ -11,34 +11,79 @@ from conceptbasis.splits import image_class
 ROOT = Path(__file__).resolve().parents[1]
 class RepositoryTests(unittest.TestCase):
     def test_dictionary_is_well_formed(self):
-        path = ROOT / "data" / "dictionary.json"
-        dictionary = json.loads(path.read_text())
-        self.assertEqual(len(dictionary), 256)
-        self.assertEqual(len({concept["name"] for concept in dictionary}), 256)
-        self.assertTrue(all(concept["members"] for concept in dictionary))
-        provenance = json.loads((ROOT / "data" / "dictionary_provenance.json").read_text())
-        self.assertEqual(
-            provenance["dictionary_sha256"],
-            hashlib.sha256(path.read_bytes()).hexdigest(),
+        artifacts = (
+            ("dictionary.json", "dictionary_provenance.json"),
+            (
+                "dictionary_positive_only_edge_average_085.json",
+                "dictionary_positive_only_edge_average_085.provenance.json",
+            ),
+            (
+                "dictionary_usage_profile_v8.json",
+                "dictionary_usage_profile_v8.provenance.json",
+            ),
         )
-        self.assertEqual(provenance["attribute_split"], "train")
+        for dictionary_name, provenance_name in artifacts:
+            with self.subTest(dictionary=dictionary_name):
+                path = ROOT / "data" / dictionary_name
+                dictionary = json.loads(path.read_text())
+                self.assertEqual(len(dictionary), 256)
+                self.assertEqual(len({concept["name"] for concept in dictionary}), 256)
+                self.assertTrue(all(concept["members"] for concept in dictionary))
+                provenance = json.loads((ROOT / "data" / provenance_name).read_text())
+                self.assertEqual(
+                    provenance["dictionary_sha256"],
+                    hashlib.sha256(path.read_bytes()).hexdigest(),
+                )
+                self.assertEqual(provenance["attribute_split"], "train")
 
     def test_reproduction_entrypoints_exist(self):
         expected = [
             "scripts/data/make_class_splits.py",
-            "scripts/data/partition_attributes.py",
-            "scripts/data/mine_attributes.py",
+            "scripts/data/partition_open_tags.py",
+            "scripts/data/mine_open_tags.py",
             "scripts/data/caption_images.py",
-            "scripts/data/compute_labels.py",
+            "scripts/data/build_training_inputs.py",
+            "scripts/data/label_fixed_dictionary.py",
+            "scripts/vllm/label_fixed_dictionary.sh",
+            "scripts/evaluation/build_retrieval_profiles.py",
+            "scripts/evaluation/evaluate_compositional_retrieval.py",
             "scripts/dictionary/build_dictionary.py",
-            "scripts/dictionary/generate_contrastive_prompts.py",
-            "scripts/dictionary/verify_concepts.py",
-            "scripts/dictionary/build_directions.py",
-            "scripts/visualization/make_playground_directions.py",
+            "scripts/dictionary/propose_merge_edges.py",
+            "scripts/visualization/make_trained_playground.py",
+            "scripts/visualization/make_fixed_label_matrix.py",
         ]
         for relative in expected:
             with self.subTest(relative=relative):
                 self.assertTrue((ROOT / relative).is_file())
+
+    def test_public_playground_coefficients_are_nonnegative(self):
+        template = (
+            ROOT / "scripts" / "visualization" / "make_trained_playground.py"
+        ).read_text()
+        self.assertIn("inp.min=0;inp.max=3", template)
+        self.assertIn("Math.max(0,Math.min(3,v))", template)
+
+    def test_selected_outputs_share_the_usage_profile_v8_stack(self):
+        selected = {
+            "conceptbasis/train.py",
+            "scripts/data/build_training_inputs.py",
+            "scripts/visualization/make_trained_playground.py",
+            "scripts/visualization/make_fixed_label_matrix.py",
+            "scripts/visualization/make_dictionary_gallery.py",
+            "scripts/visualization/make_readme_composability_chart.py",
+            "reproduce.sh",
+        }
+        for relative in selected:
+            with self.subTest(relative=relative):
+                text = (ROOT / relative).read_text()
+                self.assertIn("usage_profile_v8", text)
+
+        open_tags = (
+            ROOT / "scripts/visualization/make_open_tag_gallery.py"
+        ).read_text()
+        self.assertIn("attributes_dev_vllm_gemma4_nvfp4.jsonl", open_tags)
+        captions = (ROOT / "scripts/data/caption_images.py").read_text()
+        self.assertIn("captions_vllm_gemma4_nvfp4_clip_grounded_v2.jsonl", captions)
 
     def test_class_split_covers_full_and_cc0_sets(self):
         manifest = json.loads((ROOT / "data" / "splits.json").read_text())

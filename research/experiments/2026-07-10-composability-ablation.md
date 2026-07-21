@@ -314,8 +314,8 @@ multiple seeds.
 - Full metrics:
   `research/results/composability_ablation_k14.json`
 - Evaluation code:
-  `scripts/evaluation/eval_playground_subset_composability.py`
+  `scripts/evaluation/evaluate_compositional_retrieval.py`
 - Profile construction:
-  `scripts/evaluation/build_groupmean_profiles.py`
-- Label reconstruction:
-  `scripts/evaluation/rebuild_soft_labels_from_directions.py`
+  `scripts/evaluation/build_retrieval_profiles.py`
+- Label reconstruction was a historical one-off step; the reconstructed
+  parquet and its checksum are listed in `research/ARTIFACTS.md`.

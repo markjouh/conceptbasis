@@ -40,15 +40,19 @@ precomputed and the browser only performs retrieval over them.
 Compare it with the reverse-ridge adapter.</p></a>
 <a class="card" href="dictionary.html"><h3>Concept dictionary</h3>
 <p>The 256 train-constructed concepts, illustrated with held-out development images.</p></a>
-<a class="card" href="attributes.html"><h3>Mined attributes</h3>
-<p>Model-generated attributes for the held-out development preview. Training
-and test classes are not shown.</p></a>
+<a class="card" href="fixed-labels.html"><h3>Fixed-label matrix</h3>
+<p>Every final TRUE/FALSE decision across 278 held-out objects × 256 dictionary
+concepts, with per-object and full-matrix views.</p></a>
+<a class="card" href="attributes.html"><h3>Open-set tags</h3>
+<p>The raw model-generated tags used upstream of dictionary construction. These
+are distinct from the final exhaustive fixed-dictionary labels.</p></a>
 </div>
 <footer>
 Images: the CC0-licensed subset of the
 <a href="https://things-initiative.org/">THINGS database</a> (Hebart et al.;
 THINGSplus, Stoinski et al.) — one image per object concept.
-Model backbone: Meta Perception Encoder (PE-Core-G, 1.9B). Code: MIT-licensed.
+Model backbone: SigLIP2 Giant (patch-16, 384 px). Selected model: tuned
+reverse-ridge adapter; the baseline keeps the same backbone frozen. Code: MIT-licensed.
 </footer>
 </main>
 </body></html>

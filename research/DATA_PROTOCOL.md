@@ -14,10 +14,15 @@ deterministic manifest is `data/splits.json` (seed 20260710):
 
 ## Leakage rules
 
-- Dictionary phrases and image-score profiles use train-class CC0 images only.
+- Dictionary discovery uses open positive tags from the full train split only.
+  Candidate phrases are represented by their class-balanced SigLIP2 image-score
+  profiles; complete-linkage clustering merges phrases with sufficiently
+  similar usage. Tag support and prevalence are averaged within object class so
+  classes contribute equally despite unequal exemplar counts.
 - GMM label calibrators fit on train-class scores and are applied unchanged to
   development and test.
-- Image-anchored directions use train-class judgments only.
+- Group-mean and reverse-ridge directions use fixed-dictionary train labels
+  only. The dictionary itself is frozen before development labeling.
 - Direction construction and hyperparameters may be selected on development.
 - Public HTML galleries contain development CC0 images, not test images.
 - Any script that renders, tags, profiles, or evaluates test requires

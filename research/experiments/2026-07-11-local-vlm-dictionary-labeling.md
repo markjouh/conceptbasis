@@ -36,10 +36,10 @@ lms load google/gemma-4-26b-a4b-qat --gpu max \
   --context-length 8192 --parallel 4 --ttl 28800 \
   --identifier google/gemma-4-26b-a4b-qat -y
 
-python scripts/data/label_dictionary_concepts.py
+python scripts/data/label_fixed_dictionary.py
 ```
 
-The runner is append-only and resumable. It records successful annotations in
+The runner was append-only and resumable. It recorded successful annotations in
 `data/dictionary_labels_train_gemma26.jsonl`, errors separately, and the exact
 prompt, dictionary hash, split hash, selected-image hash, model, and inference
 settings in a metadata sidecar. It refuses incompatible resumes and refuses to
@@ -61,3 +61,7 @@ The final audit found exactly 18,211 expected train IDs, 18,211 unique successfu
 rows, no missing or extra IDs, no unresolved recovery errors, and no invalid
 canonical-label rows. Dictionary, split-manifest, and selected-image hashes all
 match the frozen metadata.
+
+The multi-megabyte JSONL payload is now a local historical artifact rather than
+a tracked input to the maintained pipeline; its metadata sidecar and the
+compact result record remain in Git.

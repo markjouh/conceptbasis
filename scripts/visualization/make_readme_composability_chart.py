@@ -1,4 +1,4 @@
-"""Render the README comparison of compositional and ordinary retrieval."""
+"""Stage 7 reporting — Render the README retrieval comparison chart."""
 
 from __future__ import annotations
 
@@ -11,11 +11,11 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
     parser.add_argument(
         "--metrics",
-        default="research/results/three_model_dev_composability.json",
-        help="tracked three-model development composability metrics",
+        default="research/results/siglip2_usage_profile_v8_v11_exhaustive_cc0_dev_k20.json",
+        help="tracked three-model development summary",
     )
     parser.add_argument(
         "--retrieval-metrics",
@@ -29,8 +29,11 @@ def main() -> None:
     args = parser.parse_args()
 
     metrics = json.loads((ROOT / args.metrics).read_text())
-    retrieval = json.loads((ROOT / args.retrieval_metrics).read_text())
-    if metrics["eval_split"] != "dev" or retrieval["eval_split"] != "dev":
+    seeded = metrics.get("schema") == "conceptbasis.seeded-composability-summary/v1"
+    retrieval = None if seeded else json.loads((ROOT / args.retrieval_metrics).read_text())
+    if metrics["eval_split"] != "dev" or (
+        retrieval is not None and retrieval["eval_split"] != "dev"
+    ):
         raise ValueError("README chart expects development metrics")
 
     subset_sizes = [int(value) for value in metrics["subset_sizes"]]
@@ -39,41 +42,62 @@ def main() -> None:
         ("groupmean", "group_mean", "Group-mean orthogonality", "square"),
         ("reverse", "reverse_ridge", "Reverse-ridge orthogonality", "diamond"),
     ]
-    series = [
-        (
-            css_class,
-            label,
-            [
-                metrics["models"][model]["true_attributes"][str(size)]["R@5"]
-                for size in subset_sizes
-            ],
-            marker,
-        )
-        for css_class, model, label, marker in model_specs
-    ]
-    ordinary = [
-        (
-            css_class,
-            label.replace(" orthogonality", ""),
-            retrieval["mean_percent_recall"][model]["R@5"] / 100,
-            marker,
-        )
-        for css_class, model, label, marker in model_specs
-    ]
-
-    cohort_sizes = [
-        metrics["models"]["reverse_ridge"]["true_attributes"][str(size)][
-            "n_images"
+    if seeded:
+        series = [
+            (
+                css_class,
+                label,
+                [metrics["models"][model]["composition_R@5"][str(size)]["mean"] for size in subset_sizes],
+                [metrics["models"][model]["composition_R@5"][str(size)]["sample_std"] for size in subset_sizes],
+                marker,
+            )
+            for css_class, model, label, marker in model_specs
         ]
-        for size in subset_sizes
-    ]
-    for model in ("contrastive", "group_mean"):
-        observed = [
-            metrics["models"][model]["true_attributes"][str(size)]["n_images"]
+        ordinary = [
+            (
+                css_class,
+                label.replace(" orthogonality", ""),
+                metrics["models"][model]["ordinary_R@5"]["mean"],
+                metrics["models"][model]["ordinary_R@5"]["sample_std"],
+                marker,
+            )
+            for css_class, model, label, marker in model_specs
+        ]
+        cohort_sizes = [metrics["cohort_images"][str(size)] for size in subset_sizes]
+        seed_count = len(metrics["seeds"])
+    else:
+        series = [
+            (
+                css_class,
+                label,
+                [metrics["models"][model]["true_attributes"][str(size)]["R@5"] for size in subset_sizes],
+                [0.0] * len(subset_sizes),
+                marker,
+            )
+            for css_class, model, label, marker in model_specs
+        ]
+        ordinary = [
+            (
+                css_class,
+                label.replace(" orthogonality", ""),
+                retrieval["mean_percent_recall"][model]["R@5"] / 100,
+                0.0,
+                marker,
+            )
+            for css_class, model, label, marker in model_specs
+        ]
+        cohort_sizes = [
+            metrics["models"]["reverse_ridge"]["true_attributes"][str(size)]["n_images"]
             for size in subset_sizes
         ]
-        if observed != cohort_sizes:
-            raise ValueError("model query cohorts differ")
+        for model in ("contrastive", "group_mean"):
+            observed = [
+                metrics["models"][model]["true_attributes"][str(size)]["n_images"]
+                for size in subset_sizes
+            ]
+            if observed != cohort_sizes:
+                raise ValueError("model query cohorts differ")
+        seed_count = 5
 
     width, height = 1120, 448
     top, bottom = 70, 76
@@ -100,6 +124,8 @@ def main() -> None:
         ".contrastive{stroke:#6e7781}.point.contrastive{fill:#6e7781}",
         ".groupmean{stroke:#0969da}.point.groupmean{fill:#0969da}",
         ".reverse{stroke:#1a7f37}.point.reverse{fill:#1a7f37}",
+        ".band{stroke:none;fill-opacity:.12}.band.contrastive{fill:#6e7781}",
+        ".band.groupmean{fill:#0969da}.band.reverse{fill:#1a7f37}",
         ".series{fill:none;stroke-width:3}.point{stroke-width:0}",
         ".bar{fill-opacity:.16;stroke-width:2}.bar.contrastive{fill:#6e7781}",
         ".bar.groupmean{fill:#0969da}.bar.reverse{fill:#1a7f37}",
@@ -111,9 +137,9 @@ def main() -> None:
         ".reverse{stroke:#3fb950}.point.reverse{fill:#3fb950}.bar.reverse{fill:#3fb950}}",
         "</style>",
         '<text class="text title" x="74" y="30">Compositional retrieval</text>',
-        '<text class="text muted small" x="74" y="50">278-class dev gallery · all classes with ≥k attributes · Recall@5</text>',
+        f'<text class="text muted small" x="74" y="50">278-class dev gallery · exhaustive labels · mean ± s.d. over {seed_count} seeds</text>',
         '<text class="text title" x="820" y="30">Ordinary image–text retrieval</text>',
-        '<text class="text muted small" x="820" y="50">3,914 dev pairs · mean of 5 matched runs · Recall@5</text>',
+        f'<text class="text muted small" x="820" y="50">3,914 dev pairs · mean ± s.d. over {seed_count} matched seeds</text>',
     ]
 
     for tick in range(0, 101, 20):
@@ -149,8 +175,12 @@ def main() -> None:
             [
                 f'<text class="text small" x="{x:.1f}" y="{plot_bottom+20}" '
                 f'text-anchor="middle">{size}</text>',
-                f'<text class="text muted small" x="{x:.1f}" y="{plot_bottom+36}" '
-                f'text-anchor="middle">n={cohort_sizes[index]}</text>',
+                (
+                    f'<text class="text muted small" x="{x:.1f}" y="{plot_bottom+36}" '
+                    f'text-anchor="middle">n={cohort_sizes[index]}</text>'
+                    if cohort_sizes[index] != max(cohort_sizes)
+                    else ""
+                ),
             ]
         )
     lines.extend(
@@ -162,7 +192,23 @@ def main() -> None:
         ]
     )
 
-    for css_class, label, values, marker in series:
+    for css_class, label, values, deviations, marker in series:
+        upper = [min(1.0, value + deviation) for value, deviation in zip(values, deviations)]
+        lower = [max(0.0, value - deviation) for value, deviation in zip(values, deviations)]
+        band = " ".join(
+            [
+                *[
+                    f"{'M' if index == 0 else 'L'} {comp_x(index):.1f} {y_pos(value):.1f}"
+                    for index, value in enumerate(upper)
+                ],
+                *[
+                    f"L {comp_x(index):.1f} {y_pos(lower[index]):.1f}"
+                    for index in range(len(lower) - 1, -1, -1)
+                ],
+                "Z",
+            ]
+        )
+        lines.append(f'<path class="band {css_class}" d="{band}"/>')
         path = " ".join(
             f"{'M' if index == 0 else 'L'} {comp_x(index):.1f} {y_pos(value):.1f}"
             for index, value in enumerate(values)
@@ -192,16 +238,25 @@ def main() -> None:
                 f'x2="{comp_right+14}" y2="{final_y:.1f}"/>',
                 f'<text class="text label" x="{comp_right+20}" y="{final_y-2:.1f}">{label}</text>',
                 f'<text class="text muted small" x="{comp_right+20}" y="{final_y+14:.1f}">'
-                f'{values[-1]*100:.1f}% at k=14</text>',
+                f'{values[-1]*100:.1f}% at k={subset_sizes[-1]}</text>',
             ]
         )
 
     centers = [850, 950, 1050]
-    for center, (css_class, label, value, marker) in zip(centers, ordinary):
+    for center, (css_class, label, value, deviation, marker) in zip(centers, ordinary):
         y = y_pos(value)
+        whisker_top = y_pos(min(1.0, value + deviation))
+        whisker_bottom = y_pos(max(0.0, value - deviation))
         lines.append(
             f'<rect class="bar {css_class}" x="{center-24}" y="{y:.1f}" '
             f'width="48" height="{plot_bottom-y:.1f}"/>'
+        )
+        lines.extend(
+            [
+                f'<line class="axis" x1="{center}" y1="{whisker_top:.1f}" x2="{center}" y2="{whisker_bottom:.1f}"/>',
+                f'<line class="axis" x1="{center-6}" y1="{whisker_top:.1f}" x2="{center+6}" y2="{whisker_top:.1f}"/>',
+                f'<line class="axis" x1="{center-6}" y1="{whisker_bottom:.1f}" x2="{center+6}" y2="{whisker_bottom:.1f}"/>',
+            ]
         )
         if marker == "circle":
             lines.append(

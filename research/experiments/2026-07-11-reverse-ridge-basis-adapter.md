@@ -78,7 +78,7 @@ holding other predicted attributes and object identity fixed.
 - Loss and estimator: `conceptbasis/losses.py`
 - Trainer: `python -m conceptbasis.train --objective reverse-ridge`
 - Pure sweep: `scripts/sweeps/sweep_reverse_ridge.py`
-- Profile builder: `scripts/evaluation/build_groupmean_profiles.py`
+- Profile builder: `scripts/evaluation/build_retrieval_profiles.py`
 - Unit test: `tests/test_reverse_ridge_loss.py`
 - Tracked compact results: `research/results/reverse_ridge_dev_results.json`
 - Tracked three-model comparison: `research/results/three_model_dev_composability.json`
